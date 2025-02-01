@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+}
+body {
+    height: 100vh;
+
+    background-color: red;
+}
+/* for responsive layout */
+.home-div {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar content";
+    background-color: #f5f7ff;
+    height: 100vh;
+    /* change */
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #ffffff;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.sidebar h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.sidebar p {
+    font-size: 9px;
+}
+
+.header {
+    grid-area: header;
+    background-color: #f8f9fa;
+}
+
+.content {
+    grid-area: content;
+    padding: 15px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: inherit;
+}
+.side-bar {
+    transition: all 0.3s ease-in-out;
+}
+
+.side-bar:hover {
+    transform: scale(1.1);
+}
+
+.active .side-bar {
+    background-color: blue !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+@keyframes bounce-once {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.side-bar:hover .icon {
+    animation: bounce-once 0.4s ease-in-out;
+}
+
+/* Bulletin Blade CSS */
+.bulletinList a {
+    all: unset;
+}
+.bulletinList a:hover {
+    font-weight: bold;
+}
+
+/* Custom scrollbar styles for Bulletin Blade */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.table {
+    font-size: 0.8rem;
+}
+
+/* Add Accounts Style */
+#addAccountModal .modal-header {
+    background-color: white;
+}
+#addAccountModal,
+#addAccountModalLabel {
+    font-size: 0.8rem;
+}
+#addAccountModal input {
+    height: 30px;
+    padding: 17px;
+    font-size: 0.8rem;
+}
+.modal-footer button {
+    height: 30px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+#addAccountModal #role {
+    font-size: 0.8rem;
+}
