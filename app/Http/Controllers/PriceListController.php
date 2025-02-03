@@ -77,7 +77,8 @@ class PriceListController extends Controller
 
         if ($content) {
             return response()->json([
-                'content' => $content->content
+                'content' => $content->content,
+                'pname' => $content->pname
             ]);
         } else {
             return response()->json([
