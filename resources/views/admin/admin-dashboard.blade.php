@@ -43,17 +43,17 @@
                     <p>Systematic Buddy 2.0</p>
                 </div>
 
-                <a href="{{route('accounts')}}" class="{{ Request::routeIs('accounts') ? 'active' : '' }}">
+                <a href="{{ route('accounts')}}" class="{{ Request::routeIs('accounts') ? 'active' : '' }}">
                     <div
-                        class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
+                        class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-user me-2 icon" style="font-size: 14px;"></i>
                         <span class="navbar-text" style="font-size: 12px;">Accounts</span>
                     </div>
                 </a>
-
-                <a href="{{ route('bulletin')}}" class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
+                <hr>
+                <a href="{{ route('admin-bulletin.index')}}" class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
                     <div
-                        class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
+                        class="side-bar input-group mb-0 mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-list-ul me-2 icon" style="font-size: 14px;"></i>
                         <span class="navbar-text" style="font-size: 12px;">Bulletin & To Do</span>
                     </div>
@@ -175,22 +175,6 @@
                                 </button>
                                 @endif
                             </div>
-
-                            {{-- Edit --}}
-                            <div class="editButton">
-                                <button type="button" class="btn btn-primary"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px">
-                                    <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
-                                </button>
-                            </div>
-
-                            {{-- Delete --}}
-                            <div class="deleteButton">
-                                <button type="button" class="btn btn-danger"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px">
-                                    <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
-                                </button>
-                            </div>
                         </div>
                     </div>
 
@@ -264,15 +248,22 @@
 
         </div>
 
+        <<<<<<< HEAD=======</div>
 
 
-        {{-- Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
 
-        {{-- Bootstrap CDN --}}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+            {{-- Script JS --}}
+            <script src="{{ asset('js/bulletin.js') }}"></script>
+            >>>>>>> 8afc4aab9b80b5723322a55fc52fcc1c19604962
+
+            {{-- Script JS --}}
+            <script src="{{ asset('js/bulletin.js') }}"></script>
+
+            {{-- Bootstrap CDN --}}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous">
+            </script>
     </body>
 
 </html>
