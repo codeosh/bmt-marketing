@@ -47,7 +47,16 @@
                             style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
                             <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
                         </button>
-                </div>      
+                </div>     
+                
+                  
+                 {{-- Copy --}}
+                 <div class="deleteButton d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-dark"
+                    style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                    <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Copy
+                   </button>
+                 </div>  
         </div>
     </div>
 
