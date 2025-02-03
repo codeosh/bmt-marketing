@@ -42,9 +42,17 @@
                     <p>Systematic Buddy 2.0</p>
                 </div>
 
+            <a href="{{ route('accounts')}}"
+            class="{{ Request::routeIs('accounts') ? 'active' : '' }}">
+                <div class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
+                    <i class="fa-solid fa-user me-2 icon" style="font-size: 14px;"></i>
+                    <span class="navbar-text" style="font-size: 12px;">Accounts</span>
+                </div>
+            </a>
+            <hr>
             <a href="{{ route('admin-bulletin.index')}}"
             class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
-                <div class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
+                <div class="side-bar input-group mb-0 mt-2 d-flex align-items-center justify-content-center border rounded">
                     <i class="fa-solid fa-list-ul me-2 icon" style="font-size: 14px;"></i>
                     <span class="navbar-text" style="font-size: 12px;">Bulletin & To Do</span>
                 </div>
@@ -165,22 +173,6 @@
                                 </button>
                                 @endif
                             </div>
-
-                            {{-- Edit --}}
-                            <div class="editButton">
-                                <button type="button" class="btn btn-primary"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px">
-                                    <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
-                                </button>
-                            </div>
-
-                            {{-- Delete --}}
-                            <div class="deleteButton">
-                                <button type="button" class="btn btn-danger"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px">
-                                    <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
-                                </button>
-                            </div>
                         </div>
                     </div>
 
@@ -246,7 +238,6 @@
                 @yield('content')
             </div>
         </div>
-
 
     </div>
     
