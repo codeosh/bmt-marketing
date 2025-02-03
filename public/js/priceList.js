@@ -24,31 +24,35 @@ $(document).ready(function () {
         }
     );
 
-    $("#pricelistForm").on("submit", function (e) {
-        e.preventDefault();
+    $("#pricelistForm")
+        .off("submit")
+        .on("submit", function (e) {
+            e.preventDefault();
 
-        const formData = $(this).serialize();
+            const formData = $(this).serialize();
 
-        $.ajax({
-            type: "POST",
-            url: "/admin-priceList",
-            data: formData,
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                toastr.success("Added Successfully!");
-            },
-            error: function (xhr, status, error) {
-                if (xhr.responseJSON) {
-                    toastr.error(
-                        xhr.responseJSON.message || "An error occurred."
-                    );
-                    console.error("Error Details:", xhr.responseJSON);
-                } else {
-                    toastr.error("An unexpected error occurred.");
-                }
-            },
+            $.ajax({
+                type: "POST",
+                url: "/admin-priceList",
+                data: formData,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                success: function (response) {
+                    toastr.success("Added Successfully!");
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.responseJSON) {
+                        toastr.error(
+                            xhr.responseJSON.message || "An error occurred."
+                        );
+                        console.error("Error Details:", xhr.responseJSON);
+                    } else {
+                        toastr.error("An unexpected error occurred.");
+                    }
+                },
+            });
         });
-    });
 });

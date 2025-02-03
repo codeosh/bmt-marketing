@@ -39,7 +39,7 @@ class BulletinController extends Controller
             DB::rollBack();
             return response()->json([
                 'success' => false,
-                'message' => 'An error occurred while adding the beneficiary.',
+                'message' => 'An error occurred while adding.',
                 'error_details' => $e->getMessage(),
                 'stack_trace' => $e->getTraceAsString(),
                 'request_data' => $request->all(),
