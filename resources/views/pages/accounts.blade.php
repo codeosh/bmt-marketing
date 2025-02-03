@@ -12,30 +12,46 @@
             </button>
         </div>
 
-        <!-- Table -->
-        <div class="accounts-container table-responsive border rounded p-3">
-            <table class="table table-hover align-middle">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th class="px-3 py-2">Name</th>
-                        <th class="px-3 py-2">Email</th>
-                        <th class="px-3 py-2">Role</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-light">
-                    <tr>
-                        <td class="px-3 py-2">John Doe</td>
-                        <td class="px-3 py-2">john.doe@example.com</td>
-                        <td class="px-3 py-2"><span class="badge bg-success">Admin</span></td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-2">Jane Smith</td>
-                        <td class="px-3 py-2">jane.smith@example.com</td>
-                        <td class="px-3 py-2"><span class="badge bg-primary">User</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+       <!-- Table -->
+<div class="accounts-container table-responsive border rounded p-3">
+    <table class="table table-hover align-middle">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th class="px-3 py-2">Name</th>
+                <th class="px-3 py-2">Email</th>
+                <th class="px-3 py-2">Role</th>
+                <th class="px-3 py-2">Action</th>
+            </tr>
+        </thead>
+        <tbody class="bg-light">
+            <tr>
+                <td class="px-3 py-2">John Doe</td>
+                <td class="px-3 py-2">john.doe@example.com</td>
+                <td class="px-3 py-2"><span class="badge bg-success">Admin</span></td>
+                <td class="px-3 py-2">
+                    <div class="d-flex gap-2">
+                        <!-- Edit -->
+                        <div class="editButton d-flex align-items-center justify-content-center">
+                            <button type="button" class="btn btn-primary"
+                                style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                                <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
+                            </button>
+                        </div>
+
+                        <!-- Delete -->
+                        <div class="deleteButton d-flex align-items-center justify-content-center">
+                            <button type="button" class="btn btn-danger"
+                                style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                                <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
+                            </button>
+                        </div>      
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
 
         <!-- Add Account Modal -->
