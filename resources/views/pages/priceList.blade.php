@@ -5,9 +5,9 @@
 @section('content')
 
 <div class="h-100 w-100 d-flex justify-content-between">
-    <div class="h-100" style="width:300px;">
+    <div class="" style="height:280px; width:300px;">
         {{-- Bulletin List --}}
-       <div class="card w-100 h-50 mb-1">
+       <div class="card mb-1" style="height: 256px">
           <small class="card-header text-muted" style="font-size:0.7rem;">Bulletin</small>
           <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
               <ol style="font-size:0.8rem; cursor:pointer;">
@@ -15,7 +15,25 @@
                     <p>Bulletin is Empty.</p>
                 @else
                     @foreach ($pnamesBulletin as $id => $pname)
-                        <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin">{{$pname}}</li>
+                        <div class="d-flex align-items-center justify-content-between mb-2" style="margin-right: 10px">
+                                <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin">{{$pname}}</li>                 
+                            <div class="d-flex gap-1">
+                                {{-- Delete --}}
+                                <div class="deleteButton">
+                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
+                                        style="font-size:0.5rem; height:20px; border-radius:3px">
+                                        <i class="fa-solid fa-trash" ></i>
+                                    </button>
+                                </div>  
+                                {{-- Edit --}}
+                                <div class="editButton ">
+                                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center"
+                                         style="font-size:0.5rem; height:20px; border-radius:3px">
+                                         <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                 </div>
+                            </div>
+                        </div>
                     @endforeach
                 @endif
               </ol>
@@ -23,7 +41,7 @@
       </div>
 
       {{-- Template --}}
-     <div class="card w-100 h-50 mb-2">
+     <div class="card mb-2" style="height:260px; width:300px;">
           <small class="card-header text-muted" style="font-size:0.7rem;">Template</small>
           <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
                     <ol style="font-size:0.8rem; cursor:pointer;">
@@ -31,7 +49,26 @@
                             <p>No products found.</p>
                         @else
                             @foreach ($pnamesTemplate as $id => $pname)
+                            <div class="d-flex align-items-center justify-content-between mb-2 " style="margin-right: 10px">
                                 <li class="bulletinList" data-id="{{ $id }}" data-type="template">{{ $pname }}  </li>
+                                <div class="d-flex gap-1">
+                                    {{-- Delete --}}
+                                    <div class="deleteButton">
+                                        <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
+                                            style="font-size:0.5rem; height:20px; border-radius:3px">
+                                            <i class="fa-solid fa-trash" ></i>
+                                        </button>
+                                    </div>  
+                                    {{-- Edit --}}
+                                    <div class="editButton ">
+                                        <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center"
+                                             style="font-size:0.5rem; height:20px; border-radius:3px">
+                                             <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                     </div>
+                                </div>
+                            </div>
+                                  
                             @endforeach
                         @endif
                     </ol>
@@ -50,23 +87,7 @@
             <span id="contentName" style="font-size:0.9rem; color:white; font-weight:bold;"></span>
         </div>
 
-        <div class="d-flex gap-2">
-                {{-- Edit --}}
-                <div class="editButton d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn btn-primary"
-                         style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
-                         <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
-                    </button>
-                 </div>
-
-                {{-- Delete --}}
-                <div class="deleteButton d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-danger"
-                            style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
-                            <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
-                        </button>
-                </div>      
-                
+        <div class="d-flex gap-2">        
                  {{-- Copy --}}
                  <div class="deleteButton d-flex align-items-center justify-content-center">
                     <button type="button" class="btn btn-dark"
