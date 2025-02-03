@@ -1,5 +1,5 @@
 //to fetch the specific list content then display on the content div
-    $(document).ready(function() {
+$(document).ready(function() {
     $('li[data-type="bulletin"], li[data-type="template"]').on('click', function() {
         var id = $(this).data('id'); // Get the clicked item's ID
 
@@ -20,4 +20,7 @@
         });
     });
 });
+
+
+
 

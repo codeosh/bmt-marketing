@@ -258,10 +258,10 @@
         </script>
 
         {{-- pricelist Script JS --}}
-        <script src="{{ asset('js/priceList.js')}}"></script> {{-- script to handle the click events for each list item. When the user clicks on a list item, an AJAX request will be sent to the controller to fetch the content and display it inside the #contentDisplay div. --}}
+        <script src="{{ asset('js/showpassword.js')}}"></script> {{-- script to handle the click events for each list item. When the user clicks on a list item, an AJAX request will be sent to the controller to fetch the content and display it inside the #contentDisplay div. --}}
         
         {{-- bulletin Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
+        <script src="{{ asset('js/priceList.js') }}"></script>
 
 
     </body>

@@ -46,7 +46,7 @@
     style="height:2rem; background-color:grey;">
         <small style="font-size: 0.8rem; color:white; margin-left:10px;">Content</small>
         <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
-        <span id="contentName" style="font-size:0.9rem; color:white; font-weight:bold;">Bulletin</span>
+        <span id="contentName" style="font-size:0.9rem; color:white; font-weight:bold;"></span>
     </div>
 
     {{-- Content --}}
