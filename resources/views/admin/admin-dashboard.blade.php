@@ -18,7 +18,8 @@
         {{-- Style Css --}}
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
         {{-- Bootstrap CDN --}}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -42,37 +43,46 @@
                     <p>Systematic Buddy 2.0</p>
                 </div>
 
-            <a href="{{ route('admin-bulletin.index')}}"
-            class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
-                <div class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
-                    <i class="fa-solid fa-list-ul me-2 icon" style="font-size: 14px;"></i>
-                    <span class="navbar-text" style="font-size: 12px;">Bulletin & To Do</span>
-                </div>
-            </a>
-   
-            <a href="{{ route('postTemplate') }}"
-            class="{{ Request::routeIs('postTemplate') ? 'active' : '' }}">
-                <div class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
-                    <i class="fa-solid fa-signs-post me-2 icon" style="font-size: 14px;"></i>
-                    <span class="navbar-text" style="font-size: 12px;">Post Templates</span>
-                </div>
-            </a>
-       
-            <a href="{{route('replyTemplate')}}"
-            class="{{ Request::routeIs('replyTemplate') ? 'active' : '' }}">
-                <div class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
-                    <i class="fa-solid fa-reply me-2 icon" style="font-size: 14px;"></i>
-                    <span class="navbar-text" style="font-size: 12px;">Reply Templates</span>
-                </div>
-            </a>
-            <hr>
-            <a href="{{route('admin-priceList.index')}}"
-            class="{{ Request::routeIs('priceList') ? 'active' : '' }}">
-                <div class="side-bar input-group mt-3 d-flex align-items-center justify-content-center border rounded">
-                    <i class="fa-solid fa-money-check-dollar me-2 icon" style="font-size: 14px;"></i>
-                    <span class="navbar-text" style="font-size: 12px;">Price List</span>
-                </div>
-            </a>
+                <a href="{{route('accounts')}}" class="{{ Request::routeIs('accounts') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-solid fa-user me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Accounts</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('bulletin')}}" class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-solid fa-list-ul me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Bulletin & To Do</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('postTemplate') }}" class="{{ Request::routeIs('postTemplate') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-solid fa-signs-post me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Post Templates</span>
+                    </div>
+                </a>
+
+                <a href="{{route('replyTemplate')}}" class="{{ Request::routeIs('replyTemplate') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-solid fa-reply me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Reply Templates</span>
+                    </div>
+                </a>
+                <hr>
+                <a href="{{route('admin-priceList.index')}}"
+                    class="{{ Request::routeIs('priceList') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mt-3 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-solid fa-money-check-dollar me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Price List</span>
+                    </div>
+                </a>
 
                 <a href="{{route('quotation')}}" class="{{ Request::routeIs('quotation') ? 'active' : '' }}">
                     <div
@@ -105,7 +115,7 @@
                         <span class="navbar-text" style="font-size: 12px;">Guides</span>
                     </div>
                 </a>
-                
+
 
             </div>
 
@@ -199,25 +209,29 @@
                     @include('modal.price_modal')
 
                     {{-- Dropdown --}}
-                    <div class="dropdown h-100 d-flex align-items-start justify-content-between" style="width: 200px; margin-right:10px;">
+                    <div class="dropdown h-100 d-flex align-items-start justify-content-between"
+                        style="width: 200px; margin-right:10px;">
                         {{-- Button Dropdown --}}
 
                         <div class="dropdown h-100 w-100 d-flex align-items-center justify-content-end">
                             <button type="button" class="h-100 d-flex justify-content-between align-items-center"
-                                data-bs-toggle="dropdown" aria-expanded="false" style="all:unset; cursor:pointer; width:150px;">
-                                
-                                <div class="h-100 d-flex align-items-end justify-content-between flex-column" style="width:150px;">
+                                data-bs-toggle="dropdown" aria-expanded="false"
+                                style="all:unset; cursor:pointer; width:150px;">
+
+                                <div class="h-100 d-flex align-items-end justify-content-between flex-column"
+                                    style="width:150px;">
                                     <span style="font-size:0.7rem;">Jhoedhen</span>
                                     <small class="text-muted align-self-end" style="font-size:0.6rem;">Admin</small>
                                 </div>
-                        
+
                                 <div class="h-100 w-25 d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-sort-down" style="font-size:0.8rem;"></i>
                                 </div>
                             </button>
-                        
+
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" :href="route('profile.edit')" style="font-size:0.8rem;">{{ __('Profile') }}</a></li>
+                                <li><a class="dropdown-item" :href="route('profile.edit')" style="font-size:0.8rem;">{{
+                                        __('Profile') }}</a></li>
                                 <li><a class="dropdown-item" href="#" style="font-size:0.8rem;">Settings</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -226,8 +240,8 @@
                                     <form method="POST" action="{{ route('logout') }}" class="dropdown-item"
                                         style="font-size:0.8rem;text-align:center;">
                                         @csrf
-                                        <x-dropdown-link :href="route('logout')" style="text-decoration: none;color: red;"
-                                            onclick="event.preventDefault();
+                                        <x-dropdown-link :href="route('logout')"
+                                            style="text-decoration: none;color: red;" onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                             {{ __('Log Out') }}
                                         </x-dropdown-link>
@@ -235,27 +249,30 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
 
-        {{-- Main Content --}}
-        <div class="content p-1 ">
-            <div class="main-content h-100 w-100 border rounded shadow p-2" style="background-color: #ffff;">
-                @yield('content')
+            {{-- Main Content --}}
+            <div class="content p-1 ">
+                <div class="main-content h-100 w-100 border rounded shadow p-2" style="background-color: #ffff;">
+                    @yield('content')
+                </div>
             </div>
+
+
         </div>
 
 
-    </div>
-    
-    
-   
-    {{-- Script JS --}}
-    <script src="{{ asset('js/bulletin.js') }}"></script>
 
-    {{-- Bootstrap CDN --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+        {{-- Script JS --}}
+        <script src="{{ asset('js/bulletin.js') }}"></script>
+
+        {{-- Bootstrap CDN --}}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+    </body>
+
 </html>

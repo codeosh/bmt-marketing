@@ -10,7 +10,18 @@
                     style="font-size:0.6rem;"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="bulletinForm">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <select name="selectBulletin" id="selectBulletin" class="form-select">
+                                    <option value="">Select option</option>
+                                    <option value="Bulletin">Bulletin</option>
+                                    <option value="Template">Template</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="itemName" class="form-label" style="font-size:0.7rem;">Item
                             Name</label>
@@ -26,7 +37,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" form="bulletinForm" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

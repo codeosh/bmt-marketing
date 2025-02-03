@@ -82,10 +82,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('user.dashboard');
     });
 
-
-
-
-
+    Route::get('/admin-bulletin', function () {
+        return view('pages.bulletin');
+    })->name('bulletin');
 
     Route::get('/postTemplate', function () {
         return view('pages.postTemplate');
@@ -94,8 +93,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/replyTemplate', function () {
         return view('pages.replyTemplate');
     })->name('replyTemplate');
-
-
 
     Route::get('/replyTemplate', function () {
         return view('pages.replyTemplate');
@@ -116,7 +113,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/guides', function () {
         return view('pages.guides');
     })->name('guides');
-    
+
     Route::get('/accounts', function () {
         return view('pages.accounts');
     })->name('accounts');

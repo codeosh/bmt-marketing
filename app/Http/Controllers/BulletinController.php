@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BulletinController extends Controller
 {
@@ -11,55 +14,27 @@ class BulletinController extends Controller
      */
     public function index()
     {
-        //
         return view('pages.bulletin');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $validatedData = $request->validate([]);
+        try {
+            DB::beginTransaction();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+            DB::commit();
+            return response()->json(['success' => true, 'message' => 'Added Successfully!']);
+        } catch (Exception $e) {
+            DB::rollBack();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while adding the beneficiary.',
+                'error_details' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'request_data' => $request->all(),
+            ], 500);
+        }
     }
 }
