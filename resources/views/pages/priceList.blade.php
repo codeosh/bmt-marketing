@@ -5,9 +5,9 @@
 @section('content')
 
 <div class="h-100 w-100 d-flex justify-content-between">
-    <div class="" style="height:280px; width:300px;">
+    <div class="" style="width:300px; height:505px;">
         {{-- Bulletin List --}}
-       <div class="card mb-1" style="height: 256px">
+       <div class="card mb-1 h-50">
           <small class="card-header text-muted" style="font-size:0.7rem;">Bulletin</small>
           <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
               <ol style="font-size:0.8rem; cursor:pointer;">
@@ -41,7 +41,7 @@
       </div>
 
       {{-- Template --}}
-     <div class="card mb-2" style="height:260px; width:300px;">
+     <div class="card mb-2 h-50">
           <small class="card-header text-muted" style="font-size:0.7rem;">Template</small>
           <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
                     <ol style="font-size:0.8rem; cursor:pointer;">
@@ -92,7 +92,7 @@
                  <div class="deleteButton d-flex align-items-center justify-content-center">
                     <button type="button" class="btn btn-dark"
                     style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
-                    <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Copy
+                    <i class="fa-solid fa-copy" style="margin-right: 5px;"></i>Copy
                    </button>
                  </div>  
         </div>

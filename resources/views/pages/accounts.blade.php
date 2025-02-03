@@ -15,7 +15,7 @@
        <!-- Table -->
 <div class="accounts-container table-responsive border rounded p-3">
     <table class="table table-hover align-middle">
-        <thead class="bg-dark text-white">
+        <thead class="text-white">
             <tr>
                 <th class="px-3 py-2">Name</th>
                 <th class="px-3 py-2">Email</th>
@@ -51,6 +51,7 @@
         </tbody>
     </table>
 </div>
+
 
 
 
