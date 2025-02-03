@@ -135,3 +135,7 @@ body {
 #addAccountModal #role {
     font-size: 0.8rem;
 }
+/* List */
+.bulletinList:hover {
+    font-weight: bold;
+}
