@@ -44,11 +44,31 @@
 
   {{-- List Content --}}
   <div class="h-100 w-100 border rounded" style="margin-left:1rem;;">
-    <div class="header w-100 rounded p-1 d-flex align-items-center gap-2" 
+    <div class="header w-100 rounded p-1 d-flex align-items-center justify-content-between gap-2" 
     style="height:2rem; background-color:grey;">
-        <small style="font-size: 0.8rem; color:white; margin-left:10px;">Context</small>
-        <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
-        <span style="font-size:0.9rem; color:white; font-weight:bold;">Bulletin</span>
+        <div class="d-flex align-items-center justify-content-between">
+            <small style="font-size: 0.8rem; color:white; margin:10px">Context</small>
+            <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
+            <span style="font-size:0.9rem; color:white; font-weight:bold;">Bulletin</span>
+        </div>
+
+        <div class="d-flex gap-2">
+                {{-- Edit --}}
+                <div class="editButton d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-primary"
+                         style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                         <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
+                    </button>
+                 </div>
+
+                {{-- Delete --}}
+                <div class="deleteButton d-flex align-items-center justify-content-center">
+                        <button type="button" class="btn btn-danger"
+                            style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                            <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
+                        </button>
+                </div>      
+        </div>
     </div>
 
     {{-- Content --}}
