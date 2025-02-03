@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\BulletinController;
+use App\Http\Controllers\PostTemplateController;
 use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\pricelisXample;
 use App\Models\Pricelist;
@@ -72,8 +73,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.admin-dashboard');
         })->name('admin.dashboard');
 
-        Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-bulletin', BulletinController::class);
+        Route::resource('admin-postTemplate', PostTemplateController::class);
+        Route::resource('admin-replyTemplate', PostTemplateController::class);
+        Route::resource('admin-priceList', PriceListController::class);
     });
 
     Route::middleware(['role:user'])->group(function () {
@@ -81,22 +84,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('user.user-dashboard');
         })->name('user.dashboard');
     });
-
-    Route::get('/admin-bulletin', function () {
-        return view('pages.bulletin');
-    })->name('bulletin');
-
-    Route::get('/postTemplate', function () {
-        return view('pages.postTemplate');
-    })->name('postTemplate');
-
-    Route::get('/replyTemplate', function () {
-        return view('pages.replyTemplate');
-    })->name('replyTemplate');
-
-    Route::get('/replyTemplate', function () {
-        return view('pages.replyTemplate');
-    })->name('replyTemplate');
 
     Route::get('/quotation', function () {
         return view('pages.quotation');

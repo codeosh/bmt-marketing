@@ -11,6 +11,18 @@
             </div>
             <div class="modal-body">
                 <form>
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <select name="selectBulletin" id="selectBulletin" class="form-select">
+                                    <option value="">Select option</option>
+                                    <option value="Bulletin">Bulletin</option>
+                                    <option value="Template">Template</option>
+                                </select>
+                                <label for="selectBulletin">Select Option:</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="itemName" class="form-label" style="font-size:0.7rem;">Item
                             Name</label>

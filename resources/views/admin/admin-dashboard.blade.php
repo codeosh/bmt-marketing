@@ -51,7 +51,8 @@
                     </div>
                 </a>
                 <hr>
-                <a href="{{ route('bulletin')}}" class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
+                <a href="{{ route('admin-bulletin.index')}}"
+                    class="{{ Request::routeIs('admin-bulletin.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mb-0 mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-list-ul me-2 icon" style="font-size: 14px;"></i>
@@ -59,7 +60,8 @@
                     </div>
                 </a>
 
-                <a href="{{ route('postTemplate') }}" class="{{ Request::routeIs('postTemplate') ? 'active' : '' }}">
+                <a href="{{ route('admin-postTemplate.index') }}"
+                    class="{{ Request::routeIs('admin-postTemplate.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-signs-post me-2 icon" style="font-size: 14px;"></i>
@@ -67,7 +69,8 @@
                     </div>
                 </a>
 
-                <a href="{{route('replyTemplate')}}" class="{{ Request::routeIs('replyTemplate') ? 'active' : '' }}">
+                <a href="{{route('admin-replyTemplate.index')}}"
+                    class="{{ Request::routeIs('admin-replyTemplate.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-reply me-2 icon" style="font-size: 14px;"></i>
@@ -138,21 +141,21 @@
 
                             {{-- Add Button --}}
                             <div class="addButton">
-                                @if (request()->routeIs('bulletin'))
+                                @if (request()->routeIs('admin-bulletin.index'))
                                 {{-- Add Button for Bulletin Page --}}
                                 <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
                                     data-bs-target="#bulletinModal"
                                     style="font-size:0.6rem; width:100px; border-radius:3px;">
                                     <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
                                 </button>
-                                @elseif (request()->routeIs('postTemplate'))
+                                @elseif (request()->routeIs('admin-postTemplate.index'))
                                 {{-- Add Button for To-Do Page --}}
                                 <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
                                     data-bs-target="#PostTemplateModal"
                                     style="font-size:0.6rem; width:100px; border-radius:3px;">
                                     <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
                                 </button>
-                                @elseif (request()->routeIs('replyTemplate'))
+                                @elseif (request()->routeIs('admin-replyTemplate.index'))
                                 {{-- Add Button for Item Category Page --}}
                                 <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
                                     data-bs-target="#ReplyTemplateModal"
