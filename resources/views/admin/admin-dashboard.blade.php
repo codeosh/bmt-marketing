@@ -248,10 +248,6 @@
 
         </div>
 
-        {{-- Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
-        <script src="{{ asset('js/priceList.js') }}"></script>
-
 
         {{-- Bootstrap CDN --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

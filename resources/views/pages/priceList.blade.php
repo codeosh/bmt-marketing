@@ -47,7 +47,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <small style="font-size: 0.8rem; color:white; margin:10px">Context</small>
             <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
-            <span style="font-size:0.9rem; color:white; font-weight:bold;">Bulletin</span>
+            <span id="contentName" style="font-size:0.9rem; color:white; font-weight:bold;"></span>
         </div>
 
         <div class="d-flex gap-2">
