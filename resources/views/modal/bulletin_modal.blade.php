@@ -19,6 +19,7 @@
                                     <option value="Bulletin">Bulletin</option>
                                     <option value="Template">Template</option>
                                 </select>
+                                <label for="selectBulletin">Select Option:</label>
                             </div>
                         </div>
                     </div>

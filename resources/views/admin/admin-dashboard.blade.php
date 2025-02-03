@@ -51,7 +51,7 @@
                     </div>
                 </a>
                 <hr>
-                <a href="{{ route('admin-bulletin.index')}}" class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
+                <a href="{{ route('bulletin')}}" class="{{ Request::routeIs('bulletin') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mb-0 mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-list-ul me-2 icon" style="font-size: 14px;"></i>
@@ -76,7 +76,7 @@
                 </a>
                 <hr>
                 <a href="{{route('admin-priceList.index')}}"
-                    class="{{ Request::routeIs('priceList') ? 'active' : '' }}">
+                    class="{{ Request::routeIs('admin-priceList.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-3 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-money-check-dollar me-2 icon" style="font-size: 14px;"></i>
@@ -159,7 +159,7 @@
                                     style="font-size:0.6rem; width:100px; border-radius:3px;">
                                     <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
                                 </button>
-                                @elseif (request()->routeIs('priceList'))
+                                @elseif (request()->routeIs('admin-priceList.index'))
                                 {{-- Add Button for Contact Page --}}
                                 <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
                                     data-bs-target="#PriceListModal"
@@ -248,22 +248,17 @@
 
         </div>
 
-        <<<<<<< HEAD=======</div>
+        {{-- Script JS --}}
+        <script src="{{ asset('js/bulletin.js') }}"></script>
 
 
+        {{-- Script JS --}}
+        <script src="{{ asset('js/bulletin.js') }}"></script>
 
-            {{-- Script JS --}}
-            <script src="{{ asset('js/bulletin.js') }}"></script>
-            >>>>>>> 8afc4aab9b80b5723322a55fc52fcc1c19604962
-
-            {{-- Script JS --}}
-            <script src="{{ asset('js/bulletin.js') }}"></script>
-
-            {{-- Bootstrap CDN --}}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                crossorigin="anonymous">
-            </script>
+        {{-- Bootstrap CDN --}}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
     </body>
 
 </html>
