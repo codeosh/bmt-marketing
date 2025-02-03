@@ -251,17 +251,19 @@
 
         </div>
 
-        {{-- Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
-
-
-        {{-- Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
 
         {{-- Bootstrap CDN --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
+
+        {{-- pricelist Script JS --}}
+        <script src="{{ asset('js/priceList.js')}}"></script> {{-- script to handle the click events for each list item. When the user clicks on a list item, an AJAX request will be sent to the controller to fetch the content and display it inside the #contentDisplay div. --}}
+        
+        {{-- bulletin Script JS --}}
+        <script src="{{ asset('js/bulletin.js') }}"></script>
+
+
     </body>
 
 </html>
