@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -14,8 +12,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\PostTemplateController;
 use App\Http\Controllers\PriceListController;
-use App\Http\Controllers\pricelisXample;
-use App\Models\Pricelist;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {

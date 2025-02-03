@@ -30,6 +30,10 @@
             integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        {{-- Toastr CDN --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
         @yield('head')
     </head>
 
@@ -169,13 +173,6 @@
                                     style="font-size:0.6rem; width:100px; border-radius:3px;">
                                     <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
                                 </button>
-                                @else
-                                {{-- Default Add Button --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#defaultModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
-                                </button>
                                 @endif
                             </div>
                         </div>
@@ -253,10 +250,8 @@
 
         {{-- Script JS --}}
         <script src="{{ asset('js/bulletin.js') }}"></script>
+        <script src="{{ asset('js/priceList.js') }}"></script>
 
-
-        {{-- Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
 
         {{-- Bootstrap CDN --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

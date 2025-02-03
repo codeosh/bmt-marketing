@@ -11,6 +11,7 @@
             </div>
             <div class="modal-body">
                 <form id="bulletinForm">
+                    @csrf
                     <div class="row g-0">
                         <div class="col-md-12">
                             <div class="form-floating">
@@ -26,12 +27,12 @@
                     <div class="mb-3">
                         <label for="itemName" class="form-label" style="font-size:0.7rem;">Item
                             Name</label>
-                        <input type="text" class="form-control" id="itemName" placeholder="Enter item name"
-                            style="height:30px;">
+                        <input type="text" class="form-control" id="itemName" name="itemName"
+                            placeholder="Enter item name" style="height:30px;">
                     </div>
                     <div class="mb-3">
                         <label for="itemDescription" class="form-label" style="font-size:0.7rem;">Description</label>
-                        <textarea class="form-control" id="itemDescription" rows="3"
+                        <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3"
                             placeholder="Enter description"></textarea>
                     </div>
                 </form>
