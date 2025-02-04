@@ -56,7 +56,8 @@
                     <p>Systematic Buddy 2.0</p>
                 </div>
 
-                <a href="{{ route('admin-accounts.index')}}" class="{{ Request::routeIs('admin-accounts.index') ? 'active' : '' }}">
+                <a href="{{ route('admin-accounts.index')}}"
+                    class="{{ Request::routeIs('admin-accounts.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-user me-2 icon" style="font-size: 14px;"></i>
@@ -100,7 +101,8 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-quotation.index')}}" class="{{ Request::routeIs('admin-quotation.index') ? 'active' : '' }}">
+                <a href="{{route('admin-quotation.index')}}"
+                    class="{{ Request::routeIs('admin-quotation.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-quote-left me-2 icon" style="font-size: 14px;"></i>
@@ -108,7 +110,8 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-prospects.index')}}" class="{{ Request::routeIs('admin-prospects.index') ? 'active' : '' }}">
+                <a href="{{route('admin-prospects.index')}}"
+                    class="{{ Request::routeIs('admin-prospects.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-magnifying-glass-dollar me-2 icon" style="font-size: 14px;"></i>
@@ -116,7 +119,8 @@
                     </div>
                 </a>
                 <hr>
-                <a href="{{route('admin-insight.index')}}" class="{{ Request::routeIs('admin-insight.index') ? 'active' : '' }}">
+                <a href="{{route('admin-insight.index')}}"
+                    class="{{ Request::routeIs('admin-insight.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-lightbulb me-2 icon" style="font-size: 14px;"></i>
@@ -124,7 +128,8 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-guides.index')}}" class="{{ Request::routeIs('admin-guides.index') ? 'active' : '' }}">
+                <a href="{{route('admin-guides.index')}}"
+                    class="{{ Request::routeIs('admin-guides.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-book me-2 icon" style="font-size: 14px;"></i>
@@ -146,7 +151,8 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
                             <input type="text" class="form-control border-0 bg-transparent" placeholder="Search..."
-                                aria-label="Search..." aria-describedby="basic-addon1" style="font-size: 0.8rem;" id="searchInput">
+                                aria-label="Search..." aria-describedby="basic-addon1" style="font-size: 0.8rem;"
+                                id="searchInput">
                         </div>
 
                         {{-- Buttons --}}
@@ -191,6 +197,7 @@
                     {{-- Modals --}}
                     {{-- Bulletin Modal --}}
                     @include('modal.bulletin_modal')
+                    @include('modal.edit_bulletin')
 
                     {{-- Post Template Modal --}}
                     @include('modal.template_modal')
@@ -264,12 +271,11 @@
         </script>
 
         {{-- pricelist Script JS --}}
-        <script src="{{ asset('js/showpassword.js')}}"></script> {{-- script to handle the click events for each list
-        item. When the user clicks on a list item, an AJAX request will be sent to the controller to fetch the content
-        and display it inside the #contentDisplay div. --}}
+        <script src="{{ asset('js/showpassword.js')}}"></script>
+
 
         {{-- bulletin Script JS --}}
-        <script src="{{ asset('js/priceList.js') }}"></script>
+        <script src="{{ asset('js/bulletin.js') }}"></script>
 
 
     </body>

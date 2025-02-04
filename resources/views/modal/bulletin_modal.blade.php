@@ -10,7 +10,7 @@
                     style="font-size:0.6rem;"></button>
             </div>
             <div class="modal-body">
-                <form id="bulletinForm">
+                <form id="bulletinForm" autocomplete="off">
                     @csrf
                     <div class="row g-0">
                         <div class="col-md-12">

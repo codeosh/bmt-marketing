@@ -10,7 +10,6 @@ $(document).ready(function () {
                     return;
                 }
 
-                // Clear existing lists
                 $("#bulletinList").empty();
                 $("#templateList").empty();
 
@@ -19,9 +18,14 @@ $(document).ready(function () {
                     <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
                         data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
                         <span class="text-truncate">${item.pname}</span>
-                        <button class="btn btn-sm btn-danger delete-bulletin" data-id="${item.id}">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <div class="d-flex gap-1">
+                            <button class="btn btn-sm btn-primary edit-bulletin" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger delete-bulletin" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </div>
                 `;
 
@@ -35,7 +39,30 @@ $(document).ready(function () {
                 // Attach click event to dynamically added list items
                 $(".bulletin-item").click(function () {
                     let content = $(this).data("content");
-                    $(".w-100.overflow-auto.rounded").html(content);
+                    let pname = $(this).text().trim();
+
+                    content = content.replace(/\n/g, "<br>");
+                    content = content.replace(/ /g, "&nbsp;");
+
+                    $(".content-display").html(content);
+                    $(".display-item-name").text(pname);
+                });
+
+                // Attach edit event to dynamically added edit buttons
+                $(".edit-bulletin").click(function (e) {
+                    e.stopPropagation(); // Prevent triggering the click event on .bulletin-item
+
+                    let id = $(this).data("id");
+                    let pname = $(this).data("pname");
+                    let content = $(this).data("content");
+
+                    // Populate the edit form (assuming you have a modal with input fields)
+                    $("#editBulletinId").val(id);
+                    $("#editBulletinName").val(pname);
+                    $("#editBulletinContent").val(content);
+
+                    // Show the modal
+                    $("#editBulletinModal").modal("show");
                 });
 
                 // Attach delete event to dynamically added delete buttons
@@ -64,6 +91,9 @@ $(document).ready(function () {
                                 success: function () {
                                     toastr.success("Deleted successfully!");
                                     fetchBulletins();
+
+                                    // Clear the content display
+                                    $(".content-display").html("");
                                 },
                                 error: function (xhr) {
                                     toastr.error("Failed to delete.");
@@ -76,7 +106,6 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 toastr.error("Failed to fetch data.");
-                console.error("Error:", xhr.responseText);
             },
         });
     }
@@ -115,6 +144,35 @@ $(document).ready(function () {
                 } else {
                     toastr.error("An unexpected error occurred.");
                 }
+            },
+        });
+    });
+
+    $("#editBulletinForm").submit(function (e) {
+        e.preventDefault();
+
+        let id = $("#editBulletinId").val();
+        let pname = $("#editBulletinName").val();
+        let content = $("#editBulletinContent").val();
+
+        $.ajax({
+            url: `/admin-bulletin/${id}`,
+            type: "PUT",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                pname: pname,
+                content: content,
+            },
+            success: function () {
+                toastr.success("Bulletin updated successfully!");
+                $("#editBulletinModal").modal("hide");
+                fetchBulletins();
+            },
+            error: function (xhr) {
+                toastr.error("Failed to update.");
+                console.error("Error:", xhr.responseText);
             },
         });
     });

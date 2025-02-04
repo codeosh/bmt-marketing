@@ -29,7 +29,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <small style="font-size: 0.8rem; color:white; margin:10px">Context</small>
                 <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
-                <span style="font-size:0.9rem; color:white; font-weight:bold;">Bulletin</span>
+                <span class="display-item-name" style="font-size:0.9rem; color:white; font-weight:bold;"></span>
             </div>
 
             <div class="d-flex gap-2">
@@ -44,11 +44,9 @@
         </div>
 
         {{-- Content --}}
-        <div class="w-100 overflow-auto rounded"
+        <div class="w-100 overflow-auto rounded content-display"
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
-
         </div>
-
     </div>
 </div>
 
