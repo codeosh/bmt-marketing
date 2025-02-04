@@ -1,0 +1,49 @@
+
+{{-- Modal edit --}}
+<div class="modal fade" id="PriceListModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <small class="text-muted">Edit Item</small>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    style="font-size:0.6rem;"></button>
+            </div>
+            <div class="modal-body">
+                <form id="pricelistForm">
+                    @csrf
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <select name="selectBulletin" id="selectBulletin" class="form-select">
+                                    <option value="">Select option</option>
+                                    <option value="Bulletin">Bulletin</option>
+                                    <option value="Template">Template</option>
+                                </select>
+                                <label for="selectBulletin">Select Option:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemName" class="form-label" style="font-size:0.7rem;">Item
+                            Name</label>
+                        <input type="text" class="form-control" id="itemName" name="itemName"
+                            placeholder="Enter item name" style="height:30px;" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemDescription" class="form-label" style="font-size:0.7rem;">Description</label>
+                        <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3"
+                            placeholder="Enter description" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="saveBtn" form="pricelistForm" class="btn btn-primary">
+                    <span id="buttonText">{{ __('Save') }}</span>
+                        <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </div>
+                </button>
+                
+        </div>
+    </div>
+</div>

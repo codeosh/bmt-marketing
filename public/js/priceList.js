@@ -113,9 +113,9 @@ $(document).ready(function () {
     $(document).off("click", ".copyButton button").on("click", ".copyButton button", function () {
             var contentElement = document.querySelector("#contentDisplay");
 
-        const copyButton = document.getElementById("copyBtn");
-        const buttonText = document.getElementById("buttonText");
-        const buttonSpinner = document.getElementById("buttonSpinner");
+        // const copyButton = document.getElementById("copyBtn");
+        // const buttonText = document.getElementById("buttonText");
+        // const buttonSpinner = document.getElementById("buttonSpinner");
 
             if (contentElement) {
                 var contentText = contentElement.innerText.trim();
@@ -125,9 +125,9 @@ $(document).ready(function () {
                         .writeText(contentText)
                         .then(() => {
                             // Show loader effect
-                            copyButton.disabled = true;
-                            buttonText.textContent = "Copying...";
-                            buttonSpinner.classList.remove("d-none");
+                            // copyButton.disabled = true;
+                            // buttonText.textContent = "Copying...";
+                            // buttonSpinner.classList.remove("d-none");
 
                             toastr.success("Content copied to clipboard!");
                         })
