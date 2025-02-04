@@ -43,4 +43,11 @@ class BulletinController extends Controller
             ], 500);
         }
     }
+
+    public function getBulletins()
+    {
+        $bulletins = Bulletin::select('id', 'pname', 'kind', 'content')->get();
+
+        return response()->json($bulletins);
+    }
 }

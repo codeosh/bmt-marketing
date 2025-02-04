@@ -71,6 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('admin.dashboard');
 
         Route::resource('admin-bulletin', BulletinController::class);
+        Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
+
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::resource('admin-replyTemplate', PostTemplateController::class);
         Route::resource('admin-priceList', PriceListController::class);
