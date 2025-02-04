@@ -40,7 +40,7 @@
       </div>
 
       {{-- Template --}}
-     <div class="card w-100 h-50 shadow-sm" style="height:260px; width:300px;">
+     <div class="card w-100 h-50 shadow-sm" style="height: 256px">
           <small class="card-header text-muted text-center" style="font-size:0.7rem;">Template</small>
           <div class="card-body p-2 overflow-auto custom-scrollbar">
                     <ol style="font-size:0.8rem; cursor:pointer;">
