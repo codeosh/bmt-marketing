@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title')</title>
@@ -15,6 +16,11 @@
             href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet">
 
+        <!-- SweetAlert2 CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+        <!-- SweetAlert2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- Style Css --}}
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
@@ -50,7 +56,7 @@
                     <p>Systematic Buddy 2.0</p>
                 </div>
 
-                <a href="{{ route('accounts')}}" class="{{ Request::routeIs('accounts') ? 'active' : '' }}">
+                <a href="{{ route('admin-accounts.index')}}" class="{{ Request::routeIs('admin-accounts.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-user me-2 icon" style="font-size: 14px;"></i>
@@ -94,7 +100,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('quotation')}}" class="{{ Request::routeIs('quotation') ? 'active' : '' }}">
+                <a href="{{route('admin-quotation.index')}}" class="{{ Request::routeIs('admin-quotation.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-quote-left me-2 icon" style="font-size: 14px;"></i>
@@ -102,7 +108,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('prospects')}}" class="{{ Request::routeIs('prospects') ? 'active' : '' }}">
+                <a href="{{route('admin-prospects.index')}}" class="{{ Request::routeIs('admin-prospects.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-magnifying-glass-dollar me-2 icon" style="font-size: 14px;"></i>
@@ -110,7 +116,7 @@
                     </div>
                 </a>
                 <hr>
-                <a href="{{route('insight')}}" class="{{ Request::routeIs('insight') ? 'active' : '' }}">
+                <a href="{{route('admin-insight.index')}}" class="{{ Request::routeIs('admin-insight.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-lightbulb me-2 icon" style="font-size: 14px;"></i>
@@ -118,7 +124,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('guides')}}" class="{{ Request::routeIs('guides') ? 'active' : '' }}">
+                <a href="{{route('admin-guides.index')}}" class="{{ Request::routeIs('admin-guides.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-2 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-book me-2 icon" style="font-size: 14px;"></i>
@@ -250,10 +256,6 @@
 
 
         </div>
-
-        {{-- Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
-        <script src="{{ asset('js/priceList.js') }}"></script>
 
 
         {{-- Bootstrap CDN --}}
