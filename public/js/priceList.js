@@ -56,3 +56,34 @@ $(document).ready(function () {
             });
         });
 });
+
+// Copy Function
+$(document).ready(function () {
+    $(document)
+        .off("click", ".copyButton button")
+        .on("click", ".copyButton button", function () {
+            var contentElement = document.querySelector("#contentDisplay");
+
+            if (contentElement) {
+                var contentText = contentElement.innerText.trim();
+
+                if (contentText) {
+                    navigator.clipboard
+                        .writeText(contentText)
+                        .then(() => {
+                            toastr.success("Content copied to clipboard!");
+                        })
+                        .catch((err) => {
+                            toastr.error(
+                                "Failed to copy content. Please try again."
+                            );
+                            console.error("Copy Error:", err);
+                        });
+                } else {
+                    toastr.warning("No content to copy.");
+                }
+            } else {
+                toastr.error("Content area not found.");
+            }
+        });
+});
