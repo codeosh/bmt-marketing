@@ -12,6 +12,11 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\PostTemplateController;
 use App\Http\Controllers\PriceListController;
+use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\ProspectsController;
+use App\Http\Controllers\InsightController;
+use App\Http\Controllers\GuidesController;
+use App\Http\Controllers\AccountController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +79,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::resource('admin-replyTemplate', PostTemplateController::class);
         Route::resource('admin-priceList', PriceListController::class);
+        Route::resource('admin-quotation', QuotationController::class);
+        Route::resource('admin-prospects', ProspectsController::class);
+        Route::resource('admin-insight', InsightController::class);
+        Route::resource('admin-guides', GuidesController::class);
+        Route::resource('admin-accounts', AccountController::class);
     });
 
     Route::middleware(['role:user'])->group(function () {
@@ -81,24 +91,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('user.user-dashboard');
         })->name('user.dashboard');
     });
-
-    Route::get('/quotation', function () {
-        return view('pages.quotation');
-    })->name('quotation');
-
-    Route::get('/prospects', function () {
-        return view('pages.prospects');
-    })->name('prospects');
-
-    Route::get('/insight', function () {
-        return view('pages.insight');
-    })->name('insight');
-
-    Route::get('/guides', function () {
-        return view('pages.guides');
-    })->name('guides');
-
-    Route::get('/accounts', function () {
-        return view('pages.accounts');
-    })->name('accounts');
 });

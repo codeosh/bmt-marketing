@@ -20,8 +20,7 @@
                             <div class="d-flex gap-1">
                                 {{-- Delete --}}
                                 <div class="deleteButton">
-                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
-                                        style="font-size:0.5rem; height:20px; border-radius:3px">
+                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center delete-priceList" data-id="{{$id}}" data-pname="{{$pname}}" style="font-size:0.5rem; height:20px; border-radius:3px">
                                         <i class="fa-solid fa-trash" ></i>
                                     </button>
                                 </div>  
@@ -54,8 +53,7 @@
                                 <div class="d-flex gap-1">
                                     {{-- Delete --}}
                                     <div class="deleteButton">
-                                        <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
-                                            style="font-size:0.5rem; height:20px; border-radius:3px">
+                                        <button class="btn btn-danger d-flex align-items-center justify-content-center delete-priceList" data-id="{{$id}}" data-pname="{{$pname}}" style="font-size:0.5rem; height:20px; border-radius:3px">
                                             <i class="fa-solid fa-trash" ></i>
                                         </button>
                                     </div>  
