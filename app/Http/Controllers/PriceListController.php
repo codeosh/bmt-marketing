@@ -42,7 +42,7 @@ class PriceListController extends Controller
         $validatedData = $request->validate([
             'selectBulletin' => 'nullable|string|max:255',
             'itemName' => 'nullable|string|max:255',
-            'itemDescription' => 'nullable|string|max:255',
+            'itemDescription' => 'nullable|string',
         ]);
         try {
             DB::beginTransaction();

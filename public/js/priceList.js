@@ -12,7 +12,7 @@ $(document).ready(function () {
                 dataType: "json", // Ensure JSON response is expected
                 success: function (response) {
                     $("#contentDisplay").html(response.content); // Display the content
-                    $("#contentName").html(response.pname); // Display the panme
+                    $("#contentName").html(response.pname);
                 },
                 error: function (xhr, status, error) {
                     console.error("AJAX Error:", status, error);
@@ -42,6 +42,7 @@ $(document).ready(function () {
                 },
                 success: function (response) {
                     toastr.success("Added Successfully!");
+                    $("#PriceListModal").modal("hide");
                 },
                 error: function (xhr, status, error) {
                     if (xhr.responseJSON) {

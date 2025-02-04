@@ -17,9 +17,9 @@ class BulletinController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'selectBulletin' => 'nullable|string|max:255',
-            'itemName' => 'nullable|string|max:255',
-            'itemDescription' => 'nullable|string|max:255',
+            'selectBulletin' => 'required|string|max:255',
+            'itemName' => 'required|string|max:255',
+            'itemDescription' => 'required|string',
         ]);
         try {
             DB::beginTransaction();
@@ -46,8 +46,14 @@ class BulletinController extends Controller
 
     public function getBulletins()
     {
-        $bulletins = Bulletin::select('id', 'pname', 'kind', 'content')->get();
+        return response()->json(Bulletin::all());
+    }
 
-        return response()->json($bulletins);
+    public function destroy($id)
+    {
+        $bulletin = Bulletin::findOrFail($id);
+        $bulletin->delete();
+
+        return response()->json(['success' => true, 'message' => 'Deleted successfully!']);
     }
 }
