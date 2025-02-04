@@ -88,8 +88,7 @@
         <div class="d-flex gap-2">        
                  {{-- Copy --}}
                  <div class="copyButton" d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn btn-dark"
-                    style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                    <button type="button" id="copyBtn" class="btn btn-dark" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
                     <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Copy
                    </button>
                  </div>  
