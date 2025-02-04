@@ -140,7 +140,7 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
                             <input type="text" class="form-control border-0 bg-transparent" placeholder="Search..."
-                                aria-label="Search..." aria-describedby="basic-addon1" style="font-size: 0.8rem;">
+                                aria-label="Search..." aria-describedby="basic-addon1" style="font-size: 0.8rem;" id="searchInput">
                         </div>
 
                         {{-- Buttons --}}

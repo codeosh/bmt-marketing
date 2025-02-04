@@ -16,8 +16,10 @@
                 @else
                     @foreach ($pnamesBulletin as $id => $pname)
                         <div class="d-flex align-items-center justify-content-between mb-2" style="margin-right: 10px">
-                                <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin">{{$pname}}</li>                 
-                            <div class="d-flex gap-1">
+                            <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; display: inline-block;">
+                                {{ $pname }}
+                            </li>
+                        <div class="d-flex gap-1">
                                 {{-- Delete --}}
                                 <div class="deleteButton">
                                     <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
