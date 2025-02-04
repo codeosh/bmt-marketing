@@ -5,9 +5,9 @@
 @section('content')
 
 <div class="h-100 w-100 d-flex justify-content-between">
-    <div class="" style="width:300px; height:505px;">
+    <div class="" style="height:280px; width:300px;">
         {{-- Bulletin List --}}
-       <div class="card mb-1 h-50">
+       <div class="card mb-1" style="height: 256px">
           <small class="card-header text-muted" style="font-size:0.7rem;">Bulletin</small>
           <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
               <ol style="font-size:0.8rem; cursor:pointer;">
@@ -16,14 +16,11 @@
                 @else
                     @foreach ($pnamesBulletin as $id => $pname)
                         <div class="d-flex align-items-center justify-content-between mb-2" style="margin-right: 10px">
-                            <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin" >
-                                {{ $pname }}
-                            </li>
-                        <div class="d-flex gap-1">
+                                <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin">{{$pname}}</li>                 
+                            <div class="d-flex gap-1">
                                 {{-- Delete --}}
                                 <div class="deleteButton">
-                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
-                                        style="font-size:0.5rem; height:20px; border-radius:3px">
+                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center delete-priceList" data-id="{{$id}}" data-pname="{{$pname}}" style="font-size:0.5rem; height:20px; border-radius:3px">
                                         <i class="fa-solid fa-trash" ></i>
                                     </button>
                                 </div>  
@@ -43,7 +40,7 @@
       </div>
 
       {{-- Template --}}
-     <div class="card mb-2 h-50">
+     <div class="card mb-2" style="height:260px; width:300px;">
           <small class="card-header text-muted" style="font-size:0.7rem;">Template</small>
           <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
                     <ol style="font-size:0.8rem; cursor:pointer;">
@@ -56,8 +53,7 @@
                                 <div class="d-flex gap-1">
                                     {{-- Delete --}}
                                     <div class="deleteButton">
-                                        <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center"
-                                            style="font-size:0.5rem; height:20px; border-radius:3px">
+                                        <button class="btn btn-danger d-flex align-items-center justify-content-center delete-priceList" data-id="{{$id}}" data-pname="{{$pname}}" style="font-size:0.5rem; height:20px; border-radius:3px">
                                             <i class="fa-solid fa-trash" ></i>
                                         </button>
                                     </div>  
@@ -86,15 +82,15 @@
         <div class="d-flex align-items-center justify-content-between">
             <small style="font-size: 0.8rem; color:white; margin:10px">Context</small>
             <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
-            <span style="font-size:0.9rem; color:white; font-weight:bold;">Bulletin</span>
+            <span id="contentName" style="font-size:0.9rem; color:white; font-weight:bold;"></span>
         </div>
 
         <div class="d-flex gap-2">        
                  {{-- Copy --}}
-                 <div class="copyButton d-flex align-items-center justify-content-center">
+                 <div class="copyButton" d-flex align-items-center justify-content-center">
                     <button type="button" class="btn btn-dark"
                     style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
-                    <i class="fa-solid fa-copy" style="margin-right: 5px;"></i>Copy
+                    <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Copy
                    </button>
                  </div>  
         </div>
@@ -114,4 +110,3 @@
 </div>
 
 @endsection
-

@@ -28,19 +28,23 @@
                         <label for="itemName" class="form-label" style="font-size:0.7rem;">Item
                             Name</label>
                         <input type="text" class="form-control" id="itemName" name="itemName"
-                            placeholder="Enter item name" style="height:30px;">
+                            placeholder="Enter item name" style="height:30px;" required>
                     </div>
                     <div class="mb-3">
                         <label for="itemDescription" class="form-label" style="font-size:0.7rem;">Description</label>
                         <textarea class="form-control" id="itemDescription" name="itemDescription" rows="3"
-                            placeholder="Enter description"></textarea>
+                            placeholder="Enter description" required></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="pricelistForm" class="btn btn-primary">Save changes</button>
-            </div>
+                <button type="submit" id="saveBtn" form="pricelistForm" class="btn btn-primary">
+                    <span id="buttonText">{{ __('Save') }}</span>
+                        <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </div>
+                </button>
+                
         </div>
     </div>
 </div>

@@ -110,6 +110,11 @@ class PriceListController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find and delete the record
+        $pricelist = Pricelist::findOrFail($id);
+        $pricelist->delete();
+
+        // Return a JSON response for AJAX
+        return response()->json(['success' => true, 'message' => 'Successfully deleted.']);
     }
 }
