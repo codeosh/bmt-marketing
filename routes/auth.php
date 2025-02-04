@@ -77,6 +77,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
+        Route::put('/admin-bulletin/{id}', [BulletinController::class, 'update']);
         Route::delete('/admin-bulletin/{id}', [BulletinController::class, 'destroy']);
 
 
