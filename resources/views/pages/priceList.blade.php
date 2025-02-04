@@ -5,18 +5,18 @@
 @section('content')
 
 <div class="h-100 w-100 d-flex justify-content-between">
-    <div class="" style="height:280px; width:300px;">
+    <div  class="h-100" style="width: 300px;">
         {{-- Bulletin List --}}
-       <div class="card mb-1" style="height: 256px">
-          <small class="card-header text-muted" style="font-size:0.7rem;">Bulletin</small>
-          <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
+       <div class="card w-100 h-50 mb-1 shadow-sm" style="height: 256px">
+          <small class="card-header text-muted text-center" style="font-size:0.7rem;">Bulletin</small>
+          <div class="card-body p-2 overflow-auto custom-scrollbar">
               <ol style="font-size:0.8rem; cursor:pointer;">
                 @if($pnamesBulletin->isEmpty())
                     <p>Bulletin is Empty.</p>
                 @else
                     @foreach ($pnamesBulletin as $id => $pname)
                         <div class="d-flex align-items-center justify-content-between mb-2" style="margin-right: 10px">
-                                <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin">{{$pname}}</li>                 
+                                <li class="bulletinList" data-id="{{ $id }}" data-type="bulletin">{{$pname}}</li>   
                             <div class="d-flex gap-1">
                                 {{-- Delete --}}
                                 <div class="deleteButton">
@@ -40,9 +40,9 @@
       </div>
 
       {{-- Template --}}
-     <div class="card mb-2" style="height:260px; width:300px;">
-          <small class="card-header text-muted" style="font-size:0.7rem;">Template</small>
-          <div class="card-body p-0 pt-2 overflow-auto custom-scrollbar">
+     <div class="card w-100 h-50 shadow-sm" style="height:260px; width:300px;">
+          <small class="card-header text-muted text-center" style="font-size:0.7rem;">Template</small>
+          <div class="card-body p-2 overflow-auto custom-scrollbar">
                     <ol style="font-size:0.8rem; cursor:pointer;">
                         @if($pnamesTemplate->isEmpty())
                             <p>No products found.</p>
