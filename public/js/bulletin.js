@@ -35,7 +35,10 @@ $(document).ready(function () {
                 // Attach click event to dynamically added list items
                 $(".bulletin-item").click(function () {
                     let content = $(this).data("content");
-                    $(".w-100.overflow-auto.rounded").html(content);
+                    content = content.replace(/\n/g, "<br>");
+                    content = content.replace(/ /g, "&nbsp;");
+
+                    $(".content-display").html(content);
                 });
 
                 // Attach delete event to dynamically added delete buttons
@@ -64,6 +67,9 @@ $(document).ready(function () {
                                 success: function () {
                                     toastr.success("Deleted successfully!");
                                     fetchBulletins();
+
+                                    // Clear the content display
+                                    $(".content-display").html("");
                                 },
                                 error: function (xhr) {
                                     toastr.error("Failed to delete.");

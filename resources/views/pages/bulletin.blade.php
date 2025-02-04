@@ -44,7 +44,7 @@
         </div>
 
         {{-- Content --}}
-        <div class="w-100 overflow-auto rounded"
+        <div class="w-100 overflow-auto rounded content-display"
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
 
         </div>
