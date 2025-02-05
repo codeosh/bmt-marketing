@@ -1,7 +1,6 @@
 @extends('admin.admin-dashboard')
 
 @section('title', 'BMTMarketing - Bulletin & To Do')
-
 @section('content')
 <div class="h-100 w-100 d-flex justify-content-between">
     <div class="h-100" style="width:550px;">
