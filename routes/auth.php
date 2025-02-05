@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\PostTemplateController;
+use App\Http\Controllers\ReplyTemplateController;
 use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ProspectsController;
@@ -82,7 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
         Route::resource('admin-postTemplate', PostTemplateController::class);
-        Route::resource('admin-replyTemplate', PostTemplateController::class);
+        Route::resource('admin-replyTemplate', ReplyTemplateController::class);
         Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);
         Route::resource('admin-prospects', ProspectsController::class);
