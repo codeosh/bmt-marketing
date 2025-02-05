@@ -1,73 +1,85 @@
 $(document).ready(function () {
     // Fetch the content and bulletin and template name from the database
-    $(document).on("click", 'li[data-type="bulletin"], li[data-type="template"]', function () {
-        var id = $(this).data("id"); // Get the clicked item's ID
+    $(document).on(
+        "click",
+        'li[data-type="bulletin"], li[data-type="template"]',
+        function () {
+            var id = $(this).data("id"); // Get the clicked item's ID
 
-        var url = "/admin-priceList/" + id;
+            var url = "/admin-priceList/" + id;
 
-        $.ajax({
-            url: url,
-            method: "GET",
-            dataType: "json", // Ensure JSON response is expected
-            success: function (response) {
-                $("#contentDisplay").html(response.content); // Display the content
-                $("#contentName").html(response.pname); // Display the pname
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error:", status, error);
-                $("#contentDisplay").html("<p>Error loading content. Please try again.</p>");
-            },
-        });
-    });
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json", // Ensure JSON response is expected
+                success: function (response) {
+                    $("#contentDisplay").html(response.content); // Display the content
+                    $("#contentName").html(response.pname); // Display the pname
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                    $("#contentDisplay").html(
+                        "<p>Error loading content. Please try again.</p>"
+                    );
+                },
+            });
+        }
+    );
 
     // Add data for pricelist
-    $("#pricelistForm").off("submit").on("submit", function (e) {
-        e.preventDefault();
+    $("#pricelistForm")
+        .off("submit")
+        .on("submit", function (e) {
+            e.preventDefault();
 
-        const formData = $(this).serialize();
+            const formData = $(this).serialize();
 
-        const saveButton = document.getElementById("saveBtn");
-        const buttonText = document.getElementById("buttonText");
-        const buttonSpinner = document.getElementById("buttonSpinner");
+            const saveButton = document.getElementById("saveBtn");
+            const buttonText = document.getElementById("buttonText");
+            const buttonSpinner = document.getElementById("buttonSpinner");
 
-        // Show loader effect
-        saveButton.disabled = true;
-        buttonText.textContent = "Saving...";
-        buttonSpinner.classList.remove("d-none");
+            // Show loader effect
+            saveButton.disabled = true;
+            buttonText.textContent = "Saving...";
+            buttonSpinner.classList.remove("d-none");
 
-        $.ajax({
-            type: "POST",
-            url: "/admin-priceList",
-            data: formData,
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                toastr.success("Added Successfully!");
+            $.ajax({
+                type: "POST",
+                url: "/admin-priceList",
+                data: formData,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                success: function (response) {
+                    toastr.success("Added Successfully!");
 
-                // Reload the page after a short delay
-                setTimeout(function () {
-                    window.location.href = "/admin-priceList"; // Redirect to the index page
+                    // Reload the page after a short delay
+                    setTimeout(function () {
+                        window.location.href = "/admin-priceList"; // Redirect to the index page
+                        saveButton.disabled = false;
+                        buttonText.textContent = "Save";
+                        buttonSpinner.classList.add("d-none");
+                    }, 1000); // Adjust delay time as needed
+                },
+                error: function (xhr, status, error) {
+                    // Turn off loader effect (ensure it runs even on error)
                     saveButton.disabled = false;
                     buttonText.textContent = "Save";
                     buttonSpinner.classList.add("d-none");
-                }, 1000); // Adjust delay time as needed
-            },
-            error: function (xhr, status, error) {
-                // Turn off loader effect (ensure it runs even on error)
-                saveButton.disabled = false;
-                buttonText.textContent = "Save";
-                buttonSpinner.classList.add("d-none");
 
-                if (xhr.responseJSON) {
-                    toastr.error(xhr.responseJSON.message || "An error occurred.");
-                    console.error("Error Details:", xhr.responseJSON);
-                } else {
-                    toastr.error("An unexpected error occurred.");
-                }
-            },
+                    if (xhr.responseJSON) {
+                        toastr.error(
+                            xhr.responseJSON.message || "An error occurred."
+                        );
+                        console.error("Error Details:", xhr.responseJSON);
+                    } else {
+                        toastr.error("An unexpected error occurred.");
+                    }
+                },
+            });
         });
-    });
 
     // Delete data
     $(document).on("click", ".delete-priceList", function () {
@@ -92,7 +104,9 @@ $(document).ready(function () {
                         _method: "DELETE",
                     },
                     success: function (response) {
-                        toastr.success(response.message || "Deleted Successfully!");
+                        toastr.success(
+                            response.message || "Deleted Successfully!"
+                        );
                         $(`.item-row[data-id="${itemId}"]`).remove(); // Remove item from list
                         window.location.href = "/admin-priceList";
                     },
@@ -100,7 +114,10 @@ $(document).ready(function () {
                         if (xhr.status === 404) {
                             toastr.error("Error: Record not found.");
                         } else {
-                            toastr.error(xhr.responseJSON?.message || "An error occurred while deleting.");
+                            toastr.error(
+                                xhr.responseJSON?.message ||
+                                    "An error occurred while deleting."
+                            );
                         }
                     },
                 });
@@ -108,14 +125,15 @@ $(document).ready(function () {
         });
     });
 
-    
     //copy function
-    $(document).off("click", ".copyButton button").on("click", ".copyButton button", function () {
+    $(document)
+        .off("click", ".copyButton button")
+        .on("click", ".copyButton button", function () {
             var contentElement = document.querySelector("#contentDisplay");
 
-        // const copyButton = document.getElementById("copyBtn");
-        // const buttonText = document.getElementById("buttonText");
-        // const buttonSpinner = document.getElementById("buttonSpinner");
+            // const copyButton = document.getElementById("copyBtn");
+            // const buttonText = document.getElementById("buttonText");
+            // const buttonSpinner = document.getElementById("buttonSpinner");
 
             if (contentElement) {
                 var contentText = contentElement.innerText.trim();
