@@ -45,10 +45,12 @@
         </div>
 
         {{-- Content --}}
-        <div class="w-100 overflow-auto rounded content-display"
+        <div class="w-100 rounded content-display"
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
         </div>
     </div>
 </div>
 
+{{-- bulletin Script JS --}}
+<script src="{{ asset('js/bulletin.js') }}"></script>
 @endsection

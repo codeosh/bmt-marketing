@@ -22,8 +22,13 @@ $(document).ready(function () {
                             <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
                                 <i class="fas fa-edit" style="font-size:10px;"></i>
                             </button>
+<<<<<<< HEAD
                             <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" data-id="${item.id}">
                                 <i class="fas fa-trash" style="font-size:10px;"></i>
+=======
+                            <button class="btn btn-sm btn-danger delete-bulletin" data-pname="${item.pname}" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+>>>>>>> 41779f911d09d7bcb2e19fa780e82964df02e60d
                             </button>
                         </div>
                     </div>
@@ -69,10 +74,10 @@ $(document).ready(function () {
                 $(".delete-bulletin").click(function (e) {
                     e.stopPropagation();
                     let id = $(this).data("id");
-
+                    let pname = $(this).data("pname");
                     Swal.fire({
                         title: "Are you sure?",
-                        text: "You won't be able to undo this!",
+                        text: `Are you sure you want to delete: ${pname}`,
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#d33",
@@ -128,6 +133,7 @@ $(document).ready(function () {
             success: function (response) {
                 toastr.success("Added Successfully!");
                 fetchBulletins();
+
 
                 // Close the modal
                 $("#bulletinModal").modal("hide");
