@@ -144,3 +144,10 @@ body {
 .bulletinList:hover {
     font-weight: bold;
 }
+
+.content-display {
+    white-space: normal; /* Allows wrapping */
+    word-break: break-word; /* Forces break on long words */
+    overflow-wrap: break-word; /* Ensures words break within the container */
+    overflow-y: auto; /* Enables vertical scrolling if needed */
+}
