@@ -46,4 +46,46 @@ class PostTemplateController extends Controller
             ], 500);
         }
     }
+
+    public function getPostTemplate()
+    {
+        return response()->json(PostTemplate::all());
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'pname' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $bulletin = PostTemplate::findOrFail($id);
+            $bulletin->update([
+                'pname' => $validatedData['pname'],
+                'content' => $validatedData['content'],
+            ]);
+
+            DB::commit();
+            return response()->json(['success' => true, 'message' => 'Updated successfully!']);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while updating.',
+                'error_details' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+            ], 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $bulletin = PostTemplate::findOrFail($id);
+        $bulletin->delete();
+
+        return response()->json(['success' => true, 'message' => 'Deleted successfully!']);
+    }
 }

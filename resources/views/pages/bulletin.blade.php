@@ -46,6 +46,9 @@
         {{-- Content --}}
         <div class="w-100 rounded content-display"
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px;">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <p id="item-" style="color: red;">Please select an item to see the content.</p>
+            </div>
         </div>
     </div>
 </div>

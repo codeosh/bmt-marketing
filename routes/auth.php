@@ -78,13 +78,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
-        Route::put('/admin-bulletin/{id}', [BulletinController::class, 'update']);
-        Route::delete('/admin-bulletin/{id}', [BulletinController::class, 'destroy']);
 
         // Dashboard Controller
         Route::resource('admin-dashboard', DashboardController::class);
 
         Route::resource('admin-postTemplate', PostTemplateController::class);
+        Route::get('/fetch-post-template', [PostTemplateController::class, 'getPostTemplate']);
+
         Route::resource('admin-replyTemplate', ReplyTemplateController::class);
         Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);

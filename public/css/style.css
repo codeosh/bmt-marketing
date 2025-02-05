@@ -146,8 +146,8 @@ body {
 }
 
 .content-display {
-    white-space: normal; /* Allows wrapping */
-    word-break: break-word; /* Forces break on long words */
-    overflow-wrap: break-word; /* Ensures words break within the container */
-    overflow-y: auto; /* Enables vertical scrolling if needed */
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow-y: auto;
 }
