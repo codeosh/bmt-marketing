@@ -83,13 +83,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //pricelist
         Route::resource('admin-priceList', PricelistController::class);
         Route::get('/fetch-pricelist', [PricelistController::class, 'getPricelist']);
-        Route::delete('/admin-pricelist/{id}', [PricelistController::class, 'destroy']);
-        Route::put('/admin-pricelist/{id}', [PricelistController::class, 'update']);
 
+        //postTemplate
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::get('/fetch-post-template', [PostTemplateController::class, 'getPostTemplate']);
 
+        //replyTemplate
         Route::resource('admin-replyTemplate', ReplyTemplateController::class);
+        Route::get('/fetch-replyTemplate', [ReplyTemplateController::class, 'getReplyTemplate']);
+
+
         Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);
         Route::resource('admin-prospects', ProspectsController::class);

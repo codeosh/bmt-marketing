@@ -211,6 +211,7 @@
 
                     {{-- Price List Modal --}}
                     @include('modal.price_modal')
+                    @include('modal.edit_pricelist')
 
                     {{-- Dropdown --}}
                     <div class="dropdown h-100 d-flex align-items-start justify-content-between"

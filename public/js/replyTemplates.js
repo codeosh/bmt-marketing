@@ -2,7 +2,7 @@
 $(document).ready(function () {
     function fetchBulletins() {
         $.ajax({
-            url: "/fetch-pricelist",
+            url: "/fetch-replyTemplate",
             type: "GET",
             success: function (response) {
                 if (!Array.isArray(response)) {
@@ -19,10 +19,10 @@ $(document).ready(function () {
                         data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
                         <span class="text-truncate">${item.pname}</span>
                         <div class="d-flex gap-1"  style="height:25px;">
-                            <button class="btn btn-sm btn-primary edit-pricelist h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                            <button class="btn btn-sm btn-primary edit-replyTemplate h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
                                 <i class="fas fa-edit" style="font-size:10px;"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger delete-pricelist h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
+                            <button class="btn btn-sm btn-danger delete-replyTemplate h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
                                 <i class="fas fa-trash" style="font-size:10px;"></i>
                             </button>
                         </div>
@@ -49,7 +49,7 @@ $(document).ready(function () {
                 });
 
                 // Attach edit event to dynamically added edit buttons
-                $(".edit-pricelist").click(function (e) {
+                $(".edit-replyTemplate").click(function (e) {
                     e.stopPropagation(); // Prevent triggering the click event on .bulletin-item
 
                     let id = $(this).data("id");
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 });
 
                 // Attach delete event to dynamically added delete buttons
-                $(".delete-pricelist").click(function (e) {
+                $(".delete-replyTemplate").click(function (e) {
                     e.stopPropagation();
                     let id = $(this).data("id");
                     let pname = $(this).data("pname");
