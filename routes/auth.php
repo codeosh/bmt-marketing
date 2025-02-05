@@ -18,7 +18,7 @@ use App\Http\Controllers\ProspectsController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
-
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -81,6 +81,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/admin-bulletin/{id}', [BulletinController::class, 'update']);
         Route::delete('/admin-bulletin/{id}', [BulletinController::class, 'destroy']);
 
+        // Dashboard Controller
+        Route::resource('admin-dashboard', DashboardController::class);
 
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::resource('admin-replyTemplate', ReplyTemplateController::class);
@@ -98,3 +100,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('user.dashboard');
     });
 });
+
+
