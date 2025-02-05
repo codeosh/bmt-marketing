@@ -79,14 +79,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
 
-<<<<<<< HEAD
         //pricelist
         Route::resource('admin-priceList', PricelistController::class);
         Route::get('/fetch-pricelist', [PricelistController::class, 'getPricelist']);
-=======
-        // Dashboard Controller
-        Route::resource('admin-dashboard', DashboardController::class);
->>>>>>> c3392b091e2979d1493f8504a78976c421c65522
 
         //postTemplate
         Route::resource('admin-postTemplate', PostTemplateController::class);
@@ -104,7 +99,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-guides', GuidesController::class);
         Route::resource('admin-accounts', AccountController::class);
 
-        Route::get('/Dashboard-Page', function (){
+        Route::get('/Dashboard-Page', function () {
             return view('pages.dashboard');
         })->name('dashboard-page');
     });
@@ -115,5 +110,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('user.dashboard');
     });
 });
-
-
