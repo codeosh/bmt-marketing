@@ -176,4 +176,22 @@ $(document).ready(function () {
             },
         });
     });
+
+    $(".copyContents button").click(function () {
+        let content = $(".content-display").text().trim();
+
+        if (navigator.clipboard) {
+            navigator.clipboard
+                .writeText(content)
+                .then(() => {
+                    toastr.success("Copied to clipboard!");
+                })
+                .catch((err) => {
+                    toastr.error("Failed to copy.");
+                    console.error("Copy error:", err);
+                });
+        } else {
+            toastr.error("Clipboard API not supported.");
+        }
+    });
 });
