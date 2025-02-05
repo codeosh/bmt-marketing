@@ -113,11 +113,20 @@ $(document).ready(function () {
     // Fetch the data when the page loads
     fetchBulletins();
 
-    // Submit form via AJAX
+    // Submit form via AJAX fro bulletin add
     $("#bulletinForm").on("submit", function (e) {
         e.preventDefault();
 
+        const saveButtonBulletin = document.getElementById("saveBtnBulletin");
+        const buttonTextBulletin = document.getElementById("buttonTextBulletin");
+        const buttonSpinnerBulletin = document.getElementById("buttonSpinnerBulletin");
         const formData = $(this).serialize();
+
+        // Show loader effect
+        saveButtonBulletin.disabled = true;
+        buttonTextBulletin.textContent = "Saving...";
+        buttonSpinnerBulletin.classList.remove("d-none");
+
         $.ajax({
             type: "POST",
             url: "/admin-bulletin",
@@ -127,6 +136,11 @@ $(document).ready(function () {
             },
             success: function (response) {
                 toastr.success("Added Successfully!");
+
+                saveButtonBulletin.disabled = false;
+                buttonTextBulletin.textContent = "Save";
+                buttonSpinnerBulletin.classList.add("d-none");
+                
                 fetchBulletins();
 
 

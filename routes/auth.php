@@ -17,7 +17,7 @@ use App\Http\Controllers\ProspectsController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
-
+use App\Models\Pricelist;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -75,15 +75,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.admin-dashboard');
         })->name('admin.dashboard');
 
+        //bulletin
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
         Route::put('/admin-bulletin/{id}', [BulletinController::class, 'update']);
         Route::delete('/admin-bulletin/{id}', [BulletinController::class, 'destroy']);
 
+        //pricelist
+        Route::resource('admin-priceList', PricelistController::class);
+        Route::get('/fetch-pricelist', [PricelistController::class, 'getPricelist']);
+        Route::delete('/admin-pricelist/{id}', [PricelistController::class, 'destroy']);
+        Route::put('/admin-pricelist/{id}', [PricelistController::class, 'update']);
 
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::resource('admin-replyTemplate', PostTemplateController::class);
-        Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);
         Route::resource('admin-prospects', ProspectsController::class);
         Route::resource('admin-insight', InsightController::class);

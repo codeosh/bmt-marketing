@@ -271,7 +271,7 @@
         </script>
 
         {{-- pricelist Script JS --}}
-        <script src="{{ asset('js/showpassword.js')}}"></script>
+        <script src="{{ asset('js/priceList.js')}}"></script>
 
 
         {{-- bulletin Script JS --}}
