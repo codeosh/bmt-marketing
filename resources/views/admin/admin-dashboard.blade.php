@@ -56,14 +56,16 @@
                     <p>Systematic Buddy 2.0</p>
                 </div>
 
-                <a href="{{ route('admin-accounts.index')}}"
-                    class="{{ Request::routeIs('admin-accounts.index') ? 'active' : '' }}">
-                    <div
-                        class="side-bar input-group mb-0 mt-5 d-flex align-items-center justify-content-center border rounded">
-                        <i class="fa-solid fa-user me-2 icon" style="font-size: 14px;"></i>
-                        <span class="navbar-text" style="font-size: 12px;">Accounts</span>
-                    </div>
-                </a>
+                {{-- Dashboard Button --}}
+                <a href="{{route('admin-dashboard.index')}}"
+                class="{{ Request::routeIs('admin-dashboard.index') ? 'active' : '' }}">
+                <div
+                    class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
+                    <i class="fa-solid fa-tv me-2 icon" style="font-size: 14px;"></i>
+                    <span class="navbar-text" style="font-size: 12px;">Dashboard</span>
+                </div>
+               </a>
+
                 <hr>
                 <a href="{{ route('admin-bulletin.index')}}"
                     class="{{ Request::routeIs('admin-bulletin.index') ? 'active' : '' }}">
@@ -137,6 +139,7 @@
                     </div>
                 </a>
 
+                
 
             </div>
 
@@ -236,7 +239,18 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" :href="route('profile.edit')" style="font-size:0.8rem;">{{
                                         __('Profile') }}</a></li>
+
+                                 {{-- Account Button --}}
+                                 <li>
+                                    <a href="{{ route('admin-accounts.index') }}" 
+                                        class="dropdown-item" 
+                                        style="font-size:0.8rem;">
+                                        Accounts
+                                    </a>
+                                </li>
+
                                 <li><a class="dropdown-item" href="#" style="font-size:0.8rem;">Settings</a></li>
+
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

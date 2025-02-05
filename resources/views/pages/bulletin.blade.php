@@ -1,16 +1,15 @@
 @extends('admin.admin-dashboard')
 
 @section('title', 'BMTMarketing - Bulletin & To Do')
-
 @section('content')
 <div class="h-100 w-100 d-flex justify-content-between">
     <div class="h-100" style="width:550px;">
-        {{-- Bulletin List --}}
+      {{-- Bulletin List --}}
         <div class="card w-100 h-50 mb-1 shadow-sm" style="height: 300px;">
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Bulletin</small>
-            <div class="card-body p-2 overflow-auto custom-scrollbar" style="height: 300px;">
+             <div class="card-body p-2 overflow-auto custom-scrollbar" style="height: 300px;">
                 <div id="bulletinList" class="d-grid gap-1"></div>
-            </div>
+             </div>
         </div>
 
         {{-- Template List --}}

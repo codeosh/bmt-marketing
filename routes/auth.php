@@ -18,7 +18,7 @@ use App\Http\Controllers\ProspectsController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
-
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -79,6 +79,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
 
+        // Dashboard Controller
+        Route::resource('admin-dashboard', DashboardController::class);
 
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::get('/fetch-post-template', [PostTemplateController::class, 'getPostTemplate']);
@@ -98,3 +100,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('user.dashboard');
     });
 });
+
+
