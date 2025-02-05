@@ -20,10 +20,10 @@ $(document).ready(function () {
                         <span class="text-truncate">${item.pname}</span>
                         <div class="d-flex gap-1"  style="height:25px;">
                             <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
-                                <i class="fas fa-edit" style="font-size:10px;"></i>
+                                <i class="fas fa-edit" style="font-size:0.8rem"></i>
                             </button>
                             <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
-                                <i class="fas fa-trash" style="font-size:10px;"></i>
+                                <i class="fas fa-trash" style="font-size:0.8rem;"></i>
                             </button>
                         </div>
                     </div>
@@ -189,5 +189,23 @@ $(document).ready(function () {
                 console.error("Error:", xhr.responseText);
             },
         });
+    });
+
+    $(".copyContents button").click(function () {
+        let content = $(".content-display").text().trim();
+
+        if (navigator.clipboard) {
+            navigator.clipboard
+                .writeText(content)
+                .then(() => {
+                    toastr.success("Copied to clipboard!");
+                })
+                .catch((err) => {
+                    toastr.error("Failed to copy.");
+                    console.error("Copy error:", err);
+                });
+        } else {
+            toastr.error("Clipboard API not supported.");
+        }
     });
 });

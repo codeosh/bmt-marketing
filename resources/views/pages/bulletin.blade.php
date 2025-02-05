@@ -1,16 +1,15 @@
 @extends('admin.admin-dashboard')
 
 @section('title', 'BMTMarketing - Bulletin & To Do')
-
 @section('content')
 <div class="h-100 w-100 d-flex justify-content-between">
     <div class="h-100" style="width:550px;">
-        {{-- Bulletin List --}}
+      {{-- Bulletin List --}}
         <div class="card w-100 h-50 mb-1 shadow-sm" style="height: 300px;">
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Bulletin</small>
-            <div class="card-body p-2 overflow-auto custom-scrollbar" style="height: 300px;">
+             <div class="card-body p-2 overflow-auto custom-scrollbar" style="height: 300px;">
                 <div id="bulletinList" class="d-grid gap-1"></div>
-            </div>
+             </div>
         </div>
 
         {{-- Template List --}}
@@ -35,7 +34,7 @@
 
             <div class="d-flex gap-2">
                 {{-- Copy --}}
-                <div class="deleteButton d-flex align-items-center justify-content-center">
+                <div class="copyContents d-flex align-items-center justify-content-center">
                     <button type="button" class="btn btn-dark"
                         style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
                         <i class="fa-solid fa-copy" style="margin-right: 5px;"></i>Copy
@@ -47,6 +46,9 @@
         {{-- Content --}}
         <div class="w-100 rounded content-display"
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px;">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <p id="item-" style="color: red;">Please select an item to see the content.</p>
+            </div>
         </div>
     </div>
 </div>

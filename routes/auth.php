@@ -18,7 +18,11 @@ use App\Http\Controllers\ProspectsController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
+<<<<<<< HEAD
 use App\Models\Pricelist;
+=======
+use App\Http\Controllers\DashboardController;
+>>>>>>> c3392b091e2979d1493f8504a78976c421c65522
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -80,9 +84,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
 
+<<<<<<< HEAD
         //pricelist
         Route::resource('admin-priceList', PricelistController::class);
         Route::get('/fetch-pricelist', [PricelistController::class, 'getPricelist']);
+=======
+        // Dashboard Controller
+        Route::resource('admin-dashboard', DashboardController::class);
+>>>>>>> c3392b091e2979d1493f8504a78976c421c65522
 
         //postTemplate
         Route::resource('admin-postTemplate', PostTemplateController::class);
@@ -107,3 +116,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('user.dashboard');
     });
 });
+
+
