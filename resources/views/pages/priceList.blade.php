@@ -116,8 +116,7 @@
     {{-- Content --}}
     <div id="contentDisplay" class="w-100 overflow-auto rounded"
         style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
-        <div class="w-100 overflow-auto rounded d-flex justify-content-center align-items-center"
-            style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
+        <div class="d-flex justify-content-center align-items-center h-100">
             <p id="item-" style="color: red;">Please select an item to see the content.</p>
         </div>
     </div>
