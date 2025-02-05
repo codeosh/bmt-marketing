@@ -50,6 +50,8 @@
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
         </div>
 
+        {{-- JS Compiled --}}
+        <script src="{{asset('js/postTemplate.js')}}"></script>
     </div>
 </div>
 </div>

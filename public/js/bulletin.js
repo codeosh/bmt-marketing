@@ -129,7 +129,6 @@ $(document).ready(function () {
                 toastr.success("Added Successfully!");
                 fetchBulletins();
 
-
                 // Close the modal
                 $("#bulletinModal").modal("hide");
 

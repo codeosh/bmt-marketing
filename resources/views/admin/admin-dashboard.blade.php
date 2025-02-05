@@ -271,11 +271,6 @@
 
         {{-- pricelist Script JS --}}
         <script src="{{ asset('js/showpassword.js')}}"></script>
-
-
-
-
-
     </body>
 
 </html>
