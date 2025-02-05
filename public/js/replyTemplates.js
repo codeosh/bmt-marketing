@@ -57,12 +57,12 @@ $(document).ready(function () {
                     let content = $(this).data("content");
 
                     // Populate the edit form (assuming you have a modal with input fields)
-                    $("#editPricelistId").val(id);
-                    $("#editPricelistName").val(pname);
-                    $("#editPricelistContent").val(content);
+                    $("#editReplyId").val(id);
+                    $("#editReplyName").val(pname);
+                    $("#editReplyContent").val(content);
 
                     // Show the modal
-                    $("#editPricelistModal").modal("show");
+                    $("#editReplyModal").modal("show");
                 });
 
                 // Attach delete event to dynamically added delete buttons
@@ -81,7 +81,7 @@ $(document).ready(function () {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: `/admin-priceList/${id}`,
+                                url: `/admin-replyTemplate/${id}`,
                                 type: "DELETE",
                                 headers: {
                                     "X-CSRF-TOKEN": $(
@@ -113,23 +113,23 @@ $(document).ready(function () {
     // Fetch the data when the page loads
     fetchBulletins();
 
-    // Submit form via AJAX fro bulletin add
-    $("#pricelistForm").on("submit", function (e) {
+    // Submit form via AJAX for add
+    $("#replyTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonPricelist = document.getElementById("saveBtn-pricelist");
-        const buttonTextPricelist= document.getElementById("buttonText-pricelist");
-        const buttonSpinnerPricelist= document.getElementById("buttonSpinner-pricelist");
+        const saveButtonreplyTemplate = document.getElementById("saveBtn-replyTemplate");
+        const buttonTextreplyTemplate= document.getElementById("buttonText-replyTemplate");
+        const buttonSpinnerreplyTemplate= document.getElementById("buttonSpinner-replyTemplate");
         const formData = $(this).serialize();
 
         // Show loader effect
-        saveButtonPricelist.disabled = true;
-        buttonTextPricelist.textContent = "Saving...";
-        buttonSpinnerPricelist.classList.remove("d-none");
+        saveButtonreplyTemplate.disabled = true;
+        buttonTextreplyTemplate.textContent = "Saving...";
+        buttonSpinnerreplyTemplate.classList.remove("d-none");
 
         $.ajax({
             type: "POST",
-            url: "/admin-priceList",
+            url: "/admin-replyTemplate",
             data: formData,
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -137,17 +137,17 @@ $(document).ready(function () {
             success: function (response) {
                 toastr.success("Added Successfully!");
 
-                saveButtonPricelist.disabled = false;
-                buttonTextPricelist.textContent = "Save";
-                buttonSpinnerPricelist.classList.add("d-none");
+                saveButtonreplyTemplate.disabled = false;
+                buttonTextreplyTemplate.textContent = "Save";
+                buttonSpinnerreplyTemplate.classList.add("d-none");
                 
                 fetchBulletins();
 
                 // Close the modal
-                $("#PriceListModal").modal("hide");
+                $("#ReplyTemplateModal").modal("hide");
 
                 // Reset the form
-                $("#pricelistForm")[0].reset();
+                $("#replyTemplateForm")[0].reset();
             },
             error: function (xhr, status, error) {
                 if (xhr.responseJSON) {
@@ -162,15 +162,16 @@ $(document).ready(function () {
         });
     });
 
-    $("#editPricelistForm").submit(function (e) {
+    //edit
+    $("#editReplyForm").submit(function (e) {
         e.preventDefault();
 
-        let id = $("#editPricelistId").val();
-        let pname = $("#editPricelistName").val();
-        let content = $("#editPricelistContent").val();
+        let id = $("#editReplyId").val();
+        let pname = $("#editReplyName").val();
+        let content = $("#editReplyContent").val();
 
         $.ajax({
-            url: `/admin-priceList/${id}`,
+            url: `/admin-replyTemplate/${id}`,
             type: "PUT",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -181,7 +182,7 @@ $(document).ready(function () {
             },
             success: function () {
                 toastr.success("Updated successfully!");
-                $("#editPricelistModal").modal("hide");
+                $("#editReplyModal").modal("hide");
                 fetchBulletins();
             },
             error: function (xhr) {

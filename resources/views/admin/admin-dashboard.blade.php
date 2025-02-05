@@ -211,6 +211,7 @@
 
                     {{-- Reply Template Modal --}}
                     @include('modal.reply_modal')
+                    @include('modal.edit_reply')
 
                     {{-- Price List Modal --}}
                     @include('modal.price_modal')
