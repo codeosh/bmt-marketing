@@ -261,7 +261,6 @@
                 </div>
             </div>
 
-
         </div>
 
 
@@ -274,8 +273,7 @@
         <script src="{{ asset('js/showpassword.js')}}"></script>
 
 
-        {{-- bulletin Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
+
 
 
     </body>
