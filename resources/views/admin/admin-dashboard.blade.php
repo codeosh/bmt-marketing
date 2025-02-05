@@ -57,8 +57,8 @@
                 </div>
 
                 {{-- Dashboard Button --}}
-                <a href="{{route('admin-dashboard.index')}}"
-                class="{{ Request::routeIs('admin-dashboard.index') ? 'active' : '' }}">
+                <a href="{{ route('dashboard-page')}}"
+                class="{{ Request::routeIs('dashboard-page') ? 'active' : '' }}">
                 <div
                     class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
                     <i class="fa-solid fa-tv me-2 icon" style="font-size: 14px;"></i>

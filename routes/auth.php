@@ -18,11 +18,6 @@ use App\Http\Controllers\ProspectsController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
-<<<<<<< HEAD
-use App\Models\Pricelist;
-=======
-use App\Http\Controllers\DashboardController;
->>>>>>> c3392b091e2979d1493f8504a78976c421c65522
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -108,6 +103,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-insight', InsightController::class);
         Route::resource('admin-guides', GuidesController::class);
         Route::resource('admin-accounts', AccountController::class);
+
+        Route::get('/Dashboard-Page', function (){
+            return view('pages.dashboard');
+        })->name('dashboard-page');
     });
 
     Route::middleware(['role:user'])->group(function () {
