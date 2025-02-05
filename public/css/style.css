@@ -92,6 +92,11 @@ body {
 }
 
 /* Custom scrollbar styles for Bulletin Blade */
+
+.custom-scrollbar {
+    max-height: calc(100% - 1rem);
+    overflow-y: auto;
+}
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }

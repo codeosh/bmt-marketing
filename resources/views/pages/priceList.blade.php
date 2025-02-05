@@ -5,10 +5,10 @@
 @section('content')
 
 <div class="h-100 w-100 d-flex justify-content-between">
-    <div  class="h-100" style="width: 300px;">
+    <div class="h-100" style="width:550px;">
         {{-- Bulletin List --}}
-       <div class="card w-100 h-50 mb-1 shadow-sm" style="height: 256px">
-          <small class="card-header text-muted text-center" style="font-size:0.7rem;">Bulletin</small>
+       <div class="card w-100 h-50 mb-1 shadow-sm" style="height: 300px;">
+          <small class="card-header text-muted text-center" style="font-size:0.8rem;">Bulletin</small>
           <div class="card-body p-2 overflow-auto custom-scrollbar">
               <ol style="font-size:0.8rem; cursor:pointer;">
                 @if($pnamesBulletin->isEmpty())
@@ -40,8 +40,8 @@
       </div>
 
       {{-- Template --}}
-     <div class="card w-100 h-50 shadow-sm" style="height: 256px">
-          <small class="card-header text-muted text-center" style="font-size:0.7rem;">Template</small>
+     <div class="card w-100 h-50 shadow-sm" style="height: 300px;">
+          <small class="card-header text-muted text-center" style="font-size:0.8rem;">Template</small>
           <div class="card-body p-2 overflow-auto custom-scrollbar">
                     <ol style="font-size:0.8rem; cursor:pointer;">
                         @if($pnamesTemplate->isEmpty())
@@ -76,7 +76,7 @@
 
 
   {{-- List Content --}}
-  <div class="h-100 w-100 border rounded" style="margin-left:1rem;;">
+  <div class="h-100 w-100 border rounded" style="margin-left:1rem;">
     <div class="header w-100 rounded p-1 d-flex align-items-center justify-content-between gap-2" 
     style="height:2rem; background-color:grey;">
         <div class="d-flex align-items-center justify-content-between">
