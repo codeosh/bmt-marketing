@@ -22,8 +22,8 @@ $(document).ready(function () {
                             <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
                                 <i class="fas fa-edit" style="font-size:10px;"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger delete-bulletin" data-pname="${item.pname}" data-id="${item.id}">
-                                <i class="fas fa-trash"></i>
+                            <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
+                                <i class="fas fa-trash" style="font-size:10px;"></i>
                             </button>
                         </div>
                     </div>
