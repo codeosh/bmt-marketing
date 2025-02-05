@@ -92,6 +92,11 @@ body {
 }
 
 /* Custom scrollbar styles for Bulletin Blade */
+
+.custom-scrollbar {
+    max-height: calc(100% - 1rem);
+    overflow-y: auto;
+}
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }
@@ -138,4 +143,11 @@ body {
 /* List */
 .bulletinList:hover {
     font-weight: bold;
+}
+
+.content-display {
+    white-space: normal; /* Allows wrapping */
+    word-break: break-word; /* Forces break on long words */
+    overflow-wrap: break-word; /* Ensures words break within the container */
+    overflow-y: auto; /* Enables vertical scrolling if needed */
 }

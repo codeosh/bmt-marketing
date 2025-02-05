@@ -145,6 +145,7 @@
                 <div class="h-100 w-100 d-flex align-items-center justify-content-between rounded shadow p-2"
                     style="background-color:#ffff;">
                     <div class="d-flex align-items-center justify-content-between gap-3">
+
                         {{-- Search --}}
                         <div class="input-group border rounded" style="height: 2rem; width: 230px;">
                             <span class="input-group-text bg-transparent border-0" id="basic-addon1">
@@ -190,6 +191,8 @@
                                 </button>
                                 @endif
                             </div>
+
+
                         </div>
                     </div>
 
@@ -201,6 +204,7 @@
 
                     {{-- Post Template Modal --}}
                     @include('modal.template_modal')
+                    @include('modal.edit_post_template')
 
                     {{-- Reply Template Modal --}}
                     @include('modal.reply_modal')
@@ -261,7 +265,6 @@
                 </div>
             </div>
 
-
         </div>
 
 
@@ -271,13 +274,7 @@
         </script>
 
         {{-- pricelist Script JS --}}
-        <script src="{{ asset('js/priceList.js')}}"></script>
-
-
-        {{-- bulletin Script JS --}}
-        <script src="{{ asset('js/bulletin.js') }}"></script>
-
-
+        <script src="{{ asset('js/showpassword.js')}}"></script>
     </body>
 
 </html>

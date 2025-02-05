@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\PostTemplateController;
+use App\Http\Controllers\ReplyTemplateController;
 use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ProspectsController;
@@ -78,8 +79,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //bulletin
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
-        Route::put('/admin-bulletin/{id}', [BulletinController::class, 'update']);
-        Route::delete('/admin-bulletin/{id}', [BulletinController::class, 'destroy']);
 
         //pricelist
         Route::resource('admin-priceList', PricelistController::class);
@@ -88,7 +87,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/admin-pricelist/{id}', [PricelistController::class, 'update']);
 
         Route::resource('admin-postTemplate', PostTemplateController::class);
-        Route::resource('admin-replyTemplate', PostTemplateController::class);
+        Route::get('/fetch-post-template', [PostTemplateController::class, 'getPostTemplate']);
+
+        Route::resource('admin-replyTemplate', ReplyTemplateController::class);
+        Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);
         Route::resource('admin-prospects', ProspectsController::class);
         Route::resource('admin-insight', InsightController::class);

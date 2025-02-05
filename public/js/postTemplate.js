@@ -1,8 +1,8 @@
-// public\js\bulletin.js
+// public\js\postTemplate.js
 $(document).ready(function () {
     function fetchBulletins() {
         $.ajax({
-            url: "/fetch-bulletins",
+            url: "/fetch-post-template",
             type: "GET",
             success: function (response) {
                 if (!Array.isArray(response)) {
@@ -19,7 +19,7 @@ $(document).ready(function () {
                         data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
                         <span class="text-truncate">${item.pname}</span>
                         <div class="d-flex gap-1"  style="height:25px;">
-                            <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                            <button class="btn btn-sm btn-primary edit-postTemplate h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
                                 <i class="fas fa-edit" style="font-size:10px;"></i>
                             </button>
                             <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
@@ -49,20 +49,20 @@ $(document).ready(function () {
                 });
 
                 // Attach edit event to dynamically added edit buttons
-                $(".edit-bulletin").click(function (e) {
-                    e.stopPropagation(); // Prevent triggering the click event on .bulletin-item
+                $(".edit-postTemplate").click(function (e) {
+                    e.stopPropagation();
 
                     let id = $(this).data("id");
                     let pname = $(this).data("pname");
                     let content = $(this).data("content");
 
                     // Populate the edit form (assuming you have a modal with input fields)
-                    $("#editBulletinId").val(id);
-                    $("#editBulletinName").val(pname);
-                    $("#editBulletinContent").val(content);
+                    $("#editPostTemplateId").val(id);
+                    $("#editPostTemplateName").val(pname);
+                    $("#editPostTemplateContent").val(content);
 
                     // Show the modal
-                    $("#editBulletinModal").modal("show");
+                    $("#editPostTemplateModal").modal("show");
                 });
 
                 // Attach delete event to dynamically added delete buttons
@@ -81,7 +81,7 @@ $(document).ready(function () {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: `/admin-bulletin/${id}`,
+                                url: `/admin-postTemplate/${id}`,
                                 type: "DELETE",
                                 headers: {
                                     "X-CSRF-TOKEN": $(
@@ -113,41 +113,27 @@ $(document).ready(function () {
     // Fetch the data when the page loads
     fetchBulletins();
 
-    // Submit form via AJAX fro bulletin add
-    $("#bulletinForm").on("submit", function (e) {
+    // Submit form via AJAX
+    $("#postTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonBulletin = document.getElementById("saveBtnBulletin");
-        const buttonTextBulletin = document.getElementById("buttonTextBulletin");
-        const buttonSpinnerBulletin = document.getElementById("buttonSpinnerBulletin");
         const formData = $(this).serialize();
-
-        // Show loader effect
-        saveButtonBulletin.disabled = true;
-        buttonTextBulletin.textContent = "Saving...";
-        buttonSpinnerBulletin.classList.remove("d-none");
-
         $.ajax({
             type: "POST",
-            url: "/admin-bulletin",
+            url: "/admin-postTemplate",
             data: formData,
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
                 toastr.success("Added Successfully!");
-
-                saveButtonBulletin.disabled = false;
-                buttonTextBulletin.textContent = "Save";
-                buttonSpinnerBulletin.classList.add("d-none");
-                
                 fetchBulletins();
 
                 // Close the modal
-                $("#bulletinModal").modal("hide");
+                $("#PostTemplateModal").modal("hide");
 
                 // Reset the form
-                $("#bulletinForm")[0].reset();
+                $("#postTemplateForm")[0].reset();
             },
             error: function (xhr, status, error) {
                 if (xhr.responseJSON) {
@@ -162,15 +148,15 @@ $(document).ready(function () {
         });
     });
 
-    $("#editBulletinForm").submit(function (e) {
+    $("#editPostTemplateForm").submit(function (e) {
         e.preventDefault();
 
-        let id = $("#editBulletinId").val();
-        let pname = $("#editBulletinName").val();
-        let content = $("#editBulletinContent").val();
+        let id = $("#editPostTemplateId").val();
+        let pname = $("#editPostTemplateName").val();
+        let content = $("#editPostTemplateContent").val();
 
         $.ajax({
-            url: `/admin-bulletin/${id}`,
+            url: `/admin-postTemplate/${id}`,
             type: "PUT",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -180,8 +166,8 @@ $(document).ready(function () {
                 content: content,
             },
             success: function () {
-                toastr.success("Bulletin updated successfully!");
-                $("#editBulletinModal").modal("hide");
+                toastr.success("Updated successfully!");
+                $("#editPostTemplateModal").modal("hide");
                 fetchBulletins();
             },
             error: function (xhr) {
