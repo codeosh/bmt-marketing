@@ -75,15 +75,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.admin-dashboard');
         })->name('admin.dashboard');
 
+        //bulletin
         Route::resource('admin-bulletin', BulletinController::class);
         Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
 
+        //pricelist
+        Route::resource('admin-priceList', PricelistController::class);
+        Route::get('/fetch-pricelist', [PricelistController::class, 'getPricelist']);
 
-
+        //postTemplate
         Route::resource('admin-postTemplate', PostTemplateController::class);
         Route::get('/fetch-post-template', [PostTemplateController::class, 'getPostTemplate']);
 
+        //replyTemplate
         Route::resource('admin-replyTemplate', ReplyTemplateController::class);
+        Route::get('/fetch-replyTemplate', [ReplyTemplateController::class, 'getReplyTemplate']);
+
+
         Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);
         Route::resource('admin-prospects', ProspectsController::class);
@@ -91,7 +99,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-guides', GuidesController::class);
         Route::resource('admin-accounts', AccountController::class);
 
-        Route::get('/Dashboard-Page', function (){
+        Route::get('/Dashboard-Page', function () {
             return view('pages.dashboard');
         })->name('dashboard-page');
     });
@@ -102,5 +110,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('user.dashboard');
     });
 });
-
-

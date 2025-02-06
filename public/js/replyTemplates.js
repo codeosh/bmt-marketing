@@ -2,7 +2,7 @@
 $(document).ready(function () {
     function fetchBulletins() {
         $.ajax({
-            url: "/fetch-bulletins",
+            url: "/fetch-replyTemplate",
             type: "GET",
             success: function (response) {
                 if (!Array.isArray(response)) {
@@ -19,11 +19,11 @@ $(document).ready(function () {
                         data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
                         <span class="text-truncate">${item.pname}</span>
                         <div class="d-flex gap-1"  style="height:25px;">
-                            <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
-                                <i class="fas fa-edit" style="font-size:0.8rem"></i>
+                            <button class="btn btn-sm btn-primary edit-replyTemplate h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                                <i class="fas fa-edit" style="font-size:10px;"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
-                                <i class="fas fa-trash" style="font-size:0.8rem;"></i>
+                            <button class="btn btn-sm btn-danger delete-replyTemplate h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
+                                <i class="fas fa-trash" style="font-size:10px;"></i>
                             </button>
                         </div>
                     </div>
@@ -37,7 +37,7 @@ $(document).ready(function () {
                 });
 
                 // Attach click event to dynamically added list items
-                $(".bulletin-item").click(function () {
+                $(".bulletin-item").click(function () {//this is not supposed to be name as bulletin-item kay ge copy raman ni if i have time i-change ra namo ag name for proper naming convention
                     let content = $(this).data("content");
                     let pname = $(this).text().trim();
 
@@ -49,7 +49,7 @@ $(document).ready(function () {
                 });
 
                 // Attach edit event to dynamically added edit buttons
-                $(".edit-bulletin").click(function (e) {
+                $(".edit-replyTemplate").click(function (e) {
                     e.stopPropagation(); // Prevent triggering the click event on .bulletin-item
 
                     let id = $(this).data("id");
@@ -57,16 +57,16 @@ $(document).ready(function () {
                     let content = $(this).data("content");
 
                     // Populate the edit form (assuming you have a modal with input fields)
-                    $("#editBulletinId").val(id);
-                    $("#editBulletinName").val(pname);
-                    $("#editBulletinContent").val(content);
+                    $("#editReplyId").val(id);
+                    $("#editReplyName").val(pname);
+                    $("#editReplyContent").val(content);
 
                     // Show the modal
-                    $("#editBulletinModal").modal("show");
+                    $("#editReplyModal").modal("show");
                 });
 
                 // Attach delete event to dynamically added delete buttons
-                $(".delete-bulletin").click(function (e) {
+                $(".delete-replyTemplate").click(function (e) {
                     e.stopPropagation();
                     let id = $(this).data("id");
                     let pname = $(this).data("pname");
@@ -81,7 +81,7 @@ $(document).ready(function () {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: `/admin-bulletin/${id}`,
+                                url: `/admin-replyTemplate/${id}`,
                                 type: "DELETE",
                                 headers: {
                                     "X-CSRF-TOKEN": $(
@@ -113,23 +113,23 @@ $(document).ready(function () {
     // Fetch the data when the page loads
     fetchBulletins();
 
-    // Submit form via AJAX fro bulletin add
-    $("#bulletinForm").on("submit", function (e) {
+    // Submit form via AJAX for add
+    $("#replyTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonBulletin = document.getElementById("saveBtnBulletin");
-        const buttonTextBulletin = document.getElementById("buttonTextBulletin");
-        const buttonSpinnerBulletin = document.getElementById("buttonSpinnerBulletin");
+        const saveButtonreplyTemplate = document.getElementById("saveBtn-replyTemplate");
+        const buttonTextreplyTemplate= document.getElementById("buttonText-replyTemplate");
+        const buttonSpinnerreplyTemplate= document.getElementById("buttonSpinner-replyTemplate");
         const formData = $(this).serialize();
 
         // Show loader effect
-        saveButtonBulletin.disabled = true;
-        buttonTextBulletin.textContent = "Saving...";
-        buttonSpinnerBulletin.classList.remove("d-none");
+        saveButtonreplyTemplate.disabled = true;
+        buttonTextreplyTemplate.textContent = "Saving...";
+        buttonSpinnerreplyTemplate.classList.remove("d-none");
 
         $.ajax({
             type: "POST",
-            url: "/admin-bulletin",
+            url: "/admin-replyTemplate",
             data: formData,
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -137,17 +137,17 @@ $(document).ready(function () {
             success: function (response) {
                 toastr.success("Added Successfully!");
 
-                saveButtonBulletin.disabled = false;
-                buttonTextBulletin.textContent = "Save";
-                buttonSpinnerBulletin.classList.add("d-none");
+                saveButtonreplyTemplate.disabled = false;
+                buttonTextreplyTemplate.textContent = "Save";
+                buttonSpinnerreplyTemplate.classList.add("d-none");
                 
                 fetchBulletins();
 
                 // Close the modal
-                $("#bulletinModal").modal("hide");
+                $("#ReplyTemplateModal").modal("hide");
 
                 // Reset the form
-                $("#bulletinForm")[0].reset();
+                $("#replyTemplateForm")[0].reset();
             },
             error: function (xhr, status, error) {
                 if (xhr.responseJSON) {
@@ -162,15 +162,16 @@ $(document).ready(function () {
         });
     });
 
-    $("#editBulletinForm").submit(function (e) {
+    //edit
+    $("#editReplyForm").submit(function (e) {
         e.preventDefault();
 
-        let id = $("#editBulletinId").val();
-        let pname = $("#editBulletinName").val();
-        let content = $("#editBulletinContent").val();
+        let id = $("#editReplyId").val();
+        let pname = $("#editReplyName").val();
+        let content = $("#editReplyContent").val();
 
         $.ajax({
-            url: `/admin-bulletin/${id}`,
+            url: `/admin-replyTemplate/${id}`,
             type: "PUT",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -180,8 +181,8 @@ $(document).ready(function () {
                 content: content,
             },
             success: function () {
-                toastr.success("Bulletin updated successfully!");
-                $("#editBulletinModal").modal("hide");
+                toastr.success("Updated successfully!");
+                $("#editReplyModal").modal("hide");
                 fetchBulletins();
             },
             error: function (xhr) {
@@ -189,37 +190,5 @@ $(document).ready(function () {
                 console.error("Error:", xhr.responseText);
             },
         });
-    });
-
-    $(".copyContents button").click(function () {
-        let content = $(".content-display").html().trim();
-
-        if (navigator.clipboard) {
-            navigator.clipboard
-                .writeText(content)
-                .then(() => {
-                    let tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = content;
-                    document.body.appendChild(tempDiv);
-
-                    let range = document.createRange();
-                    range.selectNodeContents(tempDiv);
-
-                    let selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-
-                    document.execCommand("copy");
-                    document.body.removeChild(tempDiv);
-
-                    toastr.success("Copied with formatting!");
-                })
-                .catch((err) => {
-                    toastr.error("Failed to copy.");
-                    console.error("Copy error:", err);
-                });
-        } else {
-            toastr.error("Clipboard API not supported.");
-        }
     });
 });

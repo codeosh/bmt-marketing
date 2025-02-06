@@ -6,43 +6,21 @@ use App\Models\Pricelist;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
-
-class PriceListController extends Controller
+class PricelistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //
     public function index()
     {
-        //
-        // Fetch pname where kind is 'template'
-        $pnamesTemplate = \App\Models\Pricelist::where('kind', 'template')->pluck('pname', 'id');
-
-        // Fetch pname where kind is 'bulletin'
-        $pnamesBulletin = \App\Models\Pricelist::where('kind', 'bulletin')->pluck('pname', 'id');
-
-        return view('pages.priceList', compact('pnamesTemplate', 'pnamesBulletin'));
+        return view('pages.priceList');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'selectBulletin' => 'nullable|string|max:255',
-            'itemName' => 'nullable|string|max:255',
-            'itemDescription' => 'nullable|string',
+            'selectBulletin' => 'required|string|max:255',
+            'itemName' => 'required|string|max:255',
+            'itemDescription' => 'required|string',
         ]);
         try {
             DB::beginTransaction();
@@ -67,54 +45,45 @@ class PriceListController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function getPricelist()
     {
-        // Fetch the content based on the id
-        $content = \App\Models\Pricelist::where('id', $id)->first();
+        return response()->json(Pricelist::all());
+    }
 
-        if ($content) {
-            return response()->json([
-                'content' => $content->content,
-                'pname' => $content->pname
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'pname' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $bulletin = Pricelist::findOrFail($id);
+            $bulletin->update([
+                'pname' => $validatedData['pname'],
+                'content' => $validatedData['content'],
             ]);
-        } else {
+
+            DB::commit();
+            return response()->json(['success' => true, 'message' => 'Updated successfully!']);
+        } catch (Exception $e) {
+            DB::rollBack();
             return response()->json([
-                'content' => 'Content not found.'
-            ], 404);
+                'success' => false,
+                'message' => 'An error occurred while updating.',
+                'error_details' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+            ], 500);
         }
     }
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $bulletin = Pricelist::findOrFail($id);
+        $bulletin->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        // Find and delete the record
-        $pricelist = Pricelist::findOrFail($id);
-        $pricelist->delete();
-
-        // Return a JSON response for AJAX
-        return response()->json(['success' => true, 'message' => 'Successfully deleted.']);
+        return response()->json(['success' => true, 'message' => 'Deleted successfully!']);
     }
 }
