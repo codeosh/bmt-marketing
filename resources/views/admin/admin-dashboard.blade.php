@@ -57,14 +57,13 @@
                 </div>
 
                 {{-- Dashboard Button --}}
-                <a href="{{ route('dashboard-page')}}"
-                class="{{ Request::routeIs('dashboard-page') ? 'active' : '' }}">
-                <div
-                    class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
-                    <i class="fa-solid fa-tv me-2 icon" style="font-size: 14px;"></i>
-                    <span class="navbar-text" style="font-size: 12px;">Dashboard</span>
-                </div>
-               </a>
+                <a href="{{ route('dashboard-page')}}" class="{{ Request::routeIs('dashboard-page') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-solid fa-tv me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Dashboard</span>
+                    </div>
+                </a>
 
                 <hr>
                 <a href="{{ route('admin-bulletin.index')}}"
@@ -139,7 +138,7 @@
                     </div>
                 </a>
 
-                
+
 
             </div>
 
@@ -240,10 +239,9 @@
                                 <li><a class="dropdown-item" :href="route('profile.edit')" style="font-size:0.8rem;">{{
                                         __('Profile') }}</a></li>
 
-                                 {{-- Account Button --}}
-                                 <li>
-                                    <a href="{{ route('admin-accounts.index') }}" 
-                                        class="dropdown-item" 
+                                {{-- Account Button --}}
+                                <li>
+                                    <a href="{{ route('admin-accounts.index') }}" class="dropdown-item"
                                         style="font-size:0.8rem;">
                                         Accounts
                                     </a>
