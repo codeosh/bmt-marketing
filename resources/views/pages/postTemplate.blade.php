@@ -36,9 +36,9 @@
             <div class="d-flex gap-2">
                 {{-- Copy --}}
                 <div class="copyContents d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn btn-dark"
-                        style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
-                        <i class="fa-solid fa-copy" style="margin-right: 5px;"></i>Copy
+                    <button type="button" id="CopysaveBtn" class="btn btn-dark" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                        <i class="fa-solid fa-copy" style="margin-right: 5px;"></i><span id="CopybuttonText">Copy</span>
+                        <span id="CopybuttonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>            
                     </button>
                 </div>
             </div>

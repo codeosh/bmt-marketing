@@ -176,7 +176,7 @@ $(document).ready(function () {
             success: function () {
                 toastr.success("Added Successfully!");
 
-                saveButtonPostTemplate.disable = false;
+                saveButtonPostTemplate.disabled = false;
                 buttonTextPostTemplate.textContent = "Save";
                 buttonSpinnerPostTemplate.classList.add("d-none");
 
@@ -187,7 +187,7 @@ $(document).ready(function () {
             error: function (xhr) {
                 toastr.error(xhr.responseJSON?.message || "An error occurred.");
 
-                saveButtonPostTemplate.disable = false;
+                saveButtonPostTemplate.disabled = false;
                 buttonTextPostTemplate.textContent = "Save";
                 buttonSpinnerPostTemplate.classList.add("d-none");
             },
@@ -249,6 +249,15 @@ $(document).ready(function () {
     $(".copyContents button").click(function () {
         let content = $(".content-display").html().trim();
 
+        const CopysaveButton  = document.getElementById("CopysaveBtn");
+        const CopybuttonText = document.getElementById("CopybuttonText");
+        const CopybuttonSpinner = document.getElementById("CopybuttonSpinner");
+        
+        // Show loader effect
+        CopysaveButton.disabled = true;
+        CopybuttonText.textContent = "Copying..";
+        CopybuttonSpinner.classList.remove("d-none");
+
         if (navigator.clipboard) {
             navigator.clipboard
                 .writeText(content)
@@ -268,13 +277,28 @@ $(document).ready(function () {
                     document.body.removeChild(tempDiv);
 
                     toastr.success("Copied with formatting!");
+
+                    // sttop loader effect
+                    CopysaveButton.disabled = false;
+                    CopybuttonText.textContent = "Copy";
+                    CopybuttonSpinner.classList.add("d-none");
                 })
                 .catch((err) => {
                     toastr.error("Failed to copy.");
                     console.error("Copy error:", err);
+
+                    // sttop loader effect
+                    CopysaveButton.disabled = false;
+                    CopybuttonText.textContent = "Copy";
+                    CopybuttonSpinner.classList.add("d-none");
                 });
         } else {
             toastr.error("Clipboard API not supported.");
+
+                 // sttop loader effect
+                CopysaveButton.disabled = false;
+                CopybuttonText.textContent = "Copy";
+                CopybuttonSpinner.classList.add("d-none");
         }
     });
 });

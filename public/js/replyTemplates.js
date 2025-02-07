@@ -156,15 +156,15 @@ $(document).ready(function () {
     $("#replyTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonBulletin = document.getElementById("saveBtn-replyTemplate");
-        const buttonTextBulletin = document.getElementById("buttonText-replyTemplate");
-        const buttonSpinnerBulletin = document.getElementById("buttonSpinner-replyTemplate");
+        const saveButtonreplyTemplate = document.getElementById("saveBtn-replyTemplate");
+        const buttonTextreplyTemplate = document.getElementById("buttonText-replyTemplate");
+        const buttonSpinnerreplyTemplate = document.getElementById("buttonSpinner-replyTemplate");
         const formData = $(this).serialize();
 
         // Show loader effect
-        saveButtonBulletin.disabled = true;
-        buttonTextBulletin.textContent = "Saving...";
-        buttonSpinnerBulletin.classList.remove("d-none");
+        saveButtonreplyTemplate.disabled = true;
+        buttonTextreplyTemplate.textContent = "Saving...";
+        buttonSpinnerreplyTemplate.classList.remove("d-none");
 
         $.ajax({
             type: "POST",
@@ -176,9 +176,9 @@ $(document).ready(function () {
             success: function () {
                 toastr.success("Added Successfully!");
 
-                saveButtonBulletin.disable = false;
-                buttonTextBulletin.textContent = "Save";
-                buttonSpinnerBulletin.classList.add("d-none");
+                saveButtonreplyTemplate.disabled = false;
+                buttonTextreplyTemplate.textContent = "Save";
+                buttonSpinnerreplyTemplate.classList.add("d-none");
 
                 fetchReplyTemplate();
                 $("#ReplyTemplateModal").modal("hide");
@@ -186,6 +186,10 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 toastr.error(xhr.responseJSON?.message || "An error occurred.");
+
+                saveButtonreplyTemplate.disabled = false;
+                buttonTextreplyTemplate.textContent = "Save";
+                buttonSpinnerreplyTemplate.classList.add("d-none");
             },
         });
     });
@@ -241,22 +245,61 @@ $(document).ready(function () {
         });
     });
 
+
     //copy
     $(".copyContents button").click(function () {
-        let content = $(".content-display").text().trim();
+        let content = $(".content-display").html().trim();
+
+        const CopysaveButton  = document.getElementById("CopysaveBtn-replyTemplate");
+        const CopybuttonText = document.getElementById("CopybuttonText-replyTemplate");
+        const CopybuttonSpinner = document.getElementById("CopybuttonSpinner-replyTemplate");
+        
+        // Show loader effect
+        CopysaveButton.disabled = true;
+        CopybuttonText.textContent = "Copying..";
+        CopybuttonSpinner.classList.remove("d-none");
 
         if (navigator.clipboard) {
             navigator.clipboard
                 .writeText(content)
                 .then(() => {
-                    toastr.success("Copied to clipboard!");
+                    let tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = content;
+                    document.body.appendChild(tempDiv);
+
+                    let range = document.createRange();
+                    range.selectNodeContents(tempDiv);
+
+                    let selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+
+                    document.execCommand("copy");
+                    document.body.removeChild(tempDiv);
+
+                    toastr.success("Copied with formatting!");
+
+                    // sttop loader effect
+                    CopysaveButton.disabled = false;
+                    CopybuttonText.textContent = "Copy";
+                    CopybuttonSpinner.classList.add("d-none");
                 })
                 .catch((err) => {
                     toastr.error("Failed to copy.");
                     console.error("Copy error:", err);
+
+                    // sttop loader effect
+                    CopysaveButton.disabled = false;
+                    CopybuttonText.textContent = "Copy";
+                    CopybuttonSpinner.classList.add("d-none");
                 });
         } else {
             toastr.error("Clipboard API not supported.");
+
+                 // sttop loader effect
+                CopysaveButton.disabled = false;
+                CopybuttonText.textContent = "Copy";
+                CopybuttonSpinner.classList.add("d-none");
         }
     });
 });
