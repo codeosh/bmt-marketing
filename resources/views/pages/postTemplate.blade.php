@@ -24,7 +24,7 @@
 
 
     {{-- List Content --}}
-    <div class="h-100 w-100 border rounded" style="margin-left:1rem;;">
+    <div class="h-100 w-100 border rounded" style="margin-left:0.4rem;;">
         <div class="header w-100 rounded p-1 d-flex align-items-center justify-content-between gap-2"
             style="height:2rem; background-color:grey;">
             <div class="d-flex align-items-center justify-content-between">
