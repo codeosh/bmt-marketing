@@ -47,17 +47,16 @@
         {{-- Content --}}
         <div class="w-100 rounded content-display"
             style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px;">
-
-    {{-- Content --}}
-    <div id="contentDisplay" class="w-100 overflow-auto rounded"
-        style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <p id="item-" style="color: red;">Please select an item to see the content.</p>
-        </div>
+            {{-- Content --}}
+            <div id="contentDisplay" class="w-100 overflow-auto rounded"
+                style="height:78.8vh; max-height:78.8vh; font-size:0.8rem; padding: 5px 10px; text-align:justify;">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <p id="item-" style="color: red;">Please select an item to see the content.</p>
+                </div>
+            </div>
     </div>
-</div>
 
 {{-- bulletin Script JS --}}
-<script src="{{ asset('js/priceList.js') }}"></script>>
+<script src="{{ asset('js/priceList.js') }}"></script>
 @endsection
 

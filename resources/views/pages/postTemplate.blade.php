@@ -53,6 +53,7 @@
         </div>
     </div>
 </div>
+
 {{-- JS Compiled --}}
 <script src="{{asset('js/postTemplate.js')}}"></script>
 @endsection
