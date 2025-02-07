@@ -21,7 +21,10 @@
                         <textarea class="form-control" id="editPricelistContent" rows="4" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <button type="submit" id="editsaveBtnPricelist" class="btn btn-primary">
+                    <span id="editbuttonTextPricelist">{{ __('Save Changes') }}</span>
+                    <span id="editbuttonSpinnerPricelist" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 </form>
             </div>
         </div>

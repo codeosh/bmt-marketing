@@ -39,7 +39,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="postTemplateForm" class="btn btn-primary">Save changes</button>
+                <button type="submit" id="saveBtnPostTemplate" form="postTemplateForm" class="btn btn-primary">
+                    <span id="buttonTextPostTemplate">{{ __('Save') }}</span>
+                    <span id="buttonSpinnerPostTemplate" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </div>

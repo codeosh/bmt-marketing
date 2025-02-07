@@ -21,7 +21,10 @@
                         <textarea class="form-control" id="editReplyContent" rows="4" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" id="editsaveBtnReply" class="btn btn-primary">
+                    <span id="editbuttonTextReply">{{ __('Save Changes') }}</span>
+                    <span id="editbuttonSpinnerReply" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 </form>
             </div>
         </div>

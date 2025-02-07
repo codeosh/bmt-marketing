@@ -1,6 +1,9 @@
 // public\js\postTemplate.js
 $(document).ready(function () {
-    function fetchBulletins() {
+    let ReplyTemplateData = []; // Store fetched data globally
+
+    //get the data to automatically display on the bulletin and template container
+    function fetchReplyTemplate() {
         $.ajax({
             url: "/fetch-post-template",
             type: "GET",
@@ -10,114 +13,159 @@ $(document).ready(function () {
                     return;
                 }
 
-                $("#bulletinList").empty();
-                $("#templateList").empty();
-
-                response.forEach(function (item) {
-                    let listItem = `
-                    <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
-                        data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
-                        <span class="text-truncate">${item.pname}</span>
-                        <div class="d-flex gap-1"  style="height:25px;">
-                            <button class="btn btn-sm btn-primary edit-postTemplate h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
-                                <i class="fas fa-edit" style="font-size:10px;"></i>
-                            </button>
-                            <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
-                                <i class="fas fa-trash" style="font-size:10px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-
-                    if (item.kind === "Bulletin") {
-                        $("#bulletinList").append(listItem);
-                    } else if (item.kind === "Template") {
-                        $("#templateList").append(listItem);
-                    }
-                });
-
-                // Attach click event to dynamically added list items
-                $(".bulletin-item").click(function () {
-                    let content = $(this).data("content");
-                    let pname = $(this).text().trim();
-
-                    content = content.replace(/\n/g, "<br>");
-                    content = content.replace(/ /g, "&nbsp;");
-
-                    $(".content-display").html(content);
-                    $(".display-item-name").text(pname);
-                });
-
-                // Attach edit event to dynamically added edit buttons
-                $(".edit-postTemplate").click(function (e) {
-                    e.stopPropagation();
-
-                    let id = $(this).data("id");
-                    let pname = $(this).data("pname");
-                    let content = $(this).data("content");
-
-                    // Populate the edit form (assuming you have a modal with input fields)
-                    $("#editPostTemplateId").val(id);
-                    $("#editPostTemplateName").val(pname);
-                    $("#editPostTemplateContent").val(content);
-
-                    // Show the modal
-                    $("#editPostTemplateModal").modal("show");
-                });
-
-                // Attach delete event to dynamically added delete buttons
-                $(".delete-bulletin").click(function (e) {
-                    e.stopPropagation();
-                    let id = $(this).data("id");
-                    let pname = $(this).data("pname");
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: `Are you sure you want to delete: ${pname}`,
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Yes, delete it!",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: `/admin-postTemplate/${id}`,
-                                type: "DELETE",
-                                headers: {
-                                    "X-CSRF-TOKEN": $(
-                                        'meta[name="csrf-token"]'
-                                    ).attr("content"),
-                                },
-                                success: function () {
-                                    toastr.success("Deleted successfully!");
-                                    fetchBulletins();
-
-                                    // Clear the content display
-                                    $(".content-display").html("");
-                                },
-                                error: function (xhr) {
-                                    toastr.error("Failed to delete.");
-                                    console.error("Error:", xhr.responseText);
-                                },
-                            });
-                        }
-                    });
-                });
+                ReplyTemplateData = response; // Store data globally
+                displayReplyTemplate(ReplyTemplateData); // Render data
             },
-            error: function (xhr) {
+            error: function () {
                 toastr.error("Failed to fetch data.");
             },
         });
     }
 
-    // Fetch the data when the page loads
-    fetchBulletins();
+    function displayReplyTemplate(data) {
+        $("#bulletinList").empty();
+        $("#templateList").empty();
 
-    // Submit form via AJAX
+        if (data.length === 0) { //mao nani ang data na ge renderan from fetchReplyTemplate(). so, if walay data, mo execute ni.
+            $("#bulletinList").html('<div class="text-center text-red-500">No records found</div>');
+            $("#templateList").html('<div class="text-center text-red-500">No records found</div>');
+            return;
+        }
+
+        //if naay data.  Mo exceute ni na set of codes
+        data.forEach(function (item) {
+            let listItem = `
+            <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
+                data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
+                <span class="text-truncate">${item.pname}</span>
+                <div class="d-flex gap-1" style="height:25px;">
+                    <button class="btn btn-sm btn-primary edit-replyTemplate h-100 d-flex justify-content-between align-items-center" 
+                        data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                        <i class="fas fa-edit" style="font-size:10px;"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger delete-replyTemplate h-100 d-flex justify-content-between align-items-center" 
+                        data-pname="${item.pname}" data-id="${item.id}">
+                        <i class="fas fa-trash" style="font-size:10px;"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+
+            if (item.kind === "Bulletin") {
+                $("#bulletinList").append(listItem);
+            } else if (item.kind === "Template") {
+                $("#templateList").append(listItem);
+            }
+        });
+
+        attachEvents(); // mao ni Attach event listeners to dynamically generated elements like katong edit, delete
+    }
+
+    //mao ni na function for dynamically search in which tawgon ni sya sa #searchBulletins which has keyup
+    function filterReplyTemplate() {
+        let searchTerm = $("#search").val().toLowerCase();//kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
+        let filteredData = ReplyTemplateData.filter(item =>
+            item.pname.toLowerCase().includes(searchTerm)
+        );//arrow function para i filter ang searchterm na
+
+        displayReplyTemplate(filteredData); //then i pasa ang na filter out na didtos displayReplyTemplate na function para ma display na sya
+    }
+
+
+    //function para sudlanan sa edit, click events and delete
+    function attachEvents() {
+        // Attach click event to list items para ma sudlan ag content
+        $(".bulletin-item").click(function () {
+            let content = $(this).data("content");
+            let pname = $(this).text().trim();
+
+            content = content.replace(/\n/g, "<br>").replace(/ /g, "&nbsp;");
+            $(".content-display").html(content);
+            $(".display-item-name").text(pname);
+        });
+
+        // Edit event
+        $(".edit-replyTemplate").click(function (e) {
+            e.stopPropagation();
+            let id = $(this).data("id");
+            let pname = $(this).data("pname");
+            let content = $(this).data("content");
+
+            // Populate the edit form (assuming you have a modal with input fields)
+            $("#editPostTemplateId").val(id);
+            $("#editPostTemplateName").val(pname);
+            $("#editPostTemplateContent").val(content);
+
+            // Show the modal
+            $("#editPostTemplateModal").modal("show");
+        });
+
+        // Delete event
+        $(".delete-replyTemplate").click(function (e) {
+            e.stopPropagation();
+            let id = $(this).data("id");
+            let pname = $(this).data("pname");
+            let itemElement = $(this).closest(".bulletin-item"); 
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: `Are you sure you want to delete: ${pname}`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin-postTemplate/${id}`,
+                        type: "DELETE",
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        success: function () {
+                            toastr.success("Deleted successfully!");
+
+                            // Fade out and remove the item smoothly
+                            itemElement.fadeOut(300, function () {
+                                $(this).remove();
+                            });
+
+                            fetchReplyTemplate();//refresh data if needed
+                            $(".content-display").html("");
+                        },
+                        error: function (xhr) {
+                            toastr.error("Failed to delete.");
+                            console.error("Error:", xhr.responseText);
+                        },
+                    });
+                }
+            });
+        });
+    }
+
+    // Fetch data on page load
+    fetchReplyTemplate();
+
+    //i-trigger na niya ag Search input then para ma execute na this functionality
+    $("#search").on("keyup", function () {
+        filterReplyTemplate();
+    });
+
+    // Submit form for adding a bulletin
     $("#postTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
+        const saveButtonPostTemplate = document.getElementById("saveBtnPostTemplate");
+        const buttonTextPostTemplate = document.getElementById("buttonTextPostTemplate");
+        const buttonSpinnerPostTemplate = document.getElementById("buttonSpinnerPostTemplate");
         const formData = $(this).serialize();
+
+        // Show loader effect
+        saveButtonPostTemplate.disabled = true;
+        buttonTextPostTemplate.textContent = "Saving...";
+        buttonSpinnerPostTemplate.classList.remove("d-none");
+
         $.ajax({
             type: "POST",
             url: "/admin-postTemplate",
@@ -125,35 +173,44 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            success: function (response) {
+            success: function () {
                 toastr.success("Added Successfully!");
-                fetchBulletins();
 
-                // Close the modal
+                saveButtonPostTemplate.disable = false;
+                buttonTextPostTemplate.textContent = "Save";
+                buttonSpinnerPostTemplate.classList.add("d-none");
+
+                fetchReplyTemplate();
                 $("#PostTemplateModal").modal("hide");
-
-                // Reset the form
                 $("#postTemplateForm")[0].reset();
             },
-            error: function (xhr, status, error) {
-                if (xhr.responseJSON) {
-                    toastr.error(
-                        xhr.responseJSON.message || "An error occurred."
-                    );
-                    console.error("Error Details:", xhr.responseJSON);
-                } else {
-                    toastr.error("An unexpected error occurred.");
-                }
+            error: function (xhr) {
+                toastr.error(xhr.responseJSON?.message || "An error occurred.");
+
+                saveButtonPostTemplate.disable = false;
+                buttonTextPostTemplate.textContent = "Save";
+                buttonSpinnerPostTemplate.classList.add("d-none");
             },
         });
     });
 
+
+    // Submit form for editing a bulletin
     $("#editPostTemplateForm").submit(function (e) {
         e.preventDefault();
+
+        const saveButtonPostTemplate  = document.getElementById("editsaveBtnPostTemplate");
+        const buttonTextPostTemplate = document.getElementById("editbuttonTextPostTemplate");
+        const buttonSpinnerPostTemplate  = document.getElementById("editbuttonSpinnerPostTemplate");
 
         let id = $("#editPostTemplateId").val();
         let pname = $("#editPostTemplateName").val();
         let content = $("#editPostTemplateContent").val();
+
+        // Show loader effect
+        saveButtonPostTemplate.disabled = true;
+        buttonTextPostTemplate.textContent = "Saving...";
+        buttonSpinnerPostTemplate.classList.remove("d-none");
 
         $.ajax({
             url: `/admin-postTemplate/${id}`,
@@ -167,16 +224,28 @@ $(document).ready(function () {
             },
             success: function () {
                 toastr.success("Updated successfully!");
+
+                // sttop loader effect
+                saveButtonPostTemplate.disabled = false;
+                buttonTextPostTemplate.textContent = "Save Changes";
+                buttonSpinnerPostTemplate.classList.add("d-none");
+                
                 $("#editPostTemplateModal").modal("hide");
-                fetchBulletins();
+                fetchReplyTemplate();
             },
             error: function (xhr) {
                 toastr.error("Failed to update.");
                 console.error("Error:", xhr.responseText);
+
+                // sttop loader effect
+                saveButtonPostTemplate.disabled = false;
+                buttonTextPostTemplate.textContent = "Save Changes";
+                buttonSpinnerPostTemplate.classList.add("d-none");
             },
         });
     });
 
+    //copy
     $(".copyContents button").click(function () {
         let content = $(".content-display").text().trim();
 
@@ -195,3 +264,9 @@ $(document).ready(function () {
         }
     });
 });
+
+
+
+
+
+

@@ -1,6 +1,7 @@
-// public\js\bulletin.js
 $(document).ready(function () {
-    function fetchBulletins() {
+    let PricelistData = []; // Store fetched data globally
+
+    function fetchPricelist() {
         $.ajax({
             url: "/fetch-pricelist",
             type: "GET",
@@ -10,122 +11,155 @@ $(document).ready(function () {
                     return;
                 }
 
-                $("#bulletinList").empty();
-                $("#templateList").empty();
-
-                response.forEach(function (item) {
-                    let listItem = `
-                    <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
-                        data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
-                        <span class="text-truncate">${item.pname}</span>
-                        <div class="d-flex gap-1"  style="height:25px;">
-                            <button class="btn btn-sm btn-primary edit-pricelist h-100 d-flex justify-content-between align-items-center" data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
-                                <i class="fas fa-edit" style="font-size:10px;"></i>
-                            </button>
-                            <button class="btn btn-sm btn-danger delete-pricelist h-100 d-flex justify-content-between align-items-center" data-pname="${item.pname}" data-id="${item.id}">
-                                <i class="fas fa-trash" style="font-size:10px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-
-                    if (item.kind === "Bulletin") {
-                        $("#bulletinList").append(listItem);
-                    } else if (item.kind === "Template") {
-                        $("#templateList").append(listItem);
-                    }
-                });
-
-                // Attach click event to dynamically added list items
-                $(".bulletin-item").click(function () {//this is not supposed to be name as bulletin-item kay ge copy raman ni if i have time i-change ra namo ag name for proper naming convention
-                    let content = $(this).data("content");
-                    let pname = $(this).text().trim();
-
-                    content = content.replace(/\n/g, "<br>");
-                    content = content.replace(/ /g, "&nbsp;");
-
-                    $(".content-display").html(content);
-                    $(".display-item-name").text(pname);
-                });
-
-                // Attach edit event to dynamically added edit buttons
-                $(".edit-pricelist").click(function (e) {
-                    e.stopPropagation(); // Prevent triggering the click event on .bulletin-item
-
-                    let id = $(this).data("id");
-                    let pname = $(this).data("pname");
-                    let content = $(this).data("content");
-
-                    // Populate the edit form (assuming you have a modal with input fields)
-                    $("#editPricelistId").val(id);
-                    $("#editPricelistName").val(pname);
-                    $("#editPricelistContent").val(content);
-
-                    // Show the modal
-                    $("#editPricelistModal").modal("show");
-                });
-
-                // Attach delete event to dynamically added delete buttons
-                $(".delete-pricelist").click(function (e) {
-                    e.stopPropagation();
-                    let id = $(this).data("id");
-                    let pname = $(this).data("pname");
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: `Are you sure you want to delete: ${pname}`,
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Yes, delete it!",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: `/admin-priceList/${id}`,
-                                type: "DELETE",
-                                headers: {
-                                    "X-CSRF-TOKEN": $(
-                                        'meta[name="csrf-token"]'
-                                    ).attr("content"),
-                                },
-                                success: function () {
-                                    toastr.success("Deleted successfully!");
-                                    fetchBulletins();
-
-                                    // Clear the content display
-                                    $(".content-display").html("");
-                                },
-                                error: function (xhr) {
-                                    toastr.error("Failed to delete.");
-                                    console.error("Error:", xhr.responseText);
-                                },
-                            });
-                        }
-                    });
-                });
+                PricelistData = response; // Store data globally
+                displayPricelist(PricelistData); // Render data
             },
-            error: function (xhr) {
+            error: function () {
                 toastr.error("Failed to fetch data.");
             },
         });
     }
 
-    // Fetch the data when the page loads
-    fetchBulletins();
+    function displayPricelist(data) {
+        $("#bulletinList").empty();
+        $("#templateList").empty();
 
-    // Submit form via AJAX fro bulletin add
+        if (data.length === 0) { //mao nani ang data na ge renderan from fetchPricelist(). so, if walay data, mo execute ni.
+            $("#bulletinList").html('<div class="text-center text-red-500">No records found</div>');
+            $("#templateList").html('<div class="text-center text-red-500">No records found</div>');
+            return;
+        }
+
+        //if naay data.  Mo exceute ni na set of codes
+        data.forEach(function (item) {
+            let listItem = `
+            <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
+                data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
+                <span class="text-truncate">${item.pname}</span>
+                <div class="d-flex gap-1" style="height:25px;">
+                    <button class="btn btn-sm btn-primary edit-pricelist h-100 d-flex justify-content-between align-items-center" 
+                        data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                        <i class="fas fa-edit" style="font-size:10px;"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger delete-pricelist h-100 d-flex justify-content-between align-items-center" 
+                        data-pname="${item.pname}" data-id="${item.id}">
+                        <i class="fas fa-trash" style="font-size:10px;"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+
+            if (item.kind === "Bulletin") {
+                $("#bulletinList").append(listItem);
+            } else if (item.kind === "Template") {
+                $("#templateList").append(listItem);
+            }
+        });
+
+        attachEvents(); // mao ni Attach event listeners to dynamically generated elements like katong edit, delete
+    }
+
+    //mao ni na function for dynamically search in which tawgon ni sya sa #searchBulletins which has keyup
+    function filterPricelist() {
+        let searchTerm = $("#search").val().toLowerCase();//kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
+        let filteredData = PricelistData.filter(item =>
+            item.pname.toLowerCase().includes(searchTerm)
+        );//arrow function para i filter ang searchterm na
+
+        displayPricelist(filteredData); //then i pasa ang na filter out na didtos displayPricelist na function para ma display na sya
+    }
+
+
+    //function para sudlanan sa edit, click events and delete
+    function attachEvents() {
+        // Attach click event to list items para ma sudlan ag content
+        $(".bulletin-item").click(function () {
+            let content = $(this).data("content");
+            let pname = $(this).text().trim();
+
+            content = content.replace(/\n/g, "<br>").replace(/ /g, "&nbsp;");
+            $(".content-display").html(content);
+            $(".display-item-name").text(pname);
+        });
+
+        // Edit event
+        $(".edit-pricelist").click(function (e) {
+            e.stopPropagation();
+            let id = $(this).data("id");
+            let pname = $(this).data("pname");
+            let content = $(this).data("content");
+
+            $("#editPricelistId").val(id);
+            $("#editPricelistName").val(pname);
+            $("#editPricelistContent").val(content);
+
+            $("#editPricelistModal").modal("show");
+        });
+
+        // Delete event
+        $(".delete-pricelist").click(function (e) {
+            e.stopPropagation();
+            let id = $(this).data("id");
+            let pname = $(this).data("pname");
+            let itemElement = $(this).closest(".bulletin-item"); 
+            
+            Swal.fire({
+                title: "Are you sure?",
+                text: `Are you sure you want to delete: ${pname}`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/admin-priceList/${id}`,
+                        type: "DELETE",
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        success: function () {
+                            toastr.success("Deleted successfully!");
+
+                            // Fade out and remove the item smoothly
+                            itemElement.fadeOut(300, function () {
+                                $(this).remove();
+                            });
+
+                            fetchPricelist();//refresh data if needed
+                            $(".content-display").html("");
+                        },
+                        error: function (xhr) {
+                            toastr.error("Failed to delete.");
+                            console.error("Error:", xhr.responseText);
+                        },
+                    });
+                }
+            });
+        });
+    }
+
+    // Fetch data on page load
+    fetchPricelist();
+
+    //i-trigger na niya ag Search input then para ma execute na this functionality
+    $("#search").on("keyup", function () {
+        filterPricelist();
+    });
+
+    // Submit form for adding a pricelist
     $("#pricelistForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonPricelist = document.getElementById("saveBtn-pricelist");
-        const buttonTextPricelist= document.getElementById("buttonText-pricelist");
-        const buttonSpinnerPricelist= document.getElementById("buttonSpinner-pricelist");
+        const saveButton = $("#saveBtn-pricelist");
+        const buttonText = $("#buttonText-pricelist");
+        const buttonSpinner = $("#buttonSpinner-pricelist");
         const formData = $(this).serialize();
 
-        // Show loader effect
-        saveButtonPricelist.disabled = true;
-        buttonTextPricelist.textContent = "Saving...";
-        buttonSpinnerPricelist.classList.remove("d-none");
+        saveButton.prop("disabled", true);
+        buttonText.text("Saving...");
+        buttonSpinner.removeClass("d-none");
 
         $.ajax({
             type: "POST",
@@ -134,40 +168,39 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            success: function (response) {
+            success: function () {
                 toastr.success("Added Successfully!");
 
-                saveButtonPricelist.disabled = false;
-                buttonTextPricelist.textContent = "Save";
-                buttonSpinnerPricelist.classList.add("d-none");
-                
-                fetchBulletins();
+                saveButton.prop("disabled", false);
+                buttonText.text("Save");
+                buttonSpinner.addClass("d-none");
 
-                // Close the modal
+                fetchPricelist();
                 $("#PriceListModal").modal("hide");
-
-                // Reset the form
                 $("#pricelistForm")[0].reset();
             },
-            error: function (xhr, status, error) {
-                if (xhr.responseJSON) {
-                    toastr.error(
-                        xhr.responseJSON.message || "An error occurred."
-                    );
-                    console.error("Error Details:", xhr.responseJSON);
-                } else {
-                    toastr.error("An unexpected error occurred.");
-                }
+            error: function (xhr) {
+                toastr.error(xhr.responseJSON?.message || "An error occurred.");
             },
         });
     });
 
+    // Submit form for editing a pricelist
     $("#editPricelistForm").submit(function (e) {
         e.preventDefault();
 
+        const saveButtonPricelist  = document.getElementById("editsaveBtnPricelist");
+        const buttonTextPricelist = document.getElementById("editbuttonTextPricelist");
+        const buttonSpinnerPricelist = document.getElementById("editbuttonSpinnerPricelist");
+        
         let id = $("#editPricelistId").val();
         let pname = $("#editPricelistName").val();
         let content = $("#editPricelistContent").val();
+
+        // Show loader effect
+        saveButtonPricelist.disabled = true;
+        buttonTextPricelist.textContent = "Saving...";
+        buttonSpinnerPricelist.classList.remove("d-none");
 
         $.ajax({
             url: `/admin-priceList/${id}`,
@@ -175,18 +208,26 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            data: {
-                pname: pname,
-                content: content,
-            },
+            data: { pname, content },
             success: function () {
                 toastr.success("Updated successfully!");
+                
+                // sttop loader effect
+                saveButtonPricelist.disabled = false;
+                buttonTextPricelist.textContent = "Save Changes";
+                buttonSpinnerPricelist.classList.add("d-none");
+
                 $("#editPricelistModal").modal("hide");
-                fetchBulletins();
+                fetchPricelist();
             },
             error: function (xhr) {
                 toastr.error("Failed to update.");
                 console.error("Error:", xhr.responseText);
+
+                // sttop loader effect
+                saveButtonPricelist.disabled = false;
+                buttonTextPricelist.textContent = "Save Changes";
+                buttonSpinnerPricelist.classList.add("d-none");
             },
         });
     });

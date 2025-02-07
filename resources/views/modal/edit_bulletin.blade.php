@@ -12,7 +12,7 @@
                     <input type="hidden" id="editBulletinId">
 
                     <div class="mb-3">
-                        <label for="editBulletinName" class="form-label">Bulletin Name</label>
+                        <label for="editBulletinName" class="form-label">Item Name</label>
                         <input type="text" class="form-control" id="editBulletinName" required>
                     </div>
 
@@ -21,7 +21,10 @@
                         <textarea class="form-control" id="editBulletinContent" rows="4" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" id="editsaveBtnBulletin" class="btn btn-primary">
+                    <span id="editbuttonTextBulletin">{{ __('Save Changes') }}</span>
+                    <span id="editbuttonSpinnerBulletin" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 </form>
             </div>
         </div>

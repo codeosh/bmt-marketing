@@ -4,7 +4,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editPostTemplateModalLabel">Edit Bulletin</h5>
+                <h5 class="modal-title" id="editPostTemplateModalLabel">Edit Post Template</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -12,7 +12,7 @@
                     <input type="hidden" id="editPostTemplateId">
 
                     <div class="mb-3">
-                        <label for="editPostTemplateName" class="form-label">Bulletin Name</label>
+                        <label for="editPostTemplateName" class="form-label">Item Name</label>
                         <input type="text" class="form-control" id="editPostTemplateName" required>
                     </div>
 
@@ -21,7 +21,10 @@
                         <textarea class="form-control" id="editPostTemplateContent" rows="4" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" id="editsaveBtnPostTemplate" class="btn btn-primary">
+                    <span id="editbuttonTextPostTemplate">{{ __('Save Changes') }}</span>
+                    <span id="editbuttonSpinnerPostTemplate" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 </form>
             </div>
         </div>
