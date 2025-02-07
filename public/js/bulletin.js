@@ -244,13 +244,27 @@ $(document).ready(function () {
 
     //copy
     $(".copyContents button").click(function () {
-        let content = $(".content-display").text().trim();
+        let content = $(".content-display").html().trim();
 
         if (navigator.clipboard) {
             navigator.clipboard
                 .writeText(content)
                 .then(() => {
-                    toastr.success("Copied to clipboard!");
+                    let tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = content;
+                    document.body.appendChild(tempDiv);
+
+                    let range = document.createRange();
+                    range.selectNodeContents(tempDiv);
+
+                    let selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+
+                    document.execCommand("copy");
+                    document.body.removeChild(tempDiv);
+
+                    toastr.success("Copied with formatting!");
                 })
                 .catch((err) => {
                     toastr.error("Failed to copy.");
