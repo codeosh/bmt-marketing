@@ -37,7 +37,8 @@ $(document).ready(function () {
                 });
 
                 // Attach click event to dynamically added list items
-                $(".bulletin-item").click(function () {//this is not supposed to be name as bulletin-item kay ge copy raman ni if i have time i-change ra namo ag name for proper naming convention
+                $(".bulletin-item").click(function () {
+                    //this is not supposed to be name as bulletin-item kay ge copy raman ni if i have time i-change ra namo ag name for proper naming convention
                     let content = $(this).data("content");
                     let pname = $(this).text().trim();
 
@@ -117,9 +118,15 @@ $(document).ready(function () {
     $("#replyTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonreplyTemplate = document.getElementById("saveBtn-replyTemplate");
-        const buttonTextreplyTemplate= document.getElementById("buttonText-replyTemplate");
-        const buttonSpinnerreplyTemplate= document.getElementById("buttonSpinner-replyTemplate");
+        const saveButtonreplyTemplate = document.getElementById(
+            "saveBtn-replyTemplate"
+        );
+        const buttonTextreplyTemplate = document.getElementById(
+            "buttonText-replyTemplate"
+        );
+        const buttonSpinnerreplyTemplate = document.getElementById(
+            "buttonSpinner-replyTemplate"
+        );
         const formData = $(this).serialize();
 
         // Show loader effect
@@ -140,7 +147,7 @@ $(document).ready(function () {
                 saveButtonreplyTemplate.disabled = false;
                 buttonTextreplyTemplate.textContent = "Save";
                 buttonSpinnerreplyTemplate.classList.add("d-none");
-                
+
                 fetchBulletins();
 
                 // Close the modal
