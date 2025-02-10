@@ -70,43 +70,76 @@ Route::middleware('auth')->group(function () {
 //middleware sa admin and user ge isa nalaman og group
 Route::middleware(['auth', 'verified'])->group(function () {
 
+
+    //admin routes
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/admin-dashboard', function () {
-            return view('admin.admin-dashboard');
-        })->name('admin.dashboard');
+
+        // Route::get('/admin-dashboard', function () {
+        //     return view('admin.admin-dashboard');
+        // })->name('admin.dashboard');
 
         //bulletin
         Route::resource('admin-bulletin', BulletinController::class);
-        Route::get('/fetch-bulletins', [BulletinController::class, 'getBulletins']);
+        Route::get('/fetch-bulletins', [BulletinController::class, 'getAdminBulletins']);
 
         //pricelist
         Route::resource('admin-priceList', PricelistController::class);
-        Route::get('/fetch-pricelist', [PricelistController::class, 'getPricelist']);
+        Route::get('/fetch-pricelist', [PricelistController::class, 'getAdminPricelist']) // Admin-only;
+            ->name('admin.fetch.pricelist');
 
         //postTemplate
         Route::resource('admin-postTemplate', PostTemplateController::class);
-        Route::get('/fetch-post-template', [PostTemplateController::class, 'getPostTemplate']);
+        Route::get('/fetch-post-template', [PostTemplateController::class, 'getAdminPostTemplate']);
 
         //replyTemplate
         Route::resource('admin-replyTemplate', ReplyTemplateController::class);
-        Route::get('/fetch-replyTemplate', [ReplyTemplateController::class, 'getReplyTemplate']);
+        Route::get('/fetch-replyTemplate', [ReplyTemplateController::class, 'getAdminReplyTemplate']);
 
 
-        Route::resource('admin-priceList', PriceListController::class);
         Route::resource('admin-quotation', QuotationController::class);
         Route::resource('admin-prospects', ProspectsController::class);
         Route::resource('admin-insight', InsightController::class);
         Route::resource('admin-guides', GuidesController::class);
         Route::resource('admin-accounts', AccountController::class);
 
-        Route::get('/Dashboard-Page', function () {
+        Route::get('/Dashboard-Pages', function () {
             return view('pages.dashboard');
-        })->name('dashboard-page');
+        })->name('admin-dashboard-page');
     });
 
+
+    //user routes
     Route::middleware(['role:user'])->group(function () {
-        Route::get('/user-dashboard', function () {
-            return view('user.user-dashboard');
-        })->name('user.dashboard');
+
+        // Route::get('/user-dashboard', function () {
+        //     return view('user.user-dashboard');
+        // })->name('user.dashboard');
+
+        //bulletin
+        Route::resource('user-bulletin', BulletinController::class);
+        Route::get('/fetch-user-bulletins', [BulletinController::class, 'getUserBulletins']);
+
+        //pricelist
+        Route::resource('user-priceList', PricelistController::class);
+        Route::get('/fetch-user-pricelist', [PricelistController::class, 'getUserPricelist']) // User-only;
+            ->name('user.fetch.pricelist');
+
+        //postTemplate
+        Route::resource('user-postTemplate', PostTemplateController::class);
+        Route::get('/fetch-user-post-template', [PostTemplateController::class, 'getUserPostTemplate']);
+
+        //replyTemplate
+        Route::resource('user-replyTemplate', ReplyTemplateController::class);
+        Route::get('/fetch-user-replyTemplate', [ReplyTemplateController::class, 'getUserReplyTemplate']);
+
+        Route::resource('user-quotation', QuotationController::class);
+        Route::resource('user-prospects', ProspectsController::class);
+        Route::resource('user-insight', InsightController::class);
+        Route::resource('user-guides', GuidesController::class);
+        Route::resource('user-accounts', AccountController::class);
+
+        Route::get('/Dashboard-Page', function () {
+            return view('user-pages.dashboard');
+        })->name('user-dashboard-page');
     });
 });

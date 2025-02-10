@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuidesController extends Controller
 {
@@ -12,7 +13,12 @@ class GuidesController extends Controller
     public function index()
     {
         //
-        return view('pages.guides');
+
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.guides');
+        } else {
+            return view('user-pages.guides');
+        }
     }
 
     /**

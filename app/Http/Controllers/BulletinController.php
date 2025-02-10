@@ -6,12 +6,18 @@ use App\Models\Bulletin;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\auth;
 
 class BulletinController extends Controller
 {
     public function index()
     {
-        return view('pages.bulletin');
+        //if admin iyang role then admin na pages ang magamit same goes to user
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.bulletin');
+        } else {
+            return view('user-pages.bulletin');
+        }
     }
 
     public function store(Request $request)
@@ -44,9 +50,14 @@ class BulletinController extends Controller
         }
     }
 
-    public function getBulletins()
+    public function getAdminBulletins()
     {
         return response()->json(Bulletin::all());
+    }
+    public function getUserBulletins()
+    {
+        $bulletin = Bulletin::all();
+        return response()->json($bulletin);
     }
 
     public function update(Request $request, $id)

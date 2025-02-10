@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- Dashboard Button --}}
-                <a href="{{ route('dashboard-page')}}" class="{{ Request::routeIs('dashboard-page') ? 'active' : '' }}">
+                <a href="{{ route('admin-dashboard-page')}}" class="{{ Request::routeIs('admin-dashboard-page') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-tv me-2 icon" style="font-size: 14px;"></i>
@@ -228,7 +228,7 @@
 
                                 <div class="h-100 d-flex align-items-end justify-content-between flex-column"
                                     style="width:150px;">
-                                    <span style="font-size:0.7rem;">Jhoedhen</span>
+                                    <span style="font-size:0.7rem;">{{ auth()->user()->name }}</span>
                                     <small class="text-muted align-self-end" style="font-size:0.6rem;">Admin</small>
                                 </div>
 
@@ -289,6 +289,14 @@
 
         {{-- pricelist Script JS --}}
         <script src="{{ asset('js/showpassword.js')}}"></script>
+
+        {{-- para makuha ag user role after mo-login , then i-pasa sa js for url--}}
+        <script>
+            var Laravel = {
+            user_role: @json(auth()->user()->role)
+            };
+        </script>
+
     </body>
 
 </html>

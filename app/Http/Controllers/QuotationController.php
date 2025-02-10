@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuotationController extends Controller
 {
@@ -12,7 +13,12 @@ class QuotationController extends Controller
     public function index()
     {
         //
-        return view('pages.quotation');
+
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.quotation');
+        } else {
+            return view('user-pages.quotation');
+        }
     }
 
     /**

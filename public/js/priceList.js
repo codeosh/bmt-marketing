@@ -1,9 +1,11 @@
 $(document).ready(function () {
     let PricelistData = []; // Store fetched data globally
+    
+    let url = Laravel.user_role === 'admin' ? "/fetch-pricelist" : "/fetch-user-pricelist";
 
     function fetchPricelist() {
         $.ajax({
-            url: "/fetch-pricelist",
+            url: url,
             type: "GET",
             success: function (response) {
                 if (!Array.isArray(response)) {
@@ -15,7 +17,12 @@ $(document).ready(function () {
                 displayPricelist(PricelistData); // Render data
             },
             error: function () {
+
+                if (xhr.status === 403) {
+                toastr.error("Unauthorized access.");
+                } else {
                 toastr.error("Failed to fetch data.");
+                }
             },
         });
     }
@@ -32,22 +39,24 @@ $(document).ready(function () {
 
         //if naay data.  Mo exceute ni na set of codes
         data.forEach(function (item) {
-            let listItem = `
-            <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
-                data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
-                <span class="text-truncate">${item.pname}</span>
-                <div class="d-flex gap-1" style="height:25px;">
-                    <button class="btn btn-sm btn-primary edit-pricelist h-100 d-flex justify-content-between align-items-center" 
-                        data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
-                        <i class="fas fa-edit" style="font-size:10px;"></i>
-                    </button>
-                    <button class="btn btn-sm btn-danger delete-pricelist h-100 d-flex justify-content-between align-items-center" 
-                        data-pname="${item.pname}" data-id="${item.id}">
-                        <i class="fas fa-trash" style="font-size:10px;"></i>
-                    </button>
+           let listItem = ` 
+                <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
+                    data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
+                    <span class="text-truncate">${item.pname}</span>
+                    ${Laravel.user_role === "admin" ? `
+                    <div class="d-flex gap-1" style="height:25px;">
+                        <button class="btn btn-sm btn-primary edit-pricelist h-100 d-flex justify-content-between align-items-center" 
+                            data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                            <i class="fas fa-edit" style="font-size:10px;"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger delete-pricelist h-100 d-flex justify-content-between align-items-center" 
+                            data-pname="${item.pname}" data-id="${item.id}">
+                            <i class="fas fa-trash" style="font-size:10px;"></i>
+                        </button>
+                    </div>
+                    ` : ''}
                 </div>
-            </div>
-        `;
+            `;
 
             if (item.kind === "Bulletin") {
                 $("#bulletinList").append(listItem);

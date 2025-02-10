@@ -6,6 +6,7 @@ use App\Models\PostTemplate;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostTemplateController extends Controller
 {
@@ -14,7 +15,11 @@ class PostTemplateController extends Controller
      */
     public function index()
     {
-        return view('pages.postTemplate');
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.postTemplate');
+        } else {
+            return view('user-pages.postTemplate');
+        }
     }
 
     public function store(Request $request)
@@ -47,9 +52,14 @@ class PostTemplateController extends Controller
         }
     }
 
-    public function getPostTemplate()
+    public function getAdminPostTemplate()
     {
         return response()->json(PostTemplate::all());
+    }
+    public function getUserPostTemplate()
+    {
+        $PostTemplate = PostTemplate::all();
+        return response()->json($PostTemplate);
     }
 
     public function update(Request $request, $id)
