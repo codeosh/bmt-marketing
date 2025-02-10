@@ -6,13 +6,18 @@ use App\Models\Pricelist;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PricelistController extends Controller
 {
     //
     public function index()
     {
-        return view('pages.priceList');
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.priceList');
+        } else {
+            return view('user-pages.priceList');
+        }
     }
 
     public function store(Request $request)
@@ -45,9 +50,14 @@ class PricelistController extends Controller
         }
     }
 
-    public function getPricelist()
+    public function getAdminPricelist()
     {
         return response()->json(Pricelist::all());
+    }
+    public function getUserPricelist()
+    {
+        $pricelists = Pricelist::all(); //  Fetch all pricelists
+        return response()->json($pricelists);
     }
 
     public function update(Request $request, $id)

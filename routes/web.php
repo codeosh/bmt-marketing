@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
+
 // Automatically logout if the user is logged in and tries to visit the login page
 Route::get('/', function () {
     if (Auth::check()) {

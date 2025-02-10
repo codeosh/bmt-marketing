@@ -7,12 +7,17 @@ use App\Models\ReplyTemplate;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ReplyTemplateController extends Controller
 {
     public function index()
     {
-        return view('pages.replyTemplate');
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.replyTemplate');
+        } else {
+            return view('user-pages.replyTemplate');
+        }
     }
 
     public function store(Request $request)
@@ -45,9 +50,14 @@ class ReplyTemplateController extends Controller
         }
     }
 
-    public function getReplyTemplate()
+    public function getAdminReplyTemplate()
     {
         return response()->json(ReplyTemplate::all());
+    }
+    public function getUserReplyTemplate()
+    {
+        $replyTemplate = ReplyTemplate::all();
+        return response()->json($replyTemplate);
     }
 
     public function update(Request $request, $id)

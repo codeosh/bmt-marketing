@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProspectsController extends Controller
 {
@@ -12,7 +13,11 @@ class ProspectsController extends Controller
     public function index()
     {
         //
-        return view('pages.prospects');
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.prospects');
+        } else {
+            return view('user-pages.prospects');
+        }
     }
 
     /**

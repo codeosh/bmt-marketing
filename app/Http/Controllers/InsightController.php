@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InsightController extends Controller
 {
@@ -12,7 +13,12 @@ class InsightController extends Controller
     public function index()
     {
         //
-        return view('pages.insight');
+
+        if (auth::check() && auth::user()->role === 'admin') {
+            return view('pages.insight');
+        } else {
+            return view('user-pages.insight');
+        }
     }
 
     /**

@@ -2,10 +2,12 @@
 $(document).ready(function () {
     let BulletinData = []; // Store fetched data globally
 
+    let url = Laravel.user_role === 'admin' ? "/fetch-bulletins" : "/fetch-user-bulletins";
+
     //get the data to automatically display on the bulletin and template container
     function fetchBulletin() {
         $.ajax({
-            url: "/fetch-bulletins",
+            url: url, // this wil chooses which route to access base on the result sa ternary above
             type: "GET",
             success: function (response) {
                 if (!Array.isArray(response)) {
@@ -43,6 +45,8 @@ $(document).ready(function () {
             <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
                 data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
                 <span class="text-truncate">${item.pname}</span>
+
+                ${Laravel.user_role === 'admin' ? `
                 <div class="d-flex gap-1" style="height:25px;">
                     <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" 
                         data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
@@ -53,6 +57,8 @@ $(document).ready(function () {
                         <i class="fas fa-trash" style="font-size:10px;"></i>
                     </button>
                 </div>
+                ` : ``}
+                
             </div>
         `;
 
