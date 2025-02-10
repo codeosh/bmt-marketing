@@ -3,10 +3,12 @@
 @section('title', 'BMTMarketing - Reply Template')
 
 @section('content')
-<div class="h-100 w-100 d-flex justify-content-between">
-    <div class="h-100" style="width:550px;">
+
+<div class="d-flex gap-1 h-100">
+
+    <div class="d-flex gap-1 flex-column h-100 w-45">
         {{-- Bulletin List --}}
-        <div class="card w-100 h-50 mb-1 shadow-sm" style="height: 300px;">
+        <div class="card h-50 shadow-sm" style="width:60vh;">
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Bulletin</small>
             <div class="card-body p-2 overflow-auto custom-scrollbar" style="height: 300px;">
                 <div id="bulletinList" class="d-grid gap-1"></div>
@@ -14,7 +16,7 @@
         </div>
 
         {{-- Template List --}}
-        <div class="card w-100 h-50 shadow-sm" style="height: 300px;">
+        <div class="card h-50 shadow-sm" style="width:60vh;">
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Template</small>
             <div class="card-body p-2 overflow-auto custom-scrollbar" style="height:50px;">
                 <div id="templateList" class="d-grid gap-1"></div>
@@ -24,24 +26,26 @@
 
 
     {{-- List Content --}}
-    <div class="h-100 w-100 border rounded" style="margin-left:0.4rem; ">
-        <div class="header  w-100 rounded p-1 d-flex align-items-center justify-content-between gap-2"
-            style="height:2rem; background-color:grey;">
-            <div class="d-flex align-items-center justify-content-between">
+    <div class="h-100 w-100 rounded border">
+        <div class="header d-flex rounded p-1 gap-2" style="height:37px; background-color:grey;">
+
+            <div class="d-flex align-items-center w-100">
                 <small style="font-size: 0.8rem; color:white; margin:10px">Context</small>
-                <div style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
-                <span class="display-item-name" style="font-size:0.9rem; color:white; font-weight:bold;"></span>
+                <div  style="border-left: 1px solid white; height: 1.2rem; margin-right: 8px;"></div>
+
+                {{-- Title --}}
+                <span class="display-item-name text-truncate d-inline-block" 
+                style="font-size: 0.9rem; width:85vh; color: white; font-weight: bold; white-space: nowrap; overflow: hidden;">
+                </span>
             </div>
 
-            <div class="d-flex gap-2">
                 {{-- Copy --}}
                 <div class="copyContents d-flex align-items-center justify-content-center">
-                    <button type="button" id="CopysaveBtn-replyTemplate" class="btn btn-dark" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                        <button type="button" id="CopysaveBtn-replyTemplate" class="btn btn-dark" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
                         <i class="fa-solid fa-copy" style="margin-right: 5px;"></i><span id="CopybuttonText-replyTemplate">Copy</span>
                         <span id="CopybuttonSpinner-replyTemplate" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>            
                     </button>
                 </div>
-            </div>
         </div>
 
         {{-- Content --}}

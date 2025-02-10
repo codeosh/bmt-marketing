@@ -26,9 +26,14 @@ $(document).ready(function () {
         $("#bulletinList").empty();
         $("#templateList").empty();
 
-        if (data.length === 0) { //mao nani ang data na ge renderan from fetchBulletin() og filterPricelist(). so, if walay data, mo execute ni.
-            $("#bulletinList").html('<div class="text-center text-red-500">No records found</div>');
-            $("#templateList").html('<div class="text-center text-red-500">No records found</div>');
+        if (data.length === 0) {
+            //mao nani ang data na ge renderan from fetchBulletin() og filterPricelist(). so, if walay data, mo execute ni.
+            $("#bulletinList").html(
+                '<div class="text-center text-red-500">No records found</div>'
+            );
+            $("#templateList").html(
+                '<div class="text-center text-red-500">No records found</div>'
+            );
             return;
         }
 
@@ -63,14 +68,13 @@ $(document).ready(function () {
 
     //mao ni na function for dynamically search in which tawgon ni sya sa #searchBulletins which has keyup
     function filterPricelist() {
-        let searchTerm = $("#search").val().toLowerCase();//kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
-        let filteredData = BulletinData.filter(item =>
+        let searchTerm = $("#search").val().toLowerCase(); //kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
+        let filteredData = BulletinData.filter((item) =>
             item.pname.toLowerCase().includes(searchTerm)
-        );//arrow function para i filter ang searchterm na
+        ); //arrow function para i filter ang searchterm na
 
         displayBulletin(filteredData); //then i pasa ang na filter out na didtos displayBulletin na function para ma display na sya
     }
-
 
     //function para sudlanan sa edit, click events and delete
     function attachEvents() {
@@ -122,7 +126,9 @@ $(document).ready(function () {
                         url: `/admin-bulletin/${id}`,
                         type: "DELETE",
                         headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
                         },
                         success: function () {
                             toastr.success("Deleted successfully!");
@@ -131,8 +137,8 @@ $(document).ready(function () {
                             itemElement.fadeOut(300, function () {
                                 $(this).remove();
                             });
-                            
-                            fetchBulletin();//refresh data if needed
+
+                            fetchBulletin(); //refresh data if needed
                             $(".content-display").html("");
                         },
                         error: function (xhr) {
@@ -158,8 +164,11 @@ $(document).ready(function () {
         e.preventDefault();
 
         const saveButtonBulletin = document.getElementById("saveBtnBulletin");
-        const buttonTextBulletin = document.getElementById("buttonTextBulletin");
-        const buttonSpinnerBulletin = document.getElementById("buttonSpinnerBulletin");
+        const buttonTextBulletin =
+            document.getElementById("buttonTextBulletin");
+        const buttonSpinnerBulletin = document.getElementById(
+            "buttonSpinnerBulletin"
+        );
         const formData = $(this).serialize();
 
         // Show loader effect
@@ -196,14 +205,19 @@ $(document).ready(function () {
         });
     });
 
-
     // Submit form for editing a bulletin
     $("#editBulletinForm").submit(function (e) {
         e.preventDefault();
 
-        const saveButtonBulletin  = document.getElementById("editsaveBtnBulletin");
-        const buttonTextBulletin = document.getElementById("editbuttonTextBulletin");
-        const buttonSpinnerBulletin = document.getElementById("editbuttonSpinnerBulletin");
+        const saveButtonBulletin = document.getElementById(
+            "editsaveBtnBulletin"
+        );
+        const buttonTextBulletin = document.getElementById(
+            "editbuttonTextBulletin"
+        );
+        const buttonSpinnerBulletin = document.getElementById(
+            "editbuttonSpinnerBulletin"
+        );
 
         let id = $("#editBulletinId").val();
         let pname = $("#editBulletinName").val();
@@ -247,15 +261,14 @@ $(document).ready(function () {
         });
     });
 
-
     //copy
     $(".copyContents button").click(function () {
         let content = $(".content-display").html().trim();
 
-        const CopysaveButton  = document.getElementById("CopysaveBtn");
+        const CopysaveButton = document.getElementById("CopysaveBtn");
         const CopybuttonText = document.getElementById("CopybuttonText");
         const CopybuttonSpinner = document.getElementById("CopybuttonSpinner");
-        
+
         // Show loader effect
         CopysaveButton.disabled = true;
         CopybuttonText.textContent = "Copying..";
@@ -298,13 +311,10 @@ $(document).ready(function () {
         } else {
             toastr.error("Clipboard API not supported.");
 
-                 // sttop loader effect
-                CopysaveButton.disabled = false;
-                CopybuttonText.textContent = "Copy";
-                CopybuttonSpinner.classList.add("d-none");
+            // sttop loader effect
+            CopysaveButton.disabled = false;
+            CopybuttonText.textContent = "Copy";
+            CopybuttonSpinner.classList.add("d-none");
         }
     });
 });
-
-
-
