@@ -7,7 +7,7 @@
 
     <div class="d-flex flex-column gap-3 position-relative">
         {{-- Side List --}}
-        <div class="border rounded-bottom position-absolute" style="width: 40vh; height:75vh;">
+        <div class="border w-100 h-100 rounded-bottom">
             <table class="table table-sm text-center">
                 <thead class="table-light">
                     <tr>
@@ -46,7 +46,7 @@
     </div>
     
     {{-- Content --}}
-    <div class="h-100 border rounded" style="width: 137vh">
+    <div class="h-100 w-100 border rounded" >
 
     </div>
     
