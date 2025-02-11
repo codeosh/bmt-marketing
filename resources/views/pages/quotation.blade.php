@@ -45,10 +45,10 @@
     </div>
     
     {{-- Content --}}
-    <div class="h-100 w-100 border rounded p-2 overflow-auto custom-scrollbar">
+    <div class="h-100 w-100 border rounded p-3 overflow-auto custom-scrollbar">
 
         <div class="text-center">
-            <h4 class=" fw-bolder">PRICE QUOTATION</h4>
+            <h4 class=" fw-bolder">PRICE&nbsp;&nbsp; QUOTATION</h4>
         </div>
 
         {{-- Customer Details Container--}}
@@ -100,7 +100,7 @@
 
         {{-- Quote --}}
         <div class="mt-3">
-            <small style="font-size:0.8rem;">" We are happy to quote you the following items you requested below..."</small>
+            <p class="fst-italic" style="font-size:0.8rem;">" We are happy to quote you the following items you requested below..."</p>
         </div>
 
         {{-- Table --}}
@@ -116,37 +116,6 @@
                     </tr>
                 </thead>
             </table>
-        </div>
-
-        <div>
-            <p>PRICE QUOTATION</p>
-
-            <div>
-                <form action="" class="d-flex flex-column">
-
-                    <div>
-                        <label for="">Customer :</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    
-                    <div>
-                        <label for="">Address :</label>
-                        <input type="text" name="" id="">
-                    </div>
-
-                    <div>
-                        <label for="">Contact # :</label>
-                        <input type="text" name="" id="">
-                    </div>
-
-                    <div>
-                        <label for="">ATTN :</label>
-                        <input type="text" name="" id="">
-                    </div>
-                    
-                </form>
-            </div>
-            <div></div>
         </div>
 
         <div>
