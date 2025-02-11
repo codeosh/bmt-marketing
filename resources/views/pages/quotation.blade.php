@@ -73,6 +73,12 @@
                     <input type="text" id="customerContact" style="border: none; outline: none;">
                 </div>
 
+
+                  {{-- ATN --}}
+                  <div class="customerATN">
+                    <label for="customerATN" >ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</label>
+                    <input type="text" id="customerATN" style="border: none; outline: none;">
+                </div>
             </div>
 
             {{-- No. & Date Container --}}
