@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex h-100 w-100 gap-2 p-1">
 
-    <div class="d-flex flex-column gap-3 position-relative">
+    <div class="d-flex flex-column gap-2">
         {{-- Side List --}}
         <div class="border w-100 h-100 rounded-bottom">
             <table class="table table-sm text-center">
@@ -20,7 +20,7 @@
 
         {{-- Buttons --}}
 
-        <div class="d-flex gap-1 position-absolute">
+        <div class="d-flex gap-1">
 
             {{-- Add New --}}
             <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
@@ -47,6 +47,45 @@
     
     {{-- Content --}}
     <div class="h-100 w-100 border rounded" >
+
+        <div>
+            <p>PRICE QUOTATION</p>
+
+            <div>
+                <form action="" class="d-flex flex-column">
+
+                    <div>
+                        <label for="">Customer :</label>
+                        <input type="text" name="" id="">
+                    </div>
+                    
+                    <div>
+                        <label for="">Address :</label>
+                        <input type="text" name="" id="">
+                    </div>
+
+                    <div>
+                        <label for="">Contact # :</label>
+                        <input type="text" name="" id="">
+                    </div>
+
+                    <div>
+                        <label for="">ATTN :</label>
+                        <input type="text" name="" id="">
+                    </div>
+                    
+                </form>
+            </div>
+            <div></div>
+        </div>
+
+        <div>
+
+        </div>
+        
+        <div>
+
+        </div>
 
     </div>
     
