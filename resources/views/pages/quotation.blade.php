@@ -11,9 +11,10 @@
             <table class="table table-sm text-center">
                 <thead class="table-light">
                     <tr>
-                        <th scope="col">No.</th>
+                        <th scope="col">Nos.</th>
                         <th scope="col">Customer</th>
                     </tr>
+
                 </thead>
             </table>
         </div>
@@ -73,12 +74,6 @@
                     <input type="text" id="customerContact" style="border: none; outline: none;">
                 </div>
 
-
-                  {{-- ATN --}}
-                  <div class="customerATN">
-                    <label for="customerATN" >ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</label>
-                    <input type="text" id="customerATN" style="border: none; outline: none;">
-                </div>
             </div>
 
             {{-- No. & Date Container --}}
