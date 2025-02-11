@@ -9,7 +9,7 @@
         <table class="table table-sm">
             <thead class="table-light">
                 <tr>
-                    <th scope="col">No.</th>
+                    <th scope="col">Nos.</th>
                     <th scope="col">Customer</th>
                 </tr>
             </thead>
