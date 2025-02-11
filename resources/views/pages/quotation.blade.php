@@ -5,9 +5,9 @@
 @section('content')
 <div class="d-flex h-100 w-100 gap-2 p-1">
 
-    <div class="d-flex flex-column gap-3">
+    <div class="d-flex flex-column gap-3 position-relative">
         {{-- Side List --}}
-        <div class="border rounded-bottom" style="width: 40vh; height:75vh;">
+        <div class="border rounded-bottom position-absolute" style="width: 40vh; height:75vh;">
             <table class="table table-sm text-center">
                 <thead class="table-light">
                     <tr>
@@ -20,7 +20,7 @@
 
         {{-- Buttons --}}
 
-        <div class="d-flex gap-1">
+        <div class="d-flex gap-1 position-absolute">
 
             {{-- Add New --}}
             <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
