@@ -110,6 +110,7 @@
             <p class="fst-italic" style="font-size:0.8rem;">" We are happy to quote you the following items you requested below..."</p>
         </div>
 
+        
         {{-- Table --}}
         <div class="border w-100 h-100 rounded-bottom mt-2">
             <table class="table table-sm text-center">
