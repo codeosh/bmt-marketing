@@ -5,6 +5,7 @@
 @section('content')
 <div class="d-flex h-100 w-100 gap-2 p-1 overflow-hidden">
 
+    
     <div class="d-flex flex-column gap-3">
         {{-- Side List --}}
         <div class="border w-100 h-100 rounded-bottom">
@@ -52,9 +53,9 @@
         </div>
 
         {{-- Customer Details Container--}}
-        <div class="d-flex justify-content-between fw-bolder">
+        <div class="d-flex fw-bolder gap-2" style="border: 2px solid red; height:130px;">
 
-            <div class="d-flex flex-column gap-2 "style="font-size:0.8rem;">
+            <div class="d-flex flex-column gap-2" style="font-size:0.8rem; border: 2px solid green">
                 {{-- Customer Name --}}
                 <div class="customerName">
                     <label for="customerName">Customer&nbsp; :</label>
@@ -82,23 +83,23 @@
             </div>
 
             {{-- No. & Date Container --}}
-            <div class="d-flex flex-column gap-2" style="font-size:0.8rem;">
+            <div class="d-flex flex-column gap-2" style="font-size:0.8rem; border: 2px solid blue; width:300px;">
                 {{-- No. --}}
-                <div class="customerQNumber">
+                <div class="customerQNumber w-100">
                     <label for="customerQNumber">Q No&nbsp; &nbsp; &nbsp;:</label>
-                    <input type="text" id="customerQNumber" placeholder="10093" style="border: none; outline: none; width:130px;">
+                    <input type="text" id="customerQNumber" placeholder="10093" style="border: none; outline: none; width:100%;">
                 </div>
 
                 {{-- Date Issued--}}
                 <div class="customerDateIssued">
                     <label for="customerDateIssued" >Date&nbsp; &nbsp; &nbsp;:</label>
-                    <input type="text" id="customerDateIssued" placeholder="01 - 30 - 2025" style="border: none; outline: none; width:130px;">
+                    <input type="text" id="customerDateIssued" placeholder="01 - 30 - 2025" style="border: none; outline: none;">
                 </div>
 
                 {{-- Terms --}}
                 <div class="customerTerms">
                     <label for="customerTerms">Terms&nbsp; &nbsp;:</label>
-                    <input type="text" id="customerTerms" style="border: none; outline: none; width:130px;">
+                    <input type="text" id="customerTerms" style="border: none; outline: none; width:100%;">
                 </div>
             </div>
 
