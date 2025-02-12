@@ -55,27 +55,27 @@
         {{-- Customer Details Container--}}
         <div class="d-flex fw-bolder gap-2" style="border: 2px solid red; height:130px;">
 
-            <div class="d-flex flex-column gap-2" style="font-size:0.8rem; border: 2px solid green">
+            <div class="d-flex flex-column gap-2 "style="font-size:0.8rem;">
                 {{-- Customer Name --}}
-                <div class="customerName">
-                    <label for="customerName">Customer&nbsp; :</label>
-                    <input type="text" id="customerName" style="border: none; outline: none;">
+                <div class="customerName d-flex w-100 align-items-center">
+                    <label for="customerName"class="me-2">Customer&nbsp; :</label>
+                    <input type="text" id="customerName" class="flex-grow-1" style="border: none; outline: none;">
                 </div>
 
                 {{-- Customer Address --}}
-                <div class="customerAddress">
-                    <label for="customerAddress" >Address&nbsp; &nbsp; &nbsp;:</label>
-                    <input type="text" id="customerAddress"style="border: none; outline: none;">
+                <div class="customerAddress d-flex w-100 align-items-center">
+                    <label for="customerAddress" class="me-2">Address&nbsp; &nbsp; &nbsp;:</label>
+                    <input type="text" id="customerAddress" class="flex-grow-1" style="border: none; outline: none;">
                 </div>
 
                 {{-- Customer Contact Number --}}
-                <div class="customerContact">
-                    <label for="customerContact" >Contact&nbsp; &nbsp; &nbsp;:</label>
-                    <input type="text" id="customerContact" style="border: none; outline: none;">
+                <div class="customerContact w-100 d-flex w-100 align-items-center">
+                    <label for="customerContact" class="me-2">Contact&nbsp; &nbsp; &nbsp;:</label>
+                    <input type="text" id="customerContact" class="flex-grow-1" style="border: none; outline: none;">
                 </div>
 
 
-                  {{-- ATN --}}
+                {{-- ATN --}}
                   <div class="customerATN">
                     <label for="customerATN" >ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</label>
                     <input type="text" id="customerATN" style="border: none; outline: none;">
@@ -83,7 +83,7 @@
             </div>
 
             {{-- No. & Date Container --}}
-            <div class="d-flex flex-column gap-2" style="font-size:0.8rem; border: 2px solid blue; width:300px;">
+            <div class="d-flex flex-column gap-2" style="font-size:0.8rem;">
                 {{-- No. --}}
                 <div class="customerQNumber w-100">
                     <label for="customerQNumber">Q No&nbsp; &nbsp; &nbsp;:</label>
@@ -121,6 +121,61 @@
                         <th scope="col">Unit Price</th>
                         <th scope="col">Line Amount</th>
                     </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                            </td>
+                            <td>
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                            </td>
+                            <td>
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                            </td>
+                            <td>
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                            </td>
+                            <td>
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                                <input type="text" class="w-100">
+                            </td>
+                            
+                        </tr>
+                    </tbody>
                 </thead>
             </table>
         </div>
