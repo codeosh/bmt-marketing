@@ -140,13 +140,20 @@ body {
     overflow-y: auto;
 }
 
-td input {
+td input,
+select {
     text-align: center;
-    width: 100%;
-    border: none;
-    outline: none;
+    /* border: none;
+    outline: none; */
     margin: 5px 0;
 }
 .customerDetails input {
     font-weight: bold;
+}
+
+td select {
+    appearance: none;
+    margin: 5px 0;
+    height: 23px;
+    border-radius: 2px;
 }

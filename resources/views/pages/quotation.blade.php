@@ -146,27 +146,108 @@
                             <input type="text" class="w-100">
                             <label></label>
                         </td>
-                        <td style="width:200px; border-right:1px solid black;">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
+                        <td style="width:100px; border-right:1px solid black;">
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                            
+                            <select class="w-100">
+                                <option value="" disabled selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="BOX">BOX</option>
+                            </select>
                             <label></label>
                         </td>
                         <td style="border-right:1px solid black;" >
