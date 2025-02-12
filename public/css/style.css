@@ -139,3 +139,14 @@ body {
     overflow-wrap: break-word;
     overflow-y: auto;
 }
+
+td input {
+    text-align: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin: 5px 0;
+}
+.customerDetails input {
+    font-weight: bold;
+}
