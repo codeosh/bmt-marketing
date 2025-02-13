@@ -16,7 +16,7 @@ class QuotationController extends Controller
         //
 
         if (auth::check() && auth::user()->role === 'admin') {
-            $quotation = QuotationCustomer::latest()->paginate(20);
+            $quotation = QuotationCustomer::latest()->paginate(100);
             return view('pages.quotation', compact('quotation'));
         } else {
             return view('user-pages.quotation');
