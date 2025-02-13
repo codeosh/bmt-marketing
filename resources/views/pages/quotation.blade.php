@@ -76,7 +76,7 @@
 
                 {{-- ATN --}}
                   <div class="customerATN d-flex w-100 align-items-center">
-                    <label for="customerATN" class="me-2">ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:</label>
+                    <label for="customerATN" class="me-2">ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</label>
                     <input type="text" id="customerATN" class="flex-grow-1" style="border: none; outline: none;">
                 </div>
 
