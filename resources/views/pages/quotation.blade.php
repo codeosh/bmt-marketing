@@ -140,7 +140,7 @@
                         <th scope="col">Line Amount</th>
                     </tr>
                     <tbody>
-                        <td style="width:30px; border-right:1px solid black;border-left:1px solid black;">
+                        <td style="width:30px; border-right:1px solid black;border-left:1px solid black; border-bottom:1px solid black;">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
@@ -161,32 +161,153 @@
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
-                            <label></label>
+                            <span></span>
                         </td>
-                        <td style="width:200px; border-right:1px solid black;">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <input type="text" class="w-100">
-                            <label></label>
+                        <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            
+                            <select class="w-100">
+                                <option value="" selected></option>
+                                <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
+                                <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
+                            </select>
+                            <span></span>
                         </td>
-                        <td style="border-right:1px solid black;" >
+                        <td style="border-right:1px solid black; border-bottom:1px solid black;" >
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
@@ -207,9 +328,9 @@
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
-                            <label></label>
+                            <span></span>
                         </td>
-                        <td style="width:100px; border-right:1px solid black;">
+                        <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
@@ -232,7 +353,7 @@
                             <input type="text" class="w-100">
                             <input class="bg-secondary text-white " type="text" class="w-100" value="Total:" disabled>
                         </td>
-                        <td style="width:100px; border-right:1px solid black;">
+                        <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
@@ -260,67 +381,80 @@
             </table>
         </div>
 
-        {{-- Terms & Condition Container --}}
-        <div class="mt-5 mb-5" style=" height:150px; width:500px;">
-            <div class="header bg-secondary d-flex align-items-center justify-content-evenly" style="height:30px;">
-                <small class="text-white">Terms & Condition</small>
-                <small class="text-white">Remarks & Special Notes</small>
-            </div>  
+        <div class="footer d-flex gap-2 w-100">
+                {{-- Terms & Condition Container --}}
+                <div class="mt-5 mb-5 h-100 w-50">
+                    <div class="header bg-secondary d-flex align-items-center justify-content-evenly" style="height:30px;">
+                        <small class="text-white">Terms & Condition</small>
+                        <small class="text-white">Remarks & Special Notes</small>
+                    </div>  
 
-            <div class="h-100 w-100 d-flex" style="border:1px solid black;">
-                
-                <div class="w-50 p-2" style="border-right:1px solid black;">
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bolder"  style="font-size:0.8rem;">Condition:</span>
-                            <span  style="font-size:0.8rem;">All Brand New 1 Year on</span>
+                    <div class="h-100 w-100 d-flex" style="border:1px solid black;">
+                        
+                        <div class="w-50 p-2" style="border-right:1px solid black;">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fw-bolder"  style="font-size:0.8rem;">Condition:</span>
+                                    <span  style="font-size:0.8rem;">All Brand New 1 Year on</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fw-bolder"  style="font-size:0.8rem;">Warranty:</span>
+                                    <span  style="font-size:0.8rem;">All</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fw-bolder"  style="font-size:0.8rem;">VAT (12%):</span>
+                                    <span  style="font-size:0.8rem;">Major Parts</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fw-bolder"  style="font-size:0.8rem;">Availability:</span>
+                                    <span  style="font-size:0.8rem;">Excluded</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fw-bolder"  style="font-size:0.8rem;">RD:</span>
+                                    <span  style="font-size:0.8rem;">Onstock</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {{-- Remarks & Special Notes --}}
+                        <div class="border w-50 p-2">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="fw-bolder"  style="font-size:0.8rem;">Price Effectivity:</span>
+                                    <span  style="font-size:0.8rem;">1 Week</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bolder"  style="font-size:0.8rem;">Warranty:</span>
-                            <span  style="font-size:0.8rem;">All</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bolder"  style="font-size:0.8rem;">VAT (12%):</span>
-                            <span  style="font-size:0.8rem;">Major Parts</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bolder"  style="font-size:0.8rem;">Availability:</span>
-                            <span  style="font-size:0.8rem;">Excluded</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bolder"  style="font-size:0.8rem;">RD:</span>
-                            <span  style="font-size:0.8rem;">Onstock</span>
-                        </div>
-                    </div>
-
                 </div>
 
-                   {{-- Remarks & Special Notes --}}
-                <div class="border w-50 p-2">
-                    <div class="row">
-                        <div class="col">
-                            <span class="fw-bolder"  style="font-size:0.8rem;">Price Effectivity:</span>
-                            <span  style="font-size:0.8rem;">1 Week</span>
-                        </div>
+                <div class="mt-5 w-50 d-flex flex-column align-items-center justify-content-center" style="height:190px">
+                    <div class="fw-bold" style="font-size: 0.8rem; margin-right:8rem;">
+                        <p>Quote & Prepared by:</p>
                     </div>
+                    <div class="d-flex flex-column text-center">
+                        <p class="m-0 p-0 fw-bold" style="font-size: 1.2rem">Mr. Sales Executive</p>
+                        <p class="m-0 p-0" style="font-size: 0.8rem">Tech/Sales Representative</p>
+                        <p class="m-0 p-0" style="font-size: 0.7rem;">09225282333</p>
+                        <p class="m-0 p-0" style="font-size: 0.7rem">0988626001</p>
+                    </div>
+                    
                 </div>
-            </div>
-
-         
-
         </div>
+       
     </div>
     
     
