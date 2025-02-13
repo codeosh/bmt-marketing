@@ -374,6 +374,7 @@
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
                             <input type="text" class="w-100">
+                            <hr class="m-0 color-black w-5">
                             <input class="bg-secondary text-white" type="text" class="w-100" value="" disabled>
                         </td>
                     </tbody>
