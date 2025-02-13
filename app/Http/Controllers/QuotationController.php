@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QuotationCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,8 @@ class QuotationController extends Controller
         //
 
         if (auth::check() && auth::user()->role === 'admin') {
-            return view('pages.quotation');
+            $quotation = QuotationCustomer::latest()->paginate(20);
+            return view('pages.quotation', compact('quotation'));
         } else {
             return view('user-pages.quotation');
         }

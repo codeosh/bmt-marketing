@@ -13,22 +13,19 @@ return new class extends Migration
     {
         Schema::create('tbl_items', function (Blueprint $table) {
             $table->id(); // Primary Key
-            $table->unsignedBigInteger('customer_id'); // Foreign Key Column
+            $table->foreignId('customer_id') // Foreign Key Column
+                ->constrained('tbl_customers') // References `id` in `tbl_customers`
+                ->onDelete('cascade'); // If customer is deleted, delete related items
 
             $table->integer('quantity');
-            $table->string('unit'); // Lowercase for consistency
+            $table->string('unit'); // Keep lowercase for consistency
             $table->string('item_name');
             $table->decimal('unit_price', 15, 2); // Large monetary values
             $table->decimal('line_amount', 15, 2);
-            $table->integer('attn')->nullable(); // If necessary, provide a better column name
+            $table->string('attn')->nullable(); // Changed to `string` if it's a reference
             $table->timestamp('date')->nullable();
-            $table->date('terms'); // Ensure it's really a date
-            $table->integer('quotation_no');
-
-            // Foreign key constraint
-            $table->foreign('customer_id')
-                ->references('id')->on('tbl_customers') // Make sure this matches your customers table
-                ->onDelete('cascade'); // If customer is deleted, delete related items
+            $table->string('terms'); // Changed to `string` for payment terms
+            $table->integer('quotation_no')->unique(); // Ensures unique quotation numbers
 
             $table->timestamps(); // Adds `created_at` and `updated_at`
         });

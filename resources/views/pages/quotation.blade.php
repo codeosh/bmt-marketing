@@ -7,18 +7,35 @@
 
     <div class="d-flex flex-column gap-2">
         {{-- Side List --}}
-        <div class="border w-100 h-100 rounded-bottom">
-            <table class="table table-sm text-center">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col">Nos.</th>
-                        <th scope="col">Customer</th>
-                    </tr>
+        <div class="border w-100 h-auto rounded-bottom p-3">
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-sm table-hover text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Nos.</th>
+                            <th scope="col">Customer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($quotation as $quotations)
+                            <tr>
+                                <td>{{ $quotations->nos }}</td>
+                                <td>{{ $quotations->customer_name }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                </thead>
-            </table>
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                {{ $quotation->links('pagination::bootstrap-5') }}
+            </div>
         </div>
 
+
+
+        
         {{-- Buttons --}}
         <div class="d-flex gap-1">
 
@@ -86,19 +103,19 @@
             <div class="d-flex flex-column gap-2" style="font-size:0.8rem;flex-basis:30%;">
                 {{-- No. --}}
                 <div class="customerQNumber">
-                    <label for="customerQNumber">Q No&nbsp; &nbsp; &nbsp;:</label>
+                    <label for="customerQNumber" class="me-2">Q No&nbsp; &nbsp; &nbsp;:</label>
                     <input type="text" id="customerQNumber" placeholder="10093" style="border: none; outline: none; width:130px; font-size:1.5rem; font-weight:bold;">
                 </div>
 
                 {{-- Date Issued--}}
                 <div class="customerDateIssued">
-                    <label for="customerDateIssued" >Date&nbsp; &nbsp; &nbsp;:</label>
+                    <label for="customerDateIssued" class="me-2">Date&nbsp; &nbsp; &nbsp;:</label>
                     <input type="text" id="customerDateIssued" placeholder="01 - 30 - 2025" style="border: none; outline: none; width:130px;">
                 </div>
 
                 {{-- Terms --}}
                 <div class="customerTerms">
-                    <label for="customerTerms">Terms&nbsp; &nbsp;:</label>
+                    <label for="customerTerms" class="me-2">Terms&nbsp; &nbsp;:</label>
                     <input type="text" id="customerTerms" style="border: none; outline: none; width:130px;">
                 </div>
             </div>
@@ -308,4 +325,6 @@
     
     
 </div>
+
+
 @endsection
