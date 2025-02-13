@@ -148,105 +148,145 @@
                         </td>
                         <td style="width:100px; border-right:1px solid black;">
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             
                             <select class="w-100">
-                                <option value="" disabled selected></option>
+                                <option value="" selected></option>
                                 <option value="PCS">PCS</option>
+                                <option value="PCS">SET</option>
                                 <option value="BOX">BOX</option>
+                                <option value="BOX">CTN</option>
                             </select>
                             <label></label>
                         </td>

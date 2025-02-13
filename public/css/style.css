@@ -143,9 +143,10 @@ body {
 td input,
 select {
     text-align: center;
-    /* border: none;
-    outline: none; */
+    border: none;
+    outline: none;
     margin: 5px 0;
+    height: 23px;
 }
 .customerDetails input {
     font-weight: bold;
@@ -153,7 +154,7 @@ select {
 
 td select {
     appearance: none;
-    margin: 5px 0;
     height: 23px;
+    margin: 5px 0;
     border-radius: 2px;
 }
