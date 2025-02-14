@@ -34,7 +34,7 @@
     </div>
                
         {{-- Buttons --}}
-        <div class="d-flex justify-content-evenly bg-black">
+        <div class="d-flex justify-content-evenly">
 
             {{-- Add New --}}
             <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
