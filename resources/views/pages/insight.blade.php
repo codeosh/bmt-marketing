@@ -60,3 +60,4 @@
 {{-- bulletin Script JS --}}
 <script src="{{ asset('js/insight.js') }}"></script>
 @endsection
+

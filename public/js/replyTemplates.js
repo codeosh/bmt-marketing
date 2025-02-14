@@ -2,7 +2,10 @@
 $(document).ready(function () {
     let ReplyTemplateData = []; // Store fetched data globally
 
-    let url = Laravel.user_role === 'admin' ? "/fetch-replyTemplate" : "/fetch-user-replyTemplate";
+    let url =
+        Laravel.user_role === "admin"
+            ? "/fetch-replyTemplate"
+            : "/fetch-user-replyTemplate";
 
     //get the data to automatically display on the bulletin and template container
     function fetchReplyTemplate() {
@@ -28,9 +31,14 @@ $(document).ready(function () {
         $("#bulletinList").empty();
         $("#templateList").empty();
 
-        if (data.length === 0) { //mao nani ang data na ge renderan from fetchReplyTemplate(). so, if walay data, mo execute ni.
-            $("#bulletinList").html('<div class="text-center text-red-500">No records found</div>');
-            $("#templateList").html('<div class="text-center text-red-500">No records found</div>');
+        if (data.length === 0) {
+            //mao nani ang data na ge renderan from fetchReplyTemplate(). so, if walay data, mo execute ni.
+            $("#bulletinList").html(
+                '<div class="text-center text-red-500">No records found</div>'
+            );
+            $("#templateList").html(
+                '<div class="text-center text-red-500">No records found</div>'
+            );
             return;
         }
 
@@ -38,20 +46,28 @@ $(document).ready(function () {
         data.forEach(function (item) {
             let listItem = `
             <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
-                data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
-                <span class="text-truncate">${item.pname}</span>
-                ${Laravel.user_role === 'admin' ? `
+                data-id="${item.id}" data-content="${
+                item.content
+            }" style="border: 1px solid #ddd;">
+                <span class="text-truncate" style="font-size:0.8rem"  title="${
+                    item.pname
+                }">${item.pname}</span>
+                ${
+                    Laravel.user_role === "admin"
+                        ? `
                 <div class="d-flex gap-1" style="height:25px;">
-                    <button class="btn btn-sm btn-primary edit-replyTemplate h-100 d-flex justify-content-between align-items-center" 
+                    <button class="btn btn-sm btn-secondary edit-replyTemplate h-100 d-flex justify-content-between align-items-center" 
                         data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
                         <i class="fas fa-edit" style="font-size:10px;"></i>
                     </button>
-                    <button class="btn btn-sm btn-danger delete-replyTemplate h-100 d-flex justify-content-between align-items-center" 
+                    <button class="btn btn-sm btn-secondary delete-replyTemplate h-100 d-flex justify-content-between align-items-center" 
                         data-pname="${item.pname}" data-id="${item.id}">
                         <i class="fas fa-trash" style="font-size:10px;"></i>
                     </button>
                 </div >
-                    ` : ``}
+                    `
+                        : ``
+                }
             </div>
         `;
 
@@ -67,14 +83,13 @@ $(document).ready(function () {
 
     //mao ni na function for dynamically search in which tawgon ni sya sa #searchBulletins which has keyup
     function filterReplyTemplate() {
-        let searchTerm = $("#search").val().toLowerCase();//kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
-        let filteredData = ReplyTemplateData.filter(item =>
+        let searchTerm = $("#search").val().toLowerCase(); //kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
+        let filteredData = ReplyTemplateData.filter((item) =>
             item.pname.toLowerCase().includes(searchTerm)
-        );//arrow function para i filter ang searchterm na
+        ); //arrow function para i filter ang searchterm na
 
         displayReplyTemplate(filteredData); //then i pasa ang na filter out na didtos displayReplyTemplate na function para ma display na sya
     }
-
 
     //function para sudlanan sa edit, click events and delete
     function attachEvents() {
@@ -109,7 +124,7 @@ $(document).ready(function () {
             e.stopPropagation();
             let id = $(this).data("id");
             let pname = $(this).data("pname");
-            let itemElement = $(this).closest(".bulletin-item"); 
+            let itemElement = $(this).closest(".bulletin-item");
 
             Swal.fire({
                 title: "Are you sure?",
@@ -125,7 +140,9 @@ $(document).ready(function () {
                         url: `/admin-replyTemplate/${id}`,
                         type: "DELETE",
                         headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
                         },
                         success: function () {
                             toastr.success("Deleted successfully!");
@@ -135,7 +152,7 @@ $(document).ready(function () {
                                 $(this).remove();
                             });
 
-                            fetchReplyTemplate();//refresh data if needed
+                            fetchReplyTemplate(); //refresh data if needed
                             $(".content-display").html("");
                         },
                         error: function (xhr) {
@@ -160,9 +177,15 @@ $(document).ready(function () {
     $("#replyTemplateForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonreplyTemplate = document.getElementById("saveBtn-replyTemplate");
-        const buttonTextreplyTemplate = document.getElementById("buttonText-replyTemplate");
-        const buttonSpinnerreplyTemplate = document.getElementById("buttonSpinner-replyTemplate");
+        const saveButtonreplyTemplate = document.getElementById(
+            "saveBtn-replyTemplate"
+        );
+        const buttonTextreplyTemplate = document.getElementById(
+            "buttonText-replyTemplate"
+        );
+        const buttonSpinnerreplyTemplate = document.getElementById(
+            "buttonSpinner-replyTemplate"
+        );
         const formData = $(this).serialize();
 
         // Show loader effect
@@ -198,14 +221,15 @@ $(document).ready(function () {
         });
     });
 
-
     // Submit form for editing a bulletin
     $("#editReplyForm").submit(function (e) {
         e.preventDefault();
 
-        const saveButtonReply  = document.getElementById("editsaveBtnReply");
+        const saveButtonReply = document.getElementById("editsaveBtnReply");
         const buttonTextReply = document.getElementById("editbuttonTextReply");
-        const buttonSpinnerReply = document.getElementById("editbuttonSpinnerReply");
+        const buttonSpinnerReply = document.getElementById(
+            "editbuttonSpinnerReply"
+        );
 
         let id = $("#editReplyId").val();
         let pname = $("#editReplyName").val();
@@ -233,7 +257,7 @@ $(document).ready(function () {
                 saveButtonReply.disabled = false;
                 buttonTextReply.textContent = "Save Changes";
                 buttonSpinnerReply.classList.add("d-none");
-                
+
                 $("#editReplyModal").modal("hide");
                 fetchReplyTemplate();
             },
@@ -249,15 +273,20 @@ $(document).ready(function () {
         });
     });
 
-
     //copy
     $(".copyContents button").click(function () {
         let content = $(".content-display").html().trim();
 
-        const CopysaveButton  = document.getElementById("CopysaveBtn-replyTemplate");
-        const CopybuttonText = document.getElementById("CopybuttonText-replyTemplate");
-        const CopybuttonSpinner = document.getElementById("CopybuttonSpinner-replyTemplate");
-        
+        const CopysaveButton = document.getElementById(
+            "CopysaveBtn-replyTemplate"
+        );
+        const CopybuttonText = document.getElementById(
+            "CopybuttonText-replyTemplate"
+        );
+        const CopybuttonSpinner = document.getElementById(
+            "CopybuttonSpinner-replyTemplate"
+        );
+
         // Show loader effect
         CopysaveButton.disabled = true;
         CopybuttonText.textContent = "Copying..";
@@ -300,11 +329,10 @@ $(document).ready(function () {
         } else {
             toastr.error("Clipboard API not supported.");
 
-                 // sttop loader effect
-                CopysaveButton.disabled = false;
-                CopybuttonText.textContent = "Copy";
-                CopybuttonSpinner.classList.add("d-none");
+            // sttop loader effect
+            CopysaveButton.disabled = false;
+            CopybuttonText.textContent = "Copy";
+            CopybuttonSpinner.classList.add("d-none");
         }
     });
 });
-
