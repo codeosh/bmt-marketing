@@ -59,7 +59,7 @@
        
     </div>
     
-    <div class="h-100 d-flex flex-column gap-2">
+    <div class="h-100 w-100 d-flex flex-column gap-2">
             {{-- Content --}}
             <div class=" w-100 border rounded p-3 overflow-auto custom-scrollbar" style="height:80vh;">
 
