@@ -44,10 +44,12 @@
 
 
             {{-- Save--}}
-            <button type="button" class="btn btn-info saveButton" data-bs-toggle="modal"
-               style="font-size:0.6rem; width:80px; border-radius:3px;">
-               <i class="fa-solid fa-floppy-disk"></i> Save
-           </button>
+            <form class="customerForm">
+            <button type="submit" id="saveBtn-customer" form="customerForm" class="btn btn-info saveButton" style="font-size:0.6rem; width:80px; border-radius:3px;">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span id="buttonText-customer">{{ __('Save') }}</span>
+                    <span id="buttonSpinner-customer" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            </button>
 
              {{-- Delete --}}
              <button type="button" class="btn btn-danger saveButton" data-bs-toggle="modal"
@@ -88,7 +90,6 @@
                             <label for="customerContact" class="me-2">Contact&nbsp; &nbsp; &nbsp;:</label>
                             <input type="text" id="customerContact" class="flex-grow-1" style="border: none; outline: none;">
                         </div>
-
                         {{-- ATN --}}
                         <div class="customerATN d-flex w-100 align-items-center">
                             <label for="customerATN" class="me-2">ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</label>
@@ -195,7 +196,7 @@
                                 </td>
 
                             </tr>
-
+                            </form>
                             <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
@@ -799,25 +800,6 @@
     </div>
     
 </div>
-<script>
-        function calculateLineAmount(element) {
-            let row = element.closest("tr");
-            let quantity = parseFloat(row.querySelector(".quantity").value) || 0;
-            let unitPrice = parseFloat(row.querySelector(".unit-price").value) || 0;
-            let lineAmount = quantity * unitPrice;
-            
-            row.querySelector(".line-amount").value = lineAmount.toFixed(2);
-
-            calculateTotal();
-        }
-
-        function calculateTotal() {
-            let total = 0;
-            document.querySelectorAll(".line-amount").forEach(input => {
-                total += parseFloat(input.value) || 0;
-            });
-            document.getElementById("totalAmount").value = total.toFixed(2);
-        }
-    </script>
+<script src="{{ asset('js/quotation.js') }}"></script>
 
 @endsection

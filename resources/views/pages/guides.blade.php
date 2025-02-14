@@ -3,8 +3,7 @@
 @section('title', 'BMTMarketing - Guides')
 
 @section('content')
-
-<div class="d-flex gap-1 h-100">
+    <div class="d-flex gap-1 h-100">
 
     <div class="d-flex gap-1 flex-column h-100 w-45">
         {{-- Bulletin List --}}
@@ -59,6 +58,6 @@
 </div>
 
 {{-- bulletin Script JS --}}
-<script src="{{ asset('js/priceList.js') }}"></script>
+<script src="{{ asset('js/guides.js') }}"></script>
 @endsection
 
