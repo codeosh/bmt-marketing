@@ -128,7 +128,7 @@
 
                 
                 {{-- Table --}}
-                <div class="border w-100 rounded-bottom mt-2">
+                <div class="border w-100 mt-2">
                     <table class="table table-sm text-center">
                         <thead class="table-light">
                             <tr>
@@ -359,14 +359,349 @@
                                     <input type="text" class="w-100 line-amount" disabled>
                                 </td>
 
+                            </tr>   
+
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
                             </tr>
                             <!-- Total Row -->
-                            <tr>
-                                <td colspan="4" class="text-end bg-secondary text-white fw-bold">Total:</td>
-                                <td>
-                                    <input id="totalAmount" class="w-100 bg-secondary text-white text-center" type="text" disabled>
+                            <tr class="bg-black" style="border: 1px solid black">
+                                <td colspan="3" class="p-0 m-0">
+                                    <span></span>
                                 </td>
-                            </tr>
+                                
+                                
+                                <td class="text-end p-1 bg-secondary text-white fw-bold" style=" border-right:1px solid black;">
+                                    <label class="me-4  self-align-center" style="margin-top: 0.2rem">Total:</label>
+                                </td>
+                                <td class="p-0">
+                                    <div class="w-100 h-100 bg-secondary">
+                                        <input id="totalAmount" class="w-100 text-white fw-bold border-0 bg-transparent p-0 text-center" type="text" value="1000" disabled>
+                                    </div>
+                                </td>
+                                
+                            </tr>                            
                         </tbody>
                     </table>
 

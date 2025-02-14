@@ -154,7 +154,19 @@ select {
 
 td select {
     appearance: none;
+
     height: 23px;
     margin: 5px 0;
     border-radius: 2px;
+}
+
+td {
+    border-bottom: 0 !important;
+}
+
+.line-amount:disabled {
+    background: transparent !important;
+    color: inherit !important;
+    border: none !important;
+    outline: none !important;
 }
