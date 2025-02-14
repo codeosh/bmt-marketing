@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_customers', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->string('nos')->unique(); // Defines a UNIQUE column
+            //$table->string('nos')->unique(); // Defines a UNIQUE column
             $table->string('customer_name'); // i use _  for clarity bitaw
             $table->string('address');
             $table->string('contact', 20); //`long` is invalid, 20 chars for phone numbers
