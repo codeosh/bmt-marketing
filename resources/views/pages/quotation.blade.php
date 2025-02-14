@@ -129,7 +129,7 @@
                 {{-- Table --}}
                 <div class="border w-100 rounded-bottom mt-2">
                     <table class="table table-sm text-center">
-                        <thead class="table-light" >
+                        <thead class="table-light">
                             <tr>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Unit</th>
@@ -137,246 +137,238 @@
                                 <th scope="col">Unit Price</th>
                                 <th scope="col">Line Amount</th>
                             </tr>
-                            <tbody>
-                                <td style="width:30px; border-right:1px solid black;border-left:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <span></span>
-                                </td>
-                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    
-                                    <select class="w-100">
-                                        <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="PCS">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="BOX">CTN</option>
-                                    </select>
-                                    <span></span>
-                                </td>
-                                <td style="border-right:1px solid black; border-bottom:1px solid black;" >
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <span></span>
-                                </td>
-                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input class="bg-secondary text-white " type="text" class="w-100" value="Total:" disabled>
-                                </td>
-                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input type="text" class="w-100">
-                                    <input class="bg-secondary text-white" type="text" class="w-100" value="" disabled>
-                                </td>
-                            </tbody>
                         </thead>
+                        <tbody>
+                            <!-- Row Template -->
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+                                
+                            </tr>
+                            
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 quantity" oninput="calculateLineAmount(this)">
+                                </td>
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100">
+                                        <option value="" selected></option>
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                    </select>
+                                </td>
+
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 unit-price" oninput="calculateLineAmount(this)">
+                                </td>
+
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" class="w-100 line-amount" disabled>
+                                </td>
+
+                            </tr>
+                            <!-- Total Row -->
+                            <tr>
+                                <td colspan="4" class="text-end bg-secondary text-white fw-bold">Total:</td>
+                                <td>
+                                    <input id="totalAmount" class="w-100 bg-secondary text-white text-center" type="text" disabled>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
+
                 </div>
 
                 <div class="footer d-flex gap-2 w-100">
@@ -472,6 +464,25 @@
     </div>
     
 </div>
+<script>
+        function calculateLineAmount(element) {
+            let row = element.closest("tr");
+            let quantity = parseFloat(row.querySelector(".quantity").value) || 0;
+            let unitPrice = parseFloat(row.querySelector(".unit-price").value) || 0;
+            let lineAmount = quantity * unitPrice;
+            
+            row.querySelector(".line-amount").value = lineAmount.toFixed(2);
 
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            document.querySelectorAll(".line-amount").forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+            document.getElementById("totalAmount").value = total.toFixed(2);
+        }
+    </script>
 
 @endsection
