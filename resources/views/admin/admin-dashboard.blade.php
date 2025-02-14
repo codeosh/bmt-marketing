@@ -191,6 +191,20 @@
                                     style="font-size:0.6rem; width:100px; border-radius:3px;">
                                     <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
                                 </button>
+                                @elseif (request()->routeIs('admin-insight.index'))
+                                {{-- Add Button for Contact Page --}}
+                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                    data-bs-target="#PriceListModal"
+                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
+                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                </button>
+                                @elseif (request()->routeIs('admin-guides.index'))
+                                {{-- Add Button for Contact Page --}}
+                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                    data-bs-target="#PriceListModal"
+                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
+                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                </button>
                                 @endif
                             </div>
 

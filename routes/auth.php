@@ -95,13 +95,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-replyTemplate', ReplyTemplateController::class);
         Route::get('/fetch-replyTemplate', [ReplyTemplateController::class, 'getAdminReplyTemplate']);
 
-
-        Route::resource('admin-quotation', QuotationController::class);
-        Route::resource('admin-prospects', ProspectsController::class);
+        //insight
         Route::resource('admin-insight', InsightController::class);
-        Route::resource('admin-guides', GuidesController::class);
-        Route::resource('admin-accounts', AccountController::class);
+        Route::get('/fetch-insight', [InsightController::class, 'getAdminInsight']);
 
+        //quotation
+        Route::resource('admin-quotation', QuotationController::class);
+
+        //guides
+        Route::resource('admin-guides', GuidesController::class);
+        Route::get('/fetch-guides', [GuidesController::class, 'getAdminguides']);
+
+        Route::resource('admin-accounts', AccountController::class);
+        Route::resource('admin-prospects', ProspectsController::class);
         Route::get('/Dashboard-Pages', function () {
             return view('pages.dashboard');
         })->name('admin-dashboard-page');
@@ -132,11 +138,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('user-replyTemplate', ReplyTemplateController::class);
         Route::get('/fetch-user-replyTemplate', [ReplyTemplateController::class, 'getUserReplyTemplate']);
 
-        Route::resource('user-quotation', QuotationController::class);
-        Route::resource('user-prospects', ProspectsController::class);
+        //insight
         Route::resource('user-insight', InsightController::class);
+        Route::get('/fetch-user-insight', [InsightController::class, 'getUserInsight']);
+
+        //guides
         Route::resource('user-guides', GuidesController::class);
+        Route::get('/fetch-user-guides', [GuidesController::class, 'getUserguides']);
+
+        //quotation
+        Route::resource('user-quotation', QuotationController::class);
+
         Route::resource('user-accounts', AccountController::class);
+        Route::resource('user-accounts', AccountController::class);
+        Route::resource('user-prospects', ProspectsController::class);
 
         Route::get('/Dashboard-Page', function () {
             return view('user-pages.dashboard');

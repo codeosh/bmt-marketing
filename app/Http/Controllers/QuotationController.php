@@ -16,12 +16,13 @@ class QuotationController extends Controller
     public function index()
     {
         //
+        $quotation = QuotationCustomer::latest()->paginate(100);
 
         if (auth::check() && auth::user()->role === 'admin') {
-            $quotation = QuotationCustomer::latest()->paginate(100);
+
             return view('pages.quotation', compact('quotation'));
         } else {
-            return view('user-pages.quotation');
+            return view('user-pages.quotation', compact('quotation'));
         }
     }
 

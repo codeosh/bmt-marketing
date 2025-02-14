@@ -1,13 +1,11 @@
-// public\js\bulletin.js
 $(document).ready(function () {
-    let BulletinData = []; // Store fetched data globally
+    let PricelistData = []; // Store fetched data globally
+    
+    let url = Laravel.user_role === 'admin' ? "/fetch-insight" : "/fetch-user-insight";
 
-    let url = Laravel.user_role === 'admin' ? "/fetch-bulletins" : "/fetch-user-bulletins";
-
-    //get the data to automatically display on the bulletin and template container
-    function fetchBulletin() {
+    function fetchPricelist() {
         $.ajax({
-            url: url, // this wil chooses which route to access base on the result sa ternary above
+            url: url,
             type: "GET",
             success: function (response) {
                 if (!Array.isArray(response)) {
@@ -15,52 +13,50 @@ $(document).ready(function () {
                     return;
                 }
 
-                BulletinData = response; // Store data globally
-                displayBulletin(BulletinData); // Render data
+                PricelistData = response; // Store data globally
+                displayPricelist(PricelistData); // Render data
             },
             error: function () {
+
+                if (xhr.status === 403) {
+                toastr.error("Unauthorized access.");
+                } else {
                 toastr.error("Failed to fetch data.");
+                }
             },
         });
     }
 
-    function displayBulletin(data) {
+    function displayPricelist(data) {
         $("#bulletinList").empty();
         $("#templateList").empty();
 
-        if (data.length === 0) {
-            //mao nani ang data na ge renderan from fetchBulletin() og filterPricelist(). so, if walay data, mo execute ni.
-            $("#bulletinList").html(
-                '<div class="text-center text-red-500">No records found</div>'
-            );
-            $("#templateList").html(
-                '<div class="text-center text-red-500">No records found</div>'
-            );
+        if (data.length === 0) { //mao nani ang data na ge renderan from fetchPricelist(). so, if walay data, mo execute ni.
+            $("#bulletinList").html('<div class="text-center text-red-500">No records found</div>');
+            $("#templateList").html('<div class="text-center text-red-500">No records found</div>');
             return;
         }
 
         //if naay data.  Mo exceute ni na set of codes
         data.forEach(function (item) {
-            let listItem = `
-            <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
-                data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
-                <span title="${item.pname}" class="text-truncate">${item.pname}</span>
-
-                ${Laravel.user_role === 'admin' ? `
-                <div class="d-flex gap-1" style="height:25px;">
-                    <button class="btn btn-sm btn-primary edit-bulletin h-100 d-flex justify-content-between align-items-center" 
-                        data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
-                        <i class="fas fa-edit" style="font-size:10px;"></i>
-                    </button>
-                    <button class="btn btn-sm btn-danger delete-bulletin h-100 d-flex justify-content-between align-items-center" 
-                        data-pname="${item.pname}" data-id="${item.id}">
-                        <i class="fas fa-trash" style="font-size:10px;"></i>
-                    </button>
+           let listItem = ` 
+                <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
+                    data-id="${item.id}" data-content="${item.content}" style="border: 1px solid #ddd;">
+                    <span class="text-truncate">${item.pname}</span>
+                    ${Laravel.user_role === "admin" ? `
+                    <div class="d-flex gap-1" style="height:25px;">
+                        <button class="btn btn-sm btn-primary edit-pricelist h-100 d-flex justify-content-between align-items-center" 
+                            data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                            <i class="fas fa-edit" style="font-size:10px;"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger delete-pricelist h-100 d-flex justify-content-between align-items-center" 
+                            data-pname="${item.pname}" data-id="${item.id}">
+                            <i class="fas fa-trash" style="font-size:10px;"></i>
+                        </button>
+                    </div>
+                    ` : ''}
                 </div>
-                ` : ``}
-                
-            </div>
-        `;
+            `;
 
             if (item.kind === "Bulletin") {
                 $("#bulletinList").append(listItem);
@@ -74,13 +70,14 @@ $(document).ready(function () {
 
     //mao ni na function for dynamically search in which tawgon ni sya sa #searchBulletins which has keyup
     function filterPricelist() {
-        let searchTerm = $("#search").val().toLowerCase(); //kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
-        let filteredData = BulletinData.filter((item) =>
+        let searchTerm = $("#search").val().toLowerCase();//kuhaon niya agg ge input then i convert into lowercase weather it already upper or lower case
+        let filteredData = PricelistData.filter(item =>
             item.pname.toLowerCase().includes(searchTerm)
-        ); //arrow function para i filter ang searchterm na
+        );//arrow function para i filter ang searchterm na
 
-        displayBulletin(filteredData); //then i pasa ang na filter out na didtos displayBulletin na function para ma display na sya
+        displayPricelist(filteredData); //then i pasa ang na filter out na didtos displayPricelist na function para ma display na sya
     }
+
 
     //function para sudlanan sa edit, click events and delete
     function attachEvents() {
@@ -95,29 +92,26 @@ $(document).ready(function () {
         });
 
         // Edit event
-        $(".edit-bulletin").click(function (e) {
+        $(".edit-pricelist").click(function (e) {
             e.stopPropagation();
             let id = $(this).data("id");
             let pname = $(this).data("pname");
             let content = $(this).data("content");
 
-            // Populate the edit form (assuming you have a modal with input fields)
-            $("#editBulletinId").val(id);
-            $("#editBulletinName").val(pname);
-            $("#editBulletinContent").val(content);
+            $("#editPricelistId").val(id);
+            $("#editPricelistName").val(pname);
+            $("#editPricelistContent").val(content);
 
-            // Show the modal
-            $("#editBulletinModal").modal("show");
+            $("#editPricelistModal").modal("show");
         });
 
         // Delete event
-        $(".delete-bulletin").click(function (e) {
+        $(".delete-pricelist").click(function (e) {
             e.stopPropagation();
-
             let id = $(this).data("id");
             let pname = $(this).data("pname");
-            let itemElement = $(this).closest(".bulletin-item"); //get the class bulletin-item gekan listItem naas babaw
-
+            let itemElement = $(this).closest(".bulletin-item"); 
+            
             Swal.fire({
                 title: "Are you sure?",
                 text: `Are you sure you want to delete: ${pname}`,
@@ -129,12 +123,10 @@ $(document).ready(function () {
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: `/admin-bulletin/${id}`,
+                        url: `/admin-insight/${id}`,
                         type: "DELETE",
                         headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                         },
                         success: function () {
                             toastr.success("Deleted successfully!");
@@ -144,7 +136,7 @@ $(document).ready(function () {
                                 $(this).remove();
                             });
 
-                            fetchBulletin(); //refresh data if needed
+                            fetchPricelist();//refresh data if needed
                             $(".content-display").html("");
                         },
                         error: function (xhr) {
@@ -158,33 +150,29 @@ $(document).ready(function () {
     }
 
     // Fetch data on page load
-    fetchBulletin();
+    fetchPricelist();
 
     //i-trigger na niya ag Search input then para ma execute na this functionality
     $("#search").on("keyup", function () {
         filterPricelist();
     });
 
-    // Submit form for adding a bulletin
-    $("#bulletinForm").on("submit", function (e) {
+    // Submit form for adding a pricelist
+    $("#pricelistForm").on("submit", function (e) {
         e.preventDefault();
 
-        const saveButtonBulletin = document.getElementById("saveBtnBulletin");
-        const buttonTextBulletin =
-            document.getElementById("buttonTextBulletin");
-        const buttonSpinnerBulletin = document.getElementById(
-            "buttonSpinnerBulletin"
-        );
+        const saveButton = $("#saveBtn-pricelist");
+        const buttonText = $("#buttonText-pricelist");
+        const buttonSpinner = $("#buttonSpinner-pricelist");
         const formData = $(this).serialize();
 
-        // Show loader effect
-        saveButtonBulletin.disabled = true;
-        buttonTextBulletin.textContent = "Saving...";
-        buttonSpinnerBulletin.classList.remove("d-none");
+        saveButton.prop("disabled", true);
+        buttonText.text("Saving...");
+        buttonSpinner.removeClass("d-none");
 
         $.ajax({
             type: "POST",
-            url: "/admin-bulletin",
+            url: "/admin-insight",
             data: formData,
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -192,77 +180,68 @@ $(document).ready(function () {
             success: function () {
                 toastr.success("Added Successfully!");
 
-                saveButtonBulletin.disabled = false;
-                buttonTextBulletin.textContent = "Save";
-                buttonSpinnerBulletin.classList.add("d-none");
+                saveButton.prop("disabled", false);
+                buttonText.text("Save");
+                buttonSpinner.addClass("d-none");
 
-                fetchBulletin();
-                $("#bulletinModal").modal("hide");
-                $("#bulletinForm")[0].reset();
+                fetchPricelist();
+                $("#PriceListModal").modal("hide");
+                $("#pricelistForm")[0].reset();
             },
             error: function (xhr) {
                 toastr.error(xhr.responseJSON?.message || "An error occurred.");
 
                 //stop loader
-                saveButtonBulletin.disabled = false;
-                buttonTextBulletin.textContent = "Save";
-                buttonSpinnerBulletin.classList.add("d-none");
+                saveButton.prop("disabled", false);
+                buttonText.text("Save");
+                buttonSpinner.addClass("d-none");
             },
         });
     });
 
-    // Submit form for editing a bulletin
-    $("#editBulletinForm").submit(function (e) {
+    // Submit form for editing a pricelist
+    $("#editPricelistForm").submit(function (e) {
         e.preventDefault();
 
-        const saveButtonBulletin = document.getElementById(
-            "editsaveBtnBulletin"
-        );
-        const buttonTextBulletin = document.getElementById(
-            "editbuttonTextBulletin"
-        );
-        const buttonSpinnerBulletin = document.getElementById(
-            "editbuttonSpinnerBulletin"
-        );
-
-        let id = $("#editBulletinId").val();
-        let pname = $("#editBulletinName").val();
-        let content = $("#editBulletinContent").val();
+        const saveButtonPricelist  = document.getElementById("editsaveBtnPricelist");
+        const buttonTextPricelist = document.getElementById("editbuttonTextPricelist");
+        const buttonSpinnerPricelist = document.getElementById("editbuttonSpinnerPricelist");
+        
+        let id = $("#editPricelistId").val();
+        let pname = $("#editPricelistName").val();
+        let content = $("#editPricelistContent").val();
 
         // Show loader effect
-        saveButtonBulletin.disabled = true;
-        buttonTextBulletin.textContent = "Saving...";
-        buttonSpinnerBulletin.classList.remove("d-none");
+        saveButtonPricelist.disabled = true;
+        buttonTextPricelist.textContent = "Saving...";
+        buttonSpinnerPricelist.classList.remove("d-none");
 
         $.ajax({
-            url: `/admin-bulletin/${id}`,
+            url: `/admin-insight/${id}`,
             type: "PUT",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            data: {
-                pname: pname,
-                content: content,
-            },
+            data: { pname, content },
             success: function () {
                 toastr.success("Updated successfully!");
-
+                
                 // sttop loader effect
-                saveButtonBulletin.disabled = false;
-                buttonTextBulletin.textContent = "Save Changes";
-                buttonSpinnerBulletin.classList.add("d-none");
+                saveButtonPricelist.disabled = false;
+                buttonTextPricelist.textContent = "Save Changes";
+                buttonSpinnerPricelist.classList.add("d-none");
 
-                $("#editBulletinModal").modal("hide");
-                fetchBulletin();
+                $("#editPricelistModal").modal("hide");
+                fetchPricelist();
             },
             error: function (xhr) {
                 toastr.error("Failed to update.");
                 console.error("Error:", xhr.responseText);
 
                 // sttop loader effect
-                saveButtonBulletin.disabled = false;
-                buttonTextBulletin.textContent = "Save Changes";
-                buttonSpinnerBulletin.classList.add("d-none");
+                saveButtonPricelist.disabled = false;
+                buttonTextPricelist.textContent = "Save Changes";
+                buttonSpinnerPricelist.classList.add("d-none");
             },
         });
     });
@@ -271,10 +250,10 @@ $(document).ready(function () {
     $(".copyContents button").click(function () {
         let content = $(".content-display").html().trim();
 
-        const CopysaveButton = document.getElementById("CopysaveBtn");
+        const CopysaveButton  = document.getElementById("CopysaveBtn");
         const CopybuttonText = document.getElementById("CopybuttonText");
         const CopybuttonSpinner = document.getElementById("CopybuttonSpinner");
-
+        
         // Show loader effect
         CopysaveButton.disabled = true;
         CopybuttonText.textContent = "Copying..";
@@ -317,10 +296,10 @@ $(document).ready(function () {
         } else {
             toastr.error("Clipboard API not supported.");
 
-            // sttop loader effect
-            CopysaveButton.disabled = false;
-            CopybuttonText.textContent = "Copy";
-            CopybuttonSpinner.classList.add("d-none");
+                 // sttop loader effect
+                CopysaveButton.disabled = false;
+                CopybuttonText.textContent = "Copy";
+                CopybuttonSpinner.classList.add("d-none");
         }
     });
 });
