@@ -34,7 +34,7 @@
     </div>
                
         {{-- Buttons --}}
-        <div class="d-flex justify-content-evenly">
+        <div class="d-flex justify-content-evenly bg-black">
 
             {{-- Add New --}}
             <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
@@ -44,7 +44,6 @@
 
 
             {{-- Save--}}
-            <form class="customerForm">
             <button type="submit" id="saveBtn-customer" form="customerForm" class="btn btn-info saveButton" style="font-size:0.6rem; width:80px; border-radius:3px;">
                 <i class="fa-solid fa-floppy-disk"></i>
                 <span id="buttonText-customer">{{ __('Save') }}</span>
@@ -56,7 +55,7 @@
              style="font-size:0.6rem; width:80px; border-radius:3px;">
              <i class="fa-solid fa-trash"></i> Delete
             </button>
-       
+            
         </div>
        
     </div>
