@@ -15,7 +15,7 @@ class QuotationCustomer extends Model
     protected $table = 'tbl_customers';
 
     // Specifies which columns are mass-assignable (prevents mass-assignment vulnerabilities)
-    protected $fillable = ['customer_name', 'address', 'contact'];
+    protected $fillable = ['nos', 'customer_name', 'address', 'contact'];
 
     /**
      * Define a one-to-many relationship.

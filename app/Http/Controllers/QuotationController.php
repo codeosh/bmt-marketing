@@ -39,49 +39,61 @@ class QuotationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'customer_name' => 'required|string',
-            'address' => 'required|string',
-            'contact' => 'required|string|max:20',
-            'nos' => 'required|string|unique:tbl_customers,nos',
-            'quantity.*' => 'required|integer',
-            'unit.*' => 'required|string',
-            'item_name.*' => 'required|string',
-            'unit_price.*' => 'required|numeric',
-            'line_amount.*' => 'required|numeric',
-            'terms' => 'required|string',
-            'quotation_no' => 'required|integer|unique:tbl_items,quotation_no',
-        ]);
+        DB::beginTransaction();
 
-        DB::transaction(function () use ($request) {
-            // 🔹 1️⃣ Save Customer First
+        try {
+            // Validate required fields
+            $validated = $request->validate([
+                'customer_name' => 'required|string|max:255',
+                'address' => 'nullable|string|max:255',
+                'contact' => 'nullable|string|max:20',
+                'attn' => 'nullable|string|max:255',
+                'terms' => 'nullable|string|max:255',
+                'items' => 'required|array',  // Ensure 'items' is an array
+            ]);
+
+            // Insert Customer
             $customer = QuotationCustomer::create([
-                'nos' => $request->nos,
+                'nos' => $request->nos ?? null,
                 'customer_name' => $request->customer_name,
                 'address' => $request->address,
                 'contact' => $request->contact,
             ]);
 
-            // 🔹 2️⃣ Save Items (Loop Through Items)
-            foreach ($request->quantity as $index => $qty) {
-                QuotationItem::create([
-                    'customer_id' => $customer->id,
-                    'quantity' => $qty,
-                    'unit' => $request->unit[$index],
-                    'item_name' => $request->item_name[$index],
-                    'unit_price' => $request->unit_price[$index],
-                    'line_amount' => $request->line_amount[$index],
+            // Prepare Items (From the 'items' array in the request)
+            $items = [];
+            foreach ($request->items as $item) {
+                $items[] = [
+                    'customer_id' => $customer->id,  // Attach the correct customer_id here
+                    'quantity' => $item['quantity'],
+                    'unit' => $item['unit'],
+                    'item_name' => $item['item_name'],
+                    'unit_price' => $item['unit_price'],
+                    'line_amount' => $item['line_amount'],
                     'attn' => $request->attn ?? null,
                     'date' => now(),
-                    'terms' => $request->terms,
-                    'quotation_no' => $request->quotation_no,
-                ]);
+                    'terms' => $request->terms ?? '',
+                    'quotation_no' => $request->nos ?? null,
+                ];
             }
-        });
 
-        return response()->json(['success' => 'Customer and items saved successfully']);
+            // Insert all the items at once
+            QuotationItem::insert($items);
+
+            DB::commit();
+
+            return response()->json(['success' => 'Quotation saved successfully!'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+
+
+
+
+
+
 
     /**
      * Display the specified resource.

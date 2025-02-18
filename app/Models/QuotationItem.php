@@ -15,7 +15,7 @@ class QuotationItem extends Model
     protected $table = 'tbl_items';
 
     // Specifies which columns are mass-assignable (prevents mass-assignment vulnerabilities)
-    protected $fillable = ['customer_id', 'quantity', 'unit', 'item_name', 'line_amount', 'attn', 'date', 'terms', 'quotation_no'];
+    protected $fillable = ['customer_id', 'quantity', 'unit', 'item_name', 'unit_price', 'line_amount', 'attn', 'date', 'terms', 'quotation_no'];
 
     /**
      * Define a many-to-one relationship.
