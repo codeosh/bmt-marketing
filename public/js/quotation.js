@@ -48,11 +48,13 @@ $(document).ready(function () {
         const saveBtnquote = document.getElementById("saveBtn-customers");
         const buttonTextcustomer = document.getElementById("buttonText-customer");
         const buttonSpinnercustomer = document.getElementById("buttonSpinner-customer");
+        const buttonTextsaveIcon = document.getElementById("saveIcon");
 
         //start loading
         saveBtnquote.disabled = true;
-        buttonTextcustomer.textContent = "Saving...";
+        buttonTextcustomer.textContent = "";
         buttonSpinnercustomer.classList.remove("d-none");
+        buttonTextsaveIcon.classList.add("d-none");
 
         // Create FormData object to send data via AJAX
         let formData = new FormData();

@@ -21,7 +21,7 @@ class QuotationController extends Controller
         // Get the latest quotation number from the database
         $latestQuotation = QuotationItem::latest('quotation_no')->first();
 
-        // If there's no quotation yet, start from 10093
+        // If there's no quotation yet, start from 10001
         $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10001;
 
         if (auth::check() && auth::user()->role === 'admin') {
@@ -31,9 +31,6 @@ class QuotationController extends Controller
             return view('user-pages.quotation', compact('quotation'));
         }
     }
-
-    public function getQuotation($id) {}
-
 
     /**
      * Show the form for creating a new resource.

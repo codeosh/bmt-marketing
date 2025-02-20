@@ -46,7 +46,7 @@
 
             {{-- Save--}}
             <button type="submit" id="saveBtn-customers" form="customerForm" class="btn btn-info saveButton" style="font-size:0.6rem; width:80px; border-radius:3px;">
-                    <i class="fa-solid fa-floppy-disk"></i>
+                    <i class="fa-solid fa-floppy-disk" id="saveIcon"></i>
                     <span id="buttonText-customer">{{ __('Save') }}</span>
                     <span id="buttonSpinner-customer" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
             </button>
@@ -160,7 +160,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
