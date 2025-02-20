@@ -18,13 +18,22 @@ class QuotationController extends Controller
         //
         $quotation = QuotationCustomer::latest()->paginate(100);
 
+        // Get the latest quotation number from the database
+        $latestQuotation = QuotationItem::latest('quotation_no')->first();
+
+        // If there's no quotation yet, start from 10093
+        $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10001;
+
         if (auth::check() && auth::user()->role === 'admin') {
 
-            return view('pages.quotation', compact('quotation'));
+            return view('pages.quotation', compact('quotation', 'newQuotationNo'));
         } else {
             return view('user-pages.quotation', compact('quotation'));
         }
     }
+
+    public function getQuotation($id) {}
+
 
     /**
      * Show the form for creating a new resource.
@@ -89,19 +98,51 @@ class QuotationController extends Controller
         }
     }
 
-
-
-
-
-
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+
+        // i-Retrieve niya ag quotation customer record based on the provided ID.
+        // The `first()` method is used to get a single record instead of a collection.
+        $quotationCustomer = QuotationCustomer::where('id', $id)->first();
+
+        // Retrieve all quotation items linked to this customer using the `customer_id`.
+        // The `get()` method retrieves all matching records as a collection.
+        $quotationItems = QuotationItem::where('customer_id', $id)->get();
+
+        // If ag customer record is not found, return a JSON response with an error message
+        // and an HTTP 404 (Not Found) status code.
+        if (!$quotationCustomer) {
+            return response()->json(['error' => 'Quotation not found'], 404);
+        }
+
+        // ahu ge extract ang first item from the retrieved collection, if available.
+        // This is useful if some fields (e.g., attn, date, terms) are common among all items
+        // and can be taken from the first entry.
+        $firstItem = $quotationItems->first();
+
+        // Return a structured JSON response containing customer details and associated items.
+        return response()->json([
+            // Customer details, with 'N/A' as a fallback if a field is null.
+            'customerContact' => $quotationCustomer->contact ?? 'N/A', // Customer's contact number
+            'quotationNo' => $quotationCustomer->nos ?? 'N/A', // Quotation number
+            'address' => $quotationCustomer->address ?? 'N/A', // Customer's address
+            'customerName' => $quotationCustomer->customer_name ?? 'N/A', // Customer's name
+
+            // Retrieve specific fields from the first item in the collection.
+            // If no items exist, these values default to 'N/A' to prevent errors.
+            'attn' => $firstItem->attn ?? 'N/A', // Attention (recipient) for the quotation
+            'date' => $firstItem->date ?? 'N/A', // Date of the quotation
+            'terms' => $firstItem->terms ?? 'N/A', // Payment terms
+
+            // Include the full list of quotation items associated with the customer.
+            // This allows the frontend to display all items linked to this quotation.
+            'items' => $quotationItems
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
