@@ -19,6 +19,7 @@ use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
+use App\Models\QuotationItem;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -101,6 +102,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //quotation
         Route::resource('admin-quotation', QuotationController::class);
+        Route::get('/get-latest-quotation', function () {
+            $latestQuotation = QuotationItem::latest('quotation_no')->first();
+            $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10093;
+            return response()->json(['quotation_no' => $newQuotationNo]);
+        });
 
         //guides
         Route::resource('admin-guides', GuidesController::class);

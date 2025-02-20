@@ -3,7 +3,7 @@
 @section('title', 'BMTMarketing - Quotation')
 
 @section('content')
-    <div class="d-flex h-100 w-100 gap-2 p-1">
+<div class="d-flex h-100 w-100 gap-2 p-1">
 
     <div class="d-flex flex-column gap-2">
         {{-- Side List --}}
@@ -695,9 +695,9 @@
                                 <td class="text-end p-1 bg-secondary text-white fw-bold" style=" border-right:1px solid black;">
                                     <label class="me-4  self-align-center" style="margin-top: 0.2rem">Total:</label>
                                 </td>
-                                <td class="p-0">
+                                <td class="p-0 bg-secondary">
                                     <div class="w-100 h-100 bg-secondary">
-                                        <input id="totalAmount" class="w-100 text-white fw-bold border-0 bg-transparent p-0 text-center" type="text" value="###" disabled>
+                                        <input id="totalAmount" class="w-100 text-white fw-bold border-0 bg-transparent p-0 text-center" type="text" value="####" disabled>
                                     </div>
                                 </td>
                                 
