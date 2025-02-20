@@ -160,7 +160,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -189,7 +189,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black; ">
-                                    <input type="text" name="items[1][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[1][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -218,7 +218,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[2][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[2][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -247,7 +247,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[3][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[3][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -276,7 +276,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[4][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[4][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -305,7 +305,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[5][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[5][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -334,7 +334,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[6][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[6][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -363,7 +363,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[7][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[7][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -392,7 +392,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[8][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[8][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -421,7 +421,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[9][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[9][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -450,7 +450,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[10][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[10][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -479,7 +479,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[11][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[11][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -508,7 +508,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[12][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[12][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -537,7 +537,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[13][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[13][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -566,7 +566,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[14][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[14][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -595,7 +595,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[15][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[15][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -624,7 +624,7 @@
                                 </td>
                                 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[16][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[16][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -653,7 +653,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[17][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[17][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -681,7 +681,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[18][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[18][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -709,7 +709,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[19][item_name]" class="w-100 text-start item-name ps-1">
+                                    <input type="text" name="items[19][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
