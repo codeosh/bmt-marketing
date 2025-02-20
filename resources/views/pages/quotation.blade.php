@@ -34,7 +34,7 @@
     </div>
                
         {{-- Buttons --}}
-        <div class="d-flex justify-content-evenly">
+        <div class="d-flex justify-content-evenly gap-2">
 
             {{-- Add New --}}
             <button type="submit" id="new-Quote" form="customerForm" class="btn btn-success addButton" style="font-size:0.6rem; width:80px; border-radius:3px;">
@@ -137,9 +137,9 @@
                             <tr>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Unit</th>
-                                <th scope="col">Item Name & Description</th>
+                                <th scope="col" class="text-start ps-2">Item Name & Description</th>
                                 <th scope="col">Unit Price</th>
-                                <th scope="col">Line Amount</th>
+                                <th scope="col" class="text-end">Line Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,7 +160,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name" style="text-transform: uppercase;">
+                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -168,7 +168,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[0][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[0][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
                                 
                             </tr>
@@ -188,8 +188,8 @@
                                     </select>
                                 </td>
 
-                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[1][item_name]" class="w-100 text-start item-name">
+                                <td style="border-right:1px solid black; border-bottom:1px solid black; ">
+                                    <input type="text" name="items[1][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -197,7 +197,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[1][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[1][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -218,7 +218,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[2][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[2][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -226,7 +226,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[2][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[2][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -247,7 +247,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[3][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[3][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -255,7 +255,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[3][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[3][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -276,7 +276,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[4][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[4][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -284,7 +284,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[4][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[4][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -305,7 +305,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[5][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[5][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -313,7 +313,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[5][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[5][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -334,7 +334,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[6][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[6][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -342,7 +342,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[6][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[6][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -363,7 +363,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[7][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[7][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -371,7 +371,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[7][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[7][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -392,7 +392,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[8][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[8][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -400,7 +400,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[8][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[8][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -421,7 +421,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[9][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[9][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -429,7 +429,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[9][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[9][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -450,7 +450,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[10][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[10][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -458,7 +458,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[10][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[10][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -479,7 +479,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[11][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[11][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -487,7 +487,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[11][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[11][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -508,7 +508,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[12][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[12][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -516,7 +516,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[12][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[12][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -537,7 +537,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[13][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[13][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -545,7 +545,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[13][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[13][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -566,7 +566,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[14][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[14][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -574,7 +574,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[14][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[14][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -595,7 +595,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[15][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[15][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -603,7 +603,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[15][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[15][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -624,7 +624,7 @@
                                 </td>
                                 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[16][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[16][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -632,7 +632,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[16][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[16][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -653,7 +653,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[17][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[17][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -661,7 +661,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[17][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[17][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -681,7 +681,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[18][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[18][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -689,7 +689,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[18][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[18][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -709,7 +709,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[19][item_name]" class="w-100 text-start item-name">
+                                    <input type="text" name="items[19][item_name]" class="w-100 text-start item-name ps-1">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -717,7 +717,7 @@
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[19][line_amount]" class="w-100 line-amount" disabled>
+                                    <input type="text" name="items[19][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
                             </tr>
@@ -729,11 +729,11 @@
                                 </td>
                                 
                                 <td class="text-end p-1 bg-secondary text-white fw-bold" style=" border-right:1px solid black;">
-                                    <label class="me-4  self-align-center" style="margin-top: 0.2rem">Total:</label>
+                                    <label class="me-2" style="margin-top: 0.2rem">Total:</label>
                                 </td>
                                 <td class="p-1 bg-secondary">
                                     <div class="w-100 h-100 bg-secondary">
-                                        <input id="totalAmount" class="w-100 text-white fw-bold border-0 bg-transparent p-0 text-center" type="text" value="####" disabled>
+                                        <input id="totalAmount" class="w-100 text-white fw-bold border-0 bg-transparent p-0 text-end" type="text" value="####" disabled>
                                     </div>
                                 </td>
                                 
