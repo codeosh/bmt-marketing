@@ -13,8 +13,8 @@
         </div>
 
        <!-- Table -->
-<div class="accounts-container table-responsive border rounded p-3">
-    <table class="table table-hover align-middle">
+<div class="accounts-container table-responsive border rounded p-3" style="height:80vh;">
+    <table class="table table-hover align-middle overflow-auto custom-scrollbar">
         <thead class="text-white">
             <tr>
                 <th class="px-3 py-2">Name</th>
@@ -55,7 +55,7 @@
 
 
 
-        <!-- Add Account Modal -->
+     <!-- Add Account Modal -->
         <div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountModalLabel" aria-hidden="true" >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -81,7 +81,7 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="role" class="form-label">Role</label>
-                                        <select class="form-select" id="role" name="role">
+                                        <select class="form-select" id="role" name="role" style="height:2.25rem">
                                             <option value="admin">Admin</option>
                                             <option value="user">User</option>
                                         </select>

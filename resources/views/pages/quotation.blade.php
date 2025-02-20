@@ -34,7 +34,7 @@
     </div>
                
         {{-- Buttons --}}
-        <div class="d-flex justify-content-evenly">
+        <div class="d-flex justify-content-evenly gap-2">
 
             {{-- Add New --}}
             <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
@@ -692,14 +692,13 @@
                                 
                                 
                                 <td class="text-end p-1 bg-secondary text-white fw-bold" style=" border-right:1px solid black;">
-                                    <label class="me-4  self-align-center" style="margin-top: 0.2rem">Total:</label>
+                                    <label class="me-4 self-align-center" style="margin-top: 0.2rem">Total:</label>
                                 </td>
-                                <td class="p-0">
-                                    <div class="w-100 h-100 bg-secondary">
-                                        <input id="totalAmount" class="w-100 text-white fw-bold border-0 bg-transparent p-0 text-center" type="text" value="1000" disabled>
+                                <td class="p-0 m-0">
+                                    <div class="w-100 bg-secondary d-flex align-items-center justify-content-center" style="height:32px;">
+                                        <input id="totalAmount" class="w-100 text-white fw-bold bg-transparent" type="text" value="1000" disabled>
                                     </div>
                                 </td>
-                                
                             </tr>                            
                         </tbody>
                     </table>

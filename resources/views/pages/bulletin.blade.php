@@ -9,7 +9,7 @@
          {{-- Bulletin List --}}
          <div class="card h-50 shadow-sm" style="width:60vh;">
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Bulletin</small>
-            <div class="card-body p-2 overflow-auto custom-scrollbar" >
+            <div class="card-body p-2 overflow-auto custom-scrollbar">
                 <div id="bulletinList" class="d-grid gap-1"></div>
             </div>
         </div>
