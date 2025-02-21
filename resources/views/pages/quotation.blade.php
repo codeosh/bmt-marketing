@@ -17,12 +17,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($quotation as $quotations)
-                            <tr class="quote-row" data-id="{{ $quotations->id }}">
-                                <td>{{ $quotations->nos }}</td>
-                                <td class="text-start">{{ $quotations->customer_name }}</td>
-                            </tr>
-                        @endforeach
+                        @if (count($quotation) == 0)
+                            <div class="text-center text-red-500">No records found</div>
+                        @else
+                            @foreach ($quotation as $quotations)
+                                <tr class="quote-row cursor-pointer" data-id="{{ $quotations->id }}">
+                                    <td>{{ $quotations->nos }}</td>
+                                    <td class="text-start">{{ $quotations->customer_name }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
 
@@ -106,7 +110,7 @@
                         {{-- No. --}}
                         <div class="customerQNumber">
                             <label for="customerQNumber" class="me-2">Q No&nbsp; &nbsp; &nbsp;:</label>
-                            <input type="text" id="customerQNumber" value="{{ $newQuotationNo}}" style="border: none; outline: none; width:130px; font-size:1.5rem; font-weight:bold;" readonly>
+                            <input type="text" id="customerQNumber" value="{{ $newQuotationNo }}" style="border: none; outline: none; width:130px; font-size:1.5rem; font-weight:bold;" readonly>
                         </div>
 
                         {{-- Date Issued--}}
