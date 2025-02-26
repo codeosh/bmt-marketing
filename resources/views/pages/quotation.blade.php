@@ -57,7 +57,7 @@
 
 
              {{-- Delete --}}
-             <button type="button" class="btn btn-danger saveButton" data-bs-toggle="modal"
+             <button type="button" class="btn btn-danger" id="deleteBtn" data-bs-toggle="modal"
              style="font-size:0.6rem; width:80px; border-radius:3px;">
              <i class="fa-solid fa-trash"></i> Delete
             </button>
@@ -66,9 +66,11 @@
        
     </div>
     
-    <div class="h-100 w-100 d-flex flex-column gap-2">
+    <div class="h-100 w-100 d-flex flex-column gap-2" >
             {{-- Content --}}
-            <div class=" w-100 border rounded p-3 overflow-auto custom-scrollbar" style="height:80vh;">
+            <div class=" w-100 border rounded p-3 overflow-auto custom-scrollbar" style="height:80vh;" id="customerDetailsContainer">
+
+                <div id="detailsForPrint">
 
                 <div class="text-center">
                     <h4 class=" fw-bolder">PRICE&nbsp;&nbsp; QUOTATION</h4>
@@ -822,18 +824,33 @@
                             
                         </div>
                 </div>  
+                </div>
             </div>    
 
             <div class="d-flex align-self-end gap-2">
-                {{-- Print --}}
-                <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
-                    style="font-size:0.6rem; width:80px; border-radius:3px;">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                </button>
                 {{-- Edit --}}
-                <button type="button" class="btn btn-secondary addButton" data-bs-toggle="modal"
-                    style="font-size:0.6rem; width:80px; border-radius:3px;">
+                {{-- <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
+                    style="font-size:0.6rem; width:80px; border-radius:3px;" >
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                </button> --}}
+
+                {{-- Print --}}
+                {{-- <button type="button" class="btn btn-secondary addButton"
+                    style="font-size:0.6rem; width:80px; border-radius:3px;" id="printButton">
                     <i class="fa-solid fa-print"></i> Print
+                </button> --}}
+
+                <button type="button" class="btn btn-secondary"
+                    style="font-size:0.6rem; width:80px; border-radius:3px;" id="printButton">
+                    <i class="fa-solid fa-print" id="printQuotaionIcon"></i>
+                    <span id="buttonText-Quotation">{{ __('Print') }}</span>
+                    <span id="buttonSpinner-Quotation" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+
+                {{-- Png --}}
+                <button type="button" id="convertCustomerDetailsBtnToPNG" class="btn btn-secondary addButton" data-bs-toggle="modal"
+                    style="font-size:0.6rem; width:80px; border-radius:3px;">
+                    <i class="fa-solid fa-print"></i> Png
                 </button>
 
             </div>
@@ -841,6 +858,32 @@
 
     </div>
     
+
+    {{-- modal for png preview--}}
+    <!-- Bootstrap Modal -->
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imagePreviewModalLabel">Image Preview</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="previewImage" src="" class="img-fluid" alt="Preview">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="downloadImage" class="btn btn-primary">
+            <i class="fa-solid fa-floppy-disk" id="saveQuotaionIconpng"></i>
+                <span id="buttonText-Quotationpng">{{ __('Download Image') }}</span>
+                <span id="buttonSpinner-Quotationpng" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
 <script src="{{ asset('js/quotation.js') }}"></script>
 

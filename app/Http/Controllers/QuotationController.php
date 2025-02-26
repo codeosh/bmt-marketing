@@ -162,6 +162,19 @@ class QuotationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            // Find the quotation customer
+            $quotationCustomerDelete = QuotationCustomer::findOrFail($id);
+
+            // Delete all associated items related to this quotation
+            QuotationItem::where('customer_id', $id)->delete(); // Ensure quotation_id is the foreign key
+
+            // Delete the quotation customer
+            $quotationCustomerDelete->delete();
+
+            return response()->json(['success' => true, 'message' => 'Quotation and items deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete.', 'error' => $e->getMessage()], 500);
+        }
     }
 }

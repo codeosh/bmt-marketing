@@ -114,7 +114,7 @@ $(document).ready(function () {
             // If at least one valid item exists, store row data
             if (foundFirstValidItem) {
                 tempRows.push({
-                    quantity: quantity || "", 
+                    quantity: quantity || "",
                     unit: unit || "",
                     itemName: itemName || "",
                     unitPrice: unitPrice || "",
@@ -233,7 +233,7 @@ $(document).ready(function () {
                 });
 
                 // Update the total amount field with the calculated total (formatted with commas)
-                $("#totalAmount").val(totalAmount.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+                $("#totalAmount").val(totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
             },
             error: function (xhr) {
                 // Log error message in case of an AJAX failure
@@ -315,6 +315,223 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    //for delete para sa customer and their items 
+    // Variable to store the selected row ID
+    let selectedRowId = null;
+    // Handle row selection and highlight the selected row
+    $(".quote-row").on("click", function () {
+        selectedRowId = $(this).data("id"); // Store selected row ID
+        
+        // Remove Bootstrap highlighting from all rows and highlight the clicked one, para is rajuy ma highlight and delete, kay , if wala ni sya pedi nimo sya ma highlight tanan then ma delete tong na highligh tanan, unless if naa ni sya para nug click nimos uban kato ra ang ma highlight then mawala ag highlight sa previous one nimo para isa rajuy pedi ma delete
+        $(".quote-row").removeClass("table-danger");
+        $(this).addClass("table-danger"); // Bootstrap class for a red highlight
+    });
+
+    // Handle delete action
+    $("#deleteBtn").on("click", function () {
+        if (!selectedRowId) {
+            toastr.error("Please select a record to delete.");
+            return;
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This will delete the customer and associated items.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/admin-quotation/${selectedRowId}`,
+                    type: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function () {
+                        toastr.success("Deleted successfully!");
+
+                        // Remove the selected row from the table with fade effect
+                        $(".quote-row.table-danger").fadeOut(300, function () {
+                            $(this).remove();
+                        });
+
+                        // Reset the selectedRowId after deletion
+                        selectedRowId = null;
+                    },
+                    error: function (xhr) {
+                        toastr.error("Failed to delete.");
+                        console.error("Error:", xhr.responseText);
+                    },
+                });
+            }
+        });
+    });
+
+    //for converting to PNG ni sya
+    document.getElementById("convertCustomerDetailsBtnToPNG").addEventListener("click", function () {
+        let element = document.getElementById("customerDetailsContainer");
+        let saveBtnquote = document.getElementById("downloadImage"); // Download button
+        let buttonTextcustomer = document.getElementById("buttonText-Quotationpng"); // Button text span
+        let buttonSpinnercustomer = document.getElementById("buttonSpinner-Quotationpng"); // Loading spinner
+        let buttonTextsaveIcon = document.getElementById("saveQuotaionIconpng"); // Save icon
+
+
+        // Temporarily adjust styles for full capture
+        let originalStyle = {
+            width: element.style.width,
+            maxWidth: element.style.maxWidth,
+            overflow: element.style.overflow,
+            height: element.style.height
+        };
+        
+        element.style.width = element.scrollWidth + "px"; // Ensure full width
+        element.style.maxWidth = "none"; // Prevent width limits
+        element.style.overflow = "visible"; // Show hidden content
+        element.style.height = "auto"; // Ensure full height capture
+
+        html2canvas(element, {
+            scrollX: 0,
+            scrollY: -window.scrollY, // Ensure it captures from the top
+            windowWidth: document.documentElement.scrollWidth,
+            windowHeight: element.scrollHeight, // Capture the full height
+            useCORS: true // If there are external images
+        }).then(canvas => {
+            let imageURL = canvas.toDataURL("image/png");
+
+            // Restore original styles
+            element.style.width = originalStyle.width;
+            element.style.maxWidth = originalStyle.maxWidth;
+            element.style.overflow = originalStyle.overflow;
+            element.style.height = originalStyle.height;
+
+            // Set image preview in modal
+            document.getElementById("previewImage").src = imageURL;
+            
+            // Show the modal
+            let modal = new bootstrap.Modal(document.getElementById("imagePreviewModal"));
+            modal.show();
+
+            // Set download button action
+            document.getElementById("downloadImage").onclick = function () {
+
+                // Start loading animation (disable button and show spinner)
+                saveBtnquote.disabled = true;
+                buttonTextcustomer.textContent = "";
+                buttonSpinnercustomer.classList.remove("d-none");
+                buttonTextsaveIcon.classList.add("d-none");
+                
+                let link = document.createElement("a");
+                link.href = imageURL;
+                link.download = "customer-details.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Stop loading animation after a short delay to ensure download starts
+                setTimeout(() => {
+                    saveBtnquote.disabled = false;
+                    buttonTextcustomer.textContent = "Download Image";
+                    buttonSpinnercustomer.classList.add("d-none");
+                    buttonTextsaveIcon.classList.remove("d-none");
+                }, 500); // Adjust delay if necessary
+            };
+        });
+    });
+
+    // for PRINT  functionality
+    document.getElementById("printButton").addEventListener("click", function () {
+    let customerDetailsContainer = document.getElementById("detailsForPrint");
+
+    if (!customerDetailsContainer) {
+        alert("Error: Content container not found!");
+        return;
+    }
+
+    let printBtnquotep = document.getElementById("printButton");
+    let buttonTextcustomerp = document.getElementById("buttonText-Quotation");
+    let buttonSpinnercustomerp = document.getElementById("buttonSpinner-Quotation");
+    let buttonTextsaveIconp = document.getElementById("saveQuotaionIcon");
+
+    // Clone the container
+    let clonedContent = customerDetailsContainer.cloneNode(true);
+
+        // Start loading animation (disable button and show spinner)
+        setTimeout(() => {
+                printBtnquotep.disabled = true;
+                buttonTextcustomerp.textContent = "";
+                buttonSpinnercustomerp.classList.remove("d-none");
+                buttonTextsaveIcon.classList.add("d-none");
+        }, 500);
+
+
+    // Create an iframe
+    let iframe = document.createElement("iframe");
+    iframe.style.position = "absolute";
+    iframe.style.width = "0px";
+    iframe.style.height = "0px";
+    iframe.style.border = "none"; // Hide iframe
+    document.body.appendChild(iframe);
+
+    let doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(`
+        <html>
+        <head>
+            <title>Print Preview</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+            <!-- External Stylesheets -->
+            <link rel="stylesheet" href="${document.querySelector('link[href*="bootstrap"]')?.href || ''}">
+            <link rel="stylesheet" href="${document.querySelector('link[href*="style.css"]')?.href || ''}">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+            <style>
+                @media print {
+                    body {
+                        margin: 20px;
+                        font-family: 'Poppins', sans-serif;
+                    }
+                }
+            </style>
+        </head>
+        <body></body>
+        </html>
+    `);
+    doc.close();
+
+    // Append the cloned content inside the body of the iframe
+    doc.body.appendChild(clonedContent);
+
+    // Ensure styles are fully loaded before printing
+    iframe.onload = function () {
+        setTimeout(() => {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+            document.body.removeChild(iframe);
+        }, 500);
+    };
+
+        // Stop loading animation
+    setTimeout(() => {
+        printBtnquotep.disabled = false;
+        buttonTextcustomerp.textContent = "Print";
+        buttonSpinnercustomerp.classList.add("d-none");
+        buttonTextsaveIconp.classList.remove("d-none");
+    }, 500);    
+    
+});
+
+
 });
 
 
