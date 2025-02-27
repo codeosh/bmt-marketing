@@ -45,14 +45,17 @@ $(document).ready(function () {
     $("#saveBtn-customers").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
 
+        // Get button elements for UI feedback during submission
         const saveBtnquote = document.getElementById("saveBtn-customers");
         const buttonTextcustomer = document.getElementById("buttonText-customer");
         const buttonSpinnercustomer = document.getElementById("buttonSpinner-customer");
+        const buttonTextsaveIcon = document.getElementById("saveIcon");
 
-        //start loading
+        // Start loading animation (disable button and show spinner)
         saveBtnquote.disabled = true;
-        buttonTextcustomer.textContent = "Saving...";
+        buttonTextcustomer.textContent = "";
         buttonSpinnercustomer.classList.remove("d-none");
+        buttonTextsaveIcon.classList.add("d-none");
 
         // Create FormData object to send data via AJAX
         let formData = new FormData();
@@ -68,25 +71,15 @@ $(document).ready(function () {
         let attn = ($("#customerATN").val() ?? "").trim();
         let terms = ($("#customerTerms").val() ?? "").trim();
         
-        // Validate required customer fields
+        // Validate required customer fields (Customer Name and Q Number are required)
         if (!customerName) {
             toastr.error("Please enter the: customer name.");
-
-            //stop loading
-            saveBtnquote.disabled = false;
-            buttonTextcustomer.textContent = "Save";
-            buttonSpinnercustomer.classList.add("d-none");
-
+            stopLoading(); // Reset UI on error
             return;
         }
         if (!nos) {
             toastr.error("Please enter the: Q no.");
-
-            //stop loading
-            saveBtnquote.disabled = false;
-            buttonTextcustomer.textContent = "Save";
-            buttonSpinnercustomer.classList.add("d-none");
-            
+            stopLoading();
             return;
         }
         
@@ -98,87 +91,114 @@ $(document).ready(function () {
         formData.append("attn", attn);
         formData.append("terms", terms);
         
-        // Flag to track if we have found a valid item_name
-        let foundValidItem = false;
+        // Track first and last valid item row
+        let foundFirstValidItem = false;
+        let lastValidIndex = -1;
+        let tempRows = []; // Temporary array for row data
 
-        // Loop through table rows to collect item data
+        // Loop through table rows to collect valid item data
         $(".table tbody tr").each(function (index) {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim();
-            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim();
+            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
 
-            // Check if the current row has an item name
-            if (itemName) {
-                foundValidItem = true; // Mark that we found an item
+            // Check if row contains any valid data
+            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            if (isRowValid) {
+                foundFirstValidItem = true;
+                lastValidIndex = tempRows.length; // Store last valid row index
             }
-
-            // If we have already found a valid item, save all rows below
-            if (foundValidItem) {
-                itemsValid = true;
-                formData.append(`items[${index}][quantity]`, quantity || ""); // Allow empty
-                formData.append(`items[${index}][unit]`, unit || "");
-                formData.append(`items[${index}][item_name]`, itemName || ""); // Required
-                formData.append(`items[${index}][unit_price]`, unitPrice || "");
-                formData.append(`items[${index}][line_amount]`, parseFloat(lineAmount) || "");
+            
+            // If at least one valid item exists, store row data
+            if (foundFirstValidItem) {
+                tempRows.push({
+                    quantity: quantity || "",
+                    unit: unit || "",
+                    itemName: itemName || "",
+                    unitPrice: unitPrice || "",
+                    lineAmount: parseFloat(lineAmount) || "",
+                });
             }
         });
 
-        
-        // Submit data via AJAX
+        // Remove trailing empty rows
+        let validRows = tempRows.slice(0, lastValidIndex + 1);
+
+        // Prevent submission if no valid items
+        if (validRows.length === 0) {
+            toastr.error("Please enter at least one valid item before saving.");
+            stopLoading();
+            return;
+        }
+
+        // Append valid items to FormData
+        validRows.forEach((row, index) => {
+            formData.append(`items[${index}][quantity]`, row.quantity);
+            formData.append(`items[${index}][unit]`, row.unit);
+            formData.append(`items[${index}][item_name]`, row.itemName);
+            formData.append(`items[${index}][unit_price]`, row.unitPrice);
+            formData.append(`items[${index}][line_amount]`, row.lineAmount);
+        });
+
+        // Submit data via AJAX to Laravel backend
         $.ajax({
-            url: "/admin-quotation", // Laravel backend URL
-            type: "POST", // Request method
-            data: formData, // FormData object
+            url: "/admin-quotation", // API endpoint
+            type: "POST", // HTTP request method
+            data: formData, // Form data
             processData: false, // Prevent jQuery from processing data
-            contentType: false, // Ensure proper encoding
+            contentType: false, // Prevent jQuery from setting content-type header
             success: function (response) {
                 toastr.success(response.success); // Show success message
-
-                //stop loading
-                saveBtnquote.disabled = false;
-                buttonTextcustomer.textContent = "Save";
-                buttonSpinnercustomer.classList.add("d-none");
-
-                location.reload(); // Reload the page
+                stopLoading(); // Reset UI
+                location.reload(); // Refresh page
             },
             error: function (xhr) {
-                console.error(xhr.responseText); // Log error message
-                toastr.error("Something went wrong! Try again later");
-
-                //stop loading
-                saveBtnquote.disabled = false;
-                buttonTextcustomer.textContent = "Save";
-                buttonSpinnercustomer.classList.add("d-none");
-
+                console.error(xhr.responseText); // Log error to console
+                toastr.error("Something went wrong! Try again later"); // Show error message
+                stopLoading(); // Reset UI
             }
         });
+
+        // Function to reset UI after loading
+        function stopLoading() {
+            saveBtnquote.disabled = false;
+            buttonTextcustomer.textContent = "Save";
+            buttonSpinnercustomer.classList.add("d-none");
+            buttonTextsaveIcon.classList.remove("d-none");
+        }
     });
 
-    //show ang info sa ge click na row
+    
+    // Show the information of the clicked row
     // Handle row click event
     $("#quotationTable tbody").on("click", ".quote-row", function () {
+        // Get the quotation ID from the clicked row's data attribute
         let quoteId = $(this).data("id");
+
+        // Get the Save button and text elements
         const saveBtnquote = document.getElementById("saveBtn-customers");
         const buttonTextcustomer = document.getElementById("buttonText-customer");
 
+        // Disable the Save button to prevent multiple clicks while loading
         saveBtnquote.disabled = true;
-        buttonTextcustomer.textContent = "....";
+        buttonTextcustomer.textContent = "...."; // Indicate that data is loading
 
+        // Make an AJAX GET request to fetch the quotation data based on the clicked row's ID
         $.ajax({
-            url: `/admin-quotation/${quoteId}`,
+            url: `/admin-quotation/${quoteId}`, // API endpoint to fetch the quotation data
             type: "GET",
             success: function (data) {
+                console.log("Fetched data:", data); // Debugging: Log fetched data to the console
 
-                console.log("Fetched data:", data); // Debugging
-
+                // Check if data is missing or contains an error
                 if (!data || data.error) {
                     console.error("No data found for this ID.");
                     return;
                 }
 
-                // Update customer details
+                // Populate customer details in the input fields
                 $("#customerContact").val(data.customerContact);
                 $("#customerQNumber").val(data.quotationNo);
                 $("#customerAddress").val(data.address);
@@ -187,31 +207,36 @@ $(document).ready(function () {
                 $("#customerDateIssued").val(data.date);
                 $("#customerTerms").val(data.terms);
 
-                let totalAmount = 0; // Initialize total amount
+                let totalAmount = 0; // Initialize total amount variable
 
-                // Select all existing rows and populate them
+                // Loop through each row in the items table to populate data
                 $("#items-table tbody tr").each(function (index, row) {
+                    // Check if there is corresponding item data for this row
                     if (data.items[index]) {
-                        let item = data.items[index];
+                        let item = data.items[index]; // Get the current item data
 
+                        // Populate row fields with item data
                         $(row).find(".quantity").val(item.quantity);
                         $(row).find("select").val(item.unit);
                         $(row).find(".item-name").val(item.item_name);
-                        $(row).find(".unit-price").val(item.unit_price);
-                        $(row).find(".line-amount").val(item.line_amount);
-
-                        // Calculate total amount
+                        // Convert and display unit price and line amount with commas
+                        $(row).find(".unit-price").val(item.unit_price ? parseFloat(item.unit_price).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "");//kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display);
+                        $(row).find(".line-amount").val(item.line_amount ? parseFloat(item.line_amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "");//kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display
+                        
+                        // Add line amount to the total amount calculation
                         totalAmount += parseFloat(item.line_amount) || 0;
+
                     } else {
-                        // If there's no corresponding item, clear the row
+                        // If there's no corresponding item, clear the row fields
                         $(row).find("input, select").val("");
                     }
                 });
 
-                // Update total amount field
-                $("#totalAmount").val(totalAmount.toFixed(2));
+                // Update the total amount field with the calculated total (formatted with commas)
+                $("#totalAmount").val(totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
             },
             error: function (xhr) {
+                // Log error message in case of an AJAX failure
                 console.log("Error fetching data:", xhr.responseText);
             },
         });
@@ -222,8 +247,18 @@ $(document).ready(function () {
     $("#new-Quote").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
 
-        e.preventDefault(); // Prevent default action
+        //save button
+        const saveBtnquote = document.getElementById("saveBtn-customers");
+        const buttonTextcustomer = document.getElementById("buttonText-customer");
 
+
+        //add new button
+        const addnewBtnquote = document.getElementById("saveBtn-customers");
+        const adnewwbuttonTextcustomer = document.getElementById("buttonText-Quote");
+        const adnewwbuttonSpinner = document.getElementById("buttonSpinner-Quote");
+        const adnewwIcon = document.getElementById("addIcon");
+        
+        
         // Get latest quotation number via AJAX
         $.ajax({
             url: "/get-latest-quotation", // Laravel route
@@ -238,16 +273,6 @@ $(document).ready(function () {
             },
         });
         
-        //save button
-        const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById("buttonText-customer");
-
-
-        //add new button
-        const addnewBtnquote = document.getElementById("saveBtn-customers");
-        const adnewwbuttonTextcustomer = document.getElementById("buttonText-Quote");
-        const adnewwbuttonSpinner = document.getElementById("buttonSpinner-Quote");
-        const adnewwIcon= document.getElementById("addIcon");
         
         //addnew start loading 
         addnewBtnquote.disabled = true;
@@ -274,6 +299,237 @@ $(document).ready(function () {
         
         
     });
+
+    //quotation search
+    $("#search").on("keyup", function () {
+        let searchTerm = $(this).val().toLowerCase(); // Convert input to lowercase
+
+        $(".quote-row").each(function () {
+            let customerName = $(this).find("td:eq(1)").text().toLowerCase(); // Get customer name from second column
+
+            // Show/hide row based on search term
+            if (customerName.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+
+    //for delete para sa customer and their items 
+    // Variable to store the selected row ID
+    let selectedRowId = null;
+    // Handle row selection and highlight the selected row
+    $(".quote-row").on("click", function () {
+        selectedRowId = $(this).data("id"); // Store selected row ID
+        
+        // Remove Bootstrap highlighting from all rows and highlight the clicked one, para is rajuy ma highlight and delete, kay , if wala ni sya pedi nimo sya ma highlight tanan then ma delete tong na highligh tanan, unless if naa ni sya para nug click nimos uban kato ra ang ma highlight then mawala ag highlight sa previous one nimo para isa rajuy pedi ma delete
+        $(".quote-row").removeClass("table-danger");
+        $(this).addClass("table-danger"); // Bootstrap class for a red highlight
+    });
+
+    // Handle delete action
+    $("#deleteBtn").on("click", function () {
+        if (!selectedRowId) {
+            toastr.error("Please select a record to delete.");
+            return;
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This will delete the customer and associated items.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/admin-quotation/${selectedRowId}`,
+                    type: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function () {
+                        toastr.success("Deleted successfully!");
+
+                        // Remove the selected row from the table with fade effect
+                        $(".quote-row.table-danger").fadeOut(300, function () {
+                            $(this).remove();
+                        });
+
+                        // Reset the selectedRowId after deletion
+                        selectedRowId = null;
+                    },
+                    error: function (xhr) {
+                        toastr.error("Failed to delete.");
+                        console.error("Error:", xhr.responseText);
+                    },
+                });
+            }
+        });
+    });
+
+    //for converting to PNG ni sya
+    document.getElementById("convertCustomerDetailsBtnToPNG").addEventListener("click", function () {
+        let element = document.getElementById("customerDetailsContainer");
+        let saveBtnquote = document.getElementById("downloadImage"); // Download button
+        let buttonTextcustomer = document.getElementById("buttonText-Quotationpng"); // Button text span
+        let buttonSpinnercustomer = document.getElementById("buttonSpinner-Quotationpng"); // Loading spinner
+        let buttonTextsaveIcon = document.getElementById("saveQuotaionIconpng"); // Save icon
+
+
+        // Temporarily adjust styles for full capture
+        let originalStyle = {
+            width: element.style.width,
+            maxWidth: element.style.maxWidth,
+            overflow: element.style.overflow,
+            height: element.style.height
+        };
+        
+        element.style.width = element.scrollWidth + "px"; // Ensure full width
+        element.style.maxWidth = "none"; // Prevent width limits
+        element.style.overflow = "visible"; // Show hidden content
+        element.style.height = "auto"; // Ensure full height capture
+
+        html2canvas(element, {
+            scrollX: 0,
+            scrollY: -window.scrollY, // Ensure it captures from the top
+            windowWidth: document.documentElement.scrollWidth,
+            windowHeight: element.scrollHeight, // Capture the full height
+            useCORS: true // If there are external images
+        }).then(canvas => {
+            let imageURL = canvas.toDataURL("image/png");
+
+            // Restore original styles
+            element.style.width = originalStyle.width;
+            element.style.maxWidth = originalStyle.maxWidth;
+            element.style.overflow = originalStyle.overflow;
+            element.style.height = originalStyle.height;
+
+            // Set image preview in modal
+            document.getElementById("previewImage").src = imageURL;
+            
+            // Show the modal
+            let modal = new bootstrap.Modal(document.getElementById("imagePreviewModal"));
+            modal.show();
+
+            // Set download button action
+            document.getElementById("downloadImage").onclick = function () {
+
+                // Start loading animation (disable button and show spinner)
+                saveBtnquote.disabled = true;
+                buttonTextcustomer.textContent = "";
+                buttonSpinnercustomer.classList.remove("d-none");
+                buttonTextsaveIcon.classList.add("d-none");
+                
+                let link = document.createElement("a");
+                link.href = imageURL;
+                link.download = "customer-details.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Stop loading animation after a short delay to ensure download starts
+                setTimeout(() => {
+                    saveBtnquote.disabled = false;
+                    buttonTextcustomer.textContent = "Download Image";
+                    buttonSpinnercustomer.classList.add("d-none");
+                    buttonTextsaveIcon.classList.remove("d-none");
+                }, 500); // Adjust delay if necessary
+            };
+        });
+    });
+
+    // for PRINT  functionality
+    document.getElementById("printButton").addEventListener("click", function () {
+    let customerDetailsContainer = document.getElementById("detailsForPrint");
+
+    if (!customerDetailsContainer) {
+        alert("Error: Content container not found!");
+        return;
+    }
+
+    let printBtnquotep = document.getElementById("printButton");
+    let buttonTextcustomerp = document.getElementById("buttonText-Quotation");
+    let buttonSpinnercustomerp = document.getElementById("buttonSpinner-Quotation");
+    let buttonTextsaveIconp = document.getElementById("saveQuotaionIcon");
+
+    // Clone the container
+    let clonedContent = customerDetailsContainer.cloneNode(true);
+
+        // Start loading animation (disable button and show spinner)
+        setTimeout(() => {
+                printBtnquotep.disabled = true;
+                buttonTextcustomerp.textContent = "";
+                buttonSpinnercustomerp.classList.remove("d-none");
+                buttonTextsaveIcon.classList.add("d-none");
+        }, 500);
+
+
+    // Create an iframe
+    let iframe = document.createElement("iframe");
+    iframe.style.position = "absolute";
+    iframe.style.width = "0px";
+    iframe.style.height = "0px";
+    iframe.style.border = "none"; // Hide iframe
+    document.body.appendChild(iframe);
+
+    let doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(`
+        <html>
+        <head>
+            <title>Print Preview</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+            <!-- External Stylesheets -->
+            <link rel="stylesheet" href="${document.querySelector('link[href*="bootstrap"]')?.href || ''}">
+            <link rel="stylesheet" href="${document.querySelector('link[href*="style.css"]')?.href || ''}">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+            <style>
+                @media print {
+                    body {
+                        margin: 20px;
+                        font-family: 'Poppins', sans-serif;
+                    }
+                }
+            </style>
+        </head>
+        <body></body>
+        </html>
+    `);
+    doc.close();
+
+    // Append the cloned content inside the body of the iframe
+    doc.body.appendChild(clonedContent);
+
+    // Ensure styles are fully loaded before printing
+    iframe.onload = function () {
+        setTimeout(() => {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+            document.body.removeChild(iframe);
+        }, 500);
+    };
+
+        // Stop loading animation
+    setTimeout(() => {
+        printBtnquotep.disabled = false;
+        buttonTextcustomerp.textContent = "Print";
+        buttonSpinnercustomerp.classList.add("d-none");
+        buttonTextsaveIconp.classList.remove("d-none");
+    }, 500);    
+    
+});
 
 
 });

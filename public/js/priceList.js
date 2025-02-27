@@ -1,10 +1,7 @@
 $(document).ready(function () {
     let PricelistData = []; // Store fetched data globally
 
-    let url =
-        Laravel.user_role === "admin"
-            ? "/fetch-pricelist"
-            : "/fetch-user-pricelist";
+    let url = Laravel.user_role === "admin" ? "/fetch-pricelist" : "/fetch-user-pricelist";
 
     function fetchPricelist() {
         $.ajax({

@@ -104,7 +104,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('admin-quotation', QuotationController::class);
         Route::get('/get-latest-quotation', function () {
             $latestQuotation = QuotationItem::latest('quotation_no')->first();
-            $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10093;
+            $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10001;
             return response()->json(['quotation_no' => $newQuotationNo]);
         });
 

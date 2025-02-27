@@ -21,7 +21,7 @@ class QuotationController extends Controller
         // Get the latest quotation number from the database
         $latestQuotation = QuotationItem::latest('quotation_no')->first();
 
-        // If there's no quotation yet, start from 10093
+        // If there's no quotation yet, start from 10001
         $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10001;
 
         if (auth::check() && auth::user()->role === 'admin') {
@@ -31,9 +31,6 @@ class QuotationController extends Controller
             return view('user-pages.quotation', compact('quotation'));
         }
     }
-
-    public function getQuotation($id) {}
-
 
     /**
      * Show the form for creating a new resource.
@@ -165,6 +162,19 @@ class QuotationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            // Find the quotation customer
+            $quotationCustomerDelete = QuotationCustomer::findOrFail($id);
+
+            // Delete all associated items related to this quotation
+            QuotationItem::where('customer_id', $id)->delete(); // Ensure quotation_id is the foreign key
+
+            // Delete the quotation customer
+            $quotationCustomerDelete->delete();
+
+            return response()->json(['success' => true, 'message' => 'Quotation and items deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete.', 'error' => $e->getMessage()], 500);
+        }
     }
 }
