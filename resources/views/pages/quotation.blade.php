@@ -128,6 +128,7 @@
                 <div class="mt-3">
                     <p class="fst-italic" style="font-size:0.8rem;">" We are happy to quote you the following items you requested below..."</p>
                 </div>
+                
 
                 
                 {{-- Table --}}
