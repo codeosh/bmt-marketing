@@ -158,6 +158,66 @@ class QuotationController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // $request->validate([
+        //     'image' => 'required|image|mimes:jpeg,png,bmp,gif,svg|max:2048',
+        //     'type' => 'required|in:header,footer'
+        // ]);
+
+        // $quotation = QutationHeaderAndFooter::findOrFail($id);
+
+        // // Define filename
+        // $fileName = $request->type . '_' . $id . '.' . $request->file('image')->getClientOriginalExtension();
+        // $filePath = 'public/pictures/' . $fileName;
+
+        // // Delete old image if exists
+        // $oldImage = ($request->type === 'header') ? $quotation->header_image : $quotation->footer_image;
+        // if ($oldImage && file_exists(public_path($oldImage))) {
+        //     unlink(public_path($oldImage));
+        // }
+
+        // // Move new image
+        // $request->file('image')->move(public_path('pictures'), $fileName);
+
+        // // Update database
+        // if ($request->type === 'header') {
+        //     $quotation->header_image = 'pictures/' . $fileName;
+        // } else {
+        //     $quotation->footer_image = 'pictures/' . $fileName;
+        // }
+
+        // $quotation->save();
+
+        // return response()->json([
+        //     'success' => true,
+        //     'image_url' => asset('pictures/' . $fileName),
+        //     'type' => $request->type
+        // ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        try {
+            // Find the quotation customer
+            $quotationCustomerDelete = QuotationCustomer::findOrFail($id);
+
+            // Delete all associated items related to this quotation
+            QuotationItem::where('customer_id', $id)->delete(); // Ensure quotation_id is the foreign key
+
+            // Delete the quotation customer
+            $quotationCustomerDelete->delete();
+
+            return response()->json(['success' => true, 'message' => 'Quotation and items deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete.', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updateImage(Request $request, string $id)
+    {
+        //
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,bmp,gif,svg|max:2048',
             'type' => 'required|in:header,footer'
@@ -192,65 +252,5 @@ class QuotationController extends Controller
             'image_url' => asset('pictures/' . $fileName),
             'type' => $request->type
         ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        try {
-            // Find the quotation customer
-            $quotationCustomerDelete = QuotationCustomer::findOrFail($id);
-
-            // Delete all associated items related to this quotation
-            QuotationItem::where('customer_id', $id)->delete(); // Ensure quotation_id is the foreign key
-
-            // Delete the quotation customer
-            $quotationCustomerDelete->delete();
-
-            return response()->json(['success' => true, 'message' => 'Quotation and items deleted successfully!']);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Failed to delete.', 'error' => $e->getMessage()], 500);
-        }
-    }
-
-    public function updateImage(Request $request)
-    {
-        // $request->validate([
-        //     'image' => 'required|image|mimes:jpeg,png,bmp,gif,svg|max:2048',
-        //     'id' => 'required|exists:quotation_header_and_footer,id',
-        //     'type' => 'required|in:header,footer' // Ensure only header or footer is updated
-        // ]);
-
-        // $quotation = QutationHeaderAndFooter::findOrFail($request->id);
-
-        // // Define a unique filename based on the ID and type (header or footer)
-        // $fileName = $request->type . '_' . $quotation->id . '.' . $request->file('image')->getClientOriginalExtension();
-        // $filePath = 'public/pictures/' . $fileName;
-
-        // // Delete old image if it exists
-        // $oldImage = ($request->type === 'header') ? $quotation->header_image : $quotation->footer_image;
-        // if ($oldImage && file_exists(public_path($oldImage))) {
-        //     unlink(public_path($oldImage));
-        // }
-
-        // // Move the new image to the correct directory
-        // $request->file('image')->move(public_path('pictures'), $fileName);
-
-        // // Update the correct column in the database
-        // if ($request->type === 'header') {
-        //     $quotation->header_image = 'pictures/' . $fileName;
-        // } else {
-        //     $quotation->footer_image = 'pictures/' . $fileName;
-        // }
-
-        // $quotation->save();
-
-        // return response()->json([
-        //     'success' => true,
-        //     'image_url' => asset('pictures/' . $fileName),
-        //     'type' => $request->type
-        // ]);
     }
 }

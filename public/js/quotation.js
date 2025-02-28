@@ -616,10 +616,10 @@ $(document).ready(function () {
         let formData = new FormData();
         formData.append('image', fileInput);
         formData.append('type', selectedType); // Pass selected type (header/footer)
-        formData.append('_method', 'PUT'); // Laravel requires this for updates
+        //formData.append('_method', 'PUT'); // Laravel requires this for updates
 
         $.ajax({
-            url: `/admin-quotation/${quotationId}`,
+            url: `/update-image/${quotationId}`,
             type: "POST", // Laravel will interpret as PUT due to _method
             data: formData,
             contentType: false,
@@ -646,7 +646,7 @@ $(document).ready(function () {
 
                     //stop loading
                     saveImageBtn.disabled = false;
-                    buttonTextQuotationEditHeadAndFooter.textContent = "Save Image";
+                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
                     buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
                     saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
                     
@@ -655,7 +655,7 @@ $(document).ready(function () {
                     toastr.error("Failed to update image.");
                     //stop loading
                     saveImageBtn.disabled = false;
-                    buttonTextQuotationEditHeadAndFooter.textContent = "Save Image";
+                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
                     buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
                     saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
                 }
@@ -666,7 +666,7 @@ $(document).ready(function () {
 
                 //stop loading
                 saveImageBtn.disabled = false;
-                buttonTextQuotationEditHeadAndFooter.textContent = "Save Image";
+                buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
                 buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
                 saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
             }

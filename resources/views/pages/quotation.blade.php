@@ -940,7 +940,7 @@
                 <!-- Save Button -->
                 <button id="saveImageBtn" class="btn btn-primary" style="margin-top: 20px">
                         <i class="fa-solid fa-floppy-disk" id="saveQuotaionIconEditHeadAndFooter"></i>
-                        <span id="buttonText-QuotationEditHeadAndFooter">{{ __('Save Image') }}</span>
+                        <span id="buttonText-QuotationEditHeadAndFooter">{{ __('Change Image') }}</span>
                         <span id="buttonSpinner-QuotationEditHeadAndFooter" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                 </button>
             </div>
