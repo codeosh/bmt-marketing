@@ -1,52 +1,65 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+ <div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountModalLabel" aria-hidden="true" >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form id="registerForm" >
+                        @csrf
+                        <div class="modal-header text-black">
+                            <h5 class="modal-title" id="addAccountModalLabel">Add New Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="successMessage" class="alert alert-success d-none"></div> <!-- Success message -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Username</label>
+                                        <input id="name" class="form-control" type="text" name="name" required autofocus>
+                                        <span class="text-danger" id="nameError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input id="email" class="form-control" type="email" name="email" required>
+                                        <span class="text-danger" id="emailError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="role" class="form-label">Role</label>
+                                        <select class="form-select" id="role" name="role">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                        <span class="text-danger" id="passwordError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                                        <span class="text-danger" id="passwordConfirmationError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" id="saveBtn-register" form="registerForm" class="btn btn-primary">
+                                <span id="buttonText-register">{{ __('Save') }}</span>
+                                    <span id="buttonSpinner-register" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>

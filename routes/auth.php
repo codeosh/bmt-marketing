@@ -21,11 +21,12 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Models\QuotationItem;
 
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
@@ -78,6 +79,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route::get('/admin-dashboard', function () {
         //     return view('admin.admin-dashboard');
         // })->name('admin.dashboard');
+        Route::post('/admin-register', [RegisteredUserController::class, 'store']);
 
         //bulletin
         Route::resource('admin-bulletin', BulletinController::class);
