@@ -153,6 +153,7 @@
                 <div class="mt-3">
                     <p class="fst-italic" style="font-size:0.8rem;">" We are happy to quote you the following items you requested below..."</p>
                 </div>
+                
 
                 
                 {{-- Table --}}
@@ -770,9 +771,9 @@
 
                 </div>
 
-                <div class="footer d-flex gap-2 w-100">
+                <div class="footer d-flex gap-2 w-100 ">
                         {{-- Terms & Condition Container --}}
-                        <div class="mt-5 mb-5 h-100 w-50">
+                        <div class="mt-5 mb-5 w-75 h-100">
                             <div class="header bg-secondary d-flex align-items-center justify-content-evenly" style="height:30px;">
                                 <small class="text-white">Terms & Condition</small>
                                 <small class="text-white">Remarks & Special Notes</small>
@@ -780,39 +781,43 @@
 
                             <div class="h-100 w-100 d-flex" style="border:1px solid black;">
                                 
-                                <div class="w-50 p-2" style="border-right:1px solid black;">
+                                <div class="p-2 w-75 d-flex flex-column gap-1" style="border-right:1px solid black;">
                                     <div class="row">
-                                        <div class="col">
-                                            <span class="fw-bolder"  style="font-size:0.8rem;">Condition:</span>
-                                            <span  style="font-size:0.8rem;">All Brand New 1 Year on</span>
+                                        <div class="col d-flex align-items-center">
+                                            <span class="fw-bolder me-2" style="font-size:0.8rem;">Condition:</span>
+                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="All Brand New 1 Year on">
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col  d-flex align-items-center">
+                                            <span class="fw-bolder me-2"  style="font-size:0.8rem;">Warranty:</span>
+                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="All">
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col">
-                                            <span class="fw-bolder"  style="font-size:0.8rem;">Warranty:</span>
-                                            <span  style="font-size:0.8rem;">All</span>
+                                        <div class="col  d-flex align-items-center">
+                                            <span class="fw-bolder me-2"  style="font-size:0.8rem; white-space: nowrap;">VAT (12%):</span>
+                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Major Parts">
+
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col">
-                                            <span class="fw-bolder"  style="font-size:0.8rem;">VAT (12%):</span>
-                                            <span  style="font-size:0.8rem;">Major Parts</span>
+                                        <div class="col d-flex align-items-center">
+                                            <span class="fw-bolder me-2" style="font-size:0.8rem;">Availability:</span>
+                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Excluded">
+
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col">
-                                            <span class="fw-bolder"  style="font-size:0.8rem;">Availability:</span>
-                                            <span  style="font-size:0.8rem;">Excluded</span>
-                                        </div>
-                                    </div>
+                                        <div class="col d-flex align-items-center">
+                                            <span class="fw-bolder me-2"  style="font-size:0.8rem;">RD:</span>
+                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Onstock">
 
-                                    <div class="row">
-                                        <div class="col">
-                                            <span class="fw-bolder"  style="font-size:0.8rem;">RD:</span>
-                                            <span  style="font-size:0.8rem;">Onstock</span>
                                         </div>
                                     </div>
 
@@ -822,8 +827,8 @@
                                 <div class="border w-50 p-2">
                                     <div class="row">
                                         <div class="col">
-                                            <span class="fw-bolder"  style="font-size:0.8rem;">Price Effectivity:</span>
-                                            <span  style="font-size:0.8rem;">1 Week</span>
+                                            <span class="fw-bolder me-2" style="font-size:0.8rem;white-space: nowrap;">Price Effectivity:</span>
+                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none;" value="1 Week">
                                         </div>
                                     </div>
                                 </div>
