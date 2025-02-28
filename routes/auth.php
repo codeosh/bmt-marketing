@@ -107,6 +107,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10001;
             return response()->json(['quotation_no' => $newQuotationNo]);
         });
+        Route::post('/update-image', [QuotationController::class, 'updateImage']);
 
         //guides
         Route::resource('admin-guides', GuidesController::class);

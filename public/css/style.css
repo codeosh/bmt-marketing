@@ -168,3 +168,13 @@ td {
     border: none !important;
     outline: none !important;
 }
+
+@media print {
+    .hide-on-print {
+        display: none !important;
+    }
+
+    .print-only {
+        display: inline !important;
+    }
+}

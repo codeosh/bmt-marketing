@@ -17,10 +17,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($quotation) == 0)
-                            <div class="text-center text-red-500">No records found</div>
+                        <tr class="d-none" id="alertForNoRecordsWhenSearch">
+                            <td colspan="2" class="text-center text-danger">No records found</td>
+                        </tr>
+
+                        @if ($quotation->isEmpty()) 
+                            <tr>
+                                <td colspan="2" class="text-center text-danger">No records found</td>
+                            </tr>
                         @else
-                            @foreach ($quotation as $quotations)
+                            @foreach ($quotation as $quotations)                    
                                 <tr class="quote-row cursor-pointer" data-id="{{ $quotations->id }}">
                                     <td>{{ $quotations->nos }}</td>
                                     <td class="text-start">{{ $quotations->customer_name }}</td>
@@ -71,6 +77,19 @@
             <div class=" w-100 border rounded p-3 overflow-auto custom-scrollbar" style="height:80vh;" id="customerDetailsContainer">
 
                 <div id="detailsForPrint">
+                
+                {{-- Header Image --}}
+                <img src="{{ asset($quotationHeaderAndFooter->header_image) }}" 
+                    alt="Header Image" 
+                    id="head"
+                    class="w-100 img-head" 
+                    style="margin-bottom:45px;cursor: pointer;" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#imageModal"
+                    data-id="{{ $quotationHeaderAndFooter->id }}" 
+                    data-type="header"> 
+
+                <div id="deatailsForHeaderAndFooter">
 
                 <div class="text-center">
                     <h4 class=" fw-bolder">PRICE&nbsp;&nbsp; QUOTATION</h4>
@@ -825,6 +844,18 @@
                         </div>
                 </div>  
                 </div>
+                {{-- Footer Image --}}
+                <img src="{{ asset($quotationHeaderAndFooter->footer_image) }}" 
+                    alt="Footer Image" 
+                    id="foot"
+                    class="w-100 img-head" 
+                    style="cursor: pointer;" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#imageModal"
+                    data-id="{{ $quotationHeaderAndFooter->id }}" 
+                    data-type="footer">
+                
+                </div>
             </div>    
 
             <div class="d-flex align-self-end gap-2">
@@ -883,6 +914,39 @@
   </div>
 </div>
 
+<!-- Image Edit Bootstrap Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Image Preview -->
+                <img id="modalHeaderImage" class="img-fluid" alt="Selected Image">
+                
+                <div id="deatils"></div>
+
+                <img id="modalFooterImage" class="img-fluid" alt="Selected Image">
+
+                <!-- File Input -->
+                <input type="file" id="fileInput" class="form-control mt-3" accept="image/*">
+                
+                <!-- Hidden Fields -->
+                <input type="hidden" id="quotationId" value="{{ $quotationHeaderAndFooter->id }}">
+                <input type="hidden" id="imageType">
+
+                <!-- Save Button -->
+                <button id="saveImageBtn" class="btn btn-primary" style="margin-top: 20px">
+                        <i class="fa-solid fa-floppy-disk" id="saveQuotaionIconEditHeadAndFooter"></i>
+                        <span id="buttonText-QuotationEditHeadAndFooter">{{ __('Save Image') }}</span>
+                        <span id="buttonSpinner-QuotationEditHeadAndFooter" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 <script src="{{ asset('js/quotation.js') }}"></script>
