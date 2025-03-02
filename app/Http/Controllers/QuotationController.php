@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\QuotationCustomer;
+use App\Models\QutationHeaderAndFooter;
 use App\Models\QuotationItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,8 @@ class QuotationController extends Controller
         //
         $quotation = QuotationCustomer::latest()->paginate(100);
 
+        $quotationHeaderAndFooter = QutationHeaderAndFooter::latest()->first();
+
         // Get the latest quotation number from the database
         $latestQuotation = QuotationItem::latest('quotation_no')->first();
 
@@ -26,7 +29,7 @@ class QuotationController extends Controller
 
         if (auth::check() && auth::user()->role === 'admin') {
 
-            return view('pages.quotation', compact('quotation', 'newQuotationNo'));
+            return view('pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter'));
         } else {
             return view('user-pages.quotation', compact('quotation'));
         }
@@ -155,6 +158,40 @@ class QuotationController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // $request->validate([
+        //     'image' => 'required|image|mimes:jpeg,png,bmp,gif,svg|max:2048',
+        //     'type' => 'required|in:header,footer'
+        // ]);
+
+        // $quotation = QutationHeaderAndFooter::findOrFail($id);
+
+        // // Define filename
+        // $fileName = $request->type . '_' . $id . '.' . $request->file('image')->getClientOriginalExtension();
+        // $filePath = 'public/pictures/' . $fileName;
+
+        // // Delete old image if exists
+        // $oldImage = ($request->type === 'header') ? $quotation->header_image : $quotation->footer_image;
+        // if ($oldImage && file_exists(public_path($oldImage))) {
+        //     unlink(public_path($oldImage));
+        // }
+
+        // // Move new image
+        // $request->file('image')->move(public_path('pictures'), $fileName);
+
+        // // Update database
+        // if ($request->type === 'header') {
+        //     $quotation->header_image = 'pictures/' . $fileName;
+        // } else {
+        //     $quotation->footer_image = 'pictures/' . $fileName;
+        // }
+
+        // $quotation->save();
+
+        // return response()->json([
+        //     'success' => true,
+        //     'image_url' => asset('pictures/' . $fileName),
+        //     'type' => $request->type
+        // ]);
     }
 
     /**
@@ -176,5 +213,44 @@ class QuotationController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Failed to delete.', 'error' => $e->getMessage()], 500);
         }
+    }
+
+    public function updateImage(Request $request, string $id)
+    {
+        //
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,bmp,gif,svg|max:2048',
+            'type' => 'required|in:header,footer'
+        ]);
+
+        $quotation = QutationHeaderAndFooter::findOrFail($id);
+
+        // Define filename
+        $fileName = $request->type . '_' . $id . '.' . $request->file('image')->getClientOriginalExtension();
+        $filePath = 'public/pictures/' . $fileName;
+
+        // Delete old image if exists
+        $oldImage = ($request->type === 'header') ? $quotation->header_image : $quotation->footer_image;
+        if ($oldImage && file_exists(public_path($oldImage))) {
+            unlink(public_path($oldImage));
+        }
+
+        // Move new image
+        $request->file('image')->move(public_path('pictures'), $fileName);
+
+        // Update database
+        if ($request->type === 'header') {
+            $quotation->header_image = 'pictures/' . $fileName;
+        } else {
+            $quotation->footer_image = 'pictures/' . $fileName;
+        }
+
+        $quotation->save();
+
+        return response()->json([
+            'success' => true,
+            'image_url' => asset('pictures/' . $fileName),
+            'type' => $request->type
+        ]);
     }
 }

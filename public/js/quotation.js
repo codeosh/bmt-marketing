@@ -156,7 +156,7 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 console.error(xhr.responseText); // Log error to console
-                toastr.error("Something went wrong! Try again later"); // Show error message
+                toastr.error("Something went wrong! Refresh or Try again later"); // Show error message
                 stopLoading(); // Reset UI
             }
         });
@@ -303,15 +303,19 @@ $(document).ready(function () {
     //quotation search
     $("#search").on("keyup", function () {
         let searchTerm = $(this).val().toLowerCase(); // Convert input to lowercase
+        let alert = document.getElementById("alertForNoRecordsWhenSearch");
+        
 
         $(".quote-row").each(function () {
             let customerName = $(this).find("td:eq(1)").text().toLowerCase(); // Get customer name from second column
 
             // Show/hide row based on search term
             if (customerName.includes(searchTerm)) {
+                alert.classList.add("d-none");
                 $(this).show();
             } else {
                 $(this).hide();
+                alert.classList.remove("d-none");
             }
         });
     });
@@ -443,6 +447,7 @@ $(document).ready(function () {
         });
     });
 
+
     // for PRINT  functionality
     document.getElementById("printButton").addEventListener("click", function () {
     let customerDetailsContainer = document.getElementById("detailsForPrint");
@@ -460,21 +465,34 @@ $(document).ready(function () {
     // Clone the container
     let clonedContent = customerDetailsContainer.cloneNode(true);
 
-        // Start loading animation (disable button and show spinner)
-        setTimeout(() => {
-                printBtnquotep.disabled = true;
-                buttonTextcustomerp.textContent = "";
-                buttonSpinnercustomerp.classList.remove("d-none");
-                buttonTextsaveIcon.classList.add("d-none");
-        }, 500);
+    // Convert all <select> elements to their selected values
+    clonedContent.querySelectorAll("select").forEach(select => {
+        let selectedOption = select.options[select.selectedIndex];
+        let selectedText = selectedOption ? selectedOption.text : ""; // Get selected text
 
+        let span = document.createElement("span"); // Create <span> for printing
+        span.textContent = selectedText;
+        span.style.border = "none"; // Optional: Style as needed
+        span.style.display = "inline-block";
+        span.style.width = select.clientWidth + "px"; // Ensure correct width
+
+        select.parentNode.replaceChild(span, select); // Replace <select> with <span>
+    });
+
+    // Start loading animation (disable button and show spinner)
+    setTimeout(() => {
+        printBtnquotep.disabled = true;
+        buttonTextcustomerp.textContent = "";
+        buttonSpinnercustomerp.classList.remove("d-none");
+        buttonTextsaveIconp.classList.add("d-none");
+    }, 500);
 
     // Create an iframe
     let iframe = document.createElement("iframe");
     iframe.style.position = "absolute";
     iframe.style.width = "0px";
     iframe.style.height = "0px";
-    iframe.style.border = "none"; // Hide iframe
+    iframe.style.border = "none";
     document.body.appendChild(iframe);
 
     let doc = iframe.contentWindow.document;
@@ -486,19 +504,16 @@ $(document).ready(function () {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-            <!-- External Stylesheets -->
             <link rel="stylesheet" href="${document.querySelector('link[href*="bootstrap"]')?.href || ''}">
             <link rel="stylesheet" href="${document.querySelector('link[href*="style.css"]')?.href || ''}">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
             <style>
                 @media print {
                     body {
-                        margin: 20px;
+                        margin: 0px;
                         font-family: 'Poppins', sans-serif;
                     }
                 }
@@ -509,11 +524,9 @@ $(document).ready(function () {
     `);
     doc.close();
 
-    // Append the cloned content inside the body of the iframe
-    doc.body.appendChild(clonedContent);
-
-    // Ensure styles are fully loaded before printing
+    // Ensure styles are fully loaded before appending content and printing
     iframe.onload = function () {
+        doc.body.appendChild(clonedContent);
         setTimeout(() => {
             iframe.contentWindow.focus();
             iframe.contentWindow.print();
@@ -521,15 +534,144 @@ $(document).ready(function () {
         }, 500);
     };
 
-        // Stop loading animation
+    // Stop loading animation
     setTimeout(() => {
         printBtnquotep.disabled = false;
         buttonTextcustomerp.textContent = "Print";
         buttonSpinnercustomerp.classList.add("d-none");
         buttonTextsaveIconp.classList.remove("d-none");
-    }, 500);    
-    
+    }, 500);
 });
+
+    //for changing header and footer
+    // Declare selectedType globally
+    let selectedType = '';
+
+    // Open modal and set the correct image source when clicking an image
+    $(document).on('click', '.img-head', function () {
+        let elementPriceQuotation = $("#deatailsForHeaderAndFooter").html();
+        let quotationId = $(this).data('id'); // Get quotation ID
+        selectedType = $(this).data('type'); // Get type (header/footer)
+        let imageUrl = $(this).attr('src'); // Get current image URL
+
+        let imageUrlfooter = $('#foot').attr('src'); 
+        let imageUrlHeader = $('#head').attr('src'); 
+
+        $('#deatils').html(elementPriceQuotation);
+        $('#quotationId').val(quotationId); // Store ID in hidden input
+        $('#imageType').val(selectedType); // Store whether it's header or footer
+
+        // Determine where to show the preview
+        if (selectedType === 'header') {
+            $('#modalHeaderImage').attr('src', imageUrl); // Show header image in modal
+            $('#modalFooterImage').attr('src', imageUrlfooter); // Clear footer preview
+        } else if (selectedType === 'footer') {
+            $('#modalFooterImage').attr('src', imageUrl); // Show footer image in modal
+            $('#modalHeaderImage').attr('src', imageUrlHeader); // Clear header preview
+        }
+
+        $('#imageModal').modal('show'); // Show modal
+    });
+
+    // File Input Change Event - Show Preview in Modal
+    $('#fileInput').on('change', function (event) {
+        let file = event.target.files[0];
+
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                // Update only the correct preview section (header/footer)
+                if (selectedType === 'header') {
+                    $('#modalHeaderImage').attr('src', e.target.result);
+                } else if (selectedType === 'footer') {
+                    $('#modalFooterImage').attr('src', e.target.result);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Save Image - Upload to Server
+    $('#saveImageBtn').on('click', function () {
+        
+        let saveImageBtn = document.getElementById("saveImageBtn");
+        let buttonTextQuotationEditHeadAndFooter = document.getElementById("buttonText-QuotationEditHeadAndFooter");
+        let buttonSpinnerQuotationEditHeadAndFooter = document.getElementById("buttonSpinner-QuotationEditHeadAndFooter");
+        let saveQuotaionIconEditHeadAndFooter = document.getElementById("saveQuotaionIconEditHeadAndFooter");
+            
+        let fileInput = $('#fileInput')[0].files[0];
+        let quotationId = $('#quotationId').val();
+
+        //start loading
+        saveImageBtn.disabled = true;
+        buttonTextQuotationEditHeadAndFooter.textContent = "";
+        buttonSpinnerQuotationEditHeadAndFooter.classList.remove("d-none");
+        saveQuotaionIconEditHeadAndFooter.classList.add("d-none");
+        
+        if (!fileInput || !selectedType) {
+            toastr.error("Please select an image before saving.");
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append('image', fileInput);
+        formData.append('type', selectedType); // Pass selected type (header/footer)
+        //formData.append('_method', 'PUT'); // Laravel requires this for updates
+
+        $.ajax({
+            url: `/update-image/${quotationId}`,
+            type: "POST", // Laravel will interpret as PUT due to _method
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            success: function (response) {
+                console.log("Response from server:", response); // Debug
+
+                if (response.success) {
+
+                    toastr.success("Image updated successfully!");
+
+                    // Ensure response.image_url is correct
+                    let newImageUrl = response.image_url + "?t=" + new Date().getTime();
+                    //console.log("New Image URL:", newImageUrl); // Debug
+
+                    // Select the correct image dynamically
+                    let imageSelector = `.img-head[data-id="${quotationId}"][data-type="${selectedType}"]`;
+                    //console.log("Targeted Image Selector:", imageSelector); // Debug
+
+                    $(imageSelector).attr('src', newImageUrl); // Update image immediately
+
+                    //stop loading
+                    saveImageBtn.disabled = false;
+                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
+                    buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
+                    saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
+                    
+                    $('#imageModal').modal('hide'); // Close modal
+                } else {
+                    toastr.error("Failed to update image.");
+                    //stop loading
+                    saveImageBtn.disabled = false;
+                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
+                    buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
+                    saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", xhr.responseText || error);
+                toastr.error("Something went wrong!");
+
+                //stop loading
+                saveImageBtn.disabled = false;
+                buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
+                buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
+                saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
+            }
+        });
+    });
 
 
 });

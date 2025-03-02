@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AccountController extends Controller
 {
@@ -12,7 +13,8 @@ class AccountController extends Controller
     public function index()
     {
         //
-        return view('pages.accounts');
+        $accounts = User::latest()->paginate(10);
+        return view('pages.accounts', compact('accounts'));
     }
 
     /**
