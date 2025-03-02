@@ -845,6 +845,13 @@
                     <i class="fa-solid fa-print"></i> Print
                 </button> --}}
 
+
+                 {{-- Png --}}
+                 <button type="button" id="convertCustomerDetailsBtnToPNG" class="btn bg-success text-white addButton" data-bs-toggle="modal"
+                    style="font-size:0.6rem; width:80px; border-radius:3px;">
+                    <i class="fa-solid fa-file-image"></i> Png
+                 </button>
+
                 <button type="button" class="btn btn-secondary"
                     style="font-size:0.6rem; width:80px; border-radius:3px;" id="printButton">
                     <i class="fa-solid fa-print" id="printQuotaionIcon"></i>
@@ -852,12 +859,7 @@
                     <span id="buttonSpinner-Quotation" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                 </button>
 
-                {{-- Png --}}
-                <button type="button" id="convertCustomerDetailsBtnToPNG" class="btn btn-secondary addButton" data-bs-toggle="modal"
-                    style="font-size:0.6rem; width:80px; border-radius:3px;">
-                    <i class="fa-solid fa-print"></i> Png
-                </button>
-
+               
             </div>
           
 
