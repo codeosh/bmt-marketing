@@ -168,45 +168,45 @@
                             <div class="addButton">
                                 @if (request()->routeIs('admin-bulletin.index'))
                                 {{-- Add Button for Bulletin Page --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
                                     data-bs-target="#bulletinModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                    <i class="fa-solid fa-plus"></i>
                                 </button>
                                 @elseif (request()->routeIs('admin-postTemplate.index'))
                                 {{-- Add Button for To-Do Page --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
                                     data-bs-target="#PostTemplateModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                    <i class="fa-solid fa-plus"></i>
                                 </button>
                                 @elseif (request()->routeIs('admin-replyTemplate.index'))
                                 {{-- Add Button for Item Category Page --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
                                     data-bs-target="#ReplyTemplateModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                    <i class="fa-solid fa-plus"></i> 
                                 </button>
                                 @elseif (request()->routeIs('admin-priceList.index'))
                                 {{-- Add Button for Contact Page --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
                                     data-bs-target="#PriceListModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                    <i class="fa-solid fa-plus"></i> 
                                 </button>
                                 @elseif (request()->routeIs('admin-insight.index'))
                                 {{-- Add Button for Contact Page --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
                                     data-bs-target="#PriceListModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                    <i class="fa-solid fa-plus"></i>
                                 </button>
                                 @elseif (request()->routeIs('admin-guides.index'))
                                 {{-- Add Button for Contact Page --}}
-                                <button type="button" class="btn btn-success saveButton" data-bs-toggle="modal"
+                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
                                     data-bs-target="#PriceListModal"
-                                    style="font-size:0.6rem; width:100px; border-radius:3px;">
-                                    <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> Add
+                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;" >
+                                    <i class="fa-solid fa-plus" ></i> 
                                 </button>
                                 @endif
                             </div>
