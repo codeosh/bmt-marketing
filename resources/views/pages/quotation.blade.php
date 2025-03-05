@@ -92,13 +92,13 @@
                 <div id="deatailsForHeaderAndFooter">
 
                 <div class="text-center">
-                    <h4 class="fw-bolder" style="font-size:2.2rem;">PRICE&nbsp;&nbsp; QUOTATION</h4>
+                    <h4 class=" fw-bolder">PRICE&nbsp;&nbsp; QUOTATION</h4>
                 </div>
 
                 {{-- Customer Details Container--}}
                 <div class="d-flex justify-content-between">
 
-                    <div class="customerDetails d-flex flex-column gap-2"style="font-size:1.2rem; flex-basis:70%;">
+                    <div class="customerDetails d-flex flex-column gap-2"style="font-size:0.8rem;flex-basis:70%;">
                         <form class="customerForm">
                             @csrf
                         {{-- Customer Name --}}
@@ -127,7 +127,7 @@
                     </div>
 
                     {{-- No. & Date Container --}}
-                    <div class="d-flex flex-column gap-2" style="font-size:1.2rem;flex-basis:30%;">
+                    <div class="d-flex flex-column gap-2" style="font-size:0.8rem;flex-basis:30%;">
                         {{-- No. --}}
                         <div class="customerQNumber">
                             <label for="customerQNumber" class="me-2">Q No&nbsp; &nbsp; &nbsp;:</label>
