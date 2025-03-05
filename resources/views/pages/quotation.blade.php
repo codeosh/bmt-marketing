@@ -42,7 +42,7 @@
                     {{ $quotation->links('pagination::bootstrap-5') }}
                 </div>
     </div>
-               
+
         {{-- Buttons --}}
         <div class="d-flex justify-content-evenly gap-2">
 
@@ -83,7 +83,7 @@
                     alt="Header Image" 
                     id="head"
                     class="w-100 img-head" 
-                    style="margin-bottom:45px;cursor: pointer;" 
+                    style="margin-bottom:45px;cursor: pointer;max-height: 127.28px;" 
                     data-bs-toggle="modal" 
                     data-bs-target="#imageModal"
                     data-id="{{ $quotationHeaderAndFooter->id }}" 
@@ -159,13 +159,13 @@
                 {{-- Table --}}
                 <div class="border w-100 mt-2">
                     <table class="table table-sm text-center" id="items-table">
-                        <thead class="table-light">
+                        <thead class="table-light" >
                             <tr>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Unit</th>
-                                <th scope="col" class="text-start ps-2">Item Name & Description</th>
-                                <th scope="col">Unit Price</th>
-                                <th scope="col" class="text-end">Line Amount</th>
+                                <th scope="col" style="background-color: rgb(246, 223, 181)!important; border:none">Quantity</th>
+                                <th scope="col" style="background-color: rgb(246, 223, 181)!important; border:none">Unit</th>
+                                <th scope="col" class="text-start ps-2" style="background-color: rgb(246, 223, 181)!important; border:none">Item Name & Description</th>
+                                <th scope="col" style="background-color: rgb(246, 223, 181)!important; border:none">Unit Price</th>
+                                <th scope="col" class="text-end" style="background-color: rgb(246, 223, 181)!important; border:none">Line Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -490,7 +490,7 @@
                             </tr>
 
                             {{-- row 11 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[11][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -516,10 +516,10 @@
                                     <input type="text" name="items[11][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             {{-- row 12 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[12][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -545,10 +545,10 @@
                                     <input type="text" name="items[12][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             {{-- row 13 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[13][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -574,10 +574,10 @@
                                     <input type="text" name="items[13][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             {{-- row 14 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[14][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -603,10 +603,10 @@
                                     <input type="text" name="items[14][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             {{-- row 15 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[15][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -632,10 +632,10 @@
                                     <input type="text" name="items[15][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             {{-- row 16 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[16][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -661,10 +661,10 @@
                                     <input type="text" name="items[16][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             {{-- row 17 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[17][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -690,9 +690,9 @@
                                     <input type="text" name="items[17][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
                             {{-- row 18 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[18][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -718,9 +718,9 @@
                                     <input type="text" name="items[18][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
                             {{-- row 19 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[19][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -746,7 +746,7 @@
                                     <input type="text" name="items[19][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             <!-- Total Row -->
                             <tr class="bg-black" style="border: 1px solid black">
@@ -785,7 +785,7 @@
                                     <div class="row">
                                         <div class="col d-flex align-items-center">
                                             <span class="fw-bolder me-2" style="font-size:0.8rem;">Condition:</span>
-                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="All Brand New 1 Year on">
+                                            <input type="text" id="Condition" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="All Brand New 1 Year on">
                                         </div>
                                         
                                     </div>
@@ -793,14 +793,14 @@
                                     <div class="row">
                                         <div class="col  d-flex align-items-center">
                                             <span class="fw-bolder me-2"  style="font-size:0.8rem;">Warranty:</span>
-                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="All">
+                                            <input type="text" id="Warranty" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="All">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col  d-flex align-items-center">
                                             <span class="fw-bolder me-2"  style="font-size:0.8rem; white-space: nowrap;">VAT (12%):</span>
-                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Major Parts">
+                                            <input type="text" id="VAT" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Major Parts">
 
                                         </div>
                                     </div>
@@ -808,7 +808,7 @@
                                     <div class="row">
                                         <div class="col d-flex align-items-center">
                                             <span class="fw-bolder me-2" style="font-size:0.8rem;">Availability:</span>
-                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Excluded">
+                                            <input type="text" id="Availability" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Excluded">
 
                                         </div>
                                     </div>
@@ -816,7 +816,7 @@
                                     <div class="row">
                                         <div class="col d-flex align-items-center">
                                             <span class="fw-bolder me-2"  style="font-size:0.8rem;">RD:</span>
-                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Onstock">
+                                            <input type="text" id="RD" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none; max-width:100%;" value="Onstock">
 
                                         </div>
                                     </div>
@@ -828,7 +828,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <span class="fw-bolder me-2" style="font-size:0.8rem;white-space: nowrap;">Price Effectivity:</span>
-                                            <input type="text" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none;" value="1 Week">
+                                            <input type="text" id="PriceEffectivity" class="form-control p-0 w-100" style="font-size:0.8rem; width: auto; border:none;" value="1 Week">
                                         </div>
                                     </div>
                                 </div>
@@ -854,7 +854,7 @@
                     alt="Footer Image" 
                     id="foot"
                     class="w-100 img-head" 
-                    style="cursor: pointer;" 
+                    style="cursor: pointer;max-height: 137.45px;" 
                     data-bs-toggle="modal" 
                     data-bs-target="#imageModal"
                     data-id="{{ $quotationHeaderAndFooter->id }}" 

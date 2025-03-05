@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\QuotationCustomer;
 use App\Models\QutationHeaderAndFooter;
 use App\Models\QuotationItem;
+use App\Models\QoutotaionTermsCondtionRemarks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +60,13 @@ class QuotationController extends Controller
                 'attn' => 'nullable|string|max:255',
                 'terms' => 'nullable|string|max:255',
                 'items' => 'required|array',  // Ensure 'items' is an array
+
+                'Condition' => 'string|max:255',
+                'Warranty' => 'string|max:255',
+                'vat' => 'string|max:255',
+                'Availability' => 'string|max:255',
+                'rd' => 'string|max:255',
+                'PriceEffectivity' => 'string|max:255',  // Ensure 'items' is an array
             ]);
 
             // Insert Customer
@@ -89,6 +97,18 @@ class QuotationController extends Controller
             // Insert all the items at once
             QuotationItem::insert($items);
 
+            // Insert QoutotaionTermsCondtionRemarks
+            QoutotaionTermsCondtionRemarks::create([
+                'customer_id' => $customer->id ?? null, // Ensure customer_id is set
+                'condition' => $request->Condition,  // Match request key exactly
+                'warranty' => $request->Warranty,
+                'vat' => $request->vat,
+                'availability' => $request->Availability,
+                'rd' => $request->rd,
+                'price_effectivity' => $request->PriceEffectivity,
+            ]);
+
+
             DB::commit();
 
             return response()->json(['success' => 'Quotation saved successfully!'], 200);
@@ -112,6 +132,10 @@ class QuotationController extends Controller
         // The `get()` method retrieves all matching records as a collection.
         $quotationItems = QuotationItem::where('customer_id', $id)->get();
 
+        // Retrieve all QoutotaionTermsCondtionRemarks linked to this customer using the `customer_id`.
+        // The `get()` method retrieves all matching records as a collection.
+        $QoutotaionTermsCondtionRemarks = QoutotaionTermsCondtionRemarks::where('customer_id', $id)->get();
+
         // If ag customer record is not found, return a JSON response with an error message
         // and an HTTP 404 (Not Found) status code.
         if (!$quotationCustomer) {
@@ -122,6 +146,7 @@ class QuotationController extends Controller
         // This is useful if some fields (e.g., attn, date, terms) are common among all items
         // and can be taken from the first entry.
         $firstItem = $quotationItems->first();
+        $firstItemQoutotaionTermsCondtionRemarks = $QoutotaionTermsCondtionRemarks->first();;
 
         // Return a structured JSON response containing customer details and associated items.
         return response()->json([
@@ -130,6 +155,13 @@ class QuotationController extends Controller
             'quotationNo' => $quotationCustomer->nos ?? 'N/A', // Quotation number
             'address' => $quotationCustomer->address ?? 'N/A', // Customer's address
             'customerName' => $quotationCustomer->customer_name ?? 'N/A', // Customer's name
+
+            'condition' => $firstItemQoutotaionTermsCondtionRemarks->condition ?? 'N/A',
+            'warranty' => $firstItemQoutotaionTermsCondtionRemarks->warranty ?? 'N/A',
+            'vat' => $firstItemQoutotaionTermsCondtionRemarks->vat ?? 'N/A',
+            'availability' => $firstItemQoutotaionTermsCondtionRemarks->availability ?? 'N/A',
+            'rd' => $firstItemQoutotaionTermsCondtionRemarks->rd ?? 'N/A',
+            'price_effectivity' => $firstItemQoutotaionTermsCondtionRemarks->price_effectivity ?? 'N/A',
 
             // Retrieve specific fields from the first item in the collection.
             // If no items exist, these values default to 'N/A' to prevent errors.

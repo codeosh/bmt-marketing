@@ -3,12 +3,31 @@
 @section('title', 'BMTMarketing - Price List')
 
 @section('content')
+<style>
+    .bulTemp{
+        width:60vh;
+    }
+    @media (max-width: 768px) {
+    /* Styles for tablets and smaller devices */
 
-<div class="d-flex gap-1 h-100">
+    .myCon{
+        flex-direction: column;
+        width: 100%;
+        overflow: auto;
+        
+    }
+    .bulTemp{
+        width: 100%;
+    }
+}
+    
+    
+</style>
+<div class="d-flex gap-1 h-100 myCon">
 
-    <div class="d-flex gap-1 flex-column h-100 w-45">
+    <div class="d-flex gap-1 flex-column h-100 w-45 bulTemp">
         {{-- Bulletin List --}}
-        <div class="card h-50 shadow-sm" style="width:60vh;">
+        <div class="card h-50 shadow-sm bulTemp">
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Bulletin</small>
             <div class="card-body p-2 overflow-auto custom-scrollbar" style="height: 300px;">
                 <div id="bulletinList" class="d-grid gap-1"></div>
@@ -16,7 +35,7 @@
         </div>
 
         {{-- Template List --}}
-        <div class="card h-50 shadow-sm" style="width:60vh;">
+        <div class="card h-50 shadow-sm bulTemp" >
             <small class="card-header text-muted text-center" style="font-size: 0.8rem;">Template</small>
             <div class="card-body p-2 overflow-auto custom-scrollbar" style="height:50px;">
                 <div id="templateList" class="d-grid gap-1"></div>
@@ -41,7 +60,7 @@
 
                 {{-- Copy --}}
                 <div class="copyContents d-flex align-items-center justify-content-center">
-                    <button type="button" id="CopysaveBtn" class="btn btn-dark" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                    <button type="button" id="CopysaveBtn" class="btn btn-dark" style="font-size:0.6rem; width:100px; height:29px; border-radius:3px">
                         <i class="fa-solid fa-copy" style="margin-right: 5px;"></i><span id="CopybuttonText">Copy</span>
                         <span id="CopybuttonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>            
                     </button>

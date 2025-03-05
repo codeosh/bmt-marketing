@@ -70,6 +70,13 @@ $(document).ready(function () {
         let contact = ($("#customerContact").val() ?? "").trim();
         let attn = ($("#customerATN").val() ?? "").trim();
         let terms = ($("#customerTerms").val() ?? "").trim();
+
+        let Condition = ($("#Condition").val() ?? "").trim();
+        let Warranty = ($("#Warranty").val() ?? "").trim();
+        let vat = ($("#VAT").val() ?? "").trim();
+        let Availability = ($("#Availability").val() ?? "").trim();
+        let rd = ($("#RD").val() ?? "").trim();
+        let PriceEffectivity = ($("#PriceEffectivity").val() ?? "").trim();
         
         // Validate required customer fields (Customer Name and Q Number are required)
         if (!customerName) {
@@ -141,6 +148,14 @@ $(document).ready(function () {
             formData.append(`items[${index}][unit_price]`, row.unitPrice);
             formData.append(`items[${index}][line_amount]`, row.lineAmount);
         });
+
+        // Append customer data to FormData
+        formData.append("Condition", Condition);
+        formData.append("Warranty", Warranty);
+        formData.append("vat", vat);
+        formData.append("Availability", Availability);
+        formData.append("rd", rd);
+        formData.append("PriceEffectivity", PriceEffectivity);
 
         // Submit data via AJAX to Laravel backend
         $.ajax({
@@ -234,6 +249,15 @@ $(document).ready(function () {
 
                 // Update the total amount field with the calculated total (formatted with commas)
                 $("#totalAmount").val(totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+                // Populate QoutotaionTermsCondtionRemarks in the input fields
+                $("#Condition").val(data.condition);
+                $("#Warranty").val(data.warranty);
+                $("#vat").val(data.vat);
+                $("#Availability").val(data.availability);
+                $("#rd").val(data.rd);
+                $("#PriceEffectivity").val(data.priceEffectivity);
+                
             },
             error: function (xhr) {
                 // Log error message in case of an AJAX failure
@@ -447,16 +471,15 @@ $(document).ready(function () {
         });
     });
 
-
-    // for PRINT  functionality
-    document.getElementById("printButton").addEventListener("click", function () {
+// for PRINT functionality
+document.getElementById("printButton").addEventListener("click", function () {
     let customerDetailsContainer = document.getElementById("detailsForPrint");
 
     if (!customerDetailsContainer) {
         alert("Error: Content container not found!");
         return;
     }
-
+    
     let printBtnquotep = document.getElementById("printButton");
     let buttonTextcustomerp = document.getElementById("buttonText-Quotation");
     let buttonSpinnercustomerp = document.getElementById("buttonSpinner-Quotation");
@@ -464,17 +487,32 @@ $(document).ready(function () {
 
     // Clone the container
     let clonedContent = customerDetailsContainer.cloneNode(true);
+        
+    // Remove disabled attribute from inputs and force black text
+    clonedContent.querySelectorAll("input[disabled]").forEach(input => {
+        input.removeAttribute("disabled");
+        input.style.color = "black";
+        input.style.backgroundColor = "white";
+    });
 
     // Convert all <select> elements to their selected values
     clonedContent.querySelectorAll("select").forEach(select => {
-        let selectedOption = select.options[select.selectedIndex];
-        let selectedText = selectedOption ? selectedOption.text : ""; // Get selected text
+        // Get the latest value from the live DOM, not just the cloned version
+        let liveSelect = document.querySelector(`[name="${select.name}"]`);
+        let selectedValue = liveSelect ? liveSelect.value : ""; 
 
-        let span = document.createElement("span"); // Create <span> for printing
+        console.log("Live Selected Value:", selectedValue);
+
+        let selectedText = selectedValue 
+            ? (Array.from(select.options).find(option => option.value === selectedValue)?.text || selectedValue) 
+            : "";
+
+        console.log("Selected Text After Fix:", selectedText);
+
+        let span = document.createElement("span");
         span.textContent = selectedText;
-        span.style.border = "none"; // Optional: Style as needed
-        span.style.display = "inline-block";
-        span.style.width = select.clientWidth + "px"; // Ensure correct width
+        span.style.color = "black";
+        
 
         select.parentNode.replaceChild(span, select); // Replace <select> with <span>
     });
@@ -516,6 +554,21 @@ $(document).ready(function () {
                         margin: 0px;
                         font-family: 'Poppins', sans-serif;
                     }
+                    input {
+                        color: black !important;
+                        background-color: white !important;
+                        -webkit-print-color-adjust: exact;
+                    }
+                    .bg-secondary {
+                        background-color: #6c757d !important;
+                        -webkit-print-color-adjust: exact;
+                    }
+                    th {
+                        background-color: rgb(235, 208, 157) !important;
+                        color: black !important;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
                 }
             </style>
         </head>
@@ -526,12 +579,14 @@ $(document).ready(function () {
 
     // Ensure styles are fully loaded before appending content and printing
     iframe.onload = function () {
-        doc.body.appendChild(clonedContent);
-        setTimeout(() => {
-            iframe.contentWindow.focus();
-            iframe.contentWindow.print();
-            document.body.removeChild(iframe);
-        }, 500);
+        requestAnimationFrame(() => {
+            doc.body.appendChild(clonedContent);
+            setTimeout(() => {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+                document.body.removeChild(iframe);
+            }, 500);
+        });
     };
 
     // Stop loading animation
@@ -542,6 +597,7 @@ $(document).ready(function () {
         buttonTextsaveIconp.classList.remove("d-none");
     }, 500);
 });
+
 
     //for changing header and footer
     // Declare selectedType globally
@@ -610,6 +666,13 @@ $(document).ready(function () {
         
         if (!fileInput || !selectedType) {
             toastr.error("Please select an image before saving.");
+
+            //stop loading
+            saveImageBtn.disabled = false;
+            buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
+            buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
+            saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
+            
             return;
         }
 
