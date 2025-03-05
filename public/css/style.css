@@ -178,3 +178,7 @@ td {
         display: inline !important;
     }
 }
+
+.table-header-orange th {
+    background-color: #ffa500 !important;
+}
