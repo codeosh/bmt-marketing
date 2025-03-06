@@ -61,12 +61,12 @@ class QuotationController extends Controller
                 'terms' => 'nullable|string|max:255',
                 'items' => 'required|array',  // Ensure 'items' is an array
 
-                'Condition' => 'string|max:255',
-                'Warranty' => 'string|max:255',
-                'vat' => 'string|max:255',
-                'Availability' => 'string|max:255',
-                'rd' => 'string|max:255',
-                'PriceEffectivity' => 'string|max:255',  // Ensure 'items' is an array
+                'Condition' => 'nullable|string|max:255',
+                'Warranty' => 'nullable|string|max:255',
+                'vat' => 'nullable|string|max:255',
+                'Availability' => 'nullable|string|max:255',
+                'rd' => 'nullable|string|max:255',
+                'PriceEffectivity' => 'nullable|string|max:255',  // Ensure 'items' is an array
             ]);
 
             // Insert Customer
@@ -156,12 +156,12 @@ class QuotationController extends Controller
             'address' => $quotationCustomer->address ?? 'N/A', // Customer's address
             'customerName' => $quotationCustomer->customer_name ?? 'N/A', // Customer's name
 
-            'condition' => $firstItemQoutotaionTermsCondtionRemarks->condition ?? 'N/A',
-            'warranty' => $firstItemQoutotaionTermsCondtionRemarks->warranty ?? 'N/A',
-            'vat' => $firstItemQoutotaionTermsCondtionRemarks->vat ?? 'N/A',
-            'availability' => $firstItemQoutotaionTermsCondtionRemarks->availability ?? 'N/A',
-            'rd' => $firstItemQoutotaionTermsCondtionRemarks->rd ?? 'N/A',
-            'price_effectivity' => $firstItemQoutotaionTermsCondtionRemarks->price_effectivity ?? 'N/A',
+            'condition' => $firstItemQoutotaionTermsCondtionRemarks->condition ?? 'All Brand New 1 Year on',
+            'warranty' => $firstItemQoutotaionTermsCondtionRemarks->warranty ?? 'All',
+            'vat' => $firstItemQoutotaionTermsCondtionRemarks->vat ?? 'Major Parts',
+            'availability' => $firstItemQoutotaionTermsCondtionRemarks->availability ?? 'Excluded',
+            'rd' => $firstItemQoutotaionTermsCondtionRemarks->rd ?? 'Onstock',
+            'price_effectivity' => $firstItemQoutotaionTermsCondtionRemarks->price_effectivity ?? '1 Week',
 
             // Retrieve specific fields from the first item in the collection.
             // If no items exist, these values default to 'N/A' to prevent errors.
@@ -187,44 +187,84 @@ class QuotationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-        // $request->validate([
-        //     'image' => 'required|image|mimes:jpeg,png,bmp,gif,svg|max:2048',
-        //     'type' => 'required|in:header,footer'
-        // ]);
+        DB::beginTransaction();
 
-        // $quotation = QutationHeaderAndFooter::findOrFail($id);
+        try {
+            // Validate request data
+            $validated = $request->validate([
+                'customer_name' => 'required|string|max:255',
+                'address' => 'nullable|string|max:255',
+                'contact' => 'nullable|string|max:20',
+                'attn' => 'nullable|string|max:255',
+                'terms' => 'nullable|string|max:255',
+                'items' => 'required|array', // Ensure 'items' is an array
 
-        // // Define filename
-        // $fileName = $request->type . '_' . $id . '.' . $request->file('image')->getClientOriginalExtension();
-        // $filePath = 'public/pictures/' . $fileName;
+                'Condition' => 'nullable|string|max:255',
+                'Warranty' => 'nullable|string|max:255',
+                'vat' => 'nullable|string|max:255',
+                'Availability' => 'nullable|string|max:255',
+                'rd' => 'nullable|string|max:255',
+                'PriceEffectivity' => 'nullable|string|max:255',
+            ]);
 
-        // // Delete old image if exists
-        // $oldImage = ($request->type === 'header') ? $quotation->header_image : $quotation->footer_image;
-        // if ($oldImage && file_exists(public_path($oldImage))) {
-        //     unlink(public_path($oldImage));
-        // }
+            // Find the existing customer
+            $customer = QuotationCustomer::findOrFail($id);
 
-        // // Move new image
-        // $request->file('image')->move(public_path('pictures'), $fileName);
+            // Update Customer Details
+            $customer->update([
+                'nos' => $request->nos ?? null,
+                'customer_name' => $request->customer_name,
+                'address' => $request->address,
+                'contact' => $request->contact,
+            ]);
 
-        // // Update database
-        // if ($request->type === 'header') {
-        //     $quotation->header_image = 'pictures/' . $fileName;
-        // } else {
-        //     $quotation->footer_image = 'pictures/' . $fileName;
-        // }
+            // Delete existing items before inserting updated ones
+            QuotationItem::where('customer_id', $customer->id)->delete();
 
-        // $quotation->save();
+            // Prepare Items for update
+            $items = [];
+            foreach ($request->items as $item) {
+                $items[] = [
+                    'customer_id' => $customer->id,
+                    'quantity' => $item['quantity'],
+                    'unit' => $item['unit'],
+                    'item_name' => $item['item_name'],
+                    'unit_price' => $item['unit_price'],
+                    'line_amount' => $item['line_amount'],
+                    'attn' => $request->attn ?? null,
+                    'date' =>  $request->date, // Preserve existing date, // Preserve existing date
+                    'terms' => $request->terms ?? '',
+                    'quotation_no' => $request->nos ?? null,
+                ];
+            }
 
-        // return response()->json([
-        //     'success' => true,
-        //     'image_url' => asset('pictures/' . $fileName),
-        //     'type' => $request->type
-        // ]);
+            // Insert all updated items at once
+            QuotationItem::insert($items);
+
+            // Update or create quotation terms and conditions
+            QoutotaionTermsCondtionRemarks::updateOrCreate(
+                ['customer_id' => $customer->id], // Check if exists
+                [
+                    'condition' => $request->Condition,
+                    'warranty' => $request->Warranty,
+                    'vat' => $request->vat,
+                    'availability' => $request->Availability,
+                    'rd' => $request->rd,
+                    'price_effectivity' => $request->PriceEffectivity,
+                ]
+            );
+
+            DB::commit();
+
+            return response()->json(['success' => 'Quotation updated successfully!'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

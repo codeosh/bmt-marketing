@@ -192,6 +192,8 @@ $(document).ready(function () {
         // Get the quotation ID from the clicked row's data attribute
         let quoteId = $(this).data("id");
 
+        $("#updateBtn-customers").removeClass("d-none");//show the edit btn
+
         // Get the Save button and text elements
         const saveBtnquote = document.getElementById("saveBtn-customers");
         const buttonTextcustomer = document.getElementById("buttonText-customer");
@@ -213,14 +215,19 @@ $(document).ready(function () {
                     return;
                 }
 
+                // Populate the edit button with the quotation ID
+                $("#updateBtn-customers").attr("data-is", quoteId);
+
+
                 // Populate customer details in the input fields
+                $("#customerName").val(data.customerName);
                 $("#customerContact").val(data.customerContact);
                 $("#customerQNumber").val(data.quotationNo);
                 $("#customerAddress").val(data.address);
-                $("#customerName").val(data.customerName);
                 $("#customerATN").val(data.attn);
                 $("#customerDateIssued").val(data.date);
                 $("#customerTerms").val(data.terms);
+
 
                 let totalAmount = 0; // Initialize total amount variable
 
@@ -253,10 +260,10 @@ $(document).ready(function () {
                 // Populate QoutotaionTermsCondtionRemarks in the input fields
                 $("#Condition").val(data.condition);
                 $("#Warranty").val(data.warranty);
-                $("#vat").val(data.vat);
+                $("#VAT").val(data.vat);
                 $("#Availability").val(data.availability);
-                $("#rd").val(data.rd);
-                $("#PriceEffectivity").val(data.priceEffectivity);
+                $("#RD").val(data.rd);
+                $("#PriceEffectivity").val(data.price_effectivity);
                 
             },
             error: function (xhr) {
@@ -270,6 +277,8 @@ $(document).ready(function () {
     // Add new quotation button click event
     $("#new-Quote").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
+
+        $("#updateBtn-customers").addClass("d-none");//hide edit btn
 
         //save button
         const saveBtnquote = document.getElementById("saveBtn-customers");
@@ -735,6 +744,184 @@ document.getElementById("printButton").addEventListener("click", function () {
             }
         });
     });
+
+    
+    // Listen for click event on edit button
+    $("#updateBtn-customers").on("click", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        let quoteIdupdate = $(this).attr("data-is"); // Get the ID of the edited quotation
+
+        // Ensure quoteId exists
+        if (!quoteIdupdate) {
+            toastr.error("Quotation ID is missing.");
+            return;
+        }
+
+        // Get button elements for UI feedback during submission
+        const updatesaveBtnquote = document.getElementById("updateBtn-customers");
+        const updatebuttonTextcustomer = document.getElementById("updatebuttonText-customer");
+        const updatebuttonSpinnercustomer = document.getElementById("updatebuttonSpinner-customer");
+        const updatebuttonTextsaveIcon = document.getElementById("saveupdateIcon");
+
+        // Start loading animation (disable button and show spinner)
+        updatebuttonTextcustomer.textContent = "";
+        updatebuttonSpinnercustomer.classList.remove("d-none");
+        updatesaveBtnquote.disabled = true;
+        updatebuttonTextsaveIcon.classList.add("d-none");
+
+        // Create FormData object to send data via AJAX
+        let formData = new FormData();
+        
+        // Append CSRF token for Laravel validation
+        formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
+        formData.append("_method", "PUT"); // Laravel requires PUT/PATCH for updates
+
+        // Collect customer input values and trim spaces
+        let customerName = ($("#customerName").val() ?? "").trim();
+        let nos = ($("#customerQNumber").val() ?? "").trim();
+        let address = ($("#customerAddress").val() ?? "").trim();
+        let contact = ($("#customerContact").val() ?? "").trim();
+        let attn = ($("#customerATN").val() ?? "").trim();
+        let terms = ($("#customerTerms").val() ?? "").trim();
+        let date = ($("#customerDateIssued").val() ?? "").trim();
+
+        let Condition = ($("#Condition").val() ?? "").trim();
+        let Warranty = ($("#Warranty").val() ?? "").trim();
+        let vat = ($("#VAT").val() ?? "").trim();
+        let Availability = ($("#Availability").val() ?? "").trim();
+        let rd = ($("#RD").val() ?? "").trim();
+        let PriceEffectivity = ($("#PriceEffectivity").val() ?? "").trim();
+
+        // Validate required customer fields (Customer Name and Q Number are required)
+        if (!customerName) {
+            toastr.error("Please enter the customer name.");
+
+            //stop loading
+            updatebuttonTextcustomer.textContent = "Edit";
+            updatebuttonSpinnercustomer.classList.add("d-none");
+            updatesaveBtnquote.disabled = false;
+            updatebuttonTextsaveIcon.classList.remove("d-none");
+
+            return;
+        }
+        if (!nos) {
+            toastr.error("Please enter the Q number.");
+            //stop loading
+            updatebuttonTextcustomer.textContent = "Edit";
+            updatebuttonSpinnercustomer.classList.add("d-none");
+            updatesaveBtnquote.disabled = false;
+            updatebuttonTextsaveIcon.classList.remove("d-none");
+
+            return;
+        }
+
+        // Append customer data to FormData
+        formData.append("customer_name", customerName);
+        formData.append("nos", nos);
+        formData.append("address", address);
+        formData.append("contact", contact);
+        formData.append("attn", attn);
+        formData.append("date", date);
+        formData.append("terms", terms);
+
+        // Track first and last valid item row
+        let foundFirstValidItem = false;
+        let lastValidIndex = -1;
+        let tempRows = []; // Temporary array for row data
+
+        // Loop through table rows to collect valid item data
+        $(".table tbody tr").each(function (index) {
+            let quantity = ($(this).find(".quantity").val() ?? "").trim();
+            let unit = ($(this).find("select").val() ?? "").trim();
+            let itemName = ($(this).find(".item-name").val() ?? "").trim();
+            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
+
+            // Check if row contains any valid data
+            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            if (isRowValid) {
+                foundFirstValidItem = true;
+                lastValidIndex = tempRows.length; // Store last valid row index
+            }
+
+            // If at least one valid item exists, store row data
+            if (foundFirstValidItem) {
+                tempRows.push({
+                    quantity: quantity || "",
+                    unit: unit || "",
+                    itemName: itemName || "",
+                    unitPrice: unitPrice || "",
+                    lineAmount: parseFloat(lineAmount) || "",
+                });
+            }
+        });
+
+        // Remove trailing empty rows
+        let validRows = tempRows.slice(0, lastValidIndex + 1);
+
+        // Prevent submission if no valid items
+        if (validRows.length === 0) {
+            toastr.error("Please enter at least one valid item before saving.");
+            
+            //stop loading
+            updatebuttonTextcustomer.textContent = "Edit";
+            updatebuttonSpinnercustomer.classList.add("d-none");
+            updatesaveBtnquote.disabled = false;
+            updatebuttonTextsaveIcon.classList.remove("d-none");
+
+            return;
+        }
+
+        // Append valid items to FormData
+        validRows.forEach((row, index) => {
+            formData.append(`items[${index}][quantity]`, row.quantity);
+            formData.append(`items[${index}][unit]`, row.unit);
+            formData.append(`items[${index}][item_name]`, row.itemName);
+            formData.append(`items[${index}][unit_price]`, row.unitPrice);
+            formData.append(`items[${index}][line_amount]`, row.lineAmount);
+        });
+
+        // Append customer data to FormData
+        formData.append("Condition", Condition);
+        formData.append("Warranty", Warranty);
+        formData.append("vat", vat);
+        formData.append("Availability", Availability);
+        formData.append("rd", rd);
+        formData.append("PriceEffectivity", PriceEffectivity);
+
+        // Submit data via AJAX to Laravel backend
+        $.ajax({
+            url: `/admin-quotation/${quoteIdupdate}`, // Update endpoint with ID
+            type: "POST", // Laravel requires POST with _method=PUT for updates
+            data: formData,
+            processData: false, // Prevent jQuery from processing data
+            contentType: false, // Prevent jQuery from setting content-type header
+            success: function (response) {
+                toastr.success(response.success); // Show success message
+                
+                //stop loading
+                updatebuttonTextcustomer.textContent = "Edit";
+                updatebuttonSpinnercustomer.classList.add("d-none");
+                updatesaveBtnquote.disabled = false;
+                updatebuttonTextsaveIcon.classList.remove("d-none");
+                
+                location.reload(); // Refresh page
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText); // Log error to console
+                toastr.error("Something went wrong! Refresh or try again later"); // Show error message
+                
+                //stop loading
+                updatebuttonTextcustomer.textContent = "Edit";
+                updatebuttonSpinnercustomer.classList.add("d-none");
+                updatesaveBtnquote.disabled = false;
+                updatebuttonTextsaveIcon.classList.remove("d-none");
+            }
+        });
+
+    });
+
 
 
 });

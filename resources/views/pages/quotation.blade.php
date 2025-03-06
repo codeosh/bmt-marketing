@@ -864,13 +864,18 @@
             </div>    
 
             <div class="d-flex align-self-end gap-2">
-                {{-- Edit --}}
-                {{-- <button type="button" class="btn btn-success addButton" data-bs-toggle="modal"
-                    style="font-size:0.6rem; width:80px; border-radius:3px;" >
+                
+                {{-- <button type="button" class="btn btn-success addButton"
+                    style="font-size:0.6rem; width:80px; border-radius:3px;" data-is="123" id="saveChangesBtn">
                     <i class="fa-solid fa-pen-to-square"></i> Edit
                 </button> --}}
 
-                {{-- Print --}}
+                {{-- Edit --}}
+                <button type="button" class="btn btn-info d-none" style="font-size:0.6rem; width:80px; border-radius:3px;" data-is="123" id="updateBtn-customers">
+                    <i class="fa-solid fa-floppy-disk" id="saveupdateIcon"></i>
+                    <span id="updatebuttonText-customer">{{ __('Edit') }}</span>
+                    <span id="updatebuttonSpinner-customer" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
                 {{-- <button type="button" class="btn btn-secondary addButton"
                     style="font-size:0.6rem; width:80px; border-radius:3px;" id="printButton">
                     <i class="fa-solid fa-print"></i> Print
@@ -883,6 +888,7 @@
                     <i class="fa-solid fa-file-image"></i> Png
                  </button>
 
+                 {{-- Print --}}
                 <button type="button" class="btn btn-secondary"
                     style="font-size:0.6rem; width:80px; border-radius:3px;" id="printButton">
                     <i class="fa-solid fa-print" id="printQuotaionIcon"></i>
