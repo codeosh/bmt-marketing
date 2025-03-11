@@ -110,18 +110,18 @@
                         {{-- Customer Address --}}
                         <div class="customerAddress d-flex w-100 align-items-center">
                             <label for="customerAddress" class="me-2">Address&nbsp; &nbsp; &nbsp;:</label>
-                            <input type="text" id="customerAddress" class="flex-grow-1" style="border: none; outline: none;">
+                            <input type="text" id="customerAddress" class="flex-grow-1" style="border: none; outline: none;font-weight: normal;">
                         </div>
 
                         {{-- Customer Contact Number --}}
                         <div class="customerContact w-100 d-flex w-100 align-items-center">
                             <label for="customerContact" class="me-2">Contact&nbsp; &nbsp; &nbsp;:</label>
-                            <input type="text" id="customerContact" class="flex-grow-1" style="border: none; outline: none;">
+                            <input type="text" id="customerContact" class="flex-grow-1" style="border: none; outline: none;font-weight: normal;">
                         </div>
-                        {{-- ATN --}}
+                        {{-- ATTN --}}
                         <div class="customerATN d-flex w-100 align-items-center">
-                            <label for="customerATN" class="me-2">ATN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</label>
-                            <input type="text" id="customerATN" class="flex-grow-1" style="border: none; outline: none;">
+                            <label for="customerATN" class="me-2">ATTN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</label>
+                            <input type="text" id="customerATN" class="flex-grow-1" style="border: none; outline: none;font-weight: normal;">
                         </div>
 
                     </div>
@@ -840,10 +840,10 @@
                                 <p>Quote & Prepared by:</p>
                             </div>
                             <div class="d-flex flex-column text-center">
-                                <p class="m-0 p-0 fw-bold" style="font-size: 1.2rem">Mr. Sales Executive</p>
+                                <p class="m-0 p-0 fw-bold" style="font-size: 1.2rem">{{auth()->user()->name}}</p>
                                 <p class="m-0 p-0" style="font-size: 0.8rem">Tech/Sales Representative</p>
-                                <p class="m-0 p-0" style="font-size: 0.7rem;">09225282333</p>
-                                <p class="m-0 p-0" style="font-size: 0.7rem">0988626001</p>
+                                <p class="m-0 p-0" style="font-size: 0.7rem;">{{auth()->user()->email}}</p>
+                                <p class="m-0 p-0" style="font-size: 0.7rem">{{auth()->user()->phoneNumber}}</p>
                             </div>
                             
                         </div>
@@ -864,11 +864,6 @@
             </div>    
 
             <div class="d-flex align-self-end gap-2">
-                
-                {{-- <button type="button" class="btn btn-success addButton"
-                    style="font-size:0.6rem; width:80px; border-radius:3px;" data-is="123" id="saveChangesBtn">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                </button> --}}
 
                 {{-- Edit --}}
                 <button type="button" class="btn btn-info d-none" style="font-size:0.6rem; width:80px; border-radius:3px;" data-is="123" id="updateBtn-customers">
@@ -876,11 +871,13 @@
                     <span id="updatebuttonText-customer">{{ __('Edit') }}</span>
                     <span id="updatebuttonSpinner-customer" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                 </button>
-                {{-- <button type="button" class="btn btn-secondary addButton"
-                    style="font-size:0.6rem; width:80px; border-radius:3px;" id="printButton">
-                    <i class="fa-solid fa-print"></i> Print
-                </button> --}}
 
+                {{-- copy --}}
+                <button type="button" class="btn btn-info d-none" style="font-size:0.6rem; width:80px; border-radius:3px;" data-copyID="123" id="CopyBtn-customers">
+                    <i class="fa-solid fa-floppy-disk" id="saveCopyIcon"></i>
+                    <span id="CopybuttonText-customer">{{ __('Copy') }}</span>
+                    <span id="CopybuttonSpinner-customer" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
 
                  {{-- Png --}}
                  <button type="button" id="convertCustomerDetailsBtnToPNG" class="btn bg-success text-white addButton" data-bs-toggle="modal"

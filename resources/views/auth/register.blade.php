@@ -26,8 +26,15 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
+                                        <label for="phoneNumber" class="form-label">Phone number</label>
+                                        <input id="phoneNumber" class="form-control" type="text" name="phoneNumber" required>
+                                        <span class="text-danger" id="pNumberError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
                                         <label for="role" class="form-label">Role</label>
-                                        <select class="form-select" id="role" name="role">
+                                        <select class="form-control" id="role" name="role" style="height:100%;">
                                             <option value="admin">Admin</option>
                                             <option value="user">User</option>
                                         </select>

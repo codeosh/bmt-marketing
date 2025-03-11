@@ -110,6 +110,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return response()->json(['quotation_no' => $newQuotationNo]);
         });
         Route::post('/update-image/{id}', [QuotationController::class, 'updateImage']);
+        Route::put('/CopyQuotation', [QuotationController::class, 'Copy']); // for copy quotation
 
         //guides
         Route::resource('admin-guides', GuidesController::class);

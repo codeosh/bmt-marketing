@@ -193,6 +193,7 @@ $(document).ready(function () {
         let quoteId = $(this).data("id");
 
         $("#updateBtn-customers").removeClass("d-none");//show the edit btn
+        $("#CopyBtn-customers").removeClass("d-none");//show the edit btn
 
         // Get the Save button and text elements
         const saveBtnquote = document.getElementById("saveBtn-customers");
@@ -217,6 +218,8 @@ $(document).ready(function () {
 
                 // Populate the edit button with the quotation ID
                 $("#updateBtn-customers").attr("data-is", quoteId);
+                // Populate the copy button with the quotation ID
+                $("#CopyBtn-customers").attr("data-copyID", quoteId);
 
 
                 // Populate customer details in the input fields
@@ -315,6 +318,14 @@ $(document).ready(function () {
 
         $("input").val(""); // Clears all input fields on the page
         $("select").val("");
+
+        //put to default info
+        $("#Condition").val("All Brand New 1 Year on");
+        $("#Warranty").val("All");
+        $("#VAT").val("Major Parts");
+        $("#Availability").val("Excluded");
+        $("#RD").val("Onstock");
+        $("#PriceEffectivity").val("1 Week");
         
         //for the date
         let today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
@@ -327,6 +338,7 @@ $(document).ready(function () {
         adnewwbuttonSpinner.classList.add("d-none");
         adnewwIcon.classList.remove("d-none");
 
+        //change the save btn to a workable state/mogana na sya
         saveBtnquote.disabled = false;
         buttonTextcustomer.textContent = "Save";
         
@@ -638,7 +650,7 @@ document.getElementById("printButton").addEventListener("click", function () {
         $('#imageModal').modal('show'); // Show modal
     });
 
-    // File Input Change Event - Show Preview in Modal
+    // image/File Input Change Event - Show Preview in Modal
     $('#fileInput').on('change', function (event) {
         let file = event.target.files[0];
 
@@ -746,7 +758,7 @@ document.getElementById("printButton").addEventListener("click", function () {
     });
 
     
-    // Listen for click event on edit button
+    // Listen for click event on EDIT button
     $("#updateBtn-customers").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
 
@@ -921,10 +933,162 @@ document.getElementById("printButton").addEventListener("click", function () {
         });
 
     });
+    
 
+    //copy PRICE-QUOTATION
+    $("#CopyBtn-customers").on("click", function (e) {
+        e.preventDefault(); // Prevent default form submission
 
+        // Get button elements for UI feedback during submission
+        const CopysaveBtnquote = document.getElementById("CopyBtn-customers");
+        const CopybuttonTextcustomer = document.getElementById("CopybuttonText-customer");
+        const CopybuttonSpinnercustomer = document.getElementById("CopybuttonSpinner-customer");
+        const CopybuttonTextsaveIcon = document.getElementById("saveCopyIcon");
+
+        // Start loading animation (disable button and show spinner)
+        CopybuttonTextcustomer.textContent = "";
+        CopybuttonSpinnercustomer.classList.remove("d-none");
+        CopysaveBtnquote.disabled = true;
+        CopybuttonTextsaveIcon.classList.add("d-none");
+
+        // Create FormData object to send data via AJAX
+        let formData = new FormData();
+        
+        // Append CSRF token for Laravel validation
+        formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
+        formData.append("_method", "PUT"); // Laravel requires PUT/PATCH for updates
+
+        // Collect customer input values and trim spaces
+        let customerName = ($("#customerName").val() ?? "").trim();
+        let address = ($("#customerAddress").val() ?? "").trim();
+        let contact = ($("#customerContact").val() ?? "").trim();
+        let attn = ($("#customerATN").val() ?? "").trim();
+        let terms = ($("#customerTerms").val() ?? "").trim();
+        
+
+        let Condition = ($("#Condition").val() ?? "").trim();
+        let Warranty = ($("#Warranty").val() ?? "").trim();
+        let vat = ($("#VAT").val() ?? "").trim();
+        let Availability = ($("#Availability").val() ?? "").trim();
+        let rd = ($("#RD").val() ?? "").trim();
+        let PriceEffectivity = ($("#PriceEffectivity").val() ?? "").trim();
+
+        // Validate required customer fields (Customer Name and Q Number are required)
+        if (!customerName) {
+            toastr.error("Please enter the customer name.");
+
+            //stop loading
+            CopybuttonTextcustomer.textContent = "Copy";
+            CopybuttonSpinnercustomer.classList.add("d-none");
+            CopysaveBtnquote.disabled = false;
+            CopybuttonTextsaveIcon.classList.remove("d-none");
+
+            return;
+        }
+        
+
+        // Append customer data to FormData
+        formData.append("customer_name", customerName + "- Copy");
+        formData.append("address", address);
+        formData.append("contact", contact);
+        formData.append("attn", attn);
+        formData.append("terms", terms);
+
+        // Track first and last valid item row
+        let foundFirstValidItem = false;
+        let lastValidIndex = -1;
+        let tempRows = []; // Temporary array for row data
+
+        // Loop through table rows to collect valid item data
+        $(".table tbody tr").each(function (index) {
+            let quantity = ($(this).find(".quantity").val() ?? "").trim();
+            let unit = ($(this).find("select").val() ?? "").trim();
+            let itemName = ($(this).find(".item-name").val() ?? "").trim();
+            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
+
+            // Check if row contains any valid data
+            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            if (isRowValid) {
+                foundFirstValidItem = true;
+                lastValidIndex = tempRows.length; // Store last valid row index
+            }
+
+            // If at least one valid item exists, store row data
+            if (foundFirstValidItem) {
+                tempRows.push({
+                    quantity: quantity || "",
+                    unit: unit || "",
+                    itemName: itemName || "",
+                    unitPrice: unitPrice || "",
+                    lineAmount: parseFloat(lineAmount) || "",
+                });
+            }
+        });
+
+        // Remove trailing empty rows
+        let validRows = tempRows.slice(0, lastValidIndex + 1);
+
+        // Prevent submission if no valid items
+        if (validRows.length === 0) {
+            toastr.error("Please enter at least one valid item before saving.");
+            
+            //stop loading
+            CopybuttonTextcustomer.textContent = "Copy";
+            CopybuttonSpinnercustomer.classList.add("d-none");
+            CopysaveBtnquote.disabled = false;
+            CopybuttonTextsaveIcon.classList.remove("d-none");
+
+            return;
+        }
+
+        // Append valid items to FormData
+        validRows.forEach((row, index) => {
+            formData.append(`items[${index}][quantity]`, row.quantity);
+            formData.append(`items[${index}][unit]`, row.unit);
+            formData.append(`items[${index}][item_name]`, row.itemName);
+            formData.append(`items[${index}][unit_price]`, row.unitPrice);
+            formData.append(`items[${index}][line_amount]`, row.lineAmount);
+        });
+
+        // Append customer data to FormData
+        formData.append("Condition", Condition);
+        formData.append("Warranty", Warranty);
+        formData.append("vat", vat);
+        formData.append("Availability", Availability);
+        formData.append("rd", rd);
+        formData.append("PriceEffectivity", PriceEffectivity);
+
+        // Submit data via AJAX to Laravel backend
+        $.ajax({
+            url: `/CopyQuotation`, // Update endpoint with ID
+            type: "POST", // Laravel requires POST with _method=PUT for updates
+            data: formData,
+            processData: false, // Prevent jQuery from processing data
+            contentType: false, // Prevent jQuery from setting content-type header
+            success: function (response) {
+                toastr.success(response.success); // Show success message
+                
+                //stop loading
+                CopybuttonTextcustomer.textContent = "Copy";
+                CopybuttonSpinnercustomer.classList.add("d-none");
+                CopysaveBtnquote.disabled = false;
+                CopybuttonTextsaveIcon.classList.remove("d-none");
+                
+                location.reload(); // Refresh page
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText); // Log error to console
+                toastr.error("Something went wrong! Refresh or try again later"); // Show error message
+                
+                //stop loading
+                CopybuttonTextcustomer.textContent = "Copy";
+                CopybuttonSpinnercustomer.classList.add("d-none");
+                CopysaveBtnquote.disabled = false;
+                CopybuttonTextsaveIcon.classList.remove("d-none");
+            }
+        });
+
+    })
 
 });
-
-
-

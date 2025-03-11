@@ -325,4 +325,81 @@ class QuotationController extends Controller
             'type' => $request->type
         ]);
     }
+
+    public function Copy(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            // Get the latest quotation number from the database
+            $latestQuotationForCopy = QuotationItem::latest('quotation_no')->first();
+
+            // If there's no quotation yet, start from 10001
+            $newQuotationNoForCopy = $latestQuotationForCopy ? $latestQuotationForCopy->quotation_no + 1 : 10001;
+
+            // Validate required fields
+            $validated = $request->validate([
+                'customer_name' => 'required|string|max:255',
+                'address' => 'nullable|string|max:255',
+                'contact' => 'nullable|string|max:20',
+                'attn' => 'nullable|string|max:255',
+                'terms' => 'nullable|string|max:255',
+                'items' => 'required|array',  // Ensure 'items' is an array
+
+                'Condition' => 'nullable|string|max:255',
+                'Warranty' => 'nullable|string|max:255',
+                'vat' => 'nullable|string|max:255',
+                'Availability' => 'nullable|string|max:255',
+                'rd' => 'nullable|string|max:255',
+                'PriceEffectivity' => 'nullable|string|max:255',  // Ensure 'items' is an array
+            ]);
+
+            // Insert Customer
+            $customer = QuotationCustomer::create([
+                'nos' => $newQuotationNoForCopy,
+                'customer_name' => $request->customer_name,
+                'address' => $request->address,
+                'contact' => $request->contact,
+            ]);
+
+            // Prepare Items (From the 'items' array in the request)
+            $items = [];
+            foreach ($request->items as $item) {
+                $items[] = [
+                    'customer_id' => $customer->id,  // Attach the correct customer_id here
+                    'quantity' => $item['quantity'],
+                    'unit' => $item['unit'],
+                    'item_name' => $item['item_name'],
+                    'unit_price' => $item['unit_price'],
+                    'line_amount' => $item['line_amount'],
+                    'attn' => $request->attn ?? null,
+                    'date' => now(),
+                    'terms' => $request->terms ?? '',
+                    'quotation_no' => $newQuotationNoForCopy,
+                ];
+            }
+
+            // Insert all the items at once
+            QuotationItem::insert($items);
+
+            // Insert QoutotaionTermsCondtionRemarks
+            QoutotaionTermsCondtionRemarks::create([
+                'customer_id' => $customer->id ?? null, // Ensure customer_id is set
+                'condition' => $request->Condition,  // Match request key exactly
+                'warranty' => $request->Warranty,
+                'vat' => $request->vat,
+                'availability' => $request->Availability,
+                'rd' => $request->rd,
+                'price_effectivity' => $request->PriceEffectivity,
+            ]);
+
+
+            DB::commit();
+
+            return response()->json(['success' => 'Quotation saved successfully!'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

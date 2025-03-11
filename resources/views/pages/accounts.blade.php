@@ -18,6 +18,7 @@
         <thead class="text-white">
             <tr>
                 <th class="px-3 py-2">Name</th>
+                <th class="px-3 py-2">Phone No.</th>
                 <th class="px-3 py-2">Email</th>
                 <th class="px-3 py-2">Role</th>
                 <th class="px-3 py-2">Action</th>
@@ -27,6 +28,7 @@
             @foreach ($accounts as $item)   
             <tr>
                 <td class="px-3 py-2">{{$item->name}}</td>
+                <td class="px-3 py-2">{{$item->phoneNumber}}</td>
                 <td class="px-3 py-2">{{$item->email}}</td>
                 <td class="px-3 py-2"><span class="badge bg-success">{{$item->role}}</span></td>
                 <td class="px-3 py-2">
