@@ -3,12 +3,18 @@ function calculateLineAmount(element) {
     let row = element.closest("tr");
 
     // Get input values and remove commas if present
-    let quantity = parseFloat(row.querySelector(".quantity").value.replace(/,/g, "")) || 0;
-    let unitPrice = parseFloat(row.querySelector(".unit-price").value.replace(/,/g, "")) || 0;
+    let quantity =
+        parseFloat(row.querySelector(".quantity").value.replace(/,/g, "")) || 0;
+    let unitPrice =
+        parseFloat(row.querySelector(".unit-price").value.replace(/,/g, "")) ||
+        0;
     let lineAmount = quantity * unitPrice;
 
     // Format line amount with commas
-    row.querySelector(".line-amount").value = lineAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    row.querySelector(".line-amount").value = lineAmount.toLocaleString(
+        "en-US",
+        { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+    );
 
     calculateTotal();
 }
@@ -16,18 +22,21 @@ function calculateLineAmount(element) {
 //for total
 function calculateTotal() {
     let total = 0;
-    
-    document.querySelectorAll(".line-amount").forEach(input => {
+
+    document.querySelectorAll(".line-amount").forEach((input) => {
         total += parseFloat(input.value.replace(/,/g, "")) || 0; // Remove commas before summing
     });
 
     // Format total with commas
-    document.getElementById("totalAmount").value = total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("totalAmount").value = total.toLocaleString(
+        "en-US",
+        { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+    );
 }
 
 // Automatically format user input to include commas
-document.querySelectorAll(".quantity, .unit-price").forEach(input => {
-    input.addEventListener("input", function() {
+document.querySelectorAll(".quantity, .unit-price").forEach((input) => {
+    input.addEventListener("input", function () {
         let value = this.value.replace(/,/g, ""); // Remove existing commas
         if (!isNaN(value) && value !== "") {
             this.value = parseFloat(value).toLocaleString("en-US");
@@ -35,11 +44,7 @@ document.querySelectorAll(".quantity, .unit-price").forEach(input => {
     });
 });
 
-
-
-
 $(document).ready(function () {
-
     //save customer and ilang items ge palit
     // Listen for click event on Save button
     $("#saveBtn-customers").on("click", function (e) {
@@ -47,8 +52,12 @@ $(document).ready(function () {
 
         // Get button elements for UI feedback during submission
         const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById("buttonText-customer");
-        const buttonSpinnercustomer = document.getElementById("buttonSpinner-customer");
+        const buttonTextcustomer = document.getElementById(
+            "buttonText-customer"
+        );
+        const buttonSpinnercustomer = document.getElementById(
+            "buttonSpinner-customer"
+        );
         const buttonTextsaveIcon = document.getElementById("saveIcon");
 
         // Start loading animation (disable button and show spinner)
@@ -59,10 +68,10 @@ $(document).ready(function () {
 
         // Create FormData object to send data via AJAX
         let formData = new FormData();
-        
+
         // Append CSRF token for Laravel validation
         formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
-        
+
         // Collect customer input values and trim spaces
         let customerName = ($("#customerName").val() ?? "").trim();
         let nos = ($("#customerQNumber").val() ?? "").trim();
@@ -77,7 +86,7 @@ $(document).ready(function () {
         let Availability = ($("#Availability").val() ?? "").trim();
         let rd = ($("#RD").val() ?? "").trim();
         let PriceEffectivity = ($("#PriceEffectivity").val() ?? "").trim();
-        
+
         // Validate required customer fields (Customer Name and Q Number are required)
         if (!customerName) {
             toastr.error("Please enter the: customer name.");
@@ -89,7 +98,7 @@ $(document).ready(function () {
             stopLoading();
             return;
         }
-        
+
         // Append customer data to FormData
         formData.append("customer_name", customerName);
         formData.append("nos", nos);
@@ -97,7 +106,7 @@ $(document).ready(function () {
         formData.append("contact", contact);
         formData.append("attn", attn);
         formData.append("terms", terms);
-        
+
         // Track first and last valid item row
         let foundFirstValidItem = false;
         let lastValidIndex = -1;
@@ -108,16 +117,21 @@ $(document).ready(function () {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
-            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
+            let unitPrice = ($(this).find(".unit-price").val() ?? "")
+                .trim()
+                .replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "")
+                .trim()
+                .replace(/,/g, "");
 
             // Check if row contains any valid data
-            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            let isRowValid =
+                quantity || unit || itemName || unitPrice || lineAmount;
             if (isRowValid) {
                 foundFirstValidItem = true;
                 lastValidIndex = tempRows.length; // Store last valid row index
             }
-            
+
             // If at least one valid item exists, store row data
             if (foundFirstValidItem) {
                 tempRows.push({
@@ -171,9 +185,11 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 console.error(xhr.responseText); // Log error to console
-                toastr.error("Something went wrong! Refresh or Try again later"); // Show error message
+                toastr.error(
+                    "Something went wrong! Refresh or Try again later"
+                ); // Show error message
                 stopLoading(); // Reset UI
-            }
+            },
         });
 
         // Function to reset UI after loading
@@ -185,19 +201,20 @@ $(document).ready(function () {
         }
     });
 
-    
     // Show the information of the clicked row
     // Handle row click event
     $("#quotationTable tbody").on("click", ".quote-row", function () {
         // Get the quotation ID from the clicked row's data attribute
         let quoteId = $(this).data("id");
 
-        $("#updateBtn-customers").removeClass("d-none");//show the edit btn
-        $("#CopyBtn-customers").removeClass("d-none");//show the edit btn
+        $("#updateBtn-customers").removeClass("d-none"); //show the edit btn
+        $("#CopyBtn-customers").removeClass("d-none"); //show the edit btn
 
         // Get the Save button and text elements
         const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById("buttonText-customer");
+        const buttonTextcustomer = document.getElementById(
+            "buttonText-customer"
+        );
 
         // Disable the Save button to prevent multiple clicks while loading
         saveBtnquote.disabled = true;
@@ -221,7 +238,6 @@ $(document).ready(function () {
                 // Populate the copy button with the quotation ID
                 $("#CopyBtn-customers").attr("data-copyID", quoteId);
 
-
                 // Populate customer details in the input fields
                 $("#customerName").val(data.customerName);
                 $("#customerContact").val(data.customerContact);
@@ -230,7 +246,6 @@ $(document).ready(function () {
                 $("#customerATN").val(data.attn);
                 $("#customerDateIssued").val(data.date);
                 $("#customerTerms").val(data.terms);
-
 
                 let totalAmount = 0; // Initialize total amount variable
 
@@ -245,12 +260,33 @@ $(document).ready(function () {
                         $(row).find("select").val(item.unit);
                         $(row).find(".item-name").val(item.item_name);
                         // Convert and display unit price and line amount with commas
-                        $(row).find(".unit-price").val(item.unit_price ? parseFloat(item.unit_price).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "");//kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display);
-                        $(row).find(".line-amount").val(item.line_amount ? parseFloat(item.line_amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "");//kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display
-                        
+                        $(row)
+                            .find(".unit-price")
+                            .val(
+                                item.unit_price
+                                    ? parseFloat(
+                                          item.unit_price
+                                      ).toLocaleString("en-US", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                      })
+                                    : ""
+                            ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display);
+                        $(row)
+                            .find(".line-amount")
+                            .val(
+                                item.line_amount
+                                    ? parseFloat(
+                                          item.line_amount
+                                      ).toLocaleString("en-US", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                      })
+                                    : ""
+                            ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display
+
                         // Add line amount to the total amount calculation
                         totalAmount += parseFloat(item.line_amount) || 0;
-
                     } else {
                         // If there's no corresponding item, clear the row fields
                         $(row).find("input, select").val("");
@@ -258,7 +294,12 @@ $(document).ready(function () {
                 });
 
                 // Update the total amount field with the calculated total (formatted with commas)
-                $("#totalAmount").val(totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+                $("#totalAmount").val(
+                    totalAmount.toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                    })
+                );
 
                 // Populate QoutotaionTermsCondtionRemarks in the input fields
                 $("#Condition").val(data.condition);
@@ -267,7 +308,6 @@ $(document).ready(function () {
                 $("#Availability").val(data.availability);
                 $("#RD").val(data.rd);
                 $("#PriceEffectivity").val(data.price_effectivity);
-                
             },
             error: function (xhr) {
                 // Log error message in case of an AJAX failure
@@ -276,25 +316,27 @@ $(document).ready(function () {
         });
     });
 
-
     // Add new quotation button click event
     $("#new-Quote").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
 
-        $("#updateBtn-customers").addClass("d-none");//hide edit btn
+        $("#updateBtn-customers").addClass("d-none"); //hide edit btn
 
         //save button
         const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById("buttonText-customer");
-
+        const buttonTextcustomer = document.getElementById(
+            "buttonText-customer"
+        );
 
         //add new button
         const addnewBtnquote = document.getElementById("saveBtn-customers");
-        const adnewwbuttonTextcustomer = document.getElementById("buttonText-Quote");
-        const adnewwbuttonSpinner = document.getElementById("buttonSpinner-Quote");
+        const adnewwbuttonTextcustomer =
+            document.getElementById("buttonText-Quote");
+        const adnewwbuttonSpinner = document.getElementById(
+            "buttonSpinner-Quote"
+        );
         const adnewwIcon = document.getElementById("addIcon");
-        
-        
+
         // Get latest quotation number via AJAX
         $.ajax({
             url: "/get-latest-quotation", // Laravel route
@@ -308,9 +350,8 @@ $(document).ready(function () {
                 alert("Failed to fetch latest quotation number.");
             },
         });
-        
-        
-        //addnew start loading 
+
+        //addnew start loading
         addnewBtnquote.disabled = true;
         adnewwbuttonTextcustomer.textContent = "";
         adnewwbuttonSpinner.classList.remove("d-none");
@@ -326,11 +367,10 @@ $(document).ready(function () {
         $("#Availability").val("Excluded");
         $("#RD").val("Onstock");
         $("#PriceEffectivity").val("1 Week");
-        
+
         //for the date
-        let today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        let today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
         $("#customerDateIssued").val(today);
-        
 
         //add new stop loading
         addnewBtnquote.disabled = false;
@@ -341,15 +381,12 @@ $(document).ready(function () {
         //change the save btn to a workable state/mogana na sya
         saveBtnquote.disabled = false;
         buttonTextcustomer.textContent = "Save";
-        
-        
     });
 
     //quotation search
     $("#search").on("keyup", function () {
         let searchTerm = $(this).val().toLowerCase(); // Convert input to lowercase
         let alert = document.getElementById("alertForNoRecordsWhenSearch");
-        
 
         $(".quote-row").each(function () {
             let customerName = $(this).find("td:eq(1)").text().toLowerCase(); // Get customer name from second column
@@ -365,14 +402,13 @@ $(document).ready(function () {
         });
     });
 
-
-    //for delete para sa customer and their items 
+    //for delete para sa customer and their items
     // Variable to store the selected row ID
     let selectedRowId = null;
     // Handle row selection and highlight the selected row
     $(".quote-row").on("click", function () {
         selectedRowId = $(this).data("id"); // Store selected row ID
-        
+
         // Remove Bootstrap highlighting from all rows and highlight the clicked one, para is rajuy ma highlight and delete, kay , if wala ni sya pedi nimo sya ma highlight tanan then ma delete tong na highligh tanan, unless if naa ni sya para nug click nimos uban kato ra ang ma highlight then mawala ag highlight sa previous one nimo para isa rajuy pedi ma delete
         $(".quote-row").removeClass("table-danger");
         $(this).addClass("table-danger"); // Bootstrap class for a red highlight
@@ -399,7 +435,9 @@ $(document).ready(function () {
                     url: `/admin-quotation/${selectedRowId}`,
                     type: "DELETE",
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
                     },
                     success: function () {
                         toastr.success("Deleted successfully!");
@@ -422,149 +460,174 @@ $(document).ready(function () {
     });
 
     //for converting to PNG ni sya
-    document.getElementById("convertCustomerDetailsBtnToPNG").addEventListener("click", function () {
-        let element = document.getElementById("customerDetailsContainer");
-        let saveBtnquote = document.getElementById("downloadImage"); // Download button
-        let buttonTextcustomer = document.getElementById("buttonText-Quotationpng"); // Button text span
-        let buttonSpinnercustomer = document.getElementById("buttonSpinner-Quotationpng"); // Loading spinner
-        let buttonTextsaveIcon = document.getElementById("saveQuotaionIconpng"); // Save icon
+    document
+        .getElementById("convertCustomerDetailsBtnToPNG")
+        .addEventListener("click", function () {
+            let element = document.getElementById("customerDetailsContainer");
+            let saveBtnquote = document.getElementById("downloadImage"); // Download button
+            let buttonTextcustomer = document.getElementById(
+                "buttonText-Quotationpng"
+            ); // Button text span
+            let buttonSpinnercustomer = document.getElementById(
+                "buttonSpinner-Quotationpng"
+            ); // Loading spinner
+            let buttonTextsaveIcon = document.getElementById(
+                "saveQuotaionIconpng"
+            ); // Save icon
 
-
-        // Temporarily adjust styles for full capture
-        let originalStyle = {
-            width: element.style.width,
-            maxWidth: element.style.maxWidth,
-            overflow: element.style.overflow,
-            height: element.style.height
-        };
-        
-        element.style.width = element.scrollWidth + "px"; // Ensure full width
-        element.style.maxWidth = "none"; // Prevent width limits
-        element.style.overflow = "visible"; // Show hidden content
-        element.style.height = "auto"; // Ensure full height capture
-
-        html2canvas(element, {
-            scrollX: 0,
-            scrollY: -window.scrollY, // Ensure it captures from the top
-            windowWidth: document.documentElement.scrollWidth,
-            windowHeight: element.scrollHeight, // Capture the full height
-            useCORS: true // If there are external images
-        }).then(canvas => {
-            let imageURL = canvas.toDataURL("image/png");
-
-            // Restore original styles
-            element.style.width = originalStyle.width;
-            element.style.maxWidth = originalStyle.maxWidth;
-            element.style.overflow = originalStyle.overflow;
-            element.style.height = originalStyle.height;
-
-            // Set image preview in modal
-            document.getElementById("previewImage").src = imageURL;
-            
-            // Show the modal
-            let modal = new bootstrap.Modal(document.getElementById("imagePreviewModal"));
-            modal.show();
-
-            // Set download button action
-            document.getElementById("downloadImage").onclick = function () {
-
-                // Start loading animation (disable button and show spinner)
-                saveBtnquote.disabled = true;
-                buttonTextcustomer.textContent = "";
-                buttonSpinnercustomer.classList.remove("d-none");
-                buttonTextsaveIcon.classList.add("d-none");
-                
-                let link = document.createElement("a");
-                link.href = imageURL;
-                link.download = "customer-details.png";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-                // Stop loading animation after a short delay to ensure download starts
-                setTimeout(() => {
-                    saveBtnquote.disabled = false;
-                    buttonTextcustomer.textContent = "Download Image";
-                    buttonSpinnercustomer.classList.add("d-none");
-                    buttonTextsaveIcon.classList.remove("d-none");
-                }, 500); // Adjust delay if necessary
+            // Temporarily adjust styles for full capture
+            let originalStyle = {
+                width: element.style.width,
+                maxWidth: element.style.maxWidth,
+                overflow: element.style.overflow,
+                height: element.style.height,
             };
+
+            element.style.width = element.scrollWidth + "px"; // Ensure full width
+            element.style.maxWidth = "none"; // Prevent width limits
+            element.style.overflow = "visible"; // Show hidden content
+            element.style.height = "auto"; // Ensure full height capture
+
+            html2canvas(element, {
+                scrollX: 0,
+                scrollY: -window.scrollY, // Ensure it captures from the top
+                windowWidth: document.documentElement.scrollWidth,
+                windowHeight: element.scrollHeight, // Capture the full height
+                useCORS: true, // If there are external images
+            }).then((canvas) => {
+                let imageURL = canvas.toDataURL("image/png");
+
+                // Restore original styles
+                element.style.width = originalStyle.width;
+                element.style.maxWidth = originalStyle.maxWidth;
+                element.style.overflow = originalStyle.overflow;
+                element.style.height = originalStyle.height;
+
+                // Set image preview in modal
+                document.getElementById("previewImage").src = imageURL;
+
+                // Show the modal
+                let modal = new bootstrap.Modal(
+                    document.getElementById("imagePreviewModal")
+                );
+                modal.show();
+
+                // Set download button action
+                document.getElementById("downloadImage").onclick = function () {
+                    // Start loading animation (disable button and show spinner)
+                    saveBtnquote.disabled = true;
+                    buttonTextcustomer.textContent = "";
+                    buttonSpinnercustomer.classList.remove("d-none");
+                    buttonTextsaveIcon.classList.add("d-none");
+
+                    let link = document.createElement("a");
+                    link.href = imageURL;
+                    link.download = "customer-details.png";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Stop loading animation after a short delay to ensure download starts
+                    setTimeout(() => {
+                        saveBtnquote.disabled = false;
+                        buttonTextcustomer.textContent = "Download Image";
+                        buttonSpinnercustomer.classList.add("d-none");
+                        buttonTextsaveIcon.classList.remove("d-none");
+                    }, 500); // Adjust delay if necessary
+                };
+            });
         });
-    });
 
-// for PRINT functionality
-document.getElementById("printButton").addEventListener("click", function () {
-    let customerDetailsContainer = document.getElementById("detailsForPrint");
+    // for PRINT functionality
+    document
+        .getElementById("printButton")
+        .addEventListener("click", function () {
+            let customerDetailsContainer =
+                document.getElementById("detailsForPrint");
 
-    if (!customerDetailsContainer) {
-        alert("Error: Content container not found!");
-        return;
-    }
-    
-    let printBtnquotep = document.getElementById("printButton");
-    let buttonTextcustomerp = document.getElementById("buttonText-Quotation");
-    let buttonSpinnercustomerp = document.getElementById("buttonSpinner-Quotation");
-    let buttonTextsaveIconp = document.getElementById("saveQuotaionIcon");
+            if (!customerDetailsContainer) {
+                alert("Error: Content container not found!");
+                return;
+            }
 
-    // Clone the container
-    let clonedContent = customerDetailsContainer.cloneNode(true);
-        
-    // Remove disabled attribute from inputs and force black text
-    clonedContent.querySelectorAll("input[disabled]").forEach(input => {
-        input.removeAttribute("disabled");
-        input.style.color = "black";
-        input.style.backgroundColor = "white";
-    });
+            let printBtnquotep = document.getElementById("printButton");
+            let buttonTextcustomerp = document.getElementById(
+                "buttonText-Quotation"
+            );
+            let buttonSpinnercustomerp = document.getElementById(
+                "buttonSpinner-Quotation"
+            );
+            let buttonTextsaveIconp =
+                document.getElementById("saveQuotaionIcon");
 
-    // Convert all <select> elements to their selected values
-    clonedContent.querySelectorAll("select").forEach(select => {
-        // Get the latest value from the live DOM, not just the cloned version
-        let liveSelect = document.querySelector(`[name="${select.name}"]`);
-        let selectedValue = liveSelect ? liveSelect.value : ""; 
+            // Clone the container
+            let clonedContent = customerDetailsContainer.cloneNode(true);
 
-        console.log("Live Selected Value:", selectedValue);
+            // Remove disabled attribute from inputs and force black text
+            clonedContent
+                .querySelectorAll("input[disabled]")
+                .forEach((input) => {
+                    input.removeAttribute("disabled");
+                    input.style.color = "black";
+                    input.style.backgroundColor = "white";
+                });
 
-        let selectedText = selectedValue 
-            ? (Array.from(select.options).find(option => option.value === selectedValue)?.text || selectedValue) 
-            : "";
+            // Convert all <select> elements to their selected values
+            clonedContent.querySelectorAll("select").forEach((select) => {
+                // Get the latest value from the live DOM, not just the cloned version
+                let liveSelect = document.querySelector(
+                    `[name="${select.name}"]`
+                );
+                let selectedValue = liveSelect ? liveSelect.value : "";
 
-        console.log("Selected Text After Fix:", selectedText);
+                console.log("Live Selected Value:", selectedValue);
 
-        let span = document.createElement("span");
-        span.textContent = selectedText;
-        span.style.color = "black";
-        
+                let selectedText = selectedValue
+                    ? Array.from(select.options).find(
+                          (option) => option.value === selectedValue
+                      )?.text || selectedValue
+                    : "";
 
-        select.parentNode.replaceChild(span, select); // Replace <select> with <span>
-    });
+                console.log("Selected Text After Fix:", selectedText);
 
-    // Start loading animation (disable button and show spinner)
-    setTimeout(() => {
-        printBtnquotep.disabled = true;
-        buttonTextcustomerp.textContent = "";
-        buttonSpinnercustomerp.classList.remove("d-none");
-        buttonTextsaveIconp.classList.add("d-none");
-    }, 500);
+                let span = document.createElement("span");
+                span.textContent = selectedText;
+                span.style.color = "black";
 
-    // Create an iframe
-    let iframe = document.createElement("iframe");
-    iframe.style.position = "absolute";
-    iframe.style.width = "0px";
-    iframe.style.height = "0px";
-    iframe.style.border = "none";
-    document.body.appendChild(iframe);
+                select.parentNode.replaceChild(span, select); // Replace <select> with <span>
+            });
 
-    let doc = iframe.contentWindow.document;
-    doc.open();
-    doc.write(`
+            // Start loading animation (disable button and show spinner)
+            setTimeout(() => {
+                printBtnquotep.disabled = true;
+                buttonTextcustomerp.textContent = "";
+                buttonSpinnercustomerp.classList.remove("d-none");
+                buttonTextsaveIconp.classList.add("d-none");
+            }, 500);
+
+            // Create an iframe
+            let iframe = document.createElement("iframe");
+            iframe.style.position = "absolute";
+            iframe.style.width = "0px";
+            iframe.style.height = "0px";
+            iframe.style.border = "none";
+            document.body.appendChild(iframe);
+
+            let doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(`
         <html>
         <head>
             <title>Print Preview</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <link rel="stylesheet" href="${document.querySelector('link[href*="bootstrap"]')?.href || ''}">
-            <link rel="stylesheet" href="${document.querySelector('link[href*="style.css"]')?.href || ''}">
+            <link rel="stylesheet" href="${
+                document.querySelector('link[href*="bootstrap"]')?.href || ""
+            }">
+            <link rel="stylesheet" href="${
+                document.querySelector('link[href*="style.css"]')?.href || ""
+            }">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -596,72 +659,71 @@ document.getElementById("printButton").addEventListener("click", function () {
         <body></body>
         </html>
     `);
-    doc.close();
+            doc.close();
 
-    // Ensure styles are fully loaded before appending content and printing
-    iframe.onload = function () {
-        requestAnimationFrame(() => {
-            doc.body.appendChild(clonedContent);
+            // Ensure styles are fully loaded before appending content and printing
+            iframe.onload = function () {
+                requestAnimationFrame(() => {
+                    doc.body.appendChild(clonedContent);
+                    setTimeout(() => {
+                        iframe.contentWindow.focus();
+                        iframe.contentWindow.print();
+                        document.body.removeChild(iframe);
+                    }, 500);
+                });
+            };
+
+            // Stop loading animation
             setTimeout(() => {
-                iframe.contentWindow.focus();
-                iframe.contentWindow.print();
-                document.body.removeChild(iframe);
+                printBtnquotep.disabled = false;
+                buttonTextcustomerp.textContent = "Print";
+                buttonSpinnercustomerp.classList.add("d-none");
+                buttonTextsaveIconp.classList.remove("d-none");
             }, 500);
         });
-    };
-
-    // Stop loading animation
-    setTimeout(() => {
-        printBtnquotep.disabled = false;
-        buttonTextcustomerp.textContent = "Print";
-        buttonSpinnercustomerp.classList.add("d-none");
-        buttonTextsaveIconp.classList.remove("d-none");
-    }, 500);
-});
-
 
     //for changing header and footer
     // Declare selectedType globally
-    let selectedType = '';
+    let selectedType = "";
 
     // Open modal and set the correct image source when clicking an image
-    $(document).on('click', '.img-head', function () {
+    $(document).on("click", ".img-head", function () {
         let elementPriceQuotation = $("#deatailsForHeaderAndFooter").html();
-        let quotationId = $(this).data('id'); // Get quotation ID
-        selectedType = $(this).data('type'); // Get type (header/footer)
-        let imageUrl = $(this).attr('src'); // Get current image URL
+        let quotationId = $(this).data("id"); // Get quotation ID
+        selectedType = $(this).data("type"); // Get type (header/footer)
+        let imageUrl = $(this).attr("src"); // Get current image URL
 
-        let imageUrlfooter = $('#foot').attr('src'); 
-        let imageUrlHeader = $('#head').attr('src'); 
+        let imageUrlfooter = $("#foot").attr("src");
+        let imageUrlHeader = $("#head").attr("src");
 
-        $('#deatils').html(elementPriceQuotation);
-        $('#quotationId').val(quotationId); // Store ID in hidden input
-        $('#imageType').val(selectedType); // Store whether it's header or footer
+        $("#deatils").html(elementPriceQuotation);
+        $("#quotationId").val(quotationId); // Store ID in hidden input
+        $("#imageType").val(selectedType); // Store whether it's header or footer
 
         // Determine where to show the preview
-        if (selectedType === 'header') {
-            $('#modalHeaderImage').attr('src', imageUrl); // Show header image in modal
-            $('#modalFooterImage').attr('src', imageUrlfooter); // Clear footer preview
-        } else if (selectedType === 'footer') {
-            $('#modalFooterImage').attr('src', imageUrl); // Show footer image in modal
-            $('#modalHeaderImage').attr('src', imageUrlHeader); // Clear header preview
+        if (selectedType === "header") {
+            $("#modalHeaderImage").attr("src", imageUrl); // Show header image in modal
+            $("#modalFooterImage").attr("src", imageUrlfooter); // Clear footer preview
+        } else if (selectedType === "footer") {
+            $("#modalFooterImage").attr("src", imageUrl); // Show footer image in modal
+            $("#modalHeaderImage").attr("src", imageUrlHeader); // Clear header preview
         }
 
-        $('#imageModal').modal('show'); // Show modal
+        $("#imageModal").modal("show"); // Show modal
     });
 
     // image/File Input Change Event - Show Preview in Modal
-    $('#fileInput').on('change', function (event) {
+    $("#fileInput").on("change", function (event) {
         let file = event.target.files[0];
 
         if (file) {
             let reader = new FileReader();
             reader.onload = function (e) {
                 // Update only the correct preview section (header/footer)
-                if (selectedType === 'header') {
-                    $('#modalHeaderImage').attr('src', e.target.result);
-                } else if (selectedType === 'footer') {
-                    $('#modalFooterImage').attr('src', e.target.result);
+                if (selectedType === "header") {
+                    $("#modalHeaderImage").attr("src", e.target.result);
+                } else if (selectedType === "footer") {
+                    $("#modalFooterImage").attr("src", e.target.result);
                 }
             };
             reader.readAsDataURL(file);
@@ -669,22 +731,27 @@ document.getElementById("printButton").addEventListener("click", function () {
     });
 
     // Save Image - Upload to Server
-    $('#saveImageBtn').on('click', function () {
-        
+    $("#saveImageBtn").on("click", function () {
         let saveImageBtn = document.getElementById("saveImageBtn");
-        let buttonTextQuotationEditHeadAndFooter = document.getElementById("buttonText-QuotationEditHeadAndFooter");
-        let buttonSpinnerQuotationEditHeadAndFooter = document.getElementById("buttonSpinner-QuotationEditHeadAndFooter");
-        let saveQuotaionIconEditHeadAndFooter = document.getElementById("saveQuotaionIconEditHeadAndFooter");
-            
-        let fileInput = $('#fileInput')[0].files[0];
-        let quotationId = $('#quotationId').val();
+        let buttonTextQuotationEditHeadAndFooter = document.getElementById(
+            "buttonText-QuotationEditHeadAndFooter"
+        );
+        let buttonSpinnerQuotationEditHeadAndFooter = document.getElementById(
+            "buttonSpinner-QuotationEditHeadAndFooter"
+        );
+        let saveQuotaionIconEditHeadAndFooter = document.getElementById(
+            "saveQuotaionIconEditHeadAndFooter"
+        );
+
+        let fileInput = $("#fileInput")[0].files[0];
+        let quotationId = $("#quotationId").val();
 
         //start loading
         saveImageBtn.disabled = true;
         buttonTextQuotationEditHeadAndFooter.textContent = "";
         buttonSpinnerQuotationEditHeadAndFooter.classList.remove("d-none");
         saveQuotaionIconEditHeadAndFooter.classList.add("d-none");
-        
+
         if (!fileInput || !selectedType) {
             toastr.error("Please select an image before saving.");
 
@@ -693,13 +760,13 @@ document.getElementById("printButton").addEventListener("click", function () {
             buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
             buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
             saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
-            
+
             return;
         }
 
         let formData = new FormData();
-        formData.append('image', fileInput);
-        formData.append('type', selectedType); // Pass selected type (header/footer)
+        formData.append("image", fileInput);
+        formData.append("type", selectedType); // Pass selected type (header/footer)
         //formData.append('_method', 'PUT'); // Laravel requires this for updates
 
         $.ajax({
@@ -709,39 +776,49 @@ document.getElementById("printButton").addEventListener("click", function () {
             contentType: false,
             processData: false,
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
                 console.log("Response from server:", response); // Debug
 
                 if (response.success) {
-
                     toastr.success("Image updated successfully!");
 
                     // Ensure response.image_url is correct
-                    let newImageUrl = response.image_url + "?t=" + new Date().getTime();
+                    let newImageUrl =
+                        response.image_url + "?t=" + new Date().getTime();
                     //console.log("New Image URL:", newImageUrl); // Debug
 
                     // Select the correct image dynamically
                     let imageSelector = `.img-head[data-id="${quotationId}"][data-type="${selectedType}"]`;
                     //console.log("Targeted Image Selector:", imageSelector); // Debug
 
-                    $(imageSelector).attr('src', newImageUrl); // Update image immediately
+                    $(imageSelector).attr("src", newImageUrl); // Update image immediately
 
                     //stop loading
                     saveImageBtn.disabled = false;
-                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
-                    buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
-                    saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
-                    
-                    $('#imageModal').modal('hide'); // Close modal
+                    buttonTextQuotationEditHeadAndFooter.textContent =
+                        "Change Image";
+                    buttonSpinnerQuotationEditHeadAndFooter.classList.add(
+                        "d-none"
+                    );
+                    saveQuotaionIconEditHeadAndFooter.classList.remove(
+                        "d-none"
+                    );
+
+                    $("#imageModal").modal("hide"); // Close modal
                 } else {
                     toastr.error("Failed to update image.");
                     //stop loading
                     saveImageBtn.disabled = false;
-                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
-                    buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
-                    saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
+                    buttonTextQuotationEditHeadAndFooter.textContent =
+                        "Change Image";
+                    buttonSpinnerQuotationEditHeadAndFooter.classList.add(
+                        "d-none"
+                    );
+                    saveQuotaionIconEditHeadAndFooter.classList.remove(
+                        "d-none"
+                    );
                 }
             },
             error: function (xhr, status, error) {
@@ -750,14 +827,14 @@ document.getElementById("printButton").addEventListener("click", function () {
 
                 //stop loading
                 saveImageBtn.disabled = false;
-                buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
+                buttonTextQuotationEditHeadAndFooter.textContent =
+                    "Change Image";
                 buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
                 saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
-            }
+            },
         });
     });
 
-    
     // Listen for click event on EDIT button
     $("#updateBtn-customers").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
@@ -771,10 +848,17 @@ document.getElementById("printButton").addEventListener("click", function () {
         }
 
         // Get button elements for UI feedback during submission
-        const updatesaveBtnquote = document.getElementById("updateBtn-customers");
-        const updatebuttonTextcustomer = document.getElementById("updatebuttonText-customer");
-        const updatebuttonSpinnercustomer = document.getElementById("updatebuttonSpinner-customer");
-        const updatebuttonTextsaveIcon = document.getElementById("saveupdateIcon");
+        const updatesaveBtnquote = document.getElementById(
+            "updateBtn-customers"
+        );
+        const updatebuttonTextcustomer = document.getElementById(
+            "updatebuttonText-customer"
+        );
+        const updatebuttonSpinnercustomer = document.getElementById(
+            "updatebuttonSpinner-customer"
+        );
+        const updatebuttonTextsaveIcon =
+            document.getElementById("saveupdateIcon");
 
         // Start loading animation (disable button and show spinner)
         updatebuttonTextcustomer.textContent = "";
@@ -784,7 +868,7 @@ document.getElementById("printButton").addEventListener("click", function () {
 
         // Create FormData object to send data via AJAX
         let formData = new FormData();
-        
+
         // Append CSRF token for Laravel validation
         formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
         formData.append("_method", "PUT"); // Laravel requires PUT/PATCH for updates
@@ -847,11 +931,16 @@ document.getElementById("printButton").addEventListener("click", function () {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
-            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
+            let unitPrice = ($(this).find(".unit-price").val() ?? "")
+                .trim()
+                .replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "")
+                .trim()
+                .replace(/,/g, "");
 
             // Check if row contains any valid data
-            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            let isRowValid =
+                quantity || unit || itemName || unitPrice || lineAmount;
             if (isRowValid) {
                 foundFirstValidItem = true;
                 lastValidIndex = tempRows.length; // Store last valid row index
@@ -875,7 +964,7 @@ document.getElementById("printButton").addEventListener("click", function () {
         // Prevent submission if no valid items
         if (validRows.length === 0) {
             toastr.error("Please enter at least one valid item before saving.");
-            
+
             //stop loading
             updatebuttonTextcustomer.textContent = "Edit";
             updatebuttonSpinnercustomer.classList.add("d-none");
@@ -911,29 +1000,29 @@ document.getElementById("printButton").addEventListener("click", function () {
             contentType: false, // Prevent jQuery from setting content-type header
             success: function (response) {
                 toastr.success(response.success); // Show success message
-                
+
                 //stop loading
                 updatebuttonTextcustomer.textContent = "Edit";
                 updatebuttonSpinnercustomer.classList.add("d-none");
                 updatesaveBtnquote.disabled = false;
                 updatebuttonTextsaveIcon.classList.remove("d-none");
-                
+
                 location.reload(); // Refresh page
             },
             error: function (xhr) {
                 console.error(xhr.responseText); // Log error to console
-                toastr.error("Something went wrong! Refresh or try again later"); // Show error message
-                
+                toastr.error(
+                    "Something went wrong! Refresh or try again later"
+                ); // Show error message
+
                 //stop loading
                 updatebuttonTextcustomer.textContent = "Edit";
                 updatebuttonSpinnercustomer.classList.add("d-none");
                 updatesaveBtnquote.disabled = false;
                 updatebuttonTextsaveIcon.classList.remove("d-none");
-            }
+            },
         });
-
     });
-    
 
     //copy PRICE-QUOTATION
     $("#CopyBtn-customers").on("click", function (e) {
@@ -941,8 +1030,12 @@ document.getElementById("printButton").addEventListener("click", function () {
 
         // Get button elements for UI feedback during submission
         const CopysaveBtnquote = document.getElementById("CopyBtn-customers");
-        const CopybuttonTextcustomer = document.getElementById("CopybuttonText-customer");
-        const CopybuttonSpinnercustomer = document.getElementById("CopybuttonSpinner-customer");
+        const CopybuttonTextcustomer = document.getElementById(
+            "CopybuttonText-customer"
+        );
+        const CopybuttonSpinnercustomer = document.getElementById(
+            "CopybuttonSpinner-customer"
+        );
         const CopybuttonTextsaveIcon = document.getElementById("saveCopyIcon");
 
         // Start loading animation (disable button and show spinner)
@@ -953,7 +1046,7 @@ document.getElementById("printButton").addEventListener("click", function () {
 
         // Create FormData object to send data via AJAX
         let formData = new FormData();
-        
+
         // Append CSRF token for Laravel validation
         formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
         formData.append("_method", "PUT"); // Laravel requires PUT/PATCH for updates
@@ -964,7 +1057,6 @@ document.getElementById("printButton").addEventListener("click", function () {
         let contact = ($("#customerContact").val() ?? "").trim();
         let attn = ($("#customerATN").val() ?? "").trim();
         let terms = ($("#customerTerms").val() ?? "").trim();
-        
 
         let Condition = ($("#Condition").val() ?? "").trim();
         let Warranty = ($("#Warranty").val() ?? "").trim();
@@ -985,7 +1077,6 @@ document.getElementById("printButton").addEventListener("click", function () {
 
             return;
         }
-        
 
         // Append customer data to FormData
         formData.append("customer_name", customerName + "- Copy");
@@ -1004,11 +1095,16 @@ document.getElementById("printButton").addEventListener("click", function () {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
-            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
+            let unitPrice = ($(this).find(".unit-price").val() ?? "")
+                .trim()
+                .replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "")
+                .trim()
+                .replace(/,/g, "");
 
             // Check if row contains any valid data
-            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            let isRowValid =
+                quantity || unit || itemName || unitPrice || lineAmount;
             if (isRowValid) {
                 foundFirstValidItem = true;
                 lastValidIndex = tempRows.length; // Store last valid row index
@@ -1032,7 +1128,7 @@ document.getElementById("printButton").addEventListener("click", function () {
         // Prevent submission if no valid items
         if (validRows.length === 0) {
             toastr.error("Please enter at least one valid item before saving.");
-            
+
             //stop loading
             CopybuttonTextcustomer.textContent = "Copy";
             CopybuttonSpinnercustomer.classList.add("d-none");
@@ -1068,27 +1164,61 @@ document.getElementById("printButton").addEventListener("click", function () {
             contentType: false, // Prevent jQuery from setting content-type header
             success: function (response) {
                 toastr.success(response.success); // Show success message
-                
+
                 //stop loading
                 CopybuttonTextcustomer.textContent = "Copy";
                 CopybuttonSpinnercustomer.classList.add("d-none");
                 CopysaveBtnquote.disabled = false;
                 CopybuttonTextsaveIcon.classList.remove("d-none");
-                
+
                 location.reload(); // Refresh page
             },
             error: function (xhr) {
                 console.error(xhr.responseText); // Log error to console
-                toastr.error("Something went wrong! Refresh or try again later"); // Show error message
-                
+                toastr.error(
+                    "Something went wrong! Refresh or try again later"
+                ); // Show error message
+
                 //stop loading
                 CopybuttonTextcustomer.textContent = "Copy";
                 CopybuttonSpinnercustomer.classList.add("d-none");
                 CopysaveBtnquote.disabled = false;
                 CopybuttonTextsaveIcon.classList.remove("d-none");
+            },
+        });
+    });
+});
+
+// Add Unit Button Function
+document.addEventListener("DOMContentLoaded", function () {
+    const unitSelects = document.querySelectorAll(".unit-select"); // Select all dropdowns
+    const addUnitModalEl = document.getElementById("addUnitModal");
+    const addUnitModal = new bootstrap.Modal(addUnitModalEl);
+    const newUnitInput = document.getElementById("newUnitInput");
+    const saveNewUnit = document.getElementById("saveNewUnit");
+
+    let activeSelect = null; // Store which dropdown triggered the modal
+
+    unitSelects.forEach((select) => {
+        select.addEventListener("change", function () {
+            if (this.value === "add") {
+                activeSelect = this; // Store reference to the clicked dropdown
+                addUnitModal.show();
+                this.value = ""; // Reset selection
             }
         });
+    });
 
-    })
-
+    saveNewUnit.addEventListener("click", function () {
+        const newUnit = newUnitInput.value.trim();
+        if (newUnit && activeSelect) {
+            const newOption = document.createElement("option");
+            newOption.value = newUnit;
+            newOption.textContent = newUnit;
+            activeSelect.insertBefore(newOption, activeSelect.lastElementChild);
+            activeSelect.value = newUnit; // Set new unit as selected
+            newUnitInput.value = ""; // Clear input
+            addUnitModal.hide();
+        }
+    });
 });
