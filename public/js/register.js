@@ -61,12 +61,12 @@ function addAccountToTable(user) {
             <td class="px-3 py-2">
                 <div class="d-flex gap-2">
                     <div class="editButton d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-primary" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                        <button type="button" class="btn btn-primary" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="${$user.id}">
                             <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
                         </button>
                     </div>
                     <div class="deleteButton d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-danger" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px">
+                        <button type="button" class="btn btn-danger" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="${$user.id}>
                             <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
                         </button>
                     </div>
