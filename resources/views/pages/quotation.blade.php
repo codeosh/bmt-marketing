@@ -175,15 +175,36 @@
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" class="w-100 quantity" name="items[0][quantity]" oninput="calculateLineAmount(this)">
                                 </td>
-                               <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100 unit-select" name="items[0][unit]" onchange="handleNewUnit(this)">
+                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100 unit-select" name="items[0][unit]">
                                         <option value="" selected></option>
-                                        @foreach ($units as $unit)
-                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
-                                        @endforeach
-                                        <option value="add_new">➕ Add New</option> <!-- Add New Option -->
+                                        <option value="PCS">PCS</option>
+                                        <option value="SET">SET</option>
+                                        <option value="BOX">BOX</option>
+                                        <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
+
+                                 <!-- Modal Structure -->
+                                <div class="modal fade" id="addUnitModal" tabindex="-1" aria-labelledby="addUnitModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="addUnitModalLabel">Add New Unit</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="text" id="newUnitInput" class="form-control" placeholder="Enter new unit">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" id="saveNewUnit">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
                                     <input type="text" name="items[0][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
@@ -205,12 +226,13 @@
                                     <input type="number" name="items[1][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[1][unit]">
+                                    <select class="w-100 unit-select" name="items[1][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -234,12 +256,13 @@
                                     <input type="number" name="items[2][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[2][unit]">
+                                    <select class="w-100 unit-select" name="items[2][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -263,12 +286,13 @@
                                     <input type="number" name="items[3][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[3][unit]">
+                                    <select class="w-100 unit-select" name="items[3][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -292,12 +316,13 @@
                                     <input type="number" name="items[4][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[4][unit]">
+                                    <select class="w-100 unit-select" name="items[4][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -321,12 +346,13 @@
                                     <input type="number" name="items[5][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[5][unit]">
+                                    <select class="w-100 unit-select" name="items[5][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -350,12 +376,13 @@
                                     <input type="number" name="items[6][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[6][unit]">
+                                    <select class="w-100 unit-select" name="items[6][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -379,12 +406,13 @@
                                     <input type="number" name="items[7][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[7][unit]">
+                                    <select class="w-100 unit-select" name="items[7][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -408,12 +436,13 @@
                                     <input type="number" name="items[8][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[8][unit]">
+                                    <select class="w-100 unit-select" name="items[8][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -437,12 +466,13 @@
                                     <input type="number" name="items[9][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[9][unit]">
+                                    <select class="w-100 unit-select" name="items[9][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -466,12 +496,13 @@
                                     <input type="number" name="items[10][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[10][unit]">
+                                    <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -960,5 +991,6 @@
 
 </div>
 <script src="{{ asset('js/quotation.js') }}"></script>
+
 
 @endsection
