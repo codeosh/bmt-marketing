@@ -26,19 +26,19 @@
         </tr>
       </thead>
       <tbody class="bg-light">
-        @foreach ($accounts as $item)
+        @foreach ($accounts as $account)
           <tr>
-            <td class="px-3 py-2">{{ $item->name }}</td>
-            <td class="px-3 py-2">{{ $item->phoneNumber }}</td>
-            <td class="px-3 py-2">{{ $item->email }}</td>
-            <td class="px-3 py-2"><span class="badge bg-success">{{ $item->role }}</span></td>
+            <td class="px-3 py-2">{{ $account->name }}</td>
+            <td class="px-3 py-2">{{ $account->phoneNumber }}</td>
+            <td class="px-3 py-2">{{ $account->email }}</td>
+            <td class="px-3 py-2"><span class="badge bg-success">{{ $account->role }}</span></td>
             <td class="px-3 py-2">
               <div class="d-flex gap-2">
                 <!-- Edit -->
                 <div class="editButton d-flex align-items-center justify-content-center">
                   <button type="button" class="btn btn-primary"
                     style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" id="editAccBtn"
-                    data-id="{{ $item->id }}">
+                    data-id="{{ $account->id }}">
                     <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
                   </button>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="deleteButton d-flex align-items-center justify-content-center">
                   <button type="button" class="btn btn-danger"
                     style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" id="deleteAccBtn"
-                    data-id="{{ $item->id }}">
+                    data-id="{{ $account->id }}">
                     <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
                   </button>
                 </div>
@@ -64,10 +64,11 @@
   </div>
 
 
-
-  <script src="{{ asset('js/register.js') }}"></script>
   <!-- Add Account Modal -->
   @include('auth.register')
+  @include('modal.edit_account')
+
+  <script src="{{ asset('js/register.js') }}"></script>
 
 
 

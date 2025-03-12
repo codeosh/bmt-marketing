@@ -1,4 +1,35 @@
+// public\js\register.js
 $(document).ready(function () {
+    // Function to add user to the table dynamically
+    function addAccountToTable(user) {
+        let roleBadge = user.role === "admin" ? "bg-success" : "bg-primary";
+
+        let newRow = `
+        <tr>
+            <td class="px-3 py-2">${user.name}</td>
+            <td class="px-3 py-2">${user.email}</td>
+            <td class="px-3 py-2">${user.phoneNumber}</td>
+            <td class="px-3 py-2"><span class="badge ${roleBadge}">${user.role}</span></td>
+            <td class="px-3 py-2">
+                <div class="d-flex gap-2">
+                    <div class="editButton d-flex align-items-center justify-content-center">
+                        <button type="button" class="btn btn-primary" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="${$user.id}">
+                            <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
+                        </button>
+                    </div>
+                    <div class="deleteButton d-flex align-items-center justify-content-center">
+                        <button type="button" class="btn btn-danger" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="${$user.id}>
+                            <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    `;
+
+        $("tbody").prepend(newRow); // Add the new row at the top
+    }
+
     $("#registerForm").on("submit", function (e) {
         e.preventDefault();
 
@@ -46,34 +77,10 @@ $(document).ready(function () {
             },
         });
     });
+
+    $(document).on("click", "#editAccBtn", function (e) {
+        e.preventDefault();
+        console.log("Edit button clicked"); // Check if this log appears
+        $("#editAccountModal").modal("show");
+    });
 });
-
-// Function to add user to the table dynamically
-function addAccountToTable(user) {
-    let roleBadge = user.role === "admin" ? "bg-success" : "bg-primary";
-
-    let newRow = `
-        <tr>
-            <td class="px-3 py-2">${user.name}</td>
-            <td class="px-3 py-2">${user.email}</td>
-            <td class="px-3 py-2">${user.phoneNumber}</td>
-            <td class="px-3 py-2"><span class="badge ${roleBadge}">${user.role}</span></td>
-            <td class="px-3 py-2">
-                <div class="d-flex gap-2">
-                    <div class="editButton d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-primary" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="${$user.id}">
-                            <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
-                        </button>
-                    </div>
-                    <div class="deleteButton d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-danger" style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="${$user.id}>
-                            <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Delete
-                        </button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    `;
-
-    $("tbody").prepend(newRow); // Add the new row at the top
-}
