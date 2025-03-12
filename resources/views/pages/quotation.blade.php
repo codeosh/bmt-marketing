@@ -175,13 +175,13 @@
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" class="w-100 quantity" name="items[0][quantity]" oninput="calculateLineAmount(this)">
                                 </td>
-                                <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[0][unit]">
+                               <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                    <select class="w-100 unit-select" name="items[0][unit]" onchange="handleNewUnit(this)">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add_new">➕ Add New</option> <!-- Add New Option -->
                                     </select>
                                 </td>
 

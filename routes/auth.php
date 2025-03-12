@@ -158,6 +158,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //quotation
         Route::resource('user-quotation', QuotationController::class);
+        Route::get('/get-user-latest-quotation', function () {
+            $latestQuotation = QuotationItem::latest('quotation_no')->first();
+            $newQuotationNo = $latestQuotation ? $latestQuotation->quotation_no + 1 : 10001;
+            return response()->json(['quotation_no' => $newQuotationNo]);
+        });
+        Route::post('/user-update-image/{id}', [QuotationController::class, 'updateImage']);
+        Route::put('/user-CopyQuotation', [QuotationController::class, 'Copy']); // for copy quotation
+
 
         Route::resource('user-accounts', AccountController::class);
         Route::resource('user-accounts', AccountController::class);

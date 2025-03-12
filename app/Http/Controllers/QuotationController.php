@@ -6,6 +6,7 @@ use App\Models\QuotationCustomer;
 use App\Models\QutationHeaderAndFooter;
 use App\Models\QuotationItem;
 use App\Models\QoutotaionTermsCondtionRemarks;
+use App\Models\QuotationUnit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,7 @@ class QuotationController extends Controller
     {
         //
         $quotation = QuotationCustomer::latest()->paginate(100);
+        $units = QuotationUnit::all();
 
         $quotationHeaderAndFooter = QutationHeaderAndFooter::latest()->first();
 
@@ -30,9 +32,9 @@ class QuotationController extends Controller
 
         if (auth::check() && auth::user()->role === 'admin') {
 
-            return view('pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter'));
+            return view('pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter', 'units'));
         } else {
-            return view('user-pages.quotation', compact('quotation'));
+            return view('user-pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter', 'units'));
         }
     }
 

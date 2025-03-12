@@ -35,15 +35,38 @@ document.querySelectorAll(".quantity, .unit-price").forEach(input => {
     });
 });
 
+//adneww units in quotation items
+function handleNewUnit(selectElement) {
+    if (selectElement.value === "add_new") {
+        let newUnit = prompt("Enter new unit:");
+
+        if (newUnit) {
+            // Create a new option and insert it
+            let newOption = document.createElement("option");
+            newOption.value = newUnit;
+            newOption.textContent = newUnit;
+            newOption.selected = true;
+
+            // Insert before the "Add New" option
+            selectElement.insertBefore(newOption, selectElement.lastElementChild);
+        } else {
+            // Reset selection if no value was entered
+            selectElement.value = "";
+        }
+    }
+}
+
 
 
 
 $(document).ready(function () {
-
+    
     //save customer and ilang items ge palit
     // Listen for click event on Save button
     $("#saveBtn-customers").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
+
+        let saveCustomerINfo = Laravel.user_role === "admin" ? "/admin-quotation" : "/user-quotation";
 
         // Get button elements for UI feedback during submission
         const saveBtnquote = document.getElementById("saveBtn-customers");
@@ -159,7 +182,7 @@ $(document).ready(function () {
 
         // Submit data via AJAX to Laravel backend
         $.ajax({
-            url: "/admin-quotation", // API endpoint
+            url: saveCustomerINfo, // API endpoint
             type: "POST", // HTTP request method
             data: formData, // Form data
             processData: false, // Prevent jQuery from processing data
@@ -189,8 +212,12 @@ $(document).ready(function () {
     // Show the information of the clicked row
     // Handle row click event
     $("#quotationTable tbody").on("click", ".quote-row", function () {
+        
         // Get the quotation ID from the clicked row's data attribute
         let quoteId = $(this).data("id");
+
+        let showCustomerINfo = Laravel.user_role === "admin" ? `/admin-quotation/${quoteId}` : `/user-quotation/${quoteId}`;
+
 
         $("#updateBtn-customers").removeClass("d-none");//show the edit btn
         $("#CopyBtn-customers").removeClass("d-none");//show the edit btn
@@ -205,7 +232,7 @@ $(document).ready(function () {
 
         // Make an AJAX GET request to fetch the quotation data based on the clicked row's ID
         $.ajax({
-            url: `/admin-quotation/${quoteId}`, // API endpoint to fetch the quotation data
+            url: showCustomerINfo, // API endpoint to fetch the quotation data
             type: "GET",
             success: function (data) {
                 console.log("Fetched data:", data); // Debugging: Log fetched data to the console
@@ -281,6 +308,8 @@ $(document).ready(function () {
     $("#new-Quote").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
 
+        let addNewQuote = Laravel.user_role === "admin" ? "/get-latest-quotation" : "/get-user-latest-quotation";
+            
         $("#updateBtn-customers").addClass("d-none");//hide edit btn
 
         //save button
@@ -297,7 +326,7 @@ $(document).ready(function () {
         
         // Get latest quotation number via AJAX
         $.ajax({
-            url: "/get-latest-quotation", // Laravel route
+            url: addNewQuote, // Laravel route
             type: "GET",
             dataType: "json",
             success: function (response) {
@@ -305,7 +334,7 @@ $(document).ready(function () {
                 $("#customerQNumber").val(response.quotation_no);
             },
             error: function () {
-                alert("Failed to fetch latest quotation number.");
+                toastr.error("Failed to fetch latest quotation number.");
             },
         });
         
@@ -380,6 +409,9 @@ $(document).ready(function () {
 
     // Handle delete action
     $("#deleteBtn").on("click", function () {
+
+        let deleteQuote = Laravel.user_role === "admin" ? `/admin-quotation/${selectedRowId}` : `/user-quotation/${selectedRowId}`;
+        
         if (!selectedRowId) {
             toastr.error("Please select a record to delete.");
             return;
@@ -396,7 +428,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: `/admin-quotation/${selectedRowId}`,
+                    url: deleteQuote,
                     type: "DELETE",
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -679,6 +711,8 @@ document.getElementById("printButton").addEventListener("click", function () {
         let fileInput = $('#fileInput')[0].files[0];
         let quotationId = $('#quotationId').val();
 
+        let updateIMG = Laravel.user_role === "admin" ? `/update-image/${quotationId}` : `/user-update-image/${quotationId}`;
+
         //start loading
         saveImageBtn.disabled = true;
         buttonTextQuotationEditHeadAndFooter.textContent = "";
@@ -703,7 +737,7 @@ document.getElementById("printButton").addEventListener("click", function () {
         //formData.append('_method', 'PUT'); // Laravel requires this for updates
 
         $.ajax({
-            url: `/update-image/${quotationId}`,
+            url: updateIMG,
             type: "POST", // Laravel will interpret as PUT due to _method
             data: formData,
             contentType: false,
@@ -763,6 +797,7 @@ document.getElementById("printButton").addEventListener("click", function () {
         e.preventDefault(); // Prevent default form submission
 
         let quoteIdupdate = $(this).attr("data-is"); // Get the ID of the edited quotation
+        let edit = Laravel.user_role === "admin" ? `/admin-quotation/${quoteIdupdate}` : `/user-quotation/${quoteIdupdate}`;
 
         // Ensure quoteId exists
         if (!quoteIdupdate) {
@@ -904,7 +939,7 @@ document.getElementById("printButton").addEventListener("click", function () {
 
         // Submit data via AJAX to Laravel backend
         $.ajax({
-            url: `/admin-quotation/${quoteIdupdate}`, // Update endpoint with ID
+            url: edit, // Update endpoint with ID
             type: "POST", // Laravel requires POST with _method=PUT for updates
             data: formData,
             processData: false, // Prevent jQuery from processing data
@@ -938,6 +973,8 @@ document.getElementById("printButton").addEventListener("click", function () {
     //copy PRICE-QUOTATION
     $("#CopyBtn-customers").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
+
+        let copy = Laravel.user_role === "admin" ? `/CopyQuotation` : `/user-CopyQuotation`;
 
         // Get button elements for UI feedback during submission
         const CopysaveBtnquote = document.getElementById("CopyBtn-customers");
@@ -1061,7 +1098,7 @@ document.getElementById("printButton").addEventListener("click", function () {
 
         // Submit data via AJAX to Laravel backend
         $.ajax({
-            url: `/CopyQuotation`, // Update endpoint with ID
+            url: copy, // Update endpoint with ID
             type: "POST", // Laravel requires POST with _method=PUT for updates
             data: formData,
             processData: false, // Prevent jQuery from processing data
