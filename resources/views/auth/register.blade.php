@@ -56,19 +56,16 @@
                </div>
              </div>
            </div>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-           <button type="submit" id="saveBtn-register" form="registerForm" class="btn btn-primary">
-             <span id="buttonText-register">{{ __('Save') }}</span>
-             <span id="buttonSpinner-register" class="spinner-border spinner-border-sm d-none" role="status"
-               aria-hidden="true"></span>
-         </div>
-         </button>
-     </div>
-     </form>
 
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+             <button type="submit" id="saveBtn-register" form="registerForm" class="btn btn-primary">
+               <span id="buttonText-register">{{ __('Save') }}</span>
+               <span id="buttonSpinner-register" class="spinner-border spinner-border-sm d-none" role="status"
+                 aria-hidden="true"></span>
+             </button>
+           </div>
+       </form>
+     </div>
    </div>
- </div>
- </div>
  </div>

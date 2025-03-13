@@ -44,11 +44,12 @@ $(document).ready(function () {
 
         //if naay data.  Mo exceute ni na set of codes
         data.forEach(function (item) {
+            let escapedContent = item.content.replace(/"/g, "&quot;");
             let listItem = `
             <div class="d-flex justify-content-between align-items-center btn btn-light text-start shadow-sm p-2 rounded bulletin-item text-truncate"
-                data-id="${item.id}" data-content="${
-                item.content
-            }" style="border: 1px solid #ddd;">
+                data-id="${
+                    item.id
+                }" data-content="${escapedContent}" style="border: 1px solid #ddd;">
                 <span class="text-truncate" style="font-size:0.8rem"  title="${
                     item.pname
                 }">${item.pname}</span>
@@ -57,7 +58,7 @@ $(document).ready(function () {
                         ? `
                 <div class="d-flex gap-1" style="height:25px;">
                     <button class="btn btn-sm btn-secondary edit-replyTemplate h-100 d-flex justify-content-between align-items-center" 
-                        data-id="${item.id}" data-content="${item.content}" data-pname="${item.pname}">
+                        data-id="${item.id}" data-content="${escapedContent}" data-pname="${item.pname}">
                         <i class="fas fa-edit" style="font-size:10px;"></i>
                     </button>
                     <button class="btn btn-sm btn-secondary delete-replyTemplate h-100 d-flex justify-content-between align-items-center" 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -17,51 +18,37 @@ class AccountController extends Controller
         return view('pages.accounts', compact('accounts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getUser($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return response()->json(['user' => $user]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function updateUser(Request $request, $id)
     {
-        //
-    }
+        $user = User::findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Prevent updates to deactivated users
+        if ($user->status === 'deactivated') {
+            return response()->json(['error' => 'This account has been permanently deactivated and cannot be modified.'], 403);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'phoneNumber' => 'nullable|string|max:15',
+            'role' => 'required|in:admin,user',
+            'status' => 'required|in:active,frozen,deactivated',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phoneNumber' => $validatedData['phoneNumber'],
+            'role' => $validatedData['role'],
+            'status' => $validatedData['status'],
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(['success' => true, 'user' => $user]);
     }
 }
