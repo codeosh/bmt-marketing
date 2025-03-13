@@ -121,6 +121,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/Dashboard-Pages', function () {
             return view('pages.dashboard');
         })->name('admin-dashboard-page');
+
+
+        //Accounts
+        Route::get('/account/user/{id}', [AccountController::class, 'getUser']);
+        Route::put('/account/update/{id}', [AccountController::class, 'updateUser']);
     });
 
 

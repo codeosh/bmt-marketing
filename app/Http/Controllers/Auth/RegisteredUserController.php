@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:users',
             'email' => 'required|email|unique:users',
-            'phoneNumber' => 'required|string|size:11|regex:/^\d+$/',
+            'phoneNumber' => 'nullable|string|size:11|regex:/^\d+$/',
             'role' => 'required|in:admin,user',
             'password' => 'required|min:6|confirmed',
         ]);

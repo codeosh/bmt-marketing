@@ -14,11 +14,19 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, $role)
     {
         if (!Auth::check()) {
-            return redirect('/login'); // Redirect to login if not authenticated
+            return redirect('/login');
         }
 
-        if (Auth::user()->role !== $role) {
-            return back(); // Keep the user on the current page
+        $user = Auth::user();
+
+        // Check if the user's status is frozen or deactivated
+        if (in_array($user->status, ['frozen', 'deactivated'])) {
+            abort(403, 'Access Denied. Your account is restricted.');
+        }
+
+        // Check if the user role matches the required role
+        if ($user->role !== $role) {
+            return back();
         }
 
         return $next($request);
