@@ -47,7 +47,9 @@ class AuthenticatedSessionController extends Controller
         } else {
             return redirect()->route('login');
         }
-        // return redirect()->route('user.dashboard');
+
+        // Default Redirect (if role is missing)
+        return redirect()->route('login');
     }
 
     /**

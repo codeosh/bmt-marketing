@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('phoneNumber', 11)->after('email'); // Adjust position as needed
+            $table->string('phoneNumber', 11)->after('email')->nullable(); // Adjust position as needed
         });
     }
 

@@ -22,6 +22,7 @@
           <th class="px-3 py-2">Phone No.</th>
           <th class="px-3 py-2">Email</th>
           <th class="px-3 py-2">Role</th>
+          <th class="px-3 py-2">Status</th>
           <th class="px-3 py-2">Action</th>
         </tr>
       </thead>
@@ -32,13 +33,13 @@
             <td class="px-3 py-2">{{ $account->phoneNumber }}</td>
             <td class="px-3 py-2">{{ $account->email }}</td>
             <td class="px-3 py-2"><span class="badge bg-success">{{ $account->role }}</span></td>
+            <td class="px-3 py-2"><span class="badge bg-success">{{ $account->status }}</span></td>
             <td class="px-3 py-2">
               <div class="d-flex gap-2">
                 <!-- Edit -->
                 <div class="editButton d-flex align-items-center justify-content-center">
-                  <button type="button" class="btn btn-primary"
-                    style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" id="editAccBtn"
-                    data-id="{{ $account->id }}">
+                  <button type="button" class="btn btn-primary editAccBtn"
+                    style="font-size:0.6rem; width:100px; height:25px; border-radius:3px" data-id="{{ $account->id }}">
                     <i class="fa-regular fa-pen-to-square" style="margin-right: 5px;"></i>Edit
                   </button>
                 </div>
@@ -65,8 +66,8 @@
 
 
   <!-- Add Account Modal -->
-  @include('auth.register')
   @include('modal.edit_account')
+  @include('auth.register')
 
   <script src="{{ asset('js/register.js') }}"></script>
 
