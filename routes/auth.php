@@ -26,8 +26,6 @@ Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
-
-
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
@@ -111,6 +109,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         Route::post('/update-image/{id}', [QuotationController::class, 'updateImage']);
         Route::put('/CopyQuotation', [QuotationController::class, 'Copy']); // for copy quotation
+        Route::post('/quotations/add-unit', [QuotationController::class, 'addNewUnit'])->name('quotations.addUnit'); // for add new unit quotation
 
         //guides
         Route::resource('admin-guides', GuidesController::class);
@@ -165,7 +164,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         Route::post('/user-update-image/{id}', [QuotationController::class, 'updateImage']);
         Route::put('/user-CopyQuotation', [QuotationController::class, 'Copy']); // for copy quotation
-
+        Route::post('/quotations/user-add-unit', [QuotationController::class, 'addNewUnit'])->name('quotations.addUnit');  // for add new unit quotation
 
         Route::resource('user-accounts', AccountController::class);
         Route::resource('user-accounts', AccountController::class);

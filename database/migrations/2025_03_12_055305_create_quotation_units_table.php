@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('quotation_units', function (Blueprint $table) {
             $table->id();
-            $table->string("units")->nullable();
+            $table->string("units");
             $table->timestamps();
         });
     }

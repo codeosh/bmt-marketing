@@ -178,33 +178,12 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[0][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
-
-                                 <!-- Modal Structure -->
-                                <div class="modal fade" id="addUnitModal" tabindex="-1" aria-labelledby="addUnitModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="addUnitModalLabel">Add New Unit</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="text" id="newUnitInput" class="form-control" placeholder="Enter new unit">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id="saveNewUnit">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
                                     <input type="text" name="items[0][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
@@ -228,10 +207,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[1][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -258,10 +236,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[2][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -288,10 +265,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[3][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -318,10 +294,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[4][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -348,10 +323,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[5][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -378,10 +352,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[6][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -408,11 +381,10 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[7][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
-                                        <option value="add">+ Add New</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add" id="option">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -438,10 +410,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[8][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -468,10 +439,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[9][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -498,10 +468,9 @@
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                     <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
                                         <option value="add">+ Add New</option>
                                     </select>
                                 </td>
@@ -901,7 +870,6 @@
                     <i class="fa-solid fa-floppy-disk" id="saveupdateIcon"></i>
                     <span id="updatebuttonText-customer">{{ __('Edit') }}</span>
                     <span id="updatebuttonSpinner-customer" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                </button>
 
                 {{-- copy --}}
                 <button type="button" class="btn btn-info d-none" style="font-size:0.6rem; width:80px; border-radius:3px;" data-copyID="123" id="CopyBtn-customers">
@@ -983,6 +951,36 @@
                         <i class="fa-solid fa-floppy-disk" id="saveQuotaionIconEditHeadAndFooter"></i>
                         <span id="buttonText-QuotationEditHeadAndFooter">{{ __('Change Image') }}</span>
                         <span id="buttonSpinner-QuotationEditHeadAndFooter" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- add unit Modal Structure -->
+<!-- Add Unit Modal -->
+<div class="modal fade" id="unitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <small class="text-muted">Add Unit</small>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="unitModalForm">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="unitName" class="form-label" style="font-size:0.7rem;">Unit Name</label>
+                        <input type="text" class="form-control" id="unitName" name="unitName"
+                            placeholder="Enter unit name" style="height:30px;" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="saveUnitBtn" class="btn btn-primary" form="unitModalForm">
+                    <span id="buttonText">Save</span>
+                    <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
                 </button>
             </div>
         </div>

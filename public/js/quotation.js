@@ -1,20 +1,15 @@
 //function to automatically calculate the line amount and total amount
 function calculateLineAmount(element) {
+
     let row = element.closest("tr");
 
     // Get input values and remove commas if present
-    let quantity =
-        parseFloat(row.querySelector(".quantity").value.replace(/,/g, "")) || 0;
-    let unitPrice =
-        parseFloat(row.querySelector(".unit-price").value.replace(/,/g, "")) ||
-        0;
+    let quantity = parseFloat(row.querySelector(".quantity").value.replace(/,/g, "")) || 0;
+    let unitPrice = parseFloat(row.querySelector(".unit-price").value.replace(/,/g, "")) || 0;
     let lineAmount = quantity * unitPrice;
 
     // Format line amount with commas
-    row.querySelector(".line-amount").value = lineAmount.toLocaleString(
-        "en-US",
-        { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-    );
+    row.querySelector(".line-amount").value = lineAmount.toLocaleString("en-US",{ minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     calculateTotal();
 }
@@ -28,10 +23,7 @@ function calculateTotal() {
     });
 
     // Format total with commas
-    document.getElementById("totalAmount").value = total.toLocaleString(
-        "en-US",
-        { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-    );
+    document.getElementById("totalAmount").value = total.toLocaleString("en-US",{ minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 // Automatically format user input to include commas
@@ -44,6 +36,8 @@ document.querySelectorAll(".quantity, .unit-price").forEach((input) => {
     });
 });
 
+
+
 $(document).ready(function () {
     //save customer and ilang items ge palit
     // Listen for click event on Save button
@@ -54,12 +48,8 @@ $(document).ready(function () {
 
         // Get button elements for UI feedback during submission
         const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById(
-            "buttonText-customer"
-        );
-        const buttonSpinnercustomer = document.getElementById(
-            "buttonSpinner-customer"
-        );
+        const buttonTextcustomer = document.getElementById("buttonText-customer");
+        const buttonSpinnercustomer = document.getElementById("buttonSpinner-customer");
         const buttonTextsaveIcon = document.getElementById("saveIcon");
 
         // Start loading animation (disable button and show spinner)
@@ -119,16 +109,12 @@ $(document).ready(function () {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "")
-                .trim()
-                .replace(/,/g, "");
-            let lineAmount = ($(this).find(".line-amount").val() ?? "")
-                .trim()
-                .replace(/,/g, "");
+            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
 
             // Check if row contains any valid data
-            let isRowValid =
-                quantity || unit || itemName || unitPrice || lineAmount;
+            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+
             if (isRowValid) {
                 foundFirstValidItem = true;
                 lastValidIndex = tempRows.length; // Store last valid row index
@@ -187,9 +173,7 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 console.error(xhr.responseText); // Log error to console
-                toastr.error(
-                    "Something went wrong! Refresh or Try again later"
-                ); // Show error message
+                toastr.error("Something went wrong! Refresh or Try again later"); // Show error message
                 stopLoading(); // Reset UI
             },
         });
@@ -210,18 +194,16 @@ $(document).ready(function () {
         // Get the quotation ID from the clicked row's data attribute
         let quoteId = $(this).data("id");
 
+        let showCustomerINfo = Laravel.user_role === "admin" ? `/admin-quotation/${quoteId}` : `/user-quotation/${quoteId}`;
+
         $("#updateBtn-customers").removeClass("d-none"); //show the edit btn
         $("#CopyBtn-customers").removeClass("d-none"); //show the edit btn
 
         // Get the Save button and text elements
         const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById(
-            "buttonText-customer"
-        );
 
         // Disable the Save button to prevent multiple clicks while loading
         saveBtnquote.disabled = true;
-        buttonTextcustomer.textContent = "...."; // Indicate that data is loading
 
         // Make an AJAX GET request to fetch the quotation data based on the clicked row's ID
         $.ajax({
@@ -263,30 +245,8 @@ $(document).ready(function () {
                         $(row).find("select").val(item.unit);
                         $(row).find(".item-name").val(item.item_name);
                         // Convert and display unit price and line amount with commas
-                        $(row)
-                            .find(".unit-price")
-                            .val(
-                                item.unit_price
-                                    ? parseFloat(
-                                          item.unit_price
-                                      ).toLocaleString("en-US", {
-                                          minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
-                                      })
-                                    : ""
-                            ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display);
-                        $(row)
-                            .find(".line-amount")
-                            .val(
-                                item.line_amount
-                                    ? parseFloat(
-                                          item.line_amount
-                                      ).toLocaleString("en-US", {
-                                          minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
-                                      })
-                                    : ""
-                            ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display
+                        $(row).find(".unit-price").val(item.unit_price ? parseFloat( item.unit_price).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2,}) : "" ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display);
+                        $(row).find(".line-amount").val(item.line_amount ? parseFloat( item.line_amount).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2,}): "" ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display
 
                         // Add line amount to the total amount calculation
                         totalAmount += parseFloat(item.line_amount) || 0;
@@ -297,12 +257,7 @@ $(document).ready(function () {
                 });
 
                 // Update the total amount field with the calculated total (formatted with commas)
-                $("#totalAmount").val(
-                    totalAmount.toLocaleString("en-US", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                    })
-                );
+                $("#totalAmount").val(totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2,}));
 
                 // Populate QoutotaionTermsCondtionRemarks in the input fields
                 $("#Condition").val(data.condition);
@@ -323,21 +278,19 @@ $(document).ready(function () {
     $("#new-Quote").on("click", function (e) {
         e.preventDefault(); // Prevent default form submission
 
+        let addNewQuote = Laravel.user_role === "admin" ? "/get-latest-quotation" : "/get-user-latest-quotation";
+
         $("#updateBtn-customers").addClass("d-none"); //hide edit btn
+        $("#CopyBtn-customers").addClass("d-none"); //hide copy btn
 
         //save button
         const saveBtnquote = document.getElementById("saveBtn-customers");
-        const buttonTextcustomer = document.getElementById(
-            "buttonText-customer"
-        );
+        const buttonTextcustomer = document.getElementById("buttonText-customer");
 
         //add new button
         const addnewBtnquote = document.getElementById("saveBtn-customers");
-        const adnewwbuttonTextcustomer =
-            document.getElementById("buttonText-Quote");
-        const adnewwbuttonSpinner = document.getElementById(
-            "buttonSpinner-Quote"
-        );
+        const adnewwbuttonTextcustomer = document.getElementById("buttonText-Quote");
+        const adnewwbuttonSpinner = document.getElementById("buttonSpinner-Quote");
         const adnewwIcon = document.getElementById("addIcon");
 
         // Get latest quotation number via AJAX
@@ -466,20 +419,14 @@ $(document).ready(function () {
     });
 
     //for converting to PNG ni sya
-    document
-        .getElementById("convertCustomerDetailsBtnToPNG")
-        .addEventListener("click", function () {
-            let element = document.getElementById("customerDetailsContainer");
-            let saveBtnquote = document.getElementById("downloadImage"); // Download button
-            let buttonTextcustomer = document.getElementById(
-                "buttonText-Quotationpng"
-            ); // Button text span
-            let buttonSpinnercustomer = document.getElementById(
-                "buttonSpinner-Quotationpng"
-            ); // Loading spinner
-            let buttonTextsaveIcon = document.getElementById(
-                "saveQuotaionIconpng"
-            ); // Save icon
+    document.getElementById("convertCustomerDetailsBtnToPNG").addEventListener("click", function () {
+
+        let element = document.getElementById("customerDetailsContainer");
+        let saveBtnquote = document.getElementById("downloadImage"); // Download button
+        
+        let buttonTextcustomer = document.getElementById("buttonText-Quotationpng"); // Button text span
+        let buttonSpinnercustomer = document.getElementById("buttonSpinner-Quotationpng"); // Loading spinner
+        let buttonTextsaveIcon = document.getElementById("saveQuotaionIconpng"); // Save icon
 
             // Temporarily adjust styles for full capture
             let originalStyle = {
@@ -545,11 +492,9 @@ $(document).ready(function () {
         });
 
     // for PRINT functionality
-    document
-        .getElementById("printButton")
-        .addEventListener("click", function () {
-            let customerDetailsContainer =
-                document.getElementById("detailsForPrint");
+    document.getElementById("printButton").addEventListener("click", function () {
+
+            let customerDetailsContainer = document.getElementById("detailsForPrint");
 
             if (!customerDetailsContainer) {
                 alert("Error: Content container not found!");
@@ -557,22 +502,15 @@ $(document).ready(function () {
             }
 
             let printBtnquotep = document.getElementById("printButton");
-            let buttonTextcustomerp = document.getElementById(
-                "buttonText-Quotation"
-            );
-            let buttonSpinnercustomerp = document.getElementById(
-                "buttonSpinner-Quotation"
-            );
-            let buttonTextsaveIconp =
-                document.getElementById("saveQuotaionIcon");
+            let buttonTextcustomerp = document.getElementById("buttonText-Quotation");
+            let buttonSpinnercustomerp = document.getElementById("buttonSpinner-Quotation");
+            let buttonTextsaveIconp =document.getElementById("saveQuotaionIcon");
 
             // Clone the container
             let clonedContent = customerDetailsContainer.cloneNode(true);
 
             // Remove disabled attribute from inputs and force black text
-            clonedContent
-                .querySelectorAll("input[disabled]")
-                .forEach((input) => {
+            clonedContent.querySelectorAll("input[disabled]").forEach((input) => {
                     input.removeAttribute("disabled");
                     input.style.color = "black";
                     input.style.backgroundColor = "white";
@@ -581,18 +519,12 @@ $(document).ready(function () {
             // Convert all <select> elements to their selected values
             clonedContent.querySelectorAll("select").forEach((select) => {
                 // Get the latest value from the live DOM, not just the cloned version
-                let liveSelect = document.querySelector(
-                    `[name="${select.name}"]`
-                );
+                let liveSelect = document.querySelector(`[name="${select.name}"]`);
                 let selectedValue = liveSelect ? liveSelect.value : "";
 
                 console.log("Live Selected Value:", selectedValue);
 
-                let selectedText = selectedValue
-                    ? Array.from(select.options).find(
-                          (option) => option.value === selectedValue
-                      )?.text || selectedValue
-                    : "";
+                let selectedText = selectedValue ? Array.from(select.options).find((option) => option.value === selectedValue)?.text || selectedValue: "";
 
                 console.log("Selected Text After Fix:", selectedText);
 
@@ -622,49 +554,45 @@ $(document).ready(function () {
             let doc = iframe.contentWindow.document;
             doc.open();
             doc.write(`
-        <html>
-        <head>
-            <title>Print Preview</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <link rel="stylesheet" href="${
-                document.querySelector('link[href*="bootstrap"]')?.href || ""
-            }">
-            <link rel="stylesheet" href="${
-                document.querySelector('link[href*="style.css"]')?.href || ""
-            }">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-            <style>
-                @media print {
-                    body {
-                        margin: 0px;
-                        font-family: 'Poppins', sans-serif;
-                    }
-                    input {
-                        color: black !important;
-                        background-color: white !important;
-                        -webkit-print-color-adjust: exact;
-                    }
-                    .bg-secondary {
-                        background-color: #6c757d !important;
-                        -webkit-print-color-adjust: exact;
-                    }
-                    th {
-                        background-color: rgb(235, 208, 157) !important;
-                        color: black !important;
-                        -webkit-print-color-adjust: exact;
-                        print-color-adjust: exact;
-                    }
-                }
-            </style>
-        </head>
-        <body></body>
-        </html>
-    `);
+                <html>
+                <head>
+                    <title>Print Preview</title>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <link rel="stylesheet" href="${document.querySelector('link[href*="bootstrap"]')?.href || ""}">
+                    <link rel="stylesheet" href="${document.querySelector('link[href*="style.css"]')?.href || ""}">
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+                    <style>
+                        @media print {
+                            body {
+                                margin: 0px;
+                                font-family: 'Poppins', sans-serif;
+                            }
+                            input {
+                                color: black !important;
+                                background-color: white !important;
+                                -webkit-print-color-adjust: exact;
+                            }
+                            .bg-secondary {
+                                background-color: #6c757d !important;
+                                -webkit-print-color-adjust: exact;
+                            }
+                            th {
+                                background-color: rgb(235, 208, 157) !important;
+                                color: black !important;
+                                -webkit-print-color-adjust: exact;
+                                print-color-adjust: exact;
+                            }
+                        }
+                    </style>
+                </head>
+                <body></body>
+                </html>
+            `);
             doc.close();
 
             // Ensure styles are fully loaded before appending content and printing
@@ -688,12 +616,14 @@ $(document).ready(function () {
             }, 500);
         });
 
+    
     //for changing header and footer
     // Declare selectedType globally
     let selectedType = "";
 
     // Open modal and set the correct image source when clicking an image
     $(document).on("click", ".img-head", function () {
+
         let elementPriceQuotation = $("#deatailsForHeaderAndFooter").html();
         let quotationId = $(this).data("id"); // Get quotation ID
         selectedType = $(this).data("type"); // Get type (header/footer)
@@ -738,19 +668,15 @@ $(document).ready(function () {
 
     // Save Image - Upload to Server
     $("#saveImageBtn").on("click", function () {
+
         let saveImageBtn = document.getElementById("saveImageBtn");
-        let buttonTextQuotationEditHeadAndFooter = document.getElementById(
-            "buttonText-QuotationEditHeadAndFooter"
-        );
-        let buttonSpinnerQuotationEditHeadAndFooter = document.getElementById(
-            "buttonSpinner-QuotationEditHeadAndFooter"
-        );
-        let saveQuotaionIconEditHeadAndFooter = document.getElementById(
-            "saveQuotaionIconEditHeadAndFooter"
-        );
+        let buttonTextQuotationEditHeadAndFooter = document.getElementById("buttonText-QuotationEditHeadAndFooter");
+        let buttonSpinnerQuotationEditHeadAndFooter = document.getElementById("buttonSpinner-QuotationEditHeadAndFooter");
+        let saveQuotaionIconEditHeadAndFooter = document.getElementById("saveQuotaionIconEditHeadAndFooter");
 
         let fileInput = $("#fileInput")[0].files[0];
         let quotationId = $("#quotationId").val();
+        let updateIMG = Laravel.user_role === "admin" ? `/admin-update-image/${quotationId}` : `/user-update-image/${quotationId}`;
 
         //start loading
         saveImageBtn.disabled = true;
@@ -791,8 +717,7 @@ $(document).ready(function () {
                     toastr.success("Image updated successfully!");
 
                     // Ensure response.image_url is correct
-                    let newImageUrl =
-                        response.image_url + "?t=" + new Date().getTime();
+                    let newImageUrl = response.image_url + "?t=" + new Date().getTime();
                     //console.log("New Image URL:", newImageUrl); // Debug
 
                     // Select the correct image dynamically
@@ -803,28 +728,19 @@ $(document).ready(function () {
 
                     //stop loading
                     saveImageBtn.disabled = false;
-                    buttonTextQuotationEditHeadAndFooter.textContent =
-                        "Change Image";
-                    buttonSpinnerQuotationEditHeadAndFooter.classList.add(
-                        "d-none"
-                    );
-                    saveQuotaionIconEditHeadAndFooter.classList.remove(
-                        "d-none"
-                    );
+                    buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
+                    buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
+                    saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
 
                     $("#imageModal").modal("hide"); // Close modal
                 } else {
+
                     toastr.error("Failed to update image.");
                     //stop loading
                     saveImageBtn.disabled = false;
-                    buttonTextQuotationEditHeadAndFooter.textContent =
-                        "Change Image";
-                    buttonSpinnerQuotationEditHeadAndFooter.classList.add(
-                        "d-none"
-                    );
-                    saveQuotaionIconEditHeadAndFooter.classList.remove(
-                        "d-none"
-                    );
+                    buttonTextQuotationEditHeadAndFooter.textContent ="Change Image";
+                    buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
+                    saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
                 }
             },
             error: function (xhr, status, error) {
@@ -833,8 +749,7 @@ $(document).ready(function () {
 
                 //stop loading
                 saveImageBtn.disabled = false;
-                buttonTextQuotationEditHeadAndFooter.textContent =
-                    "Change Image";
+                buttonTextQuotationEditHeadAndFooter.textContent = "Change Image";
                 buttonSpinnerQuotationEditHeadAndFooter.classList.add("d-none");
                 saveQuotaionIconEditHeadAndFooter.classList.remove("d-none");
             },
@@ -855,17 +770,10 @@ $(document).ready(function () {
         }
 
         // Get button elements for UI feedback during submission
-        const updatesaveBtnquote = document.getElementById(
-            "updateBtn-customers"
-        );
-        const updatebuttonTextcustomer = document.getElementById(
-            "updatebuttonText-customer"
-        );
-        const updatebuttonSpinnercustomer = document.getElementById(
-            "updatebuttonSpinner-customer"
-        );
-        const updatebuttonTextsaveIcon =
-            document.getElementById("saveupdateIcon");
+        const updatesaveBtnquote = document.getElementById("updateBtn-customers");
+        const updatebuttonTextcustomer = document.getElementById("updatebuttonText-customer");
+        const updatebuttonSpinnercustomer = document.getElementById("updatebuttonSpinner-customer");
+        const updatebuttonTextsaveIcon =document.getElementById("saveupdateIcon");
 
         // Start loading animation (disable button and show spinner)
         updatebuttonTextcustomer.textContent = "";
@@ -938,16 +846,12 @@ $(document).ready(function () {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "")
-                .trim()
-                .replace(/,/g, "");
-            let lineAmount = ($(this).find(".line-amount").val() ?? "")
-                .trim()
-                .replace(/,/g, "");
+            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
 
             // Check if row contains any valid data
-            let isRowValid =
-                quantity || unit || itemName || unitPrice || lineAmount;
+            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+
             if (isRowValid) {
                 foundFirstValidItem = true;
                 lastValidIndex = tempRows.length; // Store last valid row index
@@ -1039,12 +943,8 @@ $(document).ready(function () {
 
         // Get button elements for UI feedback during submission
         const CopysaveBtnquote = document.getElementById("CopyBtn-customers");
-        const CopybuttonTextcustomer = document.getElementById(
-            "CopybuttonText-customer"
-        );
-        const CopybuttonSpinnercustomer = document.getElementById(
-            "CopybuttonSpinner-customer"
-        );
+        const CopybuttonTextcustomer = document.getElementById("CopybuttonText-customer");
+        const CopybuttonSpinnercustomer = document.getElementById("CopybuttonSpinner-customer");
         const CopybuttonTextsaveIcon = document.getElementById("saveCopyIcon");
 
         // Start loading animation (disable button and show spinner)
@@ -1104,16 +1004,12 @@ $(document).ready(function () {
             let quantity = ($(this).find(".quantity").val() ?? "").trim();
             let unit = ($(this).find("select").val() ?? "").trim();
             let itemName = ($(this).find(".item-name").val() ?? "").trim();
-            let unitPrice = ($(this).find(".unit-price").val() ?? "")
-                .trim()
-                .replace(/,/g, "");
-            let lineAmount = ($(this).find(".line-amount").val() ?? "")
-                .trim()
-                .replace(/,/g, "");
+            let unitPrice = ($(this).find(".unit-price").val() ?? "").trim().replace(/,/g, "");
+            let lineAmount = ($(this).find(".line-amount").val() ?? "").trim().replace(/,/g, "");
 
             // Check if row contains any valid data
-            let isRowValid =
-                quantity || unit || itemName || unitPrice || lineAmount;
+            let isRowValid = quantity || unit || itemName || unitPrice || lineAmount;
+            
             if (isRowValid) {
                 foundFirstValidItem = true;
                 lastValidIndex = tempRows.length; // Store last valid row index
@@ -1196,38 +1092,84 @@ $(document).ready(function () {
             },
         });
     });
+
+
+let selectedDropdown = null; // Store the clicked select element
+
+// Show modal when "+ Add New" is selected
+$('.unit-select').change(function () {
+    if ($(this).val() === "add") {
+        selectedDropdown = $(this); // Store reference to the clicked dropdown
+        $('#unitModal').modal('show');
+        $(this).val(''); // Reset selection
+    }
 });
 
-// Add Unit Button Function
-document.addEventListener("DOMContentLoaded", function () {
-    const unitSelects = document.querySelectorAll(".unit-select"); // Select all dropdowns
-    const addUnitModalEl = document.getElementById("addUnitModal");
-    const addUnitModal = new bootstrap.Modal(addUnitModalEl);
-    const newUnitInput = document.getElementById("newUnitInput");
-    const saveNewUnit = document.getElementById("saveNewUnit");
+$('#unitModalForm').on('submit', function (e) { 
+    e.preventDefault();
 
-    let activeSelect = null; // Store which dropdown triggered the modal
+    let quoteUnit = Laravel.user_role === "admin" ? "/quotations/add-unit" : "/quotations/user-add-unit";
 
-    unitSelects.forEach((select) => {
-        select.addEventListener("change", function () {
-            if (this.value === "add") {
-                activeSelect = this; // Store reference to the clicked dropdown
-                addUnitModal.show();
-                this.value = ""; // Reset selection
+     // Get button elements for UI feedback during submission
+    const unitsaveBtnquote = document.getElementById("saveUnitBtn");
+    const unitbuttonTextcustomer = document.getElementById("buttonText");
+    const unitbuttonSpinnercustomer = document.getElementById("buttonSpinner");
+
+        // Start loading animation (disable button and show spinner)
+    unitbuttonTextcustomer.textContent = "";
+    unitbuttonSpinnercustomer.classList.remove("d-none");
+    unitsaveBtnquote.disabled = true;
+    
+    let formData = $(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: quoteUnit,
+        data: formData,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            if (response.success) { // Ensure the response contains success status
+                toastr.success("Added Successfully!");
+
+                unitbuttonTextcustomer.textContent = "Save";
+                unitbuttonSpinnercustomer.classList.add("d-none");
+                unitsaveBtnquote.disabled = false;
+                
+                // Append the new unit to all .unit-select dropdowns
+                $('.unit-select').each(function () {
+                    $(this).append(
+                        `<option value="${response.new_unit_name}">${response.new_unit_name}</option>`
+                    );
+                });
+
+                // Ensure the newly added option is selected for the clicked dropdown
+                if (selectedDropdown) {
+                    selectedDropdown.val(response.new_unit_id).trigger("change");
+                }
+
+                // Close and reset modal
+                $("#unitModal").modal("hide");
+                $("#unitModalForm")[0].reset();
+                selectedDropdown = null; // Reset the reference
             }
-        });
-    });
+        },
+        error: function (xhr) {
+            toastr.error(xhr.responseJSON?.message || "An error occurred.");
 
-    saveNewUnit.addEventListener("click", function () {
-        const newUnit = newUnitInput.value.trim();
-        if (newUnit && activeSelect) {
-            const newOption = document.createElement("option");
-            newOption.value = newUnit;
-            newOption.textContent = newUnit;
-            activeSelect.insertBefore(newOption, activeSelect.lastElementChild);
-            activeSelect.value = newUnit; // Set new unit as selected
-            newUnitInput.value = ""; // Clear input
-            addUnitModal.hide();
-        }
+            unitbuttonTextcustomer.textContent = "Save";
+            unitbuttonSpinnercustomer.classList.add("d-none");
+            unitsaveBtnquote.disabled = false;
+        },
     });
 });
+
+
+
+
+});
+
+
+
+

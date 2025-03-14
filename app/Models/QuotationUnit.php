@@ -10,6 +10,9 @@ class QuotationUnit extends Model
     /** @use HasFactory<\Database\Factories\QuotationUnitFactory> */
     use HasFactory;
 
+    // Define the table name explicitly
     protected $table = 'quotation_units';
+
+    // Specifies which columns are mass-assignable (prevents mass-assignment vulnerabilities)
     protected $fillable = ['units'];
 }
