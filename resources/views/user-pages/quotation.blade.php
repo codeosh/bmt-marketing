@@ -495,7 +495,7 @@
                                     <input type="number" name="items[11][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100 unit-select" name="items[10][unit]">
+                                    <select class="w-100 unit-select" name="items[11][unit]">
                                         <option value="" selected></option>
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->units }}">{{ $unit->units }}</option>
@@ -524,7 +524,7 @@
                                     <input type="number" name="items[12][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100 unit-select" name="items[10][unit]">
+                                    <select class="w-100 unit-select" name="items[12][unit]">
                                         <option value="" selected></option>
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->units }}">{{ $unit->units }}</option>
@@ -553,7 +553,7 @@
                                     <input type="number" name="items[13][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100 unit-select" name="items[10][unit]">
+                                    <select class="w-100 unit-select" name="items[13][unit]">
                                         <option value="" selected></option>
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->units }}">{{ $unit->units }}</option>
@@ -582,7 +582,7 @@
                                     <input type="number" name="items[14][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100 unit-select" name="items[10][unit]">
+                                    <select class="w-100 unit-select" name="items[14][unit]">
                                         <option value="" selected></option>
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->units }}">{{ $unit->units }}</option>
@@ -611,7 +611,7 @@
                                     <input type="number" name="items[15][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100 unit-select" name="items[10][unit]">
+                                    <select class="w-100 unit-select" name="items[15][unit]">
                                         <option value="" selected></option>
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->units }}">{{ $unit->units }}</option>
