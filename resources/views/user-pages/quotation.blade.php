@@ -490,17 +490,17 @@
                             </tr>
 
                             {{-- row 11 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[11][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[11][unit]">
+                                    <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -516,20 +516,20 @@
                                     <input type="text" name="items[11][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             {{-- row 12 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[12][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[12][unit]">
+                                    <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -545,20 +545,20 @@
                                     <input type="text" name="items[12][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             {{-- row 13 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[13][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[13][unit]">
+                                    <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -574,20 +574,20 @@
                                     <input type="text" name="items[13][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             {{-- row 14 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[14][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[14][unit]">
+                                    <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -603,20 +603,20 @@
                                     <input type="text" name="items[14][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             {{-- row 15 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[15][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[15][unit]">
+                                    <select class="w-100 unit-select" name="items[10][unit]">
                                         <option value="" selected></option>
-                                        <option value="PCS">PCS</option>
-                                        <option value="SET">SET</option>
-                                        <option value="BOX">BOX</option>
-                                        <option value="CTN">CTN</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                        @endforeach
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -632,7 +632,7 @@
                                     <input type="text" name="items[15][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             {{-- row 16 --}}
                             {{-- <tr>
