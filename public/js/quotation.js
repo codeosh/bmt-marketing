@@ -676,7 +676,7 @@ $(document).ready(function () {
 
         let fileInput = $("#fileInput")[0].files[0];
         let quotationId = $("#quotationId").val();
-        let updateIMG = Laravel.user_role === "admin" ? `/admin-update-image/${quotationId}` : `/user-update-image/${quotationId}`;
+        let updateIMG = Laravel.user_role === "admin" ? `/update-image/${quotationId}` : `/user-update-image/${quotationId}`;
 
         //start loading
         saveImageBtn.disabled = true;

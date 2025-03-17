@@ -190,14 +190,6 @@
                                 <li><a class="dropdown-item" :href="route('profile.edit')" style="font-size:0.8rem;">{{
                                         __('Profile') }}</a></li>
 
-                                {{-- Account Button --}}
-                                <li>
-                                    <a href="{{ route('admin-accounts.index') }}" class="dropdown-item"
-                                        style="font-size:0.8rem;">
-                                        Accounts
-                                    </a>
-                                </li>
-
                                 <li><a class="dropdown-item" href="#" style="font-size:0.8rem;">Settings</a></li>
 
                                 <li>

@@ -27,13 +27,14 @@
                 </tr>
             </thead>
             <tbody class="bg-light">
+                
                 @foreach ($accounts as $account)
                     <tr>
                         <td class="px-3 py-2">{{ $account->name }}</td>
                         <td class="px-3 py-2">{{ $account->phoneNumber }}</td>
                         <td class="px-3 py-2">{{ $account->email }}</td>
-                        <td class="px-3 py-2"><span class="badge bg-success">{{ $account->role }}</span></td>
-                        <td class="px-3 py-2"><span class="badge bg-success">{{ $account->status }}</span></td>
+                        <td class="px-3 py-2"><span class="{{ $account->role === 'admin' ? 'badge bg-success' : 'badge bg-primary' }}">{{ $account->role }}</span></td>
+                        <td class="px-3 py-2"><span class="{{ $account->role === 'admin' ? 'badge bg-success' : 'badge bg-primary' }}">{{ $account->status }}</span></td>
                         <td class="px-3 py-2">
                             <div class="d-flex gap-2">
                                 <!-- Edit -->

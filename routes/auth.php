@@ -125,6 +125,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Accounts
         Route::get('/account/user/{id}', [AccountController::class, 'getUser']);
         Route::put('/account/update/{id}', [AccountController::class, 'updateUser']);
+        Route::delete('/account/destroy/{id}', [AccountController::class, 'destroy']);
     });
 
 
