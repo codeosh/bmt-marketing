@@ -35,6 +35,7 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
         {{-- Convert to PNG CDN --}}
+        {{-- tomake canvas / image preview work--}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
         {{-- Font Awesome CDN --}}

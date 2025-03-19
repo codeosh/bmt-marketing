@@ -6,9 +6,12 @@ use App\Models\QuotationCustomer;
 use App\Models\QutationHeaderAndFooter;
 use App\Models\QuotationItem;
 use App\Models\QoutotaionTermsCondtionRemarks;
+use App\Models\QuotationUnit;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class QuotationController extends Controller
 {
@@ -19,6 +22,7 @@ class QuotationController extends Controller
     {
         //
         $quotation = QuotationCustomer::latest()->paginate(100);
+        $units = QuotationUnit::all();
 
         $quotationHeaderAndFooter = QutationHeaderAndFooter::latest()->first();
 
@@ -30,9 +34,9 @@ class QuotationController extends Controller
 
         if (auth::check() && auth::user()->role === 'admin') {
 
-            return view('pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter'));
+            return view('pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter', 'units'));
         } else {
-            return view('user-pages.quotation', compact('quotation'));
+            return view('user-pages.quotation', compact('quotation', 'newQuotationNo', 'quotationHeaderAndFooter', 'units'));
         }
     }
 
@@ -400,6 +404,35 @@ class QuotationController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function addNewUnit(Request $request)
+    {
+        $request->validate([
+            'unitName' => 'required|string|max:255'
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $unit = QuotationUnit::create([
+                'units' => $request->unitName
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'new_unit_id' => $unit->id,
+                'new_unit_name' => $unit->units,
+            ]);
+        } catch (Exception $error) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => $error->getMessage()
+            ]);
         }
     }
 }

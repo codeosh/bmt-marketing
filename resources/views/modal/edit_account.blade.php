@@ -62,7 +62,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" form="editAccForm">Save changes</button>
+        <button type="submit" id="editBtn-edit" form="editAccForm" class="btn btn-primary">
+          <span id="buttonText-edit">{{ __('Save changes') }}</span>
+          <span id="buttonSpinner-edit" class="spinner-border spinner-border-sm d-none" role="status"
+            aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </div>

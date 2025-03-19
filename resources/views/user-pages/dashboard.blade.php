@@ -10,4 +10,5 @@
             opacity: 0.7;">
     </div>
     </div>
+</div>
 @endsection

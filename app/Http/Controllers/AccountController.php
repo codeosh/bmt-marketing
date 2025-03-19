@@ -51,4 +51,11 @@ class AccountController extends Controller
 
         return response()->json(['success' => true, 'user' => $user]);
     }
+    public function destroy($id)
+    {
+        $deleteAcc = User::findOrFail($id);
+        $deleteAcc->delete();
+
+        return response()->json(['success' => true]);
+    }
 }
