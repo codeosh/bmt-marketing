@@ -72,9 +72,9 @@
        
     </div>
     
-    <div class="h-100 w-100 d-flex flex-column gap-2 ">
+    <div class="d-flex flex-column gap-2 w-100 h-100">
             {{-- Content --}}
-            <div class="border rounded p-3 overflow-auto custom-scrollbar" style="height: 80vh; max-width:1000px;" id="customerDetailsContainer">
+            <div class="border rounded p-3 overflow-auto custom-scrollbar" style="height: 80vh; max-width:1000px; " id="customerDetailsContainer">
 
                 <div id="detailsForPrint">
                 
@@ -98,7 +98,7 @@
                 {{-- Customer Details Container--}}
                 <div class="d-flex justify-content-between">
 
-                    <div class="customerDetails d-flex flex-column gap-2"style="font-size:0.8rem;flex-basis:70%;">
+                    <div class="customerDetails d-flex flex-column gap-2"style="font-size:1rem;flex-basis:70%;">
                         <form class="customerForm">
                             @csrf
                         {{-- Customer Name --}}
@@ -127,7 +127,7 @@
                     </div>
 
                     {{-- No. & Date Container --}}
-                    <div class="d-flex flex-column gap-2" style="font-size:0.8rem;flex-basis:30%;">
+                    <div class="d-flex flex-column gap-2" style="font-size:1rem;flex-basis:30%;">
                         {{-- No. --}}
                         <div class="customerQNumber">
                             <label for="customerQNumber" class="me-2">Q No&nbsp; &nbsp; &nbsp;:</label>
@@ -521,17 +521,18 @@
                             </tr>
 
                             {{-- row 11 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[11][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[11][unit]">
+                                    <select class="w-100 unit-select" name="items[11][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -547,20 +548,21 @@
                                     <input type="text" name="items[11][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
 
                             {{-- row 12 --}}
-                            {{-- <tr>
+                         <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[12][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[12][unit]">
+                                    <select class="w-100 unit-select" name="items[12][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -576,20 +578,21 @@
                                     <input type="text" name="items[12][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
 
                             {{-- row 13 --}}
-                            {{-- <tr>
+                             <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[13][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[13][unit]">
+                                    <select class="w-100 unit-select" name="items[13][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -605,20 +608,21 @@
                                     <input type="text" name="items[13][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             {{-- row 14 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[14][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[14][unit]">
+                                    <select class="w-100 unit-select" name="items[14][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -634,20 +638,21 @@
                                     <input type="text" name="items[14][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
 
                             {{-- row 15 --}}
-                            {{-- <tr>
+                             <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[15][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[15][unit]">
+                                    <select class="w-100 unit-select" name="items[15][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -663,20 +668,21 @@
                                     <input type="text" name="items[15][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
 
                             {{-- row 16 --}}
-                            {{-- <tr>
+                           <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[16][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[16][unit]">
+                                    <select class="w-100 unit-select" name="items[16][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
                                 
@@ -692,20 +698,21 @@
                                     <input type="text" name="items[16][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
 
                             {{-- row 17 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[17][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[17][unit]">
+                                    <select class="w-100 unit-select" name="items[17][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -721,19 +728,20 @@
                                     <input type="text" name="items[17][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
                             {{-- row 18 --}}
-                            {{-- <tr>
+                            <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[18][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[18][unit]">
+                                    <select class="w-100 unit-select" name="items[18][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -749,19 +757,20 @@
                                     <input type="text" name="items[18][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr> 
                             {{-- row 19 --}}
-                            {{-- <tr>
+                             <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[19][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
-                                    <select class="w-100" name="items[19][unit]">
+                                    <select class="w-100 unit-select" name="items[19][unit]">
                                         <option value="" selected></option>
                                         <option value="PCS">PCS</option>
                                         <option value="SET">SET</option>
                                         <option value="BOX">BOX</option>
                                         <option value="CTN">CTN</option>
+                                        <option value="add">+ Add New</option>
                                     </select>
                                 </td>
 
@@ -777,7 +786,7 @@
                                     <input type="text" name="items[19][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> --}}
+                            </tr>
 
                             <!-- Total Row -->
                             <tr class="bg-black" style="border: 1px solid black">

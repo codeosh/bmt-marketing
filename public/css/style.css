@@ -140,11 +140,15 @@ body {
     overflow-y: auto;
 }
 
+td {
+    padding: 0 !important;
+    margin: 0 !important;
+}
 td input,
 select {
     text-align: center;
-    border: none;
-    outline: none;
+    /* border: none;
+    outline: none; */
     margin: 0 !important;
     height: 23px;
 }
