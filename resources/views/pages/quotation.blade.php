@@ -82,8 +82,8 @@
                 <img src="{{ asset($quotationHeaderAndFooter->header_image) }}" 
                     alt="Header Image" 
                     id="head"
-                    class="w-100 img-head" 
-                    style="margin-bottom:45px;cursor: pointer;max-height: 127.28px;" 
+                    class="w-100 img-head " 
+                    style="margin-bottom:5px;cursor: pointer;height:90px; max-height: 90px;" 
                     data-bs-toggle="modal" 
                     data-bs-target="#imageModal"
                     data-id="{{ $quotationHeaderAndFooter->id }}" 
@@ -92,13 +92,13 @@
                 <div id="deatailsForHeaderAndFooter">
 
                 <div class="text-center">
-                    <h4 class=" fw-bolder">PRICE&nbsp;&nbsp; QUOTATION</h4>
+                    <h4 class="fw-bolder">PRICE&nbsp;&nbsp; QUOTATION</h4>
                 </div>
 
                 {{-- Customer Details Container--}}
                 <div class="d-flex justify-content-between">
 
-                    <div class="customerDetails d-flex flex-column gap-2"style="font-size:1rem;flex-basis:70%;">
+                    <div class="customerDetails d-flex flex-column gap-2"style="font-size:0.8rem;flex-basis:70%;">
                         <form class="customerForm">
                             @csrf
                         {{-- Customer Name --}}
@@ -127,7 +127,7 @@
                     </div>
 
                     {{-- No. & Date Container --}}
-                    <div class="d-flex flex-column gap-2" style="font-size:1rem;flex-basis:30%;">
+                    <div class="d-flex flex-column gap-1" style="font-size:0.8rem;flex-basis:30%;">
                         {{-- No. --}}
                         <div class="customerQNumber">
                             <label for="customerQNumber" class="me-2">Q No&nbsp; &nbsp; &nbsp;:</label>
@@ -150,14 +150,14 @@
                 </div>
 
                 {{-- Quote --}}
-                <div class="mt-3">
+                <div class="mt-2">
                     <p class="fst-italic" style="font-size:0.8rem;">" We are happy to quote you the following items you requested below..."</p>
                 </div>
                 
 
                 
                 {{-- Table --}}
-                <div class="border w-100 mt-2">
+                <div class="border w-100 ">
                     <table class="table table-sm text-center" id="items-table">
                         <thead class="table-light" >
                             <tr>
@@ -186,7 +186,7 @@
                                 </td>
 
                                 <td style="border-right:1px solid black; border-bottom:1px solid black;">
-                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
+                                    <input type="text" name="items[0][item_name]" class="w-100 text-start item-name" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -214,8 +214,8 @@
                                     </select>
                                 </td>
 
-                                <td style="border-right:1px solid black; border-bottom:1px solid black; ">
-                                    <input type="text" name="items[1][item_name]" class="w-100 text-start item-name ps-1" style="text-transform: uppercase;">
+                                <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                    <input type="text" name="items[1][item_name]" class="w-100 text-start item-name" style="text-transform: uppercase;">
                                 </td>
 
                                 <td style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
@@ -694,7 +694,7 @@
 
                             </tr> 
                             {{-- row 18 --}}
-                            <tr>
+                            {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[18][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -721,9 +721,9 @@
                                     <input type="text" name="items[18][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr> 
+                            </tr>  --}}
                             {{-- row 19 --}}
-                             <tr>
+                             {{-- <tr>
                                 <td style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
                                     <input type="number" name="items[19][quantity]" class="w-100 quantity" oninput="calculateLineAmount(this)">
                                 </td>
@@ -750,7 +750,7 @@
                                     <input type="text" name="items[19][line_amount]" class="w-100 line-amount text-end" disabled>
                                 </td>
 
-                            </tr>
+                            </tr> --}}
 
                             <!-- Total Row -->
                             <tr class="bg-black" style="border: 1px solid black">
@@ -775,9 +775,9 @@
 
                 </div>
 
-                <div class="footer d-flex gap-2 w-100 ">
-                        {{-- Terms & Condition Container --}}
-                        <div class="mt-5 mb-5 w-75 h-100">
+                <div class="footer d-flex gap-2">
+                    {{-- Terms & Condition Container --}}
+                        <div class="w-75 h-50">
                             <div class="header bg-secondary d-flex align-items-center justify-content-evenly" style="height:30px;">
                                 <small class="text-white">Terms & Condition</small>
                                 <small class="text-white">Remarks & Special Notes</small>
@@ -839,7 +839,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-5 w-50 d-flex flex-column align-items-center justify-content-center" style="height:190px">
+                        <div class="w-50 d-flex flex-column align-items-center justify-content-center" style="height:190px">
                             <div class="fw-bold" style="font-size: 0.8rem; margin-right:8rem;">
                                 <p>Quote & Prepared by:</p>
                             </div>
@@ -858,7 +858,7 @@
                     alt="Footer Image" 
                     id="foot"
                     class="w-100 img-head" 
-                    style="cursor: pointer;max-height: 137.45px;" 
+                    style="cursor: pointer;max-height: 120px; border:3px solid red;" 
                     data-bs-toggle="modal" 
                     data-bs-target="#imageModal"
                     data-id="{{ $quotationHeaderAndFooter->id }}" 
