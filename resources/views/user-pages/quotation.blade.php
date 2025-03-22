@@ -973,7 +973,7 @@
                                                 <span class="fw-bolder me-2" style="font-size:0.8rem;">Condition:</span>
                                                 <input type="text" id="Condition" class="form-control p-0 w-100"
                                                     style="font-size:0.8rem; width: auto; border:none; max-width:100%;"
-                                                    value="All Brand New 1 Year on">
+                                                    value="Brandnew">
                                             </div>
 
                                         </div>
@@ -983,7 +983,7 @@
                                                 <span class="fw-bolder me-2" style="font-size:0.8rem;">Warranty:</span>
                                                 <input type="text" id="Warranty" class="form-control p-0 w-100"
                                                     style="font-size:0.8rem; width: auto; border:none; max-width:100%;"
-                                                    value="All">
+                                                    value="1 year on all major parts">
                                             </div>
                                         </div>
 
@@ -993,7 +993,7 @@
                                                     style="font-size:0.8rem; white-space: nowrap;">VAT (12%):</span>
                                                 <input type="text" id="VAT" class="form-control p-0 w-100"
                                                     style="font-size:0.8rem; width: auto; border:none; max-width:100%;"
-                                                    value="Major Parts">
+                                                    value="Excluded">
 
                                             </div>
                                         </div>
@@ -1004,7 +1004,7 @@
                                                     style="font-size:0.8rem;">Availability:</span>
                                                 <input type="text" id="Availability" class="form-control p-0 w-100"
                                                     style="font-size:0.8rem; width: auto; border:none; max-width:100%;"
-                                                    value="Excluded">
+                                                    value="1-2 days">
 
                                             </div>
                                         </div>

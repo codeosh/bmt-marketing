@@ -317,10 +317,10 @@ $(document).ready(function () {
         $("select").val("");
 
         //put to default info
-        $("#Condition").val("All Brand New 1 Year on");
-        $("#Warranty").val("All");
-        $("#VAT").val("Major Parts");
-        $("#Availability").val("Excluded");
+        $("#Condition").val("Brandnew");
+        $("#Warranty").val("1 year on all major parts");
+        $("#VAT").val("Excluded");
+        $("#Availability").val("1-2 days");
         $("#RD").val("Onstock");
         $("#PriceEffectivity").val("1 Week");
 
