@@ -283,7 +283,7 @@
 
                                         <td style="border-right:1px solid black; border-bottom:1px solid black;">
                                             <input type="text" name="items[2][item_name]"
-                                                class="w-100 text-start item-name ps-1"
+                                                class="w-100 text-start item-name"
                                                 style="text-transform: uppercase;">
                                         </td>
 
@@ -321,7 +321,7 @@
 
                                         <td style="border-right:1px solid black; border-bottom:1px solid black;">
                                             <input type="text" name="items[3][item_name]"
-                                                class="w-100 text-start item-name ps-1"
+                                                class="w-100 text-start item-name"
                                                 style="text-transform: uppercase;">
                                         </td>
 
@@ -806,11 +806,11 @@
                                             style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                             <select class="w-100 unit-select" name="items[16][unit]">
                                                 <option value="" selected></option>
-                                                <option value="PCS">PCS</option>
-                                                <option value="SET">SET</option>
-                                                <option value="BOX">BOX</option>
-                                                <option value="CTN">CTN</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                                @endforeach
                                                 <option value="add">+ Add New</option>
+                                    
                                             </select>
                                         </td>
 
@@ -845,10 +845,9 @@
                                             style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
                                             <select class="w-100 unit-select" name="items[17][unit]">
                                                 <option value="" selected></option>
-                                                <option value="PCS">PCS</option>
-                                                <option value="SET">SET</option>
-                                                <option value="BOX">BOX</option>
-                                                <option value="CTN">CTN</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                                @endforeach
                                                 <option value="add">+ Add New</option>
                                             </select>
                                         </td>
