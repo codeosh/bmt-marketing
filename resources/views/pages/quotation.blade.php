@@ -167,9 +167,9 @@
 
 
                         {{-- Table --}}
-                        <div class="border w-100 ">
+                        <div class="w-100">
                             <table class="table table-sm text-center" id="items-table">
-                                <thead class="table-light">
+                                <thead class="table-light" style="border:1px solid black;">
                                     <tr>
                                         <th scope="col"
                                             style="background-color: rgb(246, 223, 181)!important; border:none">Quantity
@@ -949,11 +949,8 @@
                                         </td>
 
                                     </tr>
-                                    </form>
-
                                 </tbody>
                             </table>
-
                         </div>
 
                         <div class="footer d-flex gap-2">
