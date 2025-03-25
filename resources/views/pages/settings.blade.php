@@ -42,6 +42,11 @@
                 <label for="insights" class="form-check-label">Insights</label>
             </div>
 
+            <div class="form-check">
+                <input type="checkbox" name="reset[]" value="accounts" id="accounts" class="form-check-input">
+                <label for="accounts" class="form-check-label">Accounts (All Users, Keep 1 Admin)</label>
+            </div>
+
             <button type="submit" class="btn btn-danger mt-3"
                 onclick="return confirm('Are you sure you want to reset the selected data? This cannot be undone.')">
                 Reset Selected Data
