@@ -85,7 +85,7 @@
 
                     {{-- Header Image --}}
                     <img src="{{ asset($quotationHeaderAndFooter->header_image) }}" alt="Header Image" id="head"
-                        class="w-100 img-head " style="margin-bottom:5px;cursor: pointer;height:90px; max-height: 90px;"
+                        class="w-100 img-head " style="cursor: pointer; height:auto; object-fit:cover;"
                         data-bs-toggle="modal" data-bs-target="#imageModal" data-id="{{ $quotationHeaderAndFooter->id }}"
                         data-type="header">
 
@@ -283,8 +283,7 @@
 
                                         <td style="border-right:1px solid black; border-bottom:1px solid black;">
                                             <input type="text" name="items[2][item_name]"
-                                                class="w-100 text-start item-name"
-                                                style="text-transform: uppercase;">
+                                                class="w-100 text-start item-name" style="text-transform: uppercase;">
                                         </td>
 
                                         <td
@@ -321,8 +320,7 @@
 
                                         <td style="border-right:1px solid black; border-bottom:1px solid black;">
                                             <input type="text" name="items[3][item_name]"
-                                                class="w-100 text-start item-name"
-                                                style="text-transform: uppercase;">
+                                                class="w-100 text-start item-name" style="text-transform: uppercase;">
                                         </td>
 
                                         <td
@@ -810,7 +808,7 @@
                                                     <option value="{{ $unit->units }}">{{ $unit->units }}</option>
                                                 @endforeach
                                                 <option value="add">+ Add New</option>
-                                    
+
                                             </select>
                                         </td>
 
@@ -1050,8 +1048,9 @@
                     </div>
                     {{-- Footer Image --}}
                     <img src="{{ asset($quotationHeaderAndFooter->footer_image) }}" alt="Footer Image" id="foot"
-                        class="w-100 img-head" style="cursor: pointer;max-height: 120px;" data-bs-toggle="modal"
-                        data-bs-target="#imageModal" data-id="{{ $quotationHeaderAndFooter->id }}" data-type="footer">
+                        class="w-100 img-head" style="cursor: pointer; height:auto; object-fit:cover;"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-id="{{ $quotationHeaderAndFooter->id }}" data-type="footer">
 
                 </div>
             </div>
