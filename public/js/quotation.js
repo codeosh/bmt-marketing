@@ -480,7 +480,7 @@ $(document).ready(function () {
     //for converting to PNG ni sya
     document
         .getElementById("convertCustomerDetailsBtnToPNG")
-        .addEventListener("click", function () {
+        .addEventListener("click", async function () {
             let element = document.getElementById("customerDetailsContainer");
             let saveBtnquote = document.getElementById("downloadImage"); // Download button
 
@@ -494,38 +494,44 @@ $(document).ready(function () {
                 "saveQuotaionIconpng"
             ); // Save icon
 
-            // Temporarily adjust styles for full capture
+            // Backup original styles
             let originalStyle = {
                 width: element.style.width,
                 maxWidth: element.style.maxWidth,
                 overflow: element.style.overflow,
                 height: element.style.height,
+                backgroundColor: element.style.backgroundColor,
+                borderCollapse: element.style.borderCollapse,
             };
 
-            element.style.width = element.scrollWidth + "px"; // Ensure full width
-            element.style.maxWidth = "none"; // Prevent width limits
-            element.style.overflow = "visible"; // Show hidden content
-            element.style.height = "auto"; // Ensure full height capture
+            // Force full display for accurate capture
+            element.style.width = element.scrollWidth + "px";
+            element.style.maxWidth = "none";
+            element.style.overflow = "visible";
+            element.style.height = "auto";
+            element.style.backgroundColor = "white"; // Ensure full white background
+            element.style.borderCollapse = "collapse"; // Fix table border issues
 
-            html2canvas(element, {
-                scrollX: 0,
-                scrollY: -window.scrollY, // Ensure it captures from the top
-                windowWidth: document.documentElement.scrollWidth,
-                windowHeight: element.scrollHeight, // Capture the full height
-                useCORS: true, // If there are external images
-            }).then((canvas) => {
+            try {
+                let canvas = await html2canvas(element, {
+                    scrollX: 0,
+                    scrollY: -window.scrollY, // Ensure it captures from the top
+                    windowWidth: document.documentElement.scrollWidth,
+                    windowHeight: element.scrollHeight, // Capture full content height
+                    useCORS: true, // Ensure external images load
+                    scale: 2, // Improve quality of generated PNG
+                    backgroundColor: "#ffffff", // Avoid transparency issues
+                });
+
                 let imageURL = canvas.toDataURL("image/png");
 
                 // Restore original styles
-                element.style.width = originalStyle.width;
-                element.style.maxWidth = originalStyle.maxWidth;
-                element.style.overflow = originalStyle.overflow;
-                element.style.height = originalStyle.height;
+                Object.assign(element.style, originalStyle);
 
-                // Set image preview in modal
+                // Set preview image
                 document.getElementById("previewImage").src = imageURL;
 
-                // Show the modal
+                // Show modal
                 let modal = new bootstrap.Modal(
                     document.getElementById("imagePreviewModal")
                 );
@@ -533,7 +539,6 @@ $(document).ready(function () {
 
                 // Set download button action
                 document.getElementById("downloadImage").onclick = function () {
-                    // Start loading animation (disable button and show spinner)
                     saveBtnquote.disabled = true;
                     buttonTextcustomer.textContent = "";
                     buttonSpinnercustomer.classList.remove("d-none");
@@ -546,15 +551,16 @@ $(document).ready(function () {
                     link.click();
                     document.body.removeChild(link);
 
-                    // Stop loading animation after a short delay to ensure download starts
                     setTimeout(() => {
                         saveBtnquote.disabled = false;
                         buttonTextcustomer.textContent = "Download Image";
                         buttonSpinnercustomer.classList.add("d-none");
                         buttonTextsaveIcon.classList.remove("d-none");
-                    }, 500); // Adjust delay if necessary
+                    }, 500);
                 };
-            });
+            } catch (error) {
+                console.error("Error capturing element:", error);
+            }
         });
 
     // for PRINT functionality
@@ -665,14 +671,14 @@ $(document).ready(function () {
    
     .bg-black td:nth-last-child(2),
     .bg-black td:last-child {
-        background-color: orange !important;
+        background-color: rgb(250, 204, 119) !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
     /* Apply orange background only to the input inside the last <td> */
     .bg-black td:last-child input {
-        background-color: orange !important;
+        background-color: rgb(250, 204, 119) !important;
         color: black !important; /* Ensure text is visible */
         font-weight: bold !important;
         text-align: end !important;

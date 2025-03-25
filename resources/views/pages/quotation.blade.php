@@ -168,22 +168,29 @@
 
                         {{-- Table --}}
                         <div class="w-100">
-                            <table class="table table-sm text-center" id="items-table">
-                                <thead class="table-light" style="border:1px solid black;">
+                            <table class="table table-sm text-center" id="items-table" style="border:thin solid black;">
+                                <thead class="table-light">
                                     <tr>
-                                        <th scope="col" style="background-color: orange!important; border:none">
-                                            Quantity
+                                        <th scope="col"
+                                            style="background-color: rgb(255, 208, 78)!important; width:5rem; border-right:thin solid black;">
+                                            Qty
                                         </th>
-                                        <th scope="col" style="background-color: orange!important; border:none">Unit
+                                        <th scope="col"
+                                            style="background-color: rgb(255, 208, 78)!important; border-right:thin solid black;">
+                                            Unit
                                         </th>
                                         <th scope="col" class="text-start ps-2"
-                                            style="background-color: orange!important; border:none">Item Name &
+                                            style="background-color: rgb(255, 208, 78)!important; border-right:thin solid black;">
+                                            Item Name &
                                             Description</th>
-                                        <th scope="col" style="background-color: orange!important; border:none">Unit
+                                        <th scope="col"
+                                            style="background-color: rgb(255, 208, 78)!important; border-right:thin solid black;">
+                                            Unit
                                             Price
                                         </th>
                                         <th scope="col" class="text-end"
-                                            style="background-color: orange!important; border:none">Line Amount
+                                            style="background-color: rgb(255, 208, 78)!important;">
+                                            Line Amount
                                         </th>
                                     </tr>
                                 </thead>
@@ -191,13 +198,11 @@
                                     <!-- Row Template -->
                                     {{-- row 0 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px; border-right:thin solid black;">
                                             <input type="number" class="w-100 quantity" name="items[0][quantity]"
-                                                oninput="calculateLineAmount(this)">
+                                                oninput="calculateLineAmount(this)" style="">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[0][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -207,19 +212,17 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[0][item_name]"
                                                 class="w-100 text-start item-name" style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px; border-right:thin solid black;">
                                             <input type="text" name="items[0][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[0][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -228,14 +231,12 @@
 
                                     {{-- row 1 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px; border-right:thin solid black;">
                                             <input type="number" name="items[1][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[1][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -246,21 +247,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[1][item_name]"
                                                 class="w-100 text-start item-name"
-                                                style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
+                                                style="text-transform: uppercase; background-color: rgb(244, 244, 244);">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px; border-right:thin solid black;">
                                             <input type="text" name="items[1][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[1][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -270,13 +269,11 @@
 
                                     {{-- row 2 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px; border-right:thin solid black;">
                                             <input type="number" name="items[2][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px; border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[2][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -286,19 +283,17 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[2][item_name]"
                                                 class="w-100 text-start item-name" style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[2][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[2][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -307,14 +302,12 @@
 
                                     {{-- row 3 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[3][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[3][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -325,21 +318,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[3][item_name]"
                                                 class="w-100 text-start item-name"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[3][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[3][line_amount]"
                                                 style="background-color: rgb(244, 244, 244) !important"
                                                 class="w-100 line-amount text-end" disabled>
@@ -349,13 +340,11 @@
 
                                     {{-- row 4 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[4][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[4][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -365,20 +354,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[4][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[4][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[4][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -387,14 +374,12 @@
 
                                     {{-- row 5 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black; ">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[5][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[5][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -405,21 +390,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[5][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[5][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[5][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -429,13 +412,11 @@
 
                                     {{-- row 6 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[6][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[6][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -445,20 +426,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[6][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[6][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[6][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -467,14 +446,12 @@
 
                                     {{-- row 7 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[7][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[7][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -485,21 +462,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[7][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[7][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[7][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -509,13 +484,11 @@
 
                                     {{-- row 8 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[8][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[8][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -525,20 +498,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[8][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[8][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[8][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -547,14 +518,12 @@
 
                                     {{-- row 9 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[9][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[9][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -565,21 +534,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[9][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[9][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[9][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -589,13 +556,11 @@
 
                                     {{-- row 10 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[10][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[10][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -605,20 +570,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[10][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[10][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[10][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -627,14 +590,12 @@
 
                                     {{-- row 11 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[11][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[11][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -645,21 +606,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[11][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[11][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[11][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -669,13 +628,11 @@
 
                                     {{-- row 12 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[12][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[12][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -685,20 +642,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[12][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[12][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[12][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -707,14 +662,12 @@
 
                                     {{-- row 13 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[13][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[13][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -725,21 +678,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[13][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[13][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[13][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -749,13 +700,11 @@
 
                                     {{-- row 14 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[14][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[14][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -765,20 +714,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[14][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[14][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[14][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -787,14 +734,12 @@
 
                                     {{-- row 15 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[15][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[15][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -805,21 +750,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[15][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[15][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[15][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -829,13 +772,11 @@
 
                                     {{-- row 16 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[16][quantity]" class="w-100 quantity"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[16][unit]">
                                                 <option value="" selected></option>
                                                 @foreach ($units as $unit)
@@ -846,20 +787,18 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[16][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase;">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[16][unit_price]" class="w-100 unit-price"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[16][line_amount]"
                                                 class="w-100 line-amount text-end" disabled>
                                         </td>
@@ -868,14 +807,12 @@
 
                                     {{-- row 17 --}}
                                     <tr>
-                                        <td
-                                            style="width:30px; border-right:1px solid black; border-left:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:30px;border-right:thin solid black;">
                                             <input type="number" name="items[17][quantity]" class="w-100 quantity"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[17][unit]"
                                                 style="background-color: rgb(244, 244, 244)">
                                                 <option value="" selected></option>
@@ -886,21 +823,19 @@
                                             </select>
                                         </td>
 
-                                        <td style="border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="border-right:thin solid black;">
                                             <input type="text" name="items[17][item_name]"
                                                 class="w-100 text-start item-name ps-1"
                                                 style="text-transform: uppercase; background-color: rgb(244, 244, 244)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;border-right:thin solid black;">
                                             <input type="text" name="items[17][unit_price]" class="w-100 unit-price"
                                                 style="background-color: rgb(244, 244, 244)"
                                                 oninput="calculateLineAmount(this)">
                                         </td>
 
-                                        <td
-                                            style="width:100px; border-right:1px solid black; border-bottom:1px solid black;">
+                                        <td style="width:100px;">
                                             <input type="text" name="items[17][line_amount]"
                                                 class="w-100 line-amount text-end"
                                                 style="background-color: rgb(244, 244, 244) !important" disabled>
@@ -967,16 +902,16 @@
                             </tr> --}}
 
                                     <!-- Total Row -->
-                                    <tr class="bg-black" style="border: 1px solid black">
+                                    <tr class="bg-black" style="border:thin solid black;">
                                         <td colspan="3" class="p-0 m-0">
                                             <span></span>
                                         </td>
 
-                                        <td class="text-end p-1 text-black fw-bold"
-                                            style=" border-right:1px solid black; background-color:orange;">
+                                        <td class="text-end p-1 text-black fw-bold;"
+                                            style=" background-color:rgb(250, 204, 119);border-left:thin solid black; border-right:thin solid black;">
                                             <label class="me-2" style="margin-top: 0.2rem">Total:</label>
                                         </td>
-                                        <td class="p-1" style="background-color: orange">
+                                        <td class="p-1" style="background-color: rgb(250, 204, 119)">
                                             <div class="w-100 h-100">
                                                 <input id="totalAmount"
                                                     class="w-100 text-black fw-bold border-0 bg-transparent p-0 text-end"
@@ -1072,7 +1007,7 @@
                             <div class="w-50 d-flex flex-column align-items-center justify-content-center"
                                 style="height:190px">
                                 <div style="font-size: 0.8rem; margin-right:8rem;">
-                                    <p>Quote & Prepared by:</p>
+                                    <p>Prepared by:</p>
                                 </div>
                                 <div class="d-flex flex-column text-center">
                                     <p class="m-0 p-0 " style="font-size: 1.2rem">{{ auth()->user()->name }}</p>
