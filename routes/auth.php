@@ -18,6 +18,7 @@ use App\Http\Controllers\ProspectsController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use App\Models\QuotationItem;
 
@@ -126,6 +127,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/account/user/{id}', [AccountController::class, 'getUser']);
         Route::put('/account/update/{id}', [AccountController::class, 'updateUser']);
         Route::delete('/account/destroy/{id}', [AccountController::class, 'destroy']);
+
+        //Settings
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.page');
+        Route::delete('/settings/reset', [SettingController::class, 'reset'])->name('settings.reset');
     });
 
 

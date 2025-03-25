@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title')</title>
-        <link rel="icon" href="{{asset('pictures/Bizmatech-logo-removebg-preview.png')}}">
+        <link rel="icon" href="{{ asset('pictures/Bizmatech-logo-removebg-preview.png') }}">
         {{-- Google Font --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- Style Css --}}
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -35,7 +35,7 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
         {{-- Convert to PNG CDN --}}
-        {{-- tomake canvas / image preview work--}}
+        {{-- tomake canvas / image preview work --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
         {{-- Font Awesome CDN --}}
@@ -61,7 +61,8 @@
                 </div>
 
                 {{-- Dashboard Button --}}
-                <a href="{{ route('admin-dashboard-page')}}" class="{{ Request::routeIs('admin-dashboard-page') ? 'active' : '' }}">
+                <a href="{{ route('admin-dashboard-page') }}"
+                    class="{{ Request::routeIs('admin-dashboard-page') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-5 d-flex align-items-center justify-content-center border rounded">
                         <i class="fa-solid fa-tv me-2 icon" style="font-size: 14px;"></i>
@@ -70,7 +71,7 @@
                 </a>
 
                 <hr>
-                <a href="{{ route('admin-bulletin.index')}}"
+                <a href="{{ route('admin-bulletin.index') }}"
                     class="{{ Request::routeIs('admin-bulletin.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mb-0 mt-2 d-flex align-items-center justify-content-center border rounded">
@@ -88,7 +89,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-replyTemplate.index')}}"
+                <a href="{{ route('admin-replyTemplate.index') }}"
                     class="{{ Request::routeIs('admin-replyTemplate.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
@@ -97,7 +98,7 @@
                     </div>
                 </a>
                 <hr>
-                <a href="{{route('admin-priceList.index')}}"
+                <a href="{{ route('admin-priceList.index') }}"
                     class="{{ Request::routeIs('admin-priceList.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-3 d-flex align-items-center justify-content-center border rounded">
@@ -106,7 +107,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-quotation.index')}}"
+                <a href="{{ route('admin-quotation.index') }}"
                     class="{{ Request::routeIs('admin-quotation.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
@@ -115,7 +116,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-prospects.index')}}"
+                <a href="{{ route('admin-prospects.index') }}"
                     class="{{ Request::routeIs('admin-prospects.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
@@ -124,7 +125,7 @@
                     </div>
                 </a>
                 <hr>
-                <a href="{{route('admin-insight.index')}}"
+                <a href="{{ route('admin-insight.index') }}"
                     class="{{ Request::routeIs('admin-insight.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-2 d-flex align-items-center justify-content-center border rounded">
@@ -133,7 +134,7 @@
                     </div>
                 </a>
 
-                <a href="{{route('admin-guides.index')}}"
+                <a href="{{ route('admin-guides.index') }}"
                     class="{{ Request::routeIs('admin-guides.index') ? 'active' : '' }}">
                     <div
                         class="side-bar input-group mt-2 d-flex align-items-center justify-content-center border rounded">
@@ -157,9 +158,9 @@
                             <span class="input-group-text bg-transparent border-0" id="basic-addon1">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" class="form-control border-0 bg-transparent" placeholder="Search..."
-                                aria-label="Search..." aria-describedby="basic-addon1" style="font-size: 0.8rem;"
-                                id="search">
+                            <input type="text" class="form-control border-0 bg-transparent"
+                                placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1"
+                                style="font-size: 0.8rem;" id="search">
                         </div>
 
                         {{-- Buttons --}}
@@ -168,47 +169,47 @@
                             {{-- Add Button --}}
                             <div class="addButton">
                                 @if (request()->routeIs('admin-bulletin.index'))
-                                {{-- Add Button for Bulletin Page --}}
-                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#bulletinModal"
-                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                                    {{-- Add Button for Bulletin Page --}}
+                                    <button type="button" class="btn saveButton" data-bs-toggle="modal"
+                                        data-bs-target="#bulletinModal"
+                                        style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 @elseif (request()->routeIs('admin-postTemplate.index'))
-                                {{-- Add Button for To-Do Page --}}
-                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#PostTemplateModal"
-                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                                    {{-- Add Button for To-Do Page --}}
+                                    <button type="button" class="btn saveButton" data-bs-toggle="modal"
+                                        data-bs-target="#PostTemplateModal"
+                                        style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 @elseif (request()->routeIs('admin-replyTemplate.index'))
-                                {{-- Add Button for Item Category Page --}}
-                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#ReplyTemplateModal"
-                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
-                                    <i class="fa-solid fa-plus"></i> 
-                                </button>
+                                    {{-- Add Button for Item Category Page --}}
+                                    <button type="button" class="btn saveButton" data-bs-toggle="modal"
+                                        data-bs-target="#ReplyTemplateModal"
+                                        style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 @elseif (request()->routeIs('admin-priceList.index'))
-                                {{-- Add Button for Contact Page --}}
-                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#PriceListModal"
-                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
-                                    <i class="fa-solid fa-plus"></i> 
-                                </button>
+                                    {{-- Add Button for Contact Page --}}
+                                    <button type="button" class="btn saveButton" data-bs-toggle="modal"
+                                        data-bs-target="#PriceListModal"
+                                        style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 @elseif (request()->routeIs('admin-insight.index'))
-                                {{-- Add Button for Contact Page --}}
-                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#PriceListModal"
-                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                                    {{-- Add Button for Contact Page --}}
+                                    <button type="button" class="btn saveButton" data-bs-toggle="modal"
+                                        data-bs-target="#PriceListModal"
+                                        style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 @elseif (request()->routeIs('admin-guides.index'))
-                                {{-- Add Button for Contact Page --}}
-                                <button type="button" class="btn saveButton" data-bs-toggle="modal"
-                                    data-bs-target="#PriceListModal"
-                                    style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;" >
-                                    <i class="fa-solid fa-plus" ></i> 
-                                </button>
+                                    {{-- Add Button for Contact Page --}}
+                                    <button type="button" class="btn saveButton" data-bs-toggle="modal"
+                                        data-bs-target="#PriceListModal"
+                                        style="font-size:0.6rem; width:50px; border-radius:3px; border:1px solid black;">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 @endif
                             </div>
 
@@ -256,8 +257,8 @@
                             </button>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" :href="route('profile.edit')" style="font-size:0.8rem;">{{
-                                        __('Profile') }}</a></li>
+                                <li><a class="dropdown-item" :href="route('profile.edit')"
+                                        style="font-size:0.8rem;">{{ __('Profile') }}</a></li>
 
                                 {{-- Account Button --}}
                                 <li>
@@ -267,7 +268,9 @@
                                     </a>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#" style="font-size:0.8rem;">Settings</a></li>
+                                <li><a class="dropdown-item" href="{{ route('settings.page') }}"
+                                        style="font-size:0.8rem;">Settings</a>
+                                </li>
 
                                 <li>
                                     <hr class="dropdown-divider">
@@ -276,8 +279,8 @@
                                     <form method="POST" action="{{ route('logout') }}" class="dropdown-item"
                                         style="font-size:0.8rem;text-align:center;">
                                         @csrf
-                                        <x-dropdown-link :href="route('logout')"
-                                            style="text-decoration: none;color: red;" onclick="event.preventDefault();
+                                        <x-dropdown-link :href="route('logout')" style="text-decoration: none;color: red;"
+                                            onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                             {{ __('Log Out') }}
                                         </x-dropdown-link>
@@ -306,12 +309,12 @@
         </script>
 
         {{-- pricelist Script JS --}}
-        <script src="{{ asset('js/showpassword.js')}}"></script>
+        <script src="{{ asset('js/showpassword.js') }}"></script>
 
-        {{-- para makuha ag user role after mo-login , then i-pasa sa js for url--}}
+        {{-- para makuha ag user role after mo-login , then i-pasa sa js for url --}}
         <script>
             var Laravel = {
-            user_role: @json(auth()->user()->role)
+                user_role: @json(auth()->user()->role)
             };
         </script>
 
