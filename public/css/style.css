@@ -144,9 +144,8 @@ body {
     padding: 0 !important;
     margin: 0 !important;
 }
-#items-table td input{
+#items-table td input {
     padding-left: 5px !important;
-    
 }
 td input,
 select {
