@@ -13,12 +13,18 @@ class RankingController extends Controller
         // Fetch users with 'user' role for dropdown
         $users = User::where('role', 'user')->get();
 
-        // Fetch rankings with user data, ordered by sales amount
-        $rankings = Ranking::with('user')
-            ->join('users', 'rankings.user_id', '=', 'users.id')
-            ->orderBy('sales_amount', 'desc')
-            ->select('rankings.*')
-            ->get();
+        // Fetch all users with 'user' role, left join rankings, ordered by sales amount
+        $rankings = User::where('role', 'user')
+            ->leftJoin('rankings', 'users.id', '=', 'rankings.user_id')
+            ->orderBy('rankings.sales_amount', 'desc')
+            ->orderBy('users.name') // Secondary sort by name for users with no sales
+            ->select('users.id', 'users.name', 'rankings.sales_amount')
+            ->get()
+            ->map(function ($user) {
+                // Ensure sales_amount is 0 if null
+                $user->sales_amount = $user->sales_amount ?? 0;
+                return $user;
+            });
 
         return view('pages.ranking', compact('users', 'rankings'));
     }
