@@ -136,6 +136,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Staff Ranking
         Route::get('/staff-ranking', [RankingController::class, 'index'])->name('ranking.page');
         Route::post('/rankings', [RankingController::class, 'store'])->name('rankings.store');
+        Route::patch('/rankings/add', [RankingController::class, 'add'])->name('rankings.add');
+        Route::patch('/rankings/minus', [RankingController::class, 'minus'])->name('rankings.minus');
     });
 
 

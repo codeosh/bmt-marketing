@@ -154,14 +154,17 @@
                     <div class="d-flex align-items-center justify-content-between gap-3">
 
                         {{-- Search --}}
-                        <div class="input-group border rounded" style="height: 2rem; width: 230px;">
-                            <span class="input-group-text bg-transparent border-0" id="basic-addon1">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <input type="text" class="form-control border-0 bg-transparent"
-                                placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1"
-                                style="font-size: 0.8rem;" id="search">
-                        </div>
+                        @if (Route::currentRouteName() !== 'ranking.page')
+                            {{-- Search --}}
+                            <div class="input-group border rounded" style="height: 2rem; width: 230px;">
+                                <span class="input-group-text bg-transparent border-0" id="basic-addon1">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-transparent"
+                                    placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon1"
+                                    style="font-size: 0.8rem;" id="search">
+                            </div>
+                        @endif
 
                         {{-- Buttons --}}
                         <div class="d-flex align-items-center justify-content-between" style="width:330px;">

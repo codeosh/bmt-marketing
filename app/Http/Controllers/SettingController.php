@@ -8,6 +8,7 @@ use App\Models\PostTemplate;
 use App\Models\Pricelist;
 use App\Models\QuotationCustomer;
 use App\Models\QuotationItem;
+use App\Models\Ranking;
 use App\Models\ReplyTemplate;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,6 +28,15 @@ class SettingController extends Controller
         try {
             foreach ($resetOptions as $option) {
                 switch ($option) {
+                    case 'accounts':
+                        // Delete all users with role 'user'
+                        User::where('role', 'user')->delete();
+                        // Delete all admins except the default one (e.g., email = "admin@email.com")
+                        User::where('role', 'admin')
+                            ->where('email', '!=', 'admin@email.com')
+                            ->delete();
+                        break;
+
                     case 'bulletin':
                         Bulletin::query()->delete();
                         break;
@@ -47,13 +57,8 @@ class SettingController extends Controller
                     case 'insights':
                         Insight::query()->delete();
                         break;
-                    case 'accounts':
-                        // Delete all users with role 'user'
-                        User::where('role', 'user')->delete();
-                        // Delete all admins except the default one (e.g., email = "admin@email.com")
-                        User::where('role', 'admin')
-                            ->where('email', '!=', 'admin@email.com')
-                            ->delete();
+                    case 'rankings':
+                        Ranking::query()->delete();
                         break;
                 }
             }

@@ -13,6 +13,11 @@
             @method('DELETE')
 
             <div class="form-check">
+                <input type="checkbox" name="reset[]" value="accounts" id="accounts" class="form-check-input">
+                <label for="accounts" class="form-check-label">Accounts (All Users, Keep 1 Admin)</label>
+            </div>
+
+            <div class="form-check">
                 <input type="checkbox" name="reset[]" value="bulletin" id="bulletin" class="form-check-input">
                 <label for="bulletin" class="form-check-label">Bulletin</label>
             </div>
@@ -43,8 +48,8 @@
             </div>
 
             <div class="form-check">
-                <input type="checkbox" name="reset[]" value="accounts" id="accounts" class="form-check-input">
-                <label for="accounts" class="form-check-label">Accounts (All Users, Keep 1 Admin)</label>
+                <input type="checkbox" name="reset[]" value="rankings" id="rankings" class="form-check-input">
+                <label for="rankings" class="form-check-label">Rankings</label>
             </div>
 
             <button type="submit" class="btn btn-danger mt-3"
