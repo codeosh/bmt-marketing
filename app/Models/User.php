@@ -28,6 +28,11 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function rankings()
+    {
+        return $this->hasMany(Ranking::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

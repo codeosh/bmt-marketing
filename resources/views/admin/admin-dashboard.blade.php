@@ -267,7 +267,12 @@
                                         Accounts
                                     </a>
                                 </li>
-
+                                <li>
+                                    <a href="{{ route('ranking.page') }}" class="dropdown-item"
+                                        style="font-size:0.8rem;">
+                                        Staff Ranking
+                                    </a>
+                                </li>
                                 <li><a class="dropdown-item" href="{{ route('settings.page') }}"
                                         style="font-size:0.8rem;">Settings</a>
                                 </li>
