@@ -26,7 +26,7 @@
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="user_id" class="form-label">Select Staff</label>
+                                <label for="user_id" class="form-label">Select Staff:</label>
                                 <select name="user_id" id="user_id" class="form-control" style="height: 45px;" required>
                                     <option value="">-- Select User --</option>
                                     @foreach ($users as $user)
