@@ -10,7 +10,7 @@
         </div>
 
         <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-            <input type="month" id="monthYear" name="monthYear" class="form-control" style="width: 200px; height: 25px;">
+            <input type="month" id="monthYear" name="monthYear" class="form-control" style="width: 170px; height: 25px;">
         </div>
 
         <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
@@ -206,7 +206,7 @@
                 modalElement.addEventListener('hidden.bs.modal', function() {
                     document.body.classList.remove('modal-open'); // Remove modal-open class
                     document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop
-                .remove()); // Remove any remaining backdrop
+                        .remove()); // Remove any remaining backdrop
                 });
             }
 
