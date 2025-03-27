@@ -37,7 +37,6 @@ class RankingController extends Controller
             'sales_amount' => 'required|numeric|min:0',
         ]);
 
-        // Update existing record or create new one
         Ranking::create([
             'user_id' => $request->user_id,
             'sales_amount' => $request->sales_amount,

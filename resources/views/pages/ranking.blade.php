@@ -15,11 +15,12 @@
 
         <div class="mb-4" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="input-group" style="width: 15rem;">
-                <span class="input-group-text bg-transparent border-1" style="height: 30px;" id="search-addon">
+                <span class="input-group-text border-1" style="height: 30px;" id="search-addon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
                 <input type="text" class="form-control" id="searchInput" name="searchInput" placeholder="Search staff..."
-                    style="height: 30px; border-left: 0;" autocomplete="off" aria-describedby="search-addon">
+                    style="background:white; height: 30px; border-left: 0;" autocomplete="off"
+                    aria-describedby="search-addon">
             </div>
 
             <div style="display: flex; gap: 10px;">
@@ -30,41 +31,6 @@
                 <button type="button" class="btn btn-sm btn-secondary" style="width: 50px !important;" id="printButton">
                     <i class="fa-solid fa-print"></i>
                 </button>
-            </div>
-        </div>
-
-        <!-- Modal for adding sales -->
-        <div class="modal fade" id="addSalesModal" tabindex="-1" aria-labelledby="addSalesModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addSalesModalLabel">Add Sales Amount</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('rankings.store') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="user_id" class="form-label">Select Staff:</label>
-                                <select name="user_id" id="user_id" class="form-control" style="height: 45px;" required>
-                                    <option value="">-- Select User --</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="sales_amount" class="form-label">Sales Amount</label>
-                                <input type="number" name="sales_amount" id="sales_amount" class="form-control"
-                                    step="0.01" min="0" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Sales</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
 
@@ -81,7 +47,7 @@
                         <th>Rank</th>
                         <th>Name</th>
                         <th>Sales Amount</th>
-                        <th>Action</th> <!-- New column for actions -->
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,11 +85,46 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">No users available.</td> <!-- Updated colspan to 4 -->
+                            <td colspan="4">No users available.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- Modal for adding sales -->
+    <div class="modal fade" id="addSalesModal" tabindex="-1" aria-labelledby="addSalesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSalesModalLabel">Add Sales Amount</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('rankings.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">Select Staff:</label>
+                            <select name="user_id" id="user_id" class="form-control" style="height: 45px;" required>
+                                <option value="">-- Select User --</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sales_amount" class="form-label">Sales Amount</label>
+                            <input type="number" name="sales_amount" id="sales_amount" class="form-control" step="0.01"
+                                min="0" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Sales</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -140,7 +141,7 @@
                     @csrf
                     @method('PATCH')
                     <div class="modal-body">
-                        <input type="hidden" name="user_id" id="minusUserId"> <!-- Changed to user_id -->
+                        <input type="hidden" name="user_id" id="minusUserId">
                         <div class="mb-3">
                             <label for="minusAmount" class="form-label">Amount to Subtract</label>
                             <input type="number" name="minus_amount" id="minusAmount" class="form-control"
@@ -158,13 +159,13 @@
     </div>
 
 
-    <!-- Add Sales Modal (new) -->
+    <!-- Plus Sales Modal -->
     <div class="modal fade" id="plusSalesModal" tabindex="-1" aria-labelledby="plusSalesModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addSalesMplusSalesModalLabelodalLabel">Add Sales Amount</h5>
+                    <h5 class="modal-title" id="plusSalesModalLabel">Add Sales Amount</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="plusSalesForm" method="POST">
@@ -189,13 +190,23 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Modal trigger
-            const modalButton = document.querySelector('[data-bs-target="#addSalesModal"]');
-            if (modalButton) {
-                modalButton.addEventListener('click', function() {
-                    console.log('Modal button clicked');
-                    const modal = new bootstrap.Modal(document.getElementById('addSalesModal'));
-                    modal.show();
+            const modalElement = document.getElementById('addSalesModal');
+            if (modalElement) {
+                const modal = new bootstrap.Modal(modalElement);
+
+                // Open modal on button click
+                const modalButton = document.querySelector('[data-bs-target="#addSalesModal"]');
+                if (modalButton) {
+                    modalButton.addEventListener('click', function() {
+                        modal.show();
+                    });
+                }
+
+                // Ensure modal hides properly
+                modalElement.addEventListener('hidden.bs.modal', function() {
+                    document.body.classList.remove('modal-open'); // Remove modal-open class
+                    document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop
+                .remove()); // Remove any remaining backdrop
                 });
             }
 
@@ -222,27 +233,25 @@
             const style = document.createElement('style');
             style.id = 'printStyles';
             style.textContent = `
-        @media print {
-            body * { visibility: hidden; }
-            #printContainer, #printContainer * { visibility: visible; }
-            #printContainer { position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
-            #printContainer h3 { text-align: center; margin-bottom: 20px; font-weight: bold; }
-            #printContainer .month-year { text-align: center; margin-bottom: 1.5rem; }
-            #printContainer table { width: 100%; border-collapse: collapse; }
-            #printContainer th, #printContainer td { border: 1px solid #ddd; padding: 8px; }
-            #printContainer th { background-color: #f2f2f2; }
-            #printContainer tr:nth-child(even) { background-color: #f9f9f9; }
-            #printContainer td:nth-child(4), #printContainer th:nth-child(4) { display: none; } /* Hide Action column */
-        }
-    `;
+                @media print {
+                    body * { visibility: hidden; }
+                    #printContainer, #printContainer * { visibility: visible; }
+                    #printContainer { position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
+                    #printContainer h3 { text-align: center; margin-bottom: 20px; font-weight: bold; }
+                    #printContainer .month-year { text-align: center; margin-bottom: 1.5rem; }
+                    #printContainer table { width: 100%; border-collapse: collapse; }
+                    #printContainer th, #printContainer td { border: 1px solid #ddd; padding: 8px; }
+                    #printContainer th { background-color: #f2f2f2; }
+                    #printContainer tr:nth-child(even) { background-color: #f9f9f9; }
+                    #printContainer td:nth-child(4), #printContainer th:nth-child(4) { display: none; } /* Hide Action column */
+                }
+            `;
             document.head.appendChild(style);
 
             // Print Button Handler
             const printButton = document.getElementById('printButton');
             if (printButton) {
-                console.log('Print button found:', printButton);
                 printButton.addEventListener('click', function() {
-                    console.log('Print button clicked');
 
                     // Get elements to print
                     const title = document.querySelector('h3');
@@ -250,10 +259,6 @@
                         'div[style*="justify-content: center; margin-bottom: 1.5rem"]');
                     const table = document.getElementById('rankingsTable');
 
-                    // Debugging
-                    console.log('Title:', title ? title.outerHTML : 'Not found');
-                    console.log('Month/Year Div:', monthYearDiv ? monthYearDiv.outerHTML : 'Not found');
-                    console.log('Table:', table ? table.outerHTML : 'Not found');
 
                     if (!title || !monthYearDiv || !table) {
                         console.error('One or more elements to print not found');
@@ -424,7 +429,7 @@
             const formData = new FormData(addForm);
             formData.append('_method', 'PATCH');
 
-            fetch('{{ route('rankings.add') }}', { // New route for adding
+            fetch('{{ route('rankings.add') }}', {
                     method: 'POST',
                     body: formData,
                     headers: {
@@ -459,8 +464,6 @@
                     console.error('Add fetch error:', error);
                     alert('Failed to add sales amount: ' + error.message);
                 });
-
-
         });
     </script>
 @endsection
