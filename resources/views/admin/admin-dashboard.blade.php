@@ -69,6 +69,13 @@
                         <span class="navbar-text" style="font-size: 12px;">Dashboard</span>
                     </div>
                 </a>
+                <a href="{{ route('ranking.page') }}" class="{{ Request::routeIs('ranking.page') ? 'active' : '' }}">
+                    <div
+                        class="side-bar input-group mt-1 d-flex align-items-center justify-content-center border rounded">
+                        <i class="fa-regular fa-address-card me-2 icon" style="font-size: 14px;"></i>
+                        <span class="navbar-text" style="font-size: 12px;">Staff Sales</span>
+                    </div>
+                </a>
 
                 <hr>
                 <a href="{{ route('admin-bulletin.index') }}"
@@ -268,12 +275,6 @@
                                     <a href="{{ route('admin-accounts.index') }}" class="dropdown-item"
                                         style="font-size:0.8rem;">
                                         Accounts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('ranking.page') }}" class="dropdown-item"
-                                        style="font-size:0.8rem;">
-                                        Staff Ranking
                                     </a>
                                 </li>
                                 <li><a class="dropdown-item" href="{{ route('settings.page') }}"

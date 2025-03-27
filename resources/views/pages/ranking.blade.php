@@ -36,7 +36,7 @@
 
         <!-- Success Message -->
         @if (session('success'))
-            <div class="alert alert-success mt-3">{{ session('success') }}</div>
+            <div id="successMessage" class="alert alert-success mt-3">{{ session('success') }}</div>
         @endif
 
         <!-- Rankings Table -->
@@ -47,7 +47,7 @@
                         <th>Rank</th>
                         <th>Name</th>
                         <th>Sales Amount</th>
-                        <th>Action</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,22 +55,14 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ number_format($user->sales_amount, 2) }}</td>
-                            <td>
+                            <td class="text-end">{{ number_format($user->sales_amount, 2) }}</td>
+                            <td class="text-center">
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i> <!-- Vertical ellipsis icon -->
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item text-danger minus-action" href="#"
-                                                data-user-id="{{ $user->id }}"
-                                                data-sales-amount="{{ $user->sales_amount }}" data-bs-toggle="modal"
-                                                data-bs-target="#minusSalesModal">
-                                                <i class="fas fa-minus"></i> Minus
-                                            </a>
-                                        </li>
                                         <li>
                                             <a class="dropdown-item text-success add-action" href="#"
                                                 data-user-id="{{ $user->id }}"
@@ -79,6 +71,15 @@
                                                 <i class="fas fa-plus"></i> Add
                                             </a>
                                         </li>
+                                        <li>
+                                            <a class="dropdown-item text-danger minus-action" href="#"
+                                                data-user-id="{{ $user->id }}"
+                                                data-sales-amount="{{ $user->sales_amount }}" data-bs-toggle="modal"
+                                                data-bs-target="#minusSalesModal">
+                                                <i class="fas fa-minus"></i> Minus
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </td>
@@ -115,13 +116,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="sales_amount" class="form-label">Sales Amount</label>
-                            <input type="number" name="sales_amount" id="sales_amount" class="form-control" step="0.01"
-                                min="0" required>
+                            <input type="number" name="sales_amount" id="sales_amount" class="form-control"
+                                step="0.01" min="0" required>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Sales</button>
+                        <button type="submit" class="btn btn-primary">Overwrite</button>
                     </div>
                 </form>
             </div>
@@ -190,6 +191,28 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const monthYearInput = document.getElementById("monthYear");
+
+            // Load saved month/year from localStorage
+            const savedMonthYear = localStorage.getItem("selectedMonthYear");
+            if (savedMonthYear) {
+                monthYearInput.value = savedMonthYear;
+            }
+
+            // Save the selected value to localStorage when changed
+            monthYearInput.addEventListener("change", function() {
+                localStorage.setItem("selectedMonthYear", this.value);
+            });
+
+            const successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.transition = "opacity 0.5s ease";
+                    successMessage.style.opacity = "0";
+                    setTimeout(() => successMessage.remove(), 500);
+                }, 3000);
+            }
+
             const modalElement = document.getElementById('addSalesModal');
             if (modalElement) {
                 const modal = new bootstrap.Modal(modalElement);
@@ -319,7 +342,6 @@
                     const userId = this.getAttribute('data-user-id'); // Updated attribute
                     const salesAmount = this.getAttribute('data-sales-amount');
 
-                    console.log('Minus clicked - User ID:', userId, 'Sales Amount:', salesAmount);
 
                     minusUserIdInput.value = userId;
                     currentSalesAmountSpan.textContent = parseFloat(salesAmount).toFixed(2);
@@ -335,10 +357,6 @@
                 const currentAmount = parseFloat(currentSalesAmountSpan.textContent);
                 const userId = minusUserIdInput.value;
 
-                console.log('Form submitting - User ID:', userId,
-                    'Minus Amount:', minusAmount,
-                    'Current Amount:', currentAmount);
-
                 if (minusAmount > currentAmount) {
                     alert('Subtract amount cannot exceed current sales amount!');
                     return;
@@ -347,7 +365,6 @@
                 const formData = new FormData(minusForm);
                 formData.append('_method', 'PATCH');
 
-                console.log('Sending AJAX request with data:');
                 for (let [key, value] of formData.entries()) {
                     console.log(`${key}: ${value}`);
                 }
@@ -361,7 +378,6 @@
                         }
                     })
                     .then(response => {
-                        console.log('Response status:', response.status);
                         if (!response.ok) {
                             return response.text().then(text => {
                                 throw new Error(
@@ -372,7 +388,6 @@
                         return response.json();
                     })
                     .then(data => {
-                        console.log('Success response:', data);
                         if (data.success) {
                             const row = document.querySelector(
                                 `.minus-action[data-user-id="${userId}"]`).closest('tr');
