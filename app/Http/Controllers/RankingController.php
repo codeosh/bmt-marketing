@@ -37,10 +37,10 @@ class RankingController extends Controller
             'sales_amount' => 'required|numeric|min:0',
         ]);
 
-        Ranking::create([
-            'user_id' => $request->user_id,
-            'sales_amount' => $request->sales_amount,
-        ]);
+        Ranking::updateOrCreate(
+            ['user_id' => $request->user_id],
+            ['sales_amount' => $request->sales_amount]
+        );
 
         return redirect()->back()->with('success', 'Sales amount updated successfully!');
     }
