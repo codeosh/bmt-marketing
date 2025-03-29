@@ -408,7 +408,7 @@
             });
         });
 
-        // Add Action Handler
+        // Plus Action Handler
         const addButtons = document.querySelectorAll('.add-action');
         const addModal = document.getElementById('plusSalesModal');
         const addForm = document.getElementById('plusSalesForm');
@@ -430,7 +430,7 @@
             });
         });
 
-        // Handle Add Form Submission
+        // Handle Plus Form Submission
         addForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
