@@ -118,11 +118,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/fetch-guides', [GuidesController::class, 'getAdminguides']);
 
         Route::resource('admin-accounts', AccountController::class);
-        Route::resource('admin-prospects', ProspectsController::class);
+
         Route::get('/Dashboard-Pages', function () {
             return view('pages.dashboard');
         })->name('admin-dashboard-page');
 
+        // Prospects
+        Route::resource('admin-prospects', ProspectsController::class);
+        Route::get('/companies/browse-excel', [ProspectsController::class, 'browseExcel'])->name('companies.browse.excel');
+        Route::post('/companies/import', [ProspectsController::class, 'import'])->name('companies.import');
+        Route::delete('/companies/delete-selected', [ProspectsController::class, 'deleteSelected'])->name('companies.deleteSelected');
+        Route::delete('/companies/reset', [ProspectsController::class, 'reset'])->name('companies.reset');
+        Route::get('/companies/settings', [ProspectsController::class, 'settings'])->name('companies.settings');
+        Route::post('/verify-password', [ProspectsController::class, 'verifyPassword'])->name('verify.password');
 
         //Accounts
         Route::get('/account/user/{id}', [AccountController::class, 'getUser']);

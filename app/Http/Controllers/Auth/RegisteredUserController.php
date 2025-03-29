@@ -51,12 +51,12 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($validatedData['password']),
             ]);
 
-            DB::commit();
+            $user->refresh();
 
             return response()->json([
                 'success' => true,
                 'message' => 'Added Successfully!',
-                'user' => $user, // Send the new user to frontend for dynamically added sa table
+                'user' => $user,
             ]);
         } catch (Exception $e) {
             DB::rollBack();
