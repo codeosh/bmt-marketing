@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($validatedData['password']),
             ]);
 
-            $user->refresh();
+            DB::commit();
 
             return response()->json([
                 'success' => true,
