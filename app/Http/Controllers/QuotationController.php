@@ -411,7 +411,7 @@ class QuotationController extends Controller
     public function addNewUnit(Request $request)
     {
         $request->validate([
-            'unitName' => 'required|string|max:255'
+            'unitName' => 'required|string|max:255',  // Ensure the unitName is valid
         ]);
 
         try {
