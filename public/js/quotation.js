@@ -272,11 +272,11 @@ $(document).ready(function () {
                             .val(
                                 item.unit_price
                                     ? parseFloat(
-                                        item.unit_price
-                                    ).toLocaleString("en-US", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                    })
+                                          item.unit_price
+                                      ).toLocaleString("en-US", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                      })
                                     : ""
                             ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display);
                         $(row)
@@ -284,11 +284,11 @@ $(document).ready(function () {
                             .val(
                                 item.line_amount
                                     ? parseFloat(
-                                        item.line_amount
-                                    ).toLocaleString("en-US", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                    })
+                                          item.line_amount
+                                      ).toLocaleString("en-US", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                      })
                                     : ""
                             ); //kaning naa sud na taas ge convert niya ag way kama na numbers from db to naanay comma nig display
 
@@ -609,8 +609,8 @@ $(document).ready(function () {
 
                 let selectedText = selectedValue
                     ? Array.from(select.options).find(
-                        (option) => option.value === selectedValue
-                    )?.text || selectedValue
+                          (option) => option.value === selectedValue
+                      )?.text || selectedValue
                     : "";
 
                 console.log("Selected Text After Fix:", selectedText);
@@ -647,12 +647,14 @@ $(document).ready(function () {
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                    <link rel="stylesheet" href="${document.querySelector('link[href*="bootstrap"]')
-                    ?.href || ""
-                }">
-                    <link rel="stylesheet" href="${document.querySelector('link[href*="style.css"]')
-                    ?.href || ""
-                }">
+                    <link rel="stylesheet" href="${
+                        document.querySelector('link[href*="bootstrap"]')
+                            ?.href || ""
+                    }">
+                    <link rel="stylesheet" href="${
+                        document.querySelector('link[href*="style.css"]')
+                            ?.href || ""
+                    }">
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
                     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -1268,75 +1270,85 @@ $(document).ready(function () {
     let selectedDropdown = null; // Store the clicked select element
 
     // Show modal when "+ Add New" is selected
-    $('.unit-select').change(function () {
+    $(".unit-select").change(function () {
         if ($(this).val() === "add") {
             selectedDropdown = $(this); // Store reference to the clicked dropdown
-            $('#unitModal').modal('show');
-            $(this).val(''); // Reset selection
+            $("#unitModal").modal("show");
+            $(this).val(""); // Reset selection
         }
     });
 
-    $('#saveUnitBtn').on('click', function (e) {
-    e.preventDefault();  // Prevent the default submit action
-    console.log("Add Unit button clicked!");  // Debugging log
+    $("#saveUnitBtn").on("click", function (e) {
+        e.preventDefault(); // Prevent the default submit action
+        console.log("Add Unit button clicked!"); // Debugging log
 
-    let quoteUnit = Laravel.user_role === "admin" ? "/quotations/add-unit" : "/quotations/user-add-unit";
+        let quoteUnit =
+            Laravel.user_role === "admin"
+                ? "/quotations/add-unit"
+                : "/quotations/user-add-unit";
 
-    // Get button elements for UI feedback during submission
-    const unitsaveBtnquote = document.getElementById("saveUnitBtn");
-    const unitbuttonTextcustomer = document.getElementById("buttonText");
-    const unitbuttonSpinnercustomer = document.getElementById("buttonSpinner");
+        // Get button elements for UI feedback during submission
+        const unitsaveBtnquote = document.getElementById("saveUnitBtn");
+        const unitbuttonTextcustomer = document.getElementById("buttonText");
+        const unitbuttonSpinnercustomer =
+            document.getElementById("buttonSpinner");
 
-    // Start loading animation (disable button and show spinner)
-    unitbuttonTextcustomer.textContent = "";
-    unitbuttonSpinnercustomer.classList.remove("d-none");
-    unitsaveBtnquote.disabled = true;
+        // Start loading animation (disable button and show spinner)
+        unitbuttonTextcustomer.textContent = "";
+        unitbuttonSpinnercustomer.classList.remove("d-none");
+        unitsaveBtnquote.disabled = true;
 
-    let unitNameValue = $('#unitName').val();
-console.log(unitNameValue);  // Ensure it's not empty
+        let unitNameValue = $("#unitName").val();
+        console.log(unitNameValue); // Ensure it's not empty
 
-    $.ajax({
-        type: "POST",
-        url: quoteUnit,
-        data: { unitName: unitNameValue },  // Send as an object
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        success: function (response) {
-            if (response.success) { // Ensure the response contains success status
-                toastr.success("Added Successfully!");
+        $.ajax({
+            type: "POST",
+            url: quoteUnit,
+            data: { unitName: unitNameValue }, // Send as an object
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Ensure the response contains success status
+                    toastr.success("Added Successfully!");
+
+                    unitbuttonTextcustomer.textContent = "Save";
+                    unitbuttonSpinnercustomer.classList.add("d-none");
+                    unitsaveBtnquote.disabled = false;
+
+                    // Append the new unit to all .unit-select dropdowns
+                    $(".unit-select").each(function () {
+                        const newOption = new Option(
+                            response.new_unit_name,
+                            response.new_unit_id
+                        );
+                        newOption.selected = false;
+
+                        const addOption = $(this).find('option[value="add"]');
+
+                        if (addOption.length) {
+                            $(this)
+                                .find('option[value="add"]')
+                                .before(newOption);
+                        } else {
+                            $(this).append(newOption);
+                        }
+                    });
+
+                    // Close and reset modal
+                    $("#unitModal").modal("hide");
+                    $("#unitModalForm")[0].reset();
+                    selectedDropdown = null; // Reset the reference
+                }
+            },
+            error: function (xhr) {
+                toastr.error(xhr.responseJSON?.message || "An error occurred.");
 
                 unitbuttonTextcustomer.textContent = "Save";
                 unitbuttonSpinnercustomer.classList.add("d-none");
                 unitsaveBtnquote.disabled = false;
-
-                // Append the new unit to all .unit-select dropdowns
-                $('.unit-select').each(function () {
-                    $(this).append(
-                        `<option value="${response.new_unit_name}">${response.new_unit_name}</option>`
-                    );
-                });
-
-                // Ensure the newly added option is selected for the clicked dropdown
-                if (selectedDropdown) {
-                    selectedDropdown.val(response.new_unit_id).trigger("change");
-                }
-
-                // Close and reset modal
-                $("#unitModal").modal("hide");
-                $("#unitModalForm")[0].reset();
-                selectedDropdown = null; // Reset the reference
-            }
-        },
-        error: function (xhr) {
-            toastr.error(xhr.responseJSON?.message || "An error occurred.");
-
-            unitbuttonTextcustomer.textContent = "Save";
-            unitbuttonSpinnercustomer.classList.add("d-none");
-            unitsaveBtnquote.disabled = false;
-        },
+            },
+        });
     });
-});
-
-
 });

@@ -204,12 +204,12 @@
                                         </td>
                                         <td style="border-right:thin solid black;">
                                             <select class="w-100 unit-select" name="items[0][unit]">
-                                        <option value="" selected></option>
-                                        @foreach ($units as $unit)
-                                            <option value="{{ $unit->units }}">{{ $unit->units }}</option>
-                                        @endforeach
-                                        <option value="add">+ Add New</option>
-                                    </select>
+                                                <option value="" selected></option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->units }}">{{ $unit->units }}</option>
+                                                @endforeach
+                                                <option value="add">+ Add New</option>
+                                            </select>
                                         </td>
 
                                         <td style="border-right:thin solid black;">
@@ -1132,37 +1132,37 @@
             </div>
         </div>
 
-       <!-- add unit Modal Structure -->
-<!-- Add Unit Modal -->
-<!-- Add Unit Modal -->
-<div class="modal fade" id="unitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <small class="text-muted">Add Unit</small>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="unitModalForm">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="unitName" class="form-label" style="font-size:0.7rem;">Unit Name</label>
-                        <input type="text" class="form-control" id="unitName" name="unitName" placeholder="Enter unit name" style="height:30px;" required>
-
+        <!-- Add Unit Modal -->
+        <div class="modal fade" id="unitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <small class="text-muted">Add Unit</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- Changed the button to avoid form submission -->
-                <button type="button" id="saveUnitBtn" class="btn btn-primary">
-                    <span id="buttonText">Save</span>
-                    <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
-                </button>
+                    <div class="modal-body">
+                        <form id="unitModalForm">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="unitName" class="form-label" style="font-size:0.7rem;">Unit Name</label>
+                                <input type="text" class="form-control" id="unitName" name="unitName"
+                                    placeholder="Enter unit name" style="height:30px;" required>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!-- Changed the button to avoid form submission -->
+                        <button type="button" id="saveUnitBtn" class="btn btn-primary">
+                            <span id="buttonText">Save</span>
+                            <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none"
+                                role="status"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
 
 
